@@ -1,0 +1,29 @@
+<% content_for('body') do %>
+
+<p/>
+<div align="center">
+  <h1>Philou's Puyo-Puyo</h1>
+  <%= view :boardView,
+      :tag => :table,
+      :view => 'PuyoPuyo.BoardView',
+      :bind => { 'board' => 'PuyoPuyo.playerController.board' } %>
+  <%= button_view :label => 'Start', :action => 'PuyoPuyo.playerController.start' %>
+  <%= button_view :label => 'Stop', :action => 'PuyoPuyo.playerController.stop' %>
+  <p/>
+  <h2>TODO</h2>
+  Faire une ihm jolie.<p/>
+  - bien disposer la grille, ajouter des boardures ...<p/>
+  - remplacer les cases remplies par des blobs fait avec pov<p/>
+  - Faire des animations quand les pièces disparaissents<p/>
+  Faire descendre les couples de pièces.<p/>
+  - Deplacements latéraux, vers le bas<p/>
+  - Rotation<p/>
+  - Chute naturelle<p/>
+  Les faire disparaitre quand elles sont 4 les unes à côté des autres.<p/>
+  - Détecter les groupes de 4 ou plus<p/>
+  - Les faire disparaitres de la grille<p/>
+  Ajouter des couleurs différentes.<p/>
+  Faire des cascades quand elles disparaissent.<p/>
+</div>
+
+<% end %>

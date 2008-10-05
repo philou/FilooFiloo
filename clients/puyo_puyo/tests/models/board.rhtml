@@ -1,0 +1,194 @@
+<% # ========================================================================
+   # PuyoPuyo.Board Unit Test
+   # ========================================================================
+%>
+<% content_for('final') do %>
+
+<script>
+
+Test.context("PuyoPuyo.Board",{
+
+    setup: function() {
+	PuyoPuyo.Board.setDimensions(4, 6);
+
+	this.assertBoard = function(stringRows, message) {
+	    // TODO : factorize this with piece.rhtml tests
+	    this.assertIdentical(PuyoPuyo.Board.RowCount, stringRows.length);
+
+	    for(var r = 0; r < PuyoPuyo.Board.RowCount; ++r) {
+		this.assertIdentical(PuyoPuyo.Board.ColCount, stringRows[r].length);
+
+		for(var c = 0; c < PuyoPuyo.Board.ColCount; ++c) {
+		    this.assertIdentical(PuyoPuyo.Game.initialToState[stringRows[r][c]],
+					 this.board.cellState(c, r),
+					 message + " at col=" + c + ", row=" + r);
+		}
+	    }
+	};
+
+	this.assertChangesBoard = function(action, message) {
+	    var beforeBoardTime = this.board.get('time');
+	    var result = action();
+	    var afterBoardTime = this.board.get('time');
+
+	    this.assertNotIdentical(beforeBoardTime, afterBoardTime, message);
+	    return result;
+	};
+
+	this.tickShouldChangeTheBoard = function(message) {
+	    var board = this.board;
+	    this.assertChangesBoard(function() {
+		board.tick();
+	    }, message);
+	};
+
+	// TODO use this instead of tick. Try to give in a string instead of a function.
+
+	this.ticker = {
+	    running: false,
+	    start: function() {
+		this.running = true;
+	    },
+	    stop: function() {
+		this.running = false;
+	    }
+	};
+	this.colorProvider = {
+	    firstColor: PuyoPuyo.Game.Red,
+	    secondColor: PuyoPuyo.Game.Blue,
+	    popFirstColor: function() {
+		return this.firstColor;
+	    },
+	    popSecondColor: function() {
+		return this.secondColor;
+	    }
+	};
+	this.board = PuyoPuyo.Board.create({ticker: this.ticker, colorProvider: this.colorProvider});
+    },
+
+    teardown: function() {
+	delete(this.board);
+    },
+
+    "The board's playing property should change with start and stop": function() {
+	assertNotNull(board);
+	false.shouldEqual(board.get('playing'));
+
+	board.start();
+	true.shouldEqual(board.get('playing'));
+
+	board.abort();
+	false.shouldEqual(board.get('playing'));
+    },
+
+    "The ticker should be started with the board": function() {
+	false.shouldEqual(ticker.running);
+
+	board.start();
+	true.shouldEqual(ticker.running);
+
+	board.abort();
+	false.shouldEqual(ticker.running);
+    },
+
+    "The board should start empty": function() {
+	board.start();
+	assertBoard(["    ",
+		     "    ",
+		     "    ",
+		     "    ",
+		     "    ",
+		     "    "]);
+    },
+
+    "A piece should appear at first tick and move down at each tick.": function() {
+	board.start();
+	tickShouldChangeTheBoard();
+	assertBoard([" rb ",
+		     "    ",
+		     "    ",
+		     "    ",
+		     "    ",
+		     "    "],
+		    "first tick");
+
+	tickShouldChangeTheBoard();
+	assertBoard(["    ",
+		     " rb ",
+		     "    ",
+		     "    ",
+		     "    ",
+		     "    "],
+		    "second tick");
+
+	tickShouldChangeTheBoard();
+	assertBoard(["    ",
+		     "    ",
+		     " rb ",
+		     "    ",
+		     "    ",
+		     "    "],
+		    "third tick");
+    },
+
+    // TODO faire un ticker et un générateur de couleur pour avoir un rendu avant de continuer. -> fait,
+    // bugs trouvé : 
+    //    vérifier que boardTime est bien notifié à chaque changement. -> this.assertBoardRefreshed()
+
+
+    "A new piece should appear when the previous one gets blocked at the bottom of the board": function() {
+	fail("not yet implemented");
+	// on risque d'avoir une surprise si jamais le row++ fait pour faire descendre les piece reste sur la pos 
+	// d'origine ...
+    }
+
+/*
+    "A piece should rotate with vertical arrow key": function() {
+	fail("not yet implemented");
+    }
+
+    "A piece should move with other arrows keys": function() {
+	fail("not yet implemented");
+    }
+
+    "A piece should be droped with space bar": function() {
+	fail("not yet implemented");
+    }
+
+    "It should not be possible to move a piece outside the board": function() {
+	fail("not yet implemented");
+    }
+
+    "Blocked beans should follow the law of gravity": function() {
+	fail("not yet implemented");
+    }
+
+    "When grouped by 4 or more, beans of the same color should disappear": function() {
+	fail("not yet implemented");
+    }
+
+    "Disappearing beans should cascade": function() {
+	fail("not yet implemented");
+    }
+
+    "Game should be lost when there is no place for new pieces": function() {
+        fail("not yet implemented");
+    }
+*/
+    /* idées pour les tests :
+
+        avoir des trucs pour initializer la grille
+
+        pouvoir modifier la taille de la grille pour que ce soit plus simple
+
+        avoir des trucs pour modifier la pièce courante
+
+        comme pour tetris, mocker le générateur de couleur et l'horloge. */
+
+}) ;
+
+if (window.main && (appMain = main)) main = null ;
+
+</script>
+
+<% end %>
