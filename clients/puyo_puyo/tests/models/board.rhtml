@@ -26,7 +26,7 @@ Test.context("PuyoPuyo.Board",{
 	    }
 	};
 
-	this.assertChangesBoard = function(action, message) {
+	this.assertChangesBoard = function(actionName, message) {
 	    var beforeBoardTime = this.board.get('time');
 	    var result = action();
 	    var afterBoardTime = this.board.get('time');
