@@ -1,0 +1,44 @@
+<% # ========================================================================
+   # PuyoPuyo.Piece Unit Test
+   # ========================================================================
+%>
+<% content_for('final') do %>
+
+<script>
+
+Test.context("PuyoPuyo.Piece",{
+
+    setup: function() {
+	this.assertPiece = function(stringRows, piece) {
+	    this.assertIdentical(5, stringRows.length);
+
+	    for (var r = 0; r < 5; ++r) {
+		this.assertIdentical(5, stringRows[r].length);
+
+		for (var c = 0; c < 5; ++c) {
+		    this.assertIdentical(PuyoPuyo.Game.initialToState[stringRows[r][c]],
+					 piece.cellState(piece.get('center').col + c - 2, piece.get('center').row + r - 2),
+					 "at col=" + c + ", row=" + r);
+		}
+	    }
+	};
+    },
+
+    "A new piece should contain its origin and the cell at its right": function() {
+	var piece = PuyoPuyo.Piece.create({center: {row: 3, col: 2}, colors: {first: PuyoPuyo.Game.Red, second: PuyoPuyo.Game.Blue}});
+
+	assertPiece(["     ",
+		     "     ",
+		     "  rb ",
+		     "     ",
+		     "     "],
+		    piece);
+    }
+
+}) ;
+
+if (window.main && (appMain = main)) main = null ;
+
+</script>
+
+<% end %>
