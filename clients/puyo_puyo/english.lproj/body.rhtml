@@ -6,9 +6,10 @@
   <%= view :boardView,
       :tag => :table,
       :view => 'PuyoPuyo.BoardView',
-      :bind => { 'board' => 'PuyoPuyo.playerController.board' } %>
+      :bind => { :board => 'PuyoPuyo.playerController.board',
+                 :boardTime => 'PuyoPuyo.playerController.board.time' } %>
   <%= button_view :label => 'Start', :action => 'PuyoPuyo.playerController.start' %>
-  <%= button_view :label => 'Stop', :action => 'PuyoPuyo.playerController.stop' %>
+  <%= button_view :label => 'Abort', :action => 'PuyoPuyo.playerController.abort' %>
   <p/>
   <h2>TODO</h2>
   Faire une ihm jolie.<p/>

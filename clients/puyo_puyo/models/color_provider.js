@@ -19,7 +19,7 @@ PuyoPuyo.ColorProvider = SC.Record.extend(
       Private function returning a random color.
     */
     randomColor_: function() {
-	var colors = App.Game.Colors;
+	var colors = PuyoPuyo.Game.Colors;
 	var rand = Math.random();
 	var index = Math.round(rand * colors.length) % colors.length;
 
@@ -30,13 +30,13 @@ PuyoPuyo.ColorProvider = SC.Record.extend(
       Color for the first puyo of a piece.
     */
     popFirstColor: function() {
-	return this.randomColor();
+	return this.randomColor_();
     },
     /**
       Color for the second puyo of a piece.
     */
     popSecondColor: function() {
-	return this.randomColor();
+	return this.randomColor_();
     }
 
 }) ;

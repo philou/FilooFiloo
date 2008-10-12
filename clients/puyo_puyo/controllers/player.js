@@ -17,7 +17,7 @@ PuyoPuyo.playerController = SC.Object.create(
     start: function() {
 	this.get('board').start();
     },
-    stop: function() {
-	this.get('board').stop();
+    abort: function() {
+	this.get('board').abort();
     }
 }) ;

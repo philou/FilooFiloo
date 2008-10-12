@@ -11,6 +11,29 @@ Test.context("PuyoPuyo.Board",{
     setup: function() {
 	PuyoPuyo.Board.setDimensions(4, 6);
 
+	this.ticker = {
+	    running: false,
+	    start: function() {
+		this.running = true;
+	    },
+	    stop: function() {
+		this.running = false;
+	    }
+	};
+
+	this.colorProvider = {
+	    firstColor: PuyoPuyo.Game.Red,
+	    secondColor: PuyoPuyo.Game.Blue,
+	    popFirstColor: function() {
+		return this.firstColor;
+	    },
+	    popSecondColor: function() {
+		return this.secondColor;
+	    }
+	};
+
+	this.board = PuyoPuyo.Board.create({ticker: this.ticker, colorProvider: this.colorProvider});
+
 	this.assertBoard = function(stringRows, message) {
 	    // TODO : factorize this with piece.rhtml tests
 	    this.assertIdentical(PuyoPuyo.Board.RowCount, stringRows.length);
@@ -26,44 +49,53 @@ Test.context("PuyoPuyo.Board",{
 	    }
 	};
 
-	this.assertChangesBoard = function(actionName, message) {
-	    var beforeBoardTime = this.board.get('time');
-	    var result = action();
-	    var afterBoardTime = this.board.get('time');
+	this.board.shouldBe = function(that, stringRows, message) {
+	    that.assertBoard(stringRows, message);
+	};
 
-	    this.assertNotIdentical(beforeBoardTime, afterBoardTime, message);
+	this.board.shouldChangeWhen = function(that, actionName, message) {
+	    var beforeBoardTime = this.get('time');
+	    var result = this[actionName]();
+	    var afterBoardTime = this.get('time');
+	    that.assertNotIdentical(beforeBoardTime, afterBoardTime, message + " : board time not updated");
 	    return result;
 	};
 
-	this.tickShouldChangeTheBoard = function(message) {
-	    var board = this.board;
-	    this.assertChangesBoard(function() {
-		board.tick();
-	    }, message);
+	this.board.shouldNotChangeWhen = function(that, actionName, message) {
+	    var beforeBoardTime = this.get('time');
+	    var result = this[actionName]();
+	    var afterBoardTime = this.get('time');
+	    that.assertIdentical(beforeBoardTime, afterBoardTime, message + " : board time updated");
+	    return result;
 	};
 
-	// TODO use this instead of tick. Try to give in a string instead of a function.
+	this.board.shouldChangeToWhen = function(that, actionName, stringRows, message) {
+	    var result = this.shouldChangeWhen(that, actionName, message);
+	    this.shouldBe(that, stringRows, message + " : board different");
+	    return result;
+	};
 
-	this.ticker = {
-	    running: false,
-	    start: function() {
-		this.running = true;
-	    },
-	    stop: function() {
-		this.running = false;
+	/***
+          Allows to specify test sequences from left to right instead of top to bottom.
+        */
+	this.board.shouldFollow = function(that, actionNames, allStringRows) {
+	    var steps = [];
+	    var count = actionNames.length;
+	    for(var i = 0; i < count; ++i) {
+		steps[i] = { actionName: actionNames[i],
+			     message: "step "+i+" : "+actionNames[i],
+			     stringRows: []};
+	    }
+	    that.assertIdentical(0, allStringRows.length % count);
+	    for(var i = 0; i < allStringRows.length; ++i) {
+		steps[i % count].stringRows.push(allStringRows[i]);
+	    }
+	    
+	    var board = this;
+	    for(var i = 0; i < steps.length; ++i) {
+		this.shouldChangeToWhen(that, steps[i].actionName, steps[i].stringRows, steps[i].message);
 	    }
 	};
-	this.colorProvider = {
-	    firstColor: PuyoPuyo.Game.Red,
-	    secondColor: PuyoPuyo.Game.Blue,
-	    popFirstColor: function() {
-		return this.firstColor;
-	    },
-	    popSecondColor: function() {
-		return this.secondColor;
-	    }
-	};
-	this.board = PuyoPuyo.Board.create({ticker: this.ticker, colorProvider: this.colorProvider});
     },
 
     teardown: function() {
@@ -92,54 +124,137 @@ Test.context("PuyoPuyo.Board",{
     },
 
     "The board should start empty": function() {
-	board.start();
-	assertBoard(["    ",
-		     "    ",
-		     "    ",
-		     "    ",
-		     "    ",
-		     "    "]);
+	board.shouldFollow(["start"],
+			   ["    ",
+			    "    ",
+			    "    ",
+			    "    ",
+			    "    ",
+			    "    "]);
     },
 
     "A piece should appear at first tick and move down at each tick.": function() {
 	board.start();
-	tickShouldChangeTheBoard();
-	assertBoard([" rb ",
-		     "    ",
-		     "    ",
-		     "    ",
-		     "    ",
-		     "    "],
-		    "first tick");
+	board.shouldChangeToWhen("tick", 
+				 [" rb ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  "    "],
+				 "first tick");
 
-	tickShouldChangeTheBoard();
-	assertBoard(["    ",
-		     " rb ",
-		     "    ",
-		     "    ",
-		     "    ",
-		     "    "],
-		    "second tick");
+	board.shouldChangeToWhen("tick",
+				 ["    ",
+				  " rb ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  "    "],
+				 "second tick");
 
-	tickShouldChangeTheBoard();
-	assertBoard(["    ",
-		     "    ",
-		     " rb ",
-		     "    ",
-		     "    ",
-		     "    "],
-		    "third tick");
+	board.shouldChangeToWhen("tick",
+				 ["    ",
+				  "    ",
+				  " rb ",
+				  "    ",
+				  "    ",
+				  "    "],
+				 "third tick");
+
+	board.shouldChangeToWhen("tick",
+				 ["    ",
+				  "    ",
+				  "    ",
+				  " rb ",
+				  "    ",
+				  "    "],
+				 "forth tick");
+
+	board.shouldChangeToWhen("tick",
+				 ["    ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  " rb ",
+				  "    "],
+				 "fifth tick");
+
+	board.shouldChangeToWhen("tick",
+				 ["    ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  " rb "],
+				 "last tick");
     },
 
-    // TODO faire un ticker et un générateur de couleur pour avoir un rendu avant de continuer. -> fait,
-    // bugs trouvé : 
-    //    vérifier que boardTime est bien notifié à chaque changement. -> this.assertBoardRefreshed()
+    "A new game should be started after an abort.": function() {
+	board.start();
+	board.tick();
 
+	board.shouldChangeToWhen("tick",
+				 ["    ",
+				  " rb ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  "    "],
+				 "last tick");
+	board.shouldNotChangeWhen("abort");
+	board.shouldChangeToWhen("start",
+				 ["    ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  "    "],
+				 "restart");
+    },    
+
+    "New pieces should have colors from colorProvider.": function() {
+	this.colorProvider.firstColor = PuyoPuyo.Game.Purple;
+	this.colorProvider.secondColor = PuyoPuyo.Game.Yellow;
+
+	board.start();
+	board.shouldChangeToWhen("tick",
+				 [" py ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  "    "]);
+    },
 
     "A new piece should appear when the previous one gets blocked at the bottom of the board": function() {
-	fail("not yet implemented");
-	// on risque d'avoir une surprise si jamais le row++ fait pour faire descendre les piece reste sur la pos 
-	// d'origine ...
+	board.start();
+	board.initCurrentPiece_({col: PuyoPuyo.Board.PieceStartOrigin.col, row:PuyoPuyo.Board.MaxRow});
+	board.shouldBe(["    ",
+			"    ",
+			"    ",
+			"    ",
+			"    ",
+			" rb "],
+		      "initialy");
+
+	board.shouldChangeToWhen("tick",
+				 ["    ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  " rb "],
+				 "piece is blocked");
+
+	board.shouldChangeToWhen("tick",
+				 [" rb ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  " rb "],
+				 "a new piece appears");
     }
 
 /*
@@ -175,16 +290,6 @@ Test.context("PuyoPuyo.Board",{
         fail("not yet implemented");
     }
 */
-    /* idées pour les tests :
-
-        avoir des trucs pour initializer la grille
-
-        pouvoir modifier la taille de la grille pour que ce soit plus simple
-
-        avoir des trucs pour modifier la pièce courante
-
-        comme pour tetris, mocker le générateur de couleur et l'horloge. */
-
 }) ;
 
 if (window.main && (appMain = main)) main = null ;

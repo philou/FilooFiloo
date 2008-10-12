@@ -29,6 +29,9 @@ PuyoPuyo.Board = SC.Record.extend(
     start: function() {
 	this.set('playing', true);
 	this.ticker.start(this);
+	this.currentPiece = null;
+	this.blockedPiece = null;
+	this.notifyChanged_();
     },
 
     /**
@@ -44,7 +47,16 @@ PuyoPuyo.Board = SC.Record.extend(
     */
     cellState: function(col, row) {
 	if (this.currentPiece) {
-	    return this.currentPiece.cellState(col, row);
+	    var result = this.currentPiece.cellState(col, row);
+	    if (result)
+		return result;
+	}
+	// TODO changer tout cela par une expression booléenne bien ficelée,
+	// utiliser un set plutôt qu'une piece.
+	if (this.blockedPiece) {
+	    var result = this.blockedPiece.cellState(col, row);
+	    if (result)
+		return result;
 	}
 
 	return PuyoPuyo.Game.Clear;
@@ -55,13 +67,17 @@ PuyoPuyo.Board = SC.Record.extend(
     */
     tick: function() {
 	if (!this.currentPiece) {
-	    this.currentPiece = PuyoPuyo.Piece.create({
-		center: PuyoPuyo.Board.PieceStartOrigin,
-		colors: {first: PuyoPuyo.Game.Red, second: PuyoPuyo.Game.Blue}
-	    });
+	    this.initCurrentPiece_(PuyoPuyo.Board.PieceStartOrigin);
 	}
 	else {
-	    this.currentPiece.moveDown()
+	    var newPiece = this.currentPiece.moveDown();
+	    if (this.pieceIsAllowed_(newPiece)) {
+		this.currentPiece = newPiece;
+	    }
+	    else {
+		this.blockCurrentPiece_();
+		this.currentPiece = null;
+	    }
 	}
 	this.notifyChanged_();
     },
@@ -71,9 +87,26 @@ PuyoPuyo.Board = SC.Record.extend(
     },
     now_: function() {
 	return new Date();
+    },
+    initCurrentPiece_: function(center) {
+	this.currentPiece = PuyoPuyo.Piece.create({
+	    center: center,
+	    colors: {first: this.colorProvider.popFirstColor(), second: this.colorProvider.popSecondColor()}
+	});
+    },
+    pieceIsAllowed_: function(piece) {
+	var result = true;
+	piece.forEach(function(row, col) {
+	    result &=
+		(0 <= row) && (row <= PuyoPuyo.Board.MaxRow) &&
+		(0 <= col) && (col <= PuyoPuyo.Board.MaxCol);
+	});
+	return result;
+    },
+    blockCurrentPiece_: function() {
+	this.blockedPiece = this.currentPiece;
     }
-
-}) ;
+});
 
 PuyoPuyo.Board.setDimensions = function(colCount, rowCount) {
     this.ColCount = colCount;
