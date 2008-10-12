@@ -22,17 +22,33 @@ Test.context("PuyoPuyo.Piece",{
 		}
 	    }
 	};
+
+	this.piece = PuyoPuyo.Piece.create(
+	    {center: {row: 3,
+		      col: 2},
+	     colors: {first: PuyoPuyo.Game.Red,
+		      second: PuyoPuyo.Game.Blue}});
     },
 
     "A new piece should contain its origin and the cell at its right": function() {
-	var piece = PuyoPuyo.Piece.create({center: {row: 3, col: 2}, colors: {first: PuyoPuyo.Game.Red, second: PuyoPuyo.Game.Blue}});
-
 	assertPiece(["     ",
 		     "     ",
 		     "  rb ",
 		     "     ",
 		     "     "],
-		    piece);
+		    this.piece);
+    },
+
+    "forEach should enumerate both cells": function() {
+	var expected = [{row:3, col:2},{row:3, col:3}];
+	var i = 0;
+	var that = this;
+	this.piece.forEach(function(row, col) {
+	    that.assertIdentical(expected[i].row, row);
+	    that.assertIdentical(expected[i].col, col);
+	    i++;
+	});
+	this.assertIdentical(expected.length, i);
     }
 
 }) ;

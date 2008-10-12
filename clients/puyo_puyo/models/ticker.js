@@ -34,7 +34,7 @@ PuyoPuyo.Ticker = SC.Record.extend(
     */
     stop: function() {
 	PuyoPuyo.assert(this.game);
-	PuyoPuyo.assert(this.timmer);
+	PuyoPuyo.assert(this.timer);
 
 	this.timer.invalidate();
 	delete(this.timer);

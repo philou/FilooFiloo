@@ -42,10 +42,20 @@ PuyoPuyo.Piece = SC.Record.extend(
     },
 
     /**
-      Moves the piece one cell down.
+      Enumerates all cells occupied by the piece.
+    */
+    forEach: function(doSomething) {
+	doSomething(this.center.row, this.center.col);
+	doSomething(this.center.row, this.center.col + 1);
+    },
+
+    /**
+      Creates a new piece further down.
     */
     moveDown: function() {
-	this.center.row++;
+	return PuyoPuyo.Piece.create(
+	    {center: {row: this.center.row + 1, col: this.center.col },
+	     colors: this.colors});
     }
 
 }) ;

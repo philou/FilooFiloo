@@ -25,11 +25,7 @@ PuyoPuyo.BoardView = SC.View.extend(function() {
 	    for (col = 0; col < PuyoPuyo.Board.ColCount; col++) {
 
 		html.push('<td class="game_cell ');
-		if (elemValues(row, col)) {
-		    html.push('filled');
-		} else {
-		    html.push('blank');
-		}
+		html.push(elemValues(row, col));
 		html.push('"/>');
 	    }
 	    html.push('</tr>');
@@ -45,7 +41,10 @@ PuyoPuyo.BoardView = SC.View.extend(function() {
 	emptyElement: '<table>' + renderHtml(function(_row, _col) { return false; }) + '</table>',
 
 	render: function() {
-	    this.set('innerHTML', renderHtml( function(row, col) { return false; }));
-	}.observes('board')
+	    var board = this.get('board');
+	    this.set('innerHTML', renderHtml( function(row, col) {
+		return PuyoPuyo.Game.stateToName[board.cellState(col, row)];
+	    }));
+	}.observes('boardTime', 'board')
     };
 }()) ;
