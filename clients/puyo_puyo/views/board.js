@@ -37,6 +37,8 @@ PuyoPuyo.BoardView = SC.View.extend(function() {
     return {
 	
 	board: null,
+	boardTime: null,
+	acceptsFirstResponder: true,
 
 	emptyElement: '<table>' + renderHtml(function(_row, _col) { return false; }) + '</table>',
 
@@ -45,6 +47,18 @@ PuyoPuyo.BoardView = SC.View.extend(function() {
 	    this.set('innerHTML', renderHtml( function(row, col) {
 		return PuyoPuyo.Game.stateToName[board.cellState(col, row)];
 	    }));
-	}.observes('boardTime', 'board')
+	}.observes('boardTime', 'board'),
+
+	keyDown: function(evt) {
+	    return this.interpretKeyEvents(evt) ;
+	},
+	moveRight: function(sender, evt) {
+	    this.get('board').right();
+	    return true;
+	},
+	moveLeft: function(sender, evt) {
+	    this.get('board').left();
+	    return true;
+	}
     };
 }()) ;

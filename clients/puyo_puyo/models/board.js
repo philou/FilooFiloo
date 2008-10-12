@@ -29,9 +29,8 @@ PuyoPuyo.Board = SC.Record.extend(
     start: function() {
 	this.set('playing', true);
 	this.ticker.start(this);
-	this.currentPiece = null;
 	this.blockedPiece = null;
-	this.notifyChanged_();
+	this.setCurrentPiece_(null);
     },
 
     /**
@@ -69,18 +68,36 @@ PuyoPuyo.Board = SC.Record.extend(
 	if (!this.currentPiece) {
 	    this.initCurrentPiece_(PuyoPuyo.Board.PieceStartOrigin);
 	}
-	else {
-	    var newPiece = this.currentPiece.moveDown();
+	else if (!this.moveCurrentPiece_("down")){
+	    this.blockCurrentPiece_();
+	    this.setCurrentPiece_(null);
+	}
+    },
+
+    /**
+      Moves the current piece to the left.
+    */
+    left: function() {
+	this.moveCurrentPiece_("left");
+    },
+
+    /**
+      Moves the current piece to the right.
+    */
+    right: function() {
+	this.moveCurrentPiece_("right");
+    },
+    
+    moveCurrentPiece_: function(move) {
+	if (this.currentPiece) {
+	    var newPiece = this.currentPiece[move]();
 	    if (this.pieceIsAllowed_(newPiece)) {
-		this.currentPiece = newPiece;
-	    }
-	    else {
-		this.blockCurrentPiece_();
-		this.currentPiece = null;
+		this.setCurrentPiece_( newPiece);
+		return true;
 	    }
 	}
-	this.notifyChanged_();
-    },
+	return false;
+    },	
 
     notifyChanged_: function() {
 	this.set('time', this.now_());
@@ -89,10 +106,14 @@ PuyoPuyo.Board = SC.Record.extend(
 	return new Date();
     },
     initCurrentPiece_: function(center) {
-	this.currentPiece = PuyoPuyo.Piece.create({
+	this.setCurrentPiece_(PuyoPuyo.Piece.create({
 	    center: center,
 	    colors: {first: this.colorProvider.popFirstColor(), second: this.colorProvider.popSecondColor()}
-	});
+	}));
+    },
+    setCurrentPiece_: function(newPiece) {
+	this.currentPiece = newPiece;
+	this.notifyChanged_();
     },
     pieceIsAllowed_: function(piece) {
 	var result = true;
