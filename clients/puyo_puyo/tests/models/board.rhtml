@@ -135,59 +135,13 @@ Test.context("PuyoPuyo.Board",{
 
     "A piece should appear at first tick and move down at each tick.": function() {
 	board.start();
-	board.shouldChangeToWhen("tick", 
-				 [" rb ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  "    "],
-				 "first tick");
-
-	board.shouldChangeToWhen("tick",
-				 ["    ",
-				  " rb ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  "    "],
-				 "second tick");
-
-	board.shouldChangeToWhen("tick",
-				 ["    ",
-				  "    ",
-				  " rb ",
-				  "    ",
-				  "    ",
-				  "    "],
-				 "third tick");
-
-	board.shouldChangeToWhen("tick",
-				 ["    ",
-				  "    ",
-				  "    ",
-				  " rb ",
-				  "    ",
-				  "    "],
-				 "forth tick");
-
-	board.shouldChangeToWhen("tick",
-				 ["    ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  " rb ",
-				  "    "],
-				 "fifth tick");
-
-	board.shouldChangeToWhen("tick",
-				 ["    ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  " rb "],
-				 "last tick");
+	board.shouldFollow(["tick", "tick", "tick", "tick", "tick", "tick"],
+			   [" rb ", "    ", "    ", "    ", "    ", "    ",
+			    "    ", " rb ", "    ", "    ", "    ", "    ",
+			    "    ", "    ", " rb ", "    ", "    ", "    ",
+			    "    ", "    ", "    ", " rb ", "    ", "    ",
+			    "    ", "    ", "    ", "    ", " rb ", "    ",
+			    "    ", "    ", "    ", "    ", "    ", " rb "]);
     },
 
     "A new game should be started after an abort.": function() {
@@ -238,39 +192,39 @@ Test.context("PuyoPuyo.Board",{
 			" rb "],
 		      "initialy");
 
-	board.shouldChangeToWhen("tick",
-				 ["    ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  " rb "],
-				 "piece is blocked");
+	board.shouldFollow(["tick", "tick"],
+			   ["    ", " rb ",
+			    "    ", "    ",
+			    "    ", "    ",
+			    "    ", "    ",
+			    "    ", "    ",
+			    " rb ", " rb "]);
+    },
 
-	board.shouldChangeToWhen("tick",
-				 [" rb ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  " rb "],
-				 "a new piece appears");
+    "A piece should move with left and right": function() {
+	board.start();
+	board.shouldFollow(["tick", "left", "right"],
+			   [" rb ", "rb  ", " rb ", 
+			    "    ", "    ", "    ",
+			    "    ", "    ", "    ",
+			    "    ", "    ", "    ",
+			    "    ", "    ", "    ",
+			    "    ", "    ", "    "]);
     }
 
+    // TODO faire le binding des touches dans la vue.
+    // faire un test avec plusieurs pièces bloquées.
+
 /*
-    "A piece should rotate with vertical arrow key": function() {
+    "It should not be possible to move a piece outside the board": function() {
 	fail("not yet implemented");
     }
 
-    "A piece should move with other arrows keys": function() {
+    "A piece should rotate with vertical arrow keys": function() {
 	fail("not yet implemented");
     }
 
     "A piece should be droped with space bar": function() {
-	fail("not yet implemented");
-    }
-
-    "It should not be possible to move a piece outside the board": function() {
 	fail("not yet implemented");
     }
 

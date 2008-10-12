@@ -52,9 +52,27 @@ PuyoPuyo.Piece = SC.Record.extend(
     /**
       Creates a new piece further down.
     */
-    moveDown: function() {
+    down: function() {
 	return PuyoPuyo.Piece.create(
 	    {center: {row: this.center.row + 1, col: this.center.col },
+	     colors: this.colors});
+    },
+
+    /**
+      Creates a new piece at the left.
+    */
+    left: function() {
+	return PuyoPuyo.Piece.create(
+	    {center: {row: this.center.row, col: this.center.col - 1 },
+	     colors: this.colors});
+    },
+
+    /**
+      Creates a new piece at the right.
+    */
+    right: function() {
+	return PuyoPuyo.Piece.create(
+	    {center: {row: this.center.row, col: this.center.col + 1 },
 	     colors: this.colors});
     }
 
