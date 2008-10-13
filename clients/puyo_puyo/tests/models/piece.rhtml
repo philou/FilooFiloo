@@ -40,12 +40,15 @@ Test.context("PuyoPuyo.Piece",{
     },
 
     "forEach should enumerate both cells": function() {
-	var expected = [{row:3, col:2},{row:3, col:3}];
+	var expected =
+	    [{row:3, col:2, color:PuyoPuyo.Game.Red},
+	     {row:3, col:3, color:PuyoPuyo.Game.Blue}];
 	var i = 0;
 	var that = this;
-	this.piece.forEach(function(row, col) {
+	this.piece.forEach(function(row, col, color) {
 	    that.assertIdentical(expected[i].row, row);
 	    that.assertIdentical(expected[i].col, col);
+	    that.assertIdentical(expected[i].color, color);
 	    i++;
 	});
 	this.assertIdentical(expected.length, i);

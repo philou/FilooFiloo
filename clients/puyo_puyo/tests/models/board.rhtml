@@ -6,6 +6,8 @@
 
 <script>
 
+var idem = "no change";
+
 Test.context("PuyoPuyo.Board",{
 
     setup: function() {
@@ -88,14 +90,44 @@ Test.context("PuyoPuyo.Board",{
 	    }
 	    that.assertIdentical(0, allStringRows.length % count);
 	    for(var i = 0; i < allStringRows.length; ++i) {
-		steps[i % count].stringRows.push(allStringRows[i]);
+		if (allStringRows[i] === idem) {
+		    steps[i % count].stringRows = idem;
+		}
+		else {
+		    steps[i % count].stringRows.push(allStringRows[i]);
+		}
 	    }
 	    
 	    var board = this;
 	    for(var i = 0; i < steps.length; ++i) {
-		this.shouldChangeToWhen(that, steps[i].actionName, steps[i].stringRows, steps[i].message);
+		if (steps[i].stringRows === idem) {
+		    this.shouldNotChangeWhen(that, steps[i].actionName, steps[i].message);
+		}
+		else {
+		    this.shouldChangeToWhen(that, steps[i].actionName, steps[i].stringRows, steps[i].message);
+		}
 	    }
 	};
+
+	var that = this;
+	this.board.initBlockedPieces = function(stringRows) {
+	    this.setBlockedPieces_(function() {
+		var result = PuyoPuyo.CoordMap.create();
+
+		that.assertIdentical(PuyoPuyo.Board.RowCount, stringRows.length);
+
+		for(var r = 0; r < PuyoPuyo.Board.RowCount; ++r) {
+		    that.assertIdentical(PuyoPuyo.Board.ColCount, stringRows[r].length);
+
+		    for(var c = 0; c < PuyoPuyo.Board.ColCount; ++c) {
+			result.put(c, r, PuyoPuyo.Game.initialToState[stringRows[r][c]]);
+		    }
+		}
+
+		return result;
+	    }());
+	};
+	    
     },
 
     teardown: function() {
@@ -148,24 +180,14 @@ Test.context("PuyoPuyo.Board",{
 	board.start();
 	board.tick();
 
-	board.shouldChangeToWhen("tick",
-				 ["    ",
-				  " rb ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  "    "],
-				 "last tick");
-	board.shouldNotChangeWhen("abort");
-	board.shouldChangeToWhen("start",
-				 ["    ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  "    "],
-				 "restart");
-    },    
+	board.shouldFollow(["tick", "abort", "start"], 
+			   ["    ",  idem,   "    ",
+			    " rb ",  idem,   "    ",
+			    "    ",  idem,   "    ",
+			    "    ",  idem,   "    ",
+			    "    ",  idem,   "    ",
+			    "    ",  idem,   "    "]);
+    },
 
     "New pieces should have colors from colorProvider.": function() {
 	this.colorProvider.firstColor = PuyoPuyo.Game.Purple;
@@ -210,15 +232,49 @@ Test.context("PuyoPuyo.Board",{
 			    "    ", "    ", "    ",
 			    "    ", "    ", "    ",
 			    "    ", "    ", "    "]);
-    }
+    },
 
-    // TODO faire le binding des touches dans la vue.
+    "It should not be possible to move a piece outside the board": function() {
+	board.start();
+	board.shouldFollow(["tick", "left", "left", "right", "right", "right",],
+			   [" rb ", "rb  ", idem,   " rb ",  "  rb",  idem, 
+			    "    ", "    ", idem,   "    ",  "    ",  idem,
+			    "    ", "    ", idem,   "    ",  "    ",  idem,
+			    "    ", "    ", idem,   "    ",  "    ",  idem,
+			    "    ", "    ", idem,   "    ",  "    ",  idem,
+			    "    ", "    ", idem,   "    ",  "    ",  idem]);
+    },
+
+    "Blocked piece should pile on top of each other.": function() {
+	board.start();
+	board.initBlockedPieces(["    ",
+				 "    ",
+				 "    ",
+				 "    ",
+				 "    ",
+				 " yp "]);
+	board.initCurrentPiece_({col: PuyoPuyo.Board.PieceStartOrigin.col, row:PuyoPuyo.Board.MaxRow - 2});
+	board.shouldBe(["    ",
+			"    ",
+			"    ",
+			" rb ",
+			"    ",
+			" yp "],
+		      "initialy");
+
+	board.shouldFollow(["tick", "tick"],
+			   ["    ", "    ",
+			    "    ", "    ",
+			    "    ", "    ",
+			    "    ", "    ",
+			    " rb ", " rb ",
+			    " yp ", " yp "]);
+    },
+
+    // TODO
     // faire un test avec plusieurs pièces bloquées.
 
 /*
-    "It should not be possible to move a piece outside the board": function() {
-	fail("not yet implemented");
-    }
 
     "A piece should rotate with vertical arrow keys": function() {
 	fail("not yet implemented");

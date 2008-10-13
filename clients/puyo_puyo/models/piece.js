@@ -45,8 +45,8 @@ PuyoPuyo.Piece = SC.Record.extend(
       Enumerates all cells occupied by the piece.
     */
     forEach: function(doSomething) {
-	doSomething(this.center.row, this.center.col);
-	doSomething(this.center.row, this.center.col + 1);
+	doSomething(this.center.row, this.center.col, this.colors.first);
+	doSomething(this.center.row, this.center.col + 1, this.colors.second);
     },
 
     /**
