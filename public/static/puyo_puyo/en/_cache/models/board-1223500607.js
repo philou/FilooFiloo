@@ -1,3 +1,5 @@
+/* Start ----------------------------------------------------- models/board.js*/
+
 // ==========================================================================
 // PuyoPuyo.Board
 // ==========================================================================
@@ -29,8 +31,6 @@ PuyoPuyo.Board = SC.Record.extend(
     start: function() {
 	this.set('playing', true);
 	this.ticker.start(this);
-	this.setBlockedPieces_(PuyoPuyo.CoordMap.create());
-	this.setCurrentPiece_(null);
     },
 
     /**
@@ -45,57 +45,33 @@ PuyoPuyo.Board = SC.Record.extend(
       Cell status for a given column and row, see PuyoPuyo.Game for a list of all available states.
     */
     cellState: function(col, row) {
-	// TODO changer tout cela par une expression booléenne bien ficelée,
-	if (this.currentPiece) {
-	    var result = this.currentPiece.cellState(col, row);
-	    if (result)
-		return result;
-	}
-	if (this.blockedPieces) {
-	    var result = this.blockedPieces.get(col, row);
-	    if (result)
-		return result;
-	}
-	return PuyoPuyo.Game.Clear;
+	return
+	    (this.currentPiece && this.currentPiece.cellState(col, row)) ||
+	    (this.blockedPiece && this.blockedPiece.cellState(col, row)) ||
+	    PuyoPuyo.Game.Clear;
     },
 
     /**
       Invoked by the ticker to bring the piece down.
     */
     tick: function() {
+	// comment tester si on est en bas ?
+	// faire une fonction each dans piece, tester chaque coordonnée.
 	if (!this.currentPiece) {
 	    this.initCurrentPiece_(PuyoPuyo.Board.PieceStartOrigin);
 	}
-	else if (!this.moveCurrentPiece_("down")){
-	    this.blockCurrentPiece_();
-	    this.setCurrentPiece_(null);
-	}
-    },
-
-    /**
-      Moves the current piece to the left.
-    */
-    left: function() {
-	this.moveCurrentPiece_("left");
-    },
-
-    /**
-      Moves the current piece to the right.
-    */
-    right: function() {
-	this.moveCurrentPiece_("right");
-    },
-    
-    moveCurrentPiece_: function(move) {
-	if (this.currentPiece) {
-	    var newPiece = this.currentPiece[move]();
+	else {
+	    var newPiece = this.currentPiece.moveDown();
 	    if (this.pieceIsAllowed_(newPiece)) {
-		this.setCurrentPiece_( newPiece);
-		return true;
+		this.currentPiece = newPiece;
+	    }
+	    else {
+		this.blockCurrentPiece_();
+		this.currentPiece = null;
 	    }
 	}
-	return false;
-    },	
+	this.notifyChanged_();
+    },
 
     notifyChanged_: function() {
 	this.set('time', this.now_());
@@ -104,34 +80,22 @@ PuyoPuyo.Board = SC.Record.extend(
 	return new Date();
     },
     initCurrentPiece_: function(center) {
-	this.setCurrentPiece_(PuyoPuyo.Piece.create({
+	this.currentPiece = PuyoPuyo.Piece.create({
 	    center: center,
 	    colors: {first: this.colorProvider.popFirstColor(), second: this.colorProvider.popSecondColor()}
-	}));
-    },
-    setCurrentPiece_: function(newPiece) {
-	this.currentPiece = newPiece;
-	this.notifyChanged_();
+	});
     },
     pieceIsAllowed_: function(piece) {
 	var result = true;
-	var that = this;
 	piece.forEach(function(row, col) {
 	    result &=
-		(0 <= row) && (row <= PuyoPuyo.Board.MaxRow) &&
-		(0 <= col) && (col <= PuyoPuyo.Board.MaxCol) &&
-		!that.blockedPieces.get(col, row);
+		(0 < row) && (row < PuyoPuyo.Board.MaxRow) &&
+		(0 < col) && (col < PuyoPuyo.Board.MaxCol);
 	});
 	return result;
     },
     blockCurrentPiece_: function() {
-	var that = this;
-	this.currentPiece.forEach(function(row, col, color) {
-	    that.blockedPieces.put(col, row, color);
-	});
-    },
-    setBlockedPieces_: function(blockedPieces) {
-	this.blockedPieces = blockedPieces;
+	this.blockedPiece = this.currentPiece;
     }
 });
 
@@ -147,4 +111,8 @@ PuyoPuyo.Board.setDimensions = function(colCount, rowCount) {
 
 PuyoPuyo.Board.setDimensions(PuyoPuyo.Game.ColCount, PuyoPuyo.Game.RowCount);
 
+
+
+
+/* End ------------------------------------------------------- models/board.js*/
 

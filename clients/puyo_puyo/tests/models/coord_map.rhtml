@@ -1,0 +1,41 @@
+<% # ========================================================================
+   # PuyoPuyo.CoordMap Unit Test
+   # ========================================================================
+%>
+<% content_for('final') do %>
+
+<script>
+
+Test.context("PuyoPuyo.CoordMap",{
+
+    "Stored values should be remembered": function() {
+	var map = PuyoPuyo.CoordMap.create();
+	map.put(2, 4, "some value");
+	map.put(3, 4, "something else");
+
+	assertIdentical("some value", map.get(2, 4));
+	assertIdentical("something else", map.get(3, 4));
+    },
+
+    "Absent values should be reported as null": function() {
+	var map = PuyoPuyo.CoordMap.create();
+	map.put(2, 4, "something");
+	assertNull(map.get(3, 4));
+    },
+
+    "Instances should not share state": function() {
+	var map = PuyoPuyo.CoordMap.create();
+	var map2 = PuyoPuyo.CoordMap.create();
+	map.put(2, 4, "something");
+
+	assertNull(map2.get(2,4));
+    }
+
+}) ;
+
+
+if (window.main && (appMain = main)) main = null ;
+
+</script>
+
+<% end %>

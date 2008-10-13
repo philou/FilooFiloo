@@ -1,3 +1,5 @@
+/* Start ----------------------------------------------------- models/piece.js*/
+
 // ==========================================================================
 // PuyoPuyo.Piece
 // ==========================================================================
@@ -45,35 +47,21 @@ PuyoPuyo.Piece = SC.Record.extend(
       Enumerates all cells occupied by the piece.
     */
     forEach: function(doSomething) {
-	doSomething(this.center.row, this.center.col, this.colors.first);
-	doSomething(this.center.row, this.center.col + 1, this.colors.second);
+	doSomething(this.center.row, this.center.col);
+	doSomething(this.center.row, this.center.col + 1);
     },
 
     /**
-      Creates a new piece further down.
+      Moves the piece one cell down.
     */
-    down: function() {
+    moveDown: function() {
 	return PuyoPuyo.Piece.create(
 	    {center: {row: this.center.row + 1, col: this.center.col },
-	     colors: this.colors});
-    },
-
-    /**
-      Creates a new piece at the left.
-    */
-    left: function() {
-	return PuyoPuyo.Piece.create(
-	    {center: {row: this.center.row, col: this.center.col - 1 },
-	     colors: this.colors});
-    },
-
-    /**
-      Creates a new piece at the right.
-    */
-    right: function() {
-	return PuyoPuyo.Piece.create(
-	    {center: {row: this.center.row, col: this.center.col + 1 },
-	     colors: this.colors});
+	     colors: {this.colors}};
     }
 
 }) ;
+
+
+/* End ------------------------------------------------------- models/piece.js*/
+

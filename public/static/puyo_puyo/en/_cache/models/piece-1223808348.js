@@ -1,3 +1,5 @@
+/* Start ----------------------------------------------------- models/piece.js*/
+
 // ==========================================================================
 // PuyoPuyo.Piece
 // ==========================================================================
@@ -45,8 +47,8 @@ PuyoPuyo.Piece = SC.Record.extend(
       Enumerates all cells occupied by the piece.
     */
     forEach: function(doSomething) {
-	doSomething(this.center.row, this.center.col, this.colors.first);
-	doSomething(this.center.row, this.center.col + 1, this.colors.second);
+	doSomething(this.center.row, this.center.col);
+	doSomething(this.center.row, this.center.col + 1);
     },
 
     /**
@@ -77,3 +79,7 @@ PuyoPuyo.Piece = SC.Record.extend(
     }
 
 }) ;
+
+
+/* End ------------------------------------------------------- models/piece.js*/
+

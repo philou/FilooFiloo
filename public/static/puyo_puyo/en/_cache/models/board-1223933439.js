@@ -1,3 +1,5 @@
+/* Start ----------------------------------------------------- models/board.js*/
+
 // ==========================================================================
 // PuyoPuyo.Board
 // ==========================================================================
@@ -147,4 +149,8 @@ PuyoPuyo.Board.setDimensions = function(colCount, rowCount) {
 
 PuyoPuyo.Board.setDimensions(PuyoPuyo.Game.ColCount, PuyoPuyo.Game.RowCount);
 
+
+
+
+/* End ------------------------------------------------------- models/board.js*/
 

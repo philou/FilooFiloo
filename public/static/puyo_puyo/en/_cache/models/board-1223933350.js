@@ -1,3 +1,5 @@
+/* Start ----------------------------------------------------- models/board.js*/
+
 // ==========================================================================
 // PuyoPuyo.Board
 // ==========================================================================
@@ -45,17 +47,17 @@ PuyoPuyo.Board = SC.Record.extend(
       Cell status for a given column and row, see PuyoPuyo.Game for a list of all available states.
     */
     cellState: function(col, row) {
-	// TODO changer tout cela par une expression booléenne bien ficelée,
 	if (this.currentPiece) {
 	    var result = this.currentPiece.cellState(col, row);
 	    if (result)
 		return result;
 	}
-	if (this.blockedPieces) {
-	    var result = this.blockedPieces.get(col, row);
-	    if (result)
-		return result;
-	}
+	// TODO changer tout cela par une expression booléenne bien ficelée,
+	// utiliser un set plutôt qu'une piece.
+	var result = this.blockedPieces.get(col, row);
+	if (result)
+	    return result;
+
 	return PuyoPuyo.Game.Clear;
     },
 
@@ -147,4 +149,8 @@ PuyoPuyo.Board.setDimensions = function(colCount, rowCount) {
 
 PuyoPuyo.Board.setDimensions(PuyoPuyo.Game.ColCount, PuyoPuyo.Game.RowCount);
 
+
+
+
+/* End ------------------------------------------------------- models/board.js*/
 
