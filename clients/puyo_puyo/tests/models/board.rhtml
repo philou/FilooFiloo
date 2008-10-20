@@ -203,6 +203,52 @@ Test.context("PuyoPuyo.Board",{
 				  "    "]);
     },
 
+    "A piece should move with left and right": function() {
+	board.start();
+	board.shouldFollow(["tick", "left", "right"],
+			   [" rb ", "rb  ", " rb ", 
+			    "    ", "    ", "    ",
+			    "    ", "    ", "    ",
+			    "    ", "    ", "    ",
+			    "    ", "    ", "    ",
+			    "    ", "    ", "    "]);
+    },
+
+    "A piece should rotate": function() {
+	board.start();
+	board.tick();
+	board.shouldFollow(["tick", "rotate", "rotate", "rotate", "rotate"],
+			   ["    ", " b  ",   "    ",   "    ",   "    ", 
+			    " rb ", " r  ",   "br  ",   " r  ",   " rb ",
+			    "    ", "    ",   "    ",   " b  ",   "    ",
+			    "    ", "    ",   "    ",   "    ",   "    ",
+			    "    ", "    ",   "    ",   "    ",   "    ",
+			    "    ", "    ",   "    ",   "    ",   "    "]);
+    },
+
+    "A piece should anti rotate": function() {
+	board.start();
+	board.tick();
+	board.shouldFollow(["tick", "antiRotate", "antiRotate", "antiRotate", "antiRotate"],
+			   ["    ", "    ",       "    ",       " b  ",       "    ", 
+			    " rb ", " r  ",       "br  ",       " r  ",       " rb ",
+			    "    ", " b  ",       "    ",       "    ",       "    ",
+			    "    ", "    ",       "    ",       "    ",       "    ",
+			    "    ", "    ",       "    ",       "    ",       "    ",
+			    "    ", "    ",       "    ",       "    ",       "    "]);
+    },
+
+    "It should not be possible to move a piece outside the board": function() {
+	board.start();
+	board.shouldFollow(["tick", "left", "left", "right", "right", "right",],
+			   [" rb ", "rb  ", idem,   " rb ",  "  rb",  idem, 
+			    "    ", "    ", idem,   "    ",  "    ",  idem,
+			    "    ", "    ", idem,   "    ",  "    ",  idem,
+			    "    ", "    ", idem,   "    ",  "    ",  idem,
+			    "    ", "    ", idem,   "    ",  "    ",  idem,
+			    "    ", "    ", idem,   "    ",  "    ",  idem]);
+    },
+
     "A new piece should appear when the previous one gets blocked at the bottom of the board": function() {
 	board.start();
 	board.initCurrentPiece_({col: PuyoPuyo.Board.PieceStartOrigin.col, row:PuyoPuyo.Board.MaxRow});
@@ -221,28 +267,6 @@ Test.context("PuyoPuyo.Board",{
 			    "    ", "    ",
 			    "    ", "    ",
 			    " rb ", " rb "]);
-    },
-
-    "A piece should move with left and right": function() {
-	board.start();
-	board.shouldFollow(["tick", "left", "right"],
-			   [" rb ", "rb  ", " rb ", 
-			    "    ", "    ", "    ",
-			    "    ", "    ", "    ",
-			    "    ", "    ", "    ",
-			    "    ", "    ", "    ",
-			    "    ", "    ", "    "]);
-    },
-
-    "It should not be possible to move a piece outside the board": function() {
-	board.start();
-	board.shouldFollow(["tick", "left", "left", "right", "right", "right",],
-			   [" rb ", "rb  ", idem,   " rb ",  "  rb",  idem, 
-			    "    ", "    ", idem,   "    ",  "    ",  idem,
-			    "    ", "    ", idem,   "    ",  "    ",  idem,
-			    "    ", "    ", idem,   "    ",  "    ",  idem,
-			    "    ", "    ", idem,   "    ",  "    ",  idem,
-			    "    ", "    ", idem,   "    ",  "    ",  idem]);
     },
 
     "Blocked piece should pile on top of each other.": function() {
@@ -271,20 +295,55 @@ Test.context("PuyoPuyo.Board",{
 			    " yp ", " yp "]);
     },
 
-    // TODO
-    // faire un test avec plusieurs pièces bloquées.
+    "Puyos of vertical pieces should be blocked on top of each other.": function() {
+	board.start();
+	board.initCurrentPiece_({col: PuyoPuyo.Board.PieceStartOrigin.col, row:PuyoPuyo.Board.MaxRow - 1});
+	board.antiRotate();
+	board.shouldBe(["    ",
+			"    ",
+			"    ",
+			"    ",
+			" r  ",
+			" b  "],
+		      "initialy");
 
-/*
-
-    "A piece should rotate with vertical arrow keys": function() {
-	fail("not yet implemented");
-    }
-
-    "A piece should be droped with space bar": function() {
-	fail("not yet implemented");
-    }
+	board.shouldFollow(["tick"],
+			   ["    ",
+			    "    ",
+			    "    ",
+			    "    ",
+			    " r  ",
+			    " b  "]);
+    },
 
     "Blocked beans should follow the law of gravity": function() {
+	board.start();
+	board.initBlockedPieces(["    ",
+				 "    ",
+				 "    ",
+				 "    ",
+				 "    ",
+				 "yp  "]);
+	board.initCurrentPiece_({col: PuyoPuyo.Board.PieceStartOrigin.col, row:PuyoPuyo.Board.MaxRow - 1});
+	board.shouldBe(["    ",
+			"    ",
+			"    ",
+			"    ",
+			" rb ",
+			"yp  "],
+		      "initialy");
+
+	board.shouldFollow(["tick"],
+			   ["    ",
+			    "    ",
+			    "    ",
+			    "    ",
+			    " r  ",
+			    "ypb "]);
+    }
+
+/*
+    "A piece should be droped with space bar": function() {
 	fail("not yet implemented");
     }
 

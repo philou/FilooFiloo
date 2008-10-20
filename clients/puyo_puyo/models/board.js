@@ -85,7 +85,21 @@ PuyoPuyo.Board = SC.Record.extend(
     right: function() {
 	this.moveCurrentPiece_("right");
     },
-    
+
+    /**
+      Moves the current piece around its center, counterclockwise.
+    */
+    rotate: function() {
+	this.moveCurrentPiece_("rotate");
+    },
+
+    /**
+      Moves the current piece around its center, clockwise.
+    */
+    antiRotate: function() {
+	this.moveCurrentPiece_("antiRotate");
+    },
+
     moveCurrentPiece_: function(move) {
 	if (this.currentPiece) {
 	    var newPiece = this.currentPiece[move]();
@@ -113,20 +127,25 @@ PuyoPuyo.Board = SC.Record.extend(
 	this.currentPiece = newPiece;
 	this.notifyChanged_();
     },
+    cellIsAllowed_: function(row, col) {
+	return (0 <= row) && (row <= PuyoPuyo.Board.MaxRow) &&
+	       (0 <= col) && (col <= PuyoPuyo.Board.MaxCol) &&
+	       !this.blockedPieces.get(col, row);
+    },
     pieceIsAllowed_: function(piece) {
 	var result = true;
 	var that = this;
 	piece.forEach(function(row, col) {
-	    result &=
-		(0 <= row) && (row <= PuyoPuyo.Board.MaxRow) &&
-		(0 <= col) && (col <= PuyoPuyo.Board.MaxCol) &&
-		!that.blockedPieces.get(col, row);
+	    result &= that.cellIsAllowed_(row, col);
 	});
 	return result;
     },
     blockCurrentPiece_: function() {
 	var that = this;
 	this.currentPiece.forEach(function(row, col, color) {
+	    while (that.cellIsAllowed_(row + 1, col)) {
+		row = row + 1;
+	    }
 	    that.blockedPieces.put(col, row, color);
 	});
     },
