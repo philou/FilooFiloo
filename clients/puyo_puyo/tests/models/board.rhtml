@@ -340,13 +340,31 @@ Test.context("PuyoPuyo.Board",{
 			    "    ",
 			    " r  ",
 			    "ypb "]);
+    },
+
+    "Pieces should drop at the bottom.": function() {
+	board.start();
+	board.shouldFollow(["tick", "drop", "tick", "drop"],
+			   [" rb ", "    ", " rb ", "    ",
+			    "    ", "    ", "    ", "    ",
+			    "    ", "    ", "    ", "    ",
+			    "    ", "    ", "    ", "    ",
+			    "    ", "    ", "    ", " rb ",
+			    "    ", " rb ", " rb ", " rb "]);
+    },
+
+    "Pieces should follow the law of gravity when droped.": function() {
+	board.start();
+	board.shouldFollow(["tick", "drop", "tick", "right", "drop"],
+			   [" rb ", "    ", " rb ", "  rb",  "    ",
+			    "    ", "    ", "    ", "    ",  "    ",
+			    "    ", "    ", "    ", "    ",  "    ",
+			    "    ", "    ", "    ", "    ",  "    ",
+			    "    ", "    ", "    ", "    ",  "  r ",
+			    "    ", " rb ", " rb ", " rb ",  " rbb"]);
     }
 
 /*
-    "A piece should be droped with space bar": function() {
-	fail("not yet implemented");
-    }
-
     "When grouped by 4 or more, beans of the same color should disappear": function() {
 	fail("not yet implemented");
     }

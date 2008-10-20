@@ -68,7 +68,6 @@ PuyoPuyo.Board = SC.Record.extend(
 	}
 	else if (!this.moveCurrentPiece_("down")){
 	    this.blockCurrentPiece_();
-	    this.setCurrentPiece_(null);
 	}
     },
 
@@ -98,6 +97,15 @@ PuyoPuyo.Board = SC.Record.extend(
     */
     antiRotate: function() {
 	this.moveCurrentPiece_("antiRotate");
+    },
+
+    /**
+      Drops the current piece to the bottom.
+    */
+    drop: function() {
+	if (this.currentPiece) {
+	    this.blockCurrentPiece_();
+	}
     },
 
     moveCurrentPiece_: function(move) {
@@ -148,6 +156,7 @@ PuyoPuyo.Board = SC.Record.extend(
 	    }
 	    that.blockedPieces.put(col, row, color);
 	});
+	this.setCurrentPiece_(null);
     },
     setBlockedPieces_: function(blockedPieces) {
 	this.blockedPieces = blockedPieces;
