@@ -67,6 +67,13 @@ PuyoPuyo.BoardView = SC.View.extend(function() {
 	moveDown: function(sender, evt) {
 	    this.get('board').antiRotate();
 	    return true;
+	},
+	insertText: function(chr) {
+	    if (" " === chr) {
+		this.get('board').drop();
+		return true;
+	    }
+	    return false;
 	}
     };
 }()) ;
