@@ -148,11 +148,11 @@ body {
 table { border-spacing: 1px }
 td.game_cell { width: 30px; height: 30px }
 td.clear { background-color: #DDDDDD }
-td.red { background-color: #FF0000 }
-td.blue { background-color: #0000FF }
-td.green { background-color: #00FF00 }
-td.purple { background-color: #FF00FF }
-td.yellow { background-color: #FFFF00 }
+td.red { background-color: #CC0000 }
+td.blue { background-color: #0000CC }
+td.green { background-color: #00CC00 }
+td.purple { background-color: #CC00CC }
+td.yellow { background-color: #CCCC00 }
 
 /* @end */
 
