@@ -39,6 +39,68 @@ Test.context("PuyoPuyo.Piece",{
 		    this.piece);
     },
 
+    "The piece should change when rotated.": function() {
+	var piece = this.piece.rotate();
+	assertPiece(["     ",
+		     "  b  ",
+		     "  r  ",
+		     "     ",
+		     "     "],
+		    piece);
+	piece = piece.rotate();
+	assertPiece(["     ",
+		     "     ",
+		     " br  ",
+		     "     ",
+		     "     "],
+		    piece);
+	piece = piece.rotate();
+	assertPiece(["     ",
+		     "     ",
+		     "  r  ",
+		     "  b  ",
+		     "     "],
+		    piece);
+	piece = piece.rotate();
+	assertPiece(["     ",
+		     "     ",
+		     "  rb ",
+		     "     ",
+		     "     "],
+		    piece);
+    },
+
+    "The piece should change when anti rotated.": function() {
+	var piece = this.piece.antiRotate();
+	assertPiece(["     ",
+		     "     ",
+		     "  r  ",
+		     "  b  ",
+		     "     "],
+		    piece);
+	piece = piece.antiRotate();
+	assertPiece(["     ",
+		     "     ",
+		     " br  ",
+		     "     ",
+		     "     "],
+		    piece);
+	piece = piece.antiRotate();
+	assertPiece(["     ",
+		     "  b  ",
+		     "  r  ",
+		     "     ",
+		     "     "],
+		    piece);
+	piece = piece.antiRotate();
+	assertPiece(["     ",
+		     "     ",
+		     "  rb ",
+		     "     ",
+		     "     "],
+		    piece);
+    },
+
     "forEach should enumerate both cells": function() {
 	var expected =
 	    [{row:3, col:2, color:PuyoPuyo.Game.Red},
@@ -52,6 +114,18 @@ Test.context("PuyoPuyo.Piece",{
 	    i++;
 	});
 	this.assertIdentical(expected.length, i);
+    },
+
+    "forEach should enumerate cells from bottom to top": function() {
+	var that = this;
+	["Down", "Up"].each( function(orientation) {
+	    that.piece.orientation = orientation;
+	    var previousRow = PuyoPuyo.Board.MaxRow + 1;
+	    that.piece.forEach(function(row, col, color) {
+		that.assert(row < previousRow);
+		previousRow = row;
+	    });
+	});
     }
 
 }) ;

@@ -27,17 +27,20 @@ PuyoPuyo.Piece = SC.Record.extend(
     colors: {first: PuyoPuyo.Game.Red, second: PuyoPuyo.Game.Red },
 
     /**
+      Orientation of the piece.
+    */
+    orientation: "Right",
+
+    /**
       State of a cell according to the piece. A color or clear if the cell is not occupied by the piece.
     */
     cellState: function(col, row) {
-	if (row === this.center.row) {
-	    switch(col) {
-	    case this.center.col:
-		return this.colors.first;
-	    case this.center.col + 1:
-		return this.colors.second;
-	    }
-	}
+	if ((this.center.row === row) && (this.center.col === col))
+	    return this.colors.first;
+
+	if ((this.secondCell_().row === row) && (this.secondCell_().col === col))
+	    return this.colors.second;
+
 	return PuyoPuyo.Game.Clear;
     },
 
@@ -45,8 +48,14 @@ PuyoPuyo.Piece = SC.Record.extend(
       Enumerates all cells occupied by the piece.
     */
     forEach: function(doSomething) {
-	doSomething(this.center.row, this.center.col, this.colors.first);
-	doSomething(this.center.row, this.center.col + 1, this.colors.second);
+	if ("Down" === this.orientation) {
+	    doSomething(this.secondCell_().row, this.secondCell_().col, this.colors.second);
+	    doSomething(this.center.row, this.center.col, this.colors.first);
+	}
+	else {
+	    doSomething(this.center.row, this.center.col, this.colors.first);
+	    doSomething(this.secondCell_().row, this.secondCell_().col, this.colors.second);
+	}
     },
 
     /**
@@ -55,7 +64,8 @@ PuyoPuyo.Piece = SC.Record.extend(
     down: function() {
 	return PuyoPuyo.Piece.create(
 	    {center: {row: this.center.row + 1, col: this.center.col },
-	     colors: this.colors});
+	     colors: this.colors,
+	     orientation: this.orientation});
     },
 
     /**
@@ -64,7 +74,8 @@ PuyoPuyo.Piece = SC.Record.extend(
     left: function() {
 	return PuyoPuyo.Piece.create(
 	    {center: {row: this.center.row, col: this.center.col - 1 },
-	     colors: this.colors});
+	     colors: this.colors,
+	     orientation: this.orientation});
     },
 
     /**
@@ -73,7 +84,63 @@ PuyoPuyo.Piece = SC.Record.extend(
     right: function() {
 	return PuyoPuyo.Piece.create(
 	    {center: {row: this.center.row, col: this.center.col + 1 },
-	     colors: this.colors});
+	     colors: this.colors,
+	     orientation: this.orientation});
+    },
+
+    /**
+      Creates a new rotated piece.
+    */
+    rotate: function() {
+	return PuyoPuyo.Piece.create(
+	    {center: {row: this.center.row, col: this.center.col},
+	     colors: this.colors,
+	     orientation: this.rotateOrientation_(this.orientation)});
+    },
+
+    /**
+      Creates a new anti rotated piece.
+    */
+    antiRotate: function() {
+	return PuyoPuyo.Piece.create(
+	    {center: {row: this.center.row, col: this.center.col},
+	     colors: this.colors,
+	     orientation: this.antiRotateOrientation_(this.orientation)});
+    },
+
+    secondCell_: function() {
+	switch(this.orientation)
+	{
+	case "Right": return {row: this.center.row, col: this.center.col + 1 };
+	case "Up": return {row: this.center.row - 1, col: this.center.col };
+	case "Left": return {row: this.center.row, col: this.center.col - 1 };
+	case "Down": return {row: this.center.row + 1, col: this.center.col };
+	}
+	throw "unexpected orientation";
+    },
+
+    rotateOrientation_: function(orientation) {
+	switch(orientation)
+	{
+	case "Right": return "Up";
+	case "Up": return "Left";
+	case "Left": return "Down";
+	case "Down": return "Right";
+	}
+	throw "unexpected orientation";
+    },
+
+    antiRotateOrientation_: function(orientation) {
+	switch(orientation)
+	{
+	case "Right": return "Down";
+	case "Up": return "Right";
+	case "Left": return "Up";
+	case "Down": return "Left";
+	}
+	throw "unexpected orientation";
     }
 
 }) ;
+
+
