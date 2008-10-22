@@ -15,10 +15,15 @@ require('core');
 PuyoPuyo.CoordMap = SC.Object.extend(
 /** @scope PuyoPuyo.CoordMap.prototype */ {
 
-    /***
+    /**
+      Number of items in the map.
+    */
+    count: 0,
+
+    /**
       Gets the value stored at (x,y), or null if absent.
     */
-    get: function(x,y) {
+    getAt: function(x,y) {
 	return this[this.key_(x,y)] || null;
     },
 
@@ -26,6 +31,9 @@ PuyoPuyo.CoordMap = SC.Object.extend(
       Stores value at (x,y).
     */
     put: function(x, y, value) {
+        if (!this[this.key_(x,y)]) {
+            this.count++;
+        }
 	this[this.key_(x,y)] = value;
     },
 

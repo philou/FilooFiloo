@@ -52,7 +52,7 @@ PuyoPuyo.Board = SC.Record.extend(
 		return result;
 	}
 	if (this.blockedPieces) {
-	    var result = this.blockedPieces.get(col, row);
+	    var result = this.blockedPieces.getAt(col, row);
 	    if (result)
 		return result;
 	}
@@ -138,7 +138,7 @@ PuyoPuyo.Board = SC.Record.extend(
     cellIsAllowed_: function(row, col) {
 	return (0 <= row) && (row <= PuyoPuyo.Board.MaxRow) &&
 	       (0 <= col) && (col <= PuyoPuyo.Board.MaxCol) &&
-	       !this.blockedPieces.get(col, row);
+	       !this.blockedPieces.getAt(col, row);
     },
     pieceIsAllowed_: function(piece) {
 	var result = true;

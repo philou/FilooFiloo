@@ -6,8 +6,6 @@
 
 <script>
 
-var idem = "no change";
-
 Test.context("PuyoPuyo.Board",{
 
     setup: function() {
@@ -36,23 +34,9 @@ Test.context("PuyoPuyo.Board",{
 
 	this.board = PuyoPuyo.Board.create({ticker: this.ticker, colorProvider: this.colorProvider});
 
-	this.assertBoard = function(stringRows, message) {
-	    // TODO : factorize this with piece.rhtml tests
-	    this.assertIdentical(PuyoPuyo.Board.RowCount, stringRows.length);
-
-	    for(var r = 0; r < PuyoPuyo.Board.RowCount; ++r) {
-		this.assertIdentical(PuyoPuyo.Board.ColCount, stringRows[r].length);
-
-		for(var c = 0; c < PuyoPuyo.Board.ColCount; ++c) {
-		    this.assertIdentical(PuyoPuyo.Game.initialToState[stringRows[r][c]],
-					 this.board.cellState(c, r),
-					 message + " at col=" + c + ", row=" + r);
-		}
-	    }
-	};
-
-	this.board.shouldBe = function(that, stringRows, message) {
-	    that.assertBoard(stringRows, message);
+	this.board.shouldBe = function(fixture, stringRows, message) {
+            var board = this;
+            PuyoPuyo.TestsHelpers.assertStringRows(fixture, stringRows, PuyoPuyo.Board.RowCount, PuyoPuyo.Board.ColCount, function(c,r) { return board.cellState(c,r); }, message);
 	};
 
 	this.board.shouldChangeWhen = function(that, actionName, message) {
@@ -81,51 +65,27 @@ Test.context("PuyoPuyo.Board",{
           Allows to specify test sequences from left to right instead of top to bottom.
         */
 	this.board.shouldFollow = function(that, actionNames, allStringRows) {
+	    var board = this;
 	    var steps = [];
 	    var count = actionNames.length;
 	    for(var i = 0; i < count; ++i) {
 		steps[i] = { actionName: actionNames[i],
-			     message: "step "+i+" : "+actionNames[i],
-			     stringRows: []};
+			     message: "step "+i+" : "+actionNames[i]};
 	    }
-	    that.assertIdentical(0, allStringRows.length % count);
-	    for(var i = 0; i < allStringRows.length; ++i) {
-		if (allStringRows[i] === idem) {
-		    steps[i % count].stringRows = idem;
-		}
-		else {
-		    steps[i % count].stringRows.push(allStringRows[i]);
-		}
-	    }
-	    
-	    var board = this;
+            var stringRows = PuyoPuyo.TestsHelpers.transpose(that, allStringRows, count);
+
 	    for(var i = 0; i < steps.length; ++i) {
-		if (steps[i].stringRows === idem) {
+		if (stringRows[i] === idem) {
 		    this.shouldNotChangeWhen(that, steps[i].actionName, steps[i].message);
 		}
 		else {
-		    this.shouldChangeToWhen(that, steps[i].actionName, steps[i].stringRows, steps[i].message);
+		    this.shouldChangeToWhen(that, steps[i].actionName, stringRows[i], steps[i].message);
 		}
 	    }
 	};
 
-	var that = this;
 	this.board.initBlockedPieces = function(stringRows) {
-	    this.setBlockedPieces_(function() {
-		var result = PuyoPuyo.CoordMap.create();
-
-		that.assertIdentical(PuyoPuyo.Board.RowCount, stringRows.length);
-
-		for(var r = 0; r < PuyoPuyo.Board.RowCount; ++r) {
-		    that.assertIdentical(PuyoPuyo.Board.ColCount, stringRows[r].length);
-
-		    for(var c = 0; c < PuyoPuyo.Board.ColCount; ++c) {
-			result.put(c, r, PuyoPuyo.Game.initialToState[stringRows[r][c]]);
-		    }
-		}
-
-		return result;
-	    }());
+	    this.setBlockedPieces_(PuyoPuyo.TestsHelpers.newCoordMap(stringRows));
 	};
 	    
     },
@@ -362,13 +322,22 @@ Test.context("PuyoPuyo.Board",{
 			    "    ", "    ", "    ", "    ",  "    ",
 			    "    ", "    ", "    ", "    ",  "  r ",
 			    "    ", " rb ", " rb ", " rb ",  " rbb"]);
-    }
+    },
 
-/*
     "When grouped by 4 or more, beans of the same color should disappear": function() {
-	fail("not yet implemented");
-    }
+	this.colorProvider.firstColor = PuyoPuyo.Game.Red;
+	this.colorProvider.secondColor = PuyoPuyo.Game.Red;
 
+        board.start();
+	board.shouldFollow(["tick", "drop", "tick", "drop", "tick", "tick"],
+			   [" rr ", "    ", " rr ", "    ", "    ", " rr ",
+			    "    ", "    ", "    ", "    ", "    ", "    ",
+			    "    ", "    ", "    ", "    ", "    ", "    ",
+			    "    ", "    ", "    ", "    ", "    ", "    ",
+			    "    ", "    ", "    ", " rr ", "    ", "    ",
+			    "    ", " rr ", " rr ", " rr ", "    ", "    "]);
+    }
+/*
     "Disappearing beans should cascade": function() {
 	fail("not yet implemented");
     }

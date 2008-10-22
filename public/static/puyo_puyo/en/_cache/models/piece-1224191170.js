@@ -1,0 +1,125 @@
+/* Start ----------------------------------------------------- models/piece.js*/
+
+// ==========================================================================
+// PuyoPuyo.Piece
+// ==========================================================================
+
+require('core');
+require('models/game');
+
+/** @class
+
+  Objects representing the current falling puyo-puyo couple.
+
+  @extends SC.Record
+  @author Philou
+  @version 0.1
+*/
+PuyoPuyo.Piece = SC.Record.extend(
+/** @scope PuyoPuyo.Piece.prototype */ {
+
+    /**
+      Origin position of the piece.
+    */
+    center: {row: 0, col:0},
+    
+    /**
+      Colors of the puyos in the piece. first is for the origin.
+    */
+    colors: {first: PuyoPuyo.Game.Red, second: PuyoPuyo.Game.Red },
+
+    /**
+      Orientation of the piece.
+    */
+    orientation: "Right",
+
+    /**
+      State of a cell according to the piece. A color or clear if the cell is not occupied by the piece.
+    */
+    cellState: function(col, row) {
+	if (this.center === {row:row, col:col})
+	    return this.colors.first;
+
+	if (this.secondCell_() === {row:row, col:col})
+	    return this.colors.second;
+
+	return PuyoPuyo.Game.Clear;
+    },
+
+    /**
+      Enumerates all cells occupied by the piece.
+    */
+    forEach: function(doSomething) {
+	doSomething(this.center.row, this.center.col, this.colors.first);
+	doSomething(this.secondCell_().row, this.secondCell_().col + 1, this.colors.second);
+    },
+
+    /**
+      Creates a new piece further down.
+    */
+    down: function() {
+	return PuyoPuyo.Piece.create(
+	    {center: {row: this.center.row + 1, col: this.center.col },
+	     colors: this.colors,
+	     orientation: this.orientation});
+    },
+
+    /**
+      Creates a new piece at the left.
+    */
+    left: function() {
+	return PuyoPuyo.Piece.create(
+	    {center: {row: this.center.row, col: this.center.col - 1 },
+	     colors: this.colors,
+	     orientation: this.orientation});
+    },
+
+    /**
+      Creates a new piece at the right.
+    */
+    right: function() {
+	return PuyoPuyo.Piece.create(
+	    {center: {row: this.center.row, col: this.center.col + 1 },
+	     colors: this.colors,
+	     orientation: this.orientation});
+    },
+
+    /**
+      Creates a new rotated piece.
+    */
+    rotate: function() {
+	return PuyoPuyo.Piece.create(
+	    {center: {row: this.center.row, col: this.center.col},
+	     colors: this.colors,
+	     orientation: this.rotateOrientation_(this.orientation)});
+    },
+
+    secondCell_: function() {
+	switch(this.orientation)
+	{
+	case "Right": return {row: this.center.row, col: this.center.col + 1 };
+	case "Up": return {row: this.center.row + 1, col: this.center.col };
+	case "Left": return {row: this.center.row, col: this.center.col - 1 };
+	case "Down": return {row: this.center.row - 1, col: this.center.col };
+	}
+	throw "unexpected orientation";
+    },
+
+    rotateOrientation_: function(orientation) {
+	switch(this.orientation)
+	{
+	case "Right": return "Up";
+	case "Up": return "Left";
+	case "Left": return "Down";
+	case "Down": return "Right";
+	}
+	throw "unexpected orientation";
+    }
+
+}) ;
+
+
+
+
+/* End ------------------------------------------------------- models/piece.js*/
+
