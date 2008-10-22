@@ -10,17 +10,9 @@ Test.context("PuyoPuyo.Piece",{
 
     setup: function() {
 	this.assertPiece = function(stringRows, piece) {
-	    this.assertIdentical(5, stringRows.length);
-
-	    for (var r = 0; r < 5; ++r) {
-		this.assertIdentical(5, stringRows[r].length);
-
-		for (var c = 0; c < 5; ++c) {
-		    this.assertIdentical(PuyoPuyo.Game.initialToState[stringRows[r][c]],
-					 piece.cellState(piece.get('center').col + c - 2, piece.get('center').row + r - 2),
-					 "at col=" + c + ", row=" + r);
-		}
-	    }
+            PuyoPuyo.TestsHelpers.assertStringRows(this, stringRows, 5, 5, function(c,r) {
+                return piece.cellState(piece.get('center').col + c - 2, piece.get('center').row + r - 2);
+            }, "");
 	};
 
 	this.piece = PuyoPuyo.Piece.create(
