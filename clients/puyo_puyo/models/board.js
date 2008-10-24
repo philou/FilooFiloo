@@ -64,7 +64,9 @@ PuyoPuyo.Board = SC.Record.extend(
     */
     tick: function() {
 	if (!this.currentPiece) {
-	    this.initCurrentPiece_(PuyoPuyo.Board.PieceStartOrigin);
+            if (!this.cleanBlockedPieces_()) {
+	        this.initCurrentPiece_(PuyoPuyo.Board.PieceStartOrigin);
+            }
 	}
 	else if (!this.moveCurrentPiece_("down")){
 	    this.blockCurrentPiece_();
@@ -160,6 +162,19 @@ PuyoPuyo.Board = SC.Record.extend(
     },
     setBlockedPieces_: function(blockedPieces) {
 	this.blockedPieces = blockedPieces;
+    },
+    cleanBlockedPieces_: function() {
+        for(var r = PuyoPuyo.Board.MaxRow; 0 <= r; --r) {
+            for(var c = 0; c <= PuyoPuyo.Board.MaxCol; ++c) {
+                var piece = this.blockedPieces.pieceContaining(c, r);
+                if (4 <= piece.get('count')) {
+                    this.blockedPieces.removeEach(piece);
+                    this.notifyChanged_();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 });
 
