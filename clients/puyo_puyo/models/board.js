@@ -69,7 +69,7 @@ PuyoPuyo.Board = SC.Record.extend(
 
         this.onNextTick = this[this.onNextTick]();
 
-        PuyoPuyo.assert(this[this.onNextTick]);
+        PuyoPuyo.assert(!this.onNextTick || this[this.onNextTick]);
     },
 
     /**
@@ -128,11 +128,17 @@ PuyoPuyo.Board = SC.Record.extend(
     },
     initCurrentPiece_: function(center) {
         center = center || PuyoPuyo.Board.PieceStartOrigin;
-	this.setCurrentPiece_(PuyoPuyo.Piece.create({
+        var newPiece = PuyoPuyo.Piece.create({
 	    center: center,
 	    colors: {first: this.colorProvider.popFirstColor(), second: this.colorProvider.popSecondColor()}
-	}));
+	});
 
+        if (!this.pieceIsAllowed_(newPiece)) {
+            this.abort();
+            return null;
+        }
+
+	this.setCurrentPiece_(newPiece);
         return "tickCurrentPiece_";
     },
     tickCurrentPiece_: function() {

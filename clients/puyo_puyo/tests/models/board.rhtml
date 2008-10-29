@@ -392,11 +392,25 @@ Test.context("PuyoPuyo.Board",{
 			    " r  ", " r  ", " r  ", " r  ", "    ", "    ",
 			    "rb  ", "rb  ", "rb  ", "r   ", "rr  ", "    ",
 			    "rb  ", "rb  ", "rbbb", "r   ", "rr  ", "    "]);
+    },
+
+    "Game should be lost when there is no place for new pieces": function() {
+	board.startWithBoard([" rr ",
+			      " bb ",
+			      " rr ",
+			      " bb ",
+			      " rr ",
+			      " bb "]);
+	true.shouldEqual(board.get('playing'));
+
+	board.tick();
+	false.shouldEqual(board.get('playing'));
     }
 /*
-    "Game should be lost when there is no place for new pieces": function() {
+    "Timer should be notified about playing and colapsing phases": function() {
         fail("not yet implemented");
     }
+
 */
 }) ;
 
