@@ -84,10 +84,14 @@ Test.context("PuyoPuyo.Board",{
 	    }
 	};
 
-	this.board.initBlockedPieces = function(stringRows) {
-	    this.setBlockedPieces_(PuyoPuyo.TestsHelpers.newCoordMap(stringRows));
+	this.board.startWithBoard = function(stringRows) {
+	    this.start(PuyoPuyo.TestsHelpers.newCoordMap(stringRows));
 	};
-	    
+        this.board.tickN = function(n) {
+            for(var i = 0; i < n; ++i) {
+                this.tick();
+            }
+        };
     },
 
     teardown: function() {
@@ -211,7 +215,7 @@ Test.context("PuyoPuyo.Board",{
 
     "A new piece should appear when the previous one gets blocked at the bottom of the board": function() {
 	board.start();
-	board.initCurrentPiece_({col: PuyoPuyo.Board.PieceStartOrigin.col, row:PuyoPuyo.Board.MaxRow});
+        board.tickN(PuyoPuyo.Board.MaxRow + 1);
 	board.shouldBe(["    ",
 			"    ",
 			"    ",
@@ -230,14 +234,13 @@ Test.context("PuyoPuyo.Board",{
     },
 
     "Blocked piece should pile on top of each other.": function() {
-	board.start();
-	board.initBlockedPieces(["    ",
-				 "    ",
-				 "    ",
-				 "    ",
-				 "    ",
-				 " yp "]);
-	board.initCurrentPiece_({col: PuyoPuyo.Board.PieceStartOrigin.col, row:PuyoPuyo.Board.MaxRow - 2});
+	board.startWithBoard(["    ",
+			      "    ",
+			      "    ",
+			      "    ",
+			      "    ",
+			      " yp "]);
+        board.tickN(PuyoPuyo.Board.MaxRow -1);
 	board.shouldBe(["    ",
 			"    ",
 			"    ",
@@ -257,7 +260,7 @@ Test.context("PuyoPuyo.Board",{
 
     "Puyos of vertical pieces should be blocked on top of each other.": function() {
 	board.start();
-	board.initCurrentPiece_({col: PuyoPuyo.Board.PieceStartOrigin.col, row:PuyoPuyo.Board.MaxRow - 1});
+        board.tickN(PuyoPuyo.Board.MaxRow);
 	board.antiRotate();
 	board.shouldBe(["    ",
 			"    ",
@@ -277,14 +280,13 @@ Test.context("PuyoPuyo.Board",{
     },
 
     "Blocked beans should follow the law of gravity": function() {
-	board.start();
-	board.initBlockedPieces(["    ",
-				 "    ",
-				 "    ",
-				 "    ",
-				 "    ",
-				 "yp  "]);
-	board.initCurrentPiece_({col: PuyoPuyo.Board.PieceStartOrigin.col, row:PuyoPuyo.Board.MaxRow - 1});
+	board.startWithBoard(["    ",
+			      "    ",
+			      "    ",
+			      "    ",
+			      "    ",
+			      "yp  "]);
+        board.tickN(PuyoPuyo.Board.MaxRow);
 	board.shouldBe(["    ",
 			"    ",
 			"    ",
@@ -339,13 +341,12 @@ Test.context("PuyoPuyo.Board",{
     },
 
     "If blocking the piece several groups, all should disappear": function() {
-	board.start();
-	board.initBlockedPieces(["    ",
-				 "    ",
-				 "    ",
-				 "r  b",
-				 "r  b",
-				 "r  b"]);
+	board.startWithBoard(["    ",
+			      "    ",
+			      "    ",
+			      "r  b",
+			      "r  b",
+			      "r  b"]);
 	board.shouldFollow(["tick", "drop", "tick"],
 			   [" rb ", "    ", "    ",
 			    "    ", "    ", "    ",
@@ -353,6 +354,25 @@ Test.context("PuyoPuyo.Board",{
 			    "r  b", "r  b", "    ",
 			    "r  b", "r  b", "    ",
 			    "r  b", "rrbb", "    "]);
+    },
+
+    "Pieces on top of a disappearing group should fall": function() {
+	board.startWithBoard(["    ",
+			      "p   ",
+			      "y   ",
+			      "b   ",
+			      "r   ",
+			      "r   "]);
+	this.colorProvider.firstColor = PuyoPuyo.Game.Red;
+	this.colorProvider.secondColor = PuyoPuyo.Game.Red;
+
+	board.shouldFollow(["tick", "drop", "tick", "tick"],
+			   [" rr ", "    ", "    ", "    ",
+			    "p   ", "p   ", "p   ", "    ",
+			    "y   ", "y   ", "y   ", "    ",
+			    "b   ", "b   ", "b   ", "p   ",
+			    "r   ", "r   ", "    ", "y   ",
+			    "r   ", "rrr ", "    ", "b   "]);
     }
 /*
     "Disappearing beans should cascade": function() {
