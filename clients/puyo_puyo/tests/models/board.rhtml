@@ -336,6 +336,23 @@ Test.context("PuyoPuyo.Board",{
 			    "    ", "    ", "    ", "    ", "    ", "    ",
 			    "    ", "    ", "    ", " rr ", "    ", "    ",
 			    "    ", " rr ", " rr ", " rr ", "    ", "    "]);
+    },
+
+    "If blocking the piece several groups, all should disappear": function() {
+	board.start();
+	board.initBlockedPieces(["    ",
+				 "    ",
+				 "    ",
+				 "r  b",
+				 "r  b",
+				 "r  b"]);
+	board.shouldFollow(["tick", "drop", "tick"],
+			   [" rb ", "    ", "    ",
+			    "    ", "    ", "    ",
+			    "    ", "    ", "    ",
+			    "r  b", "r  b", "    ",
+			    "r  b", "r  b", "    ",
+			    "r  b", "rrbb", "    "]);
     }
 /*
     "Disappearing beans should cascade": function() {

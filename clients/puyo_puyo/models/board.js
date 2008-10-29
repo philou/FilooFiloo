@@ -164,17 +164,20 @@ PuyoPuyo.Board = SC.Record.extend(
 	this.blockedPieces = blockedPieces;
     },
     cleanBlockedPieces_: function() {
+        var cleanedPieces = false;
         for(var r = PuyoPuyo.Board.MaxRow; 0 <= r; --r) {
             for(var c = 0; c <= PuyoPuyo.Board.MaxCol; ++c) {
                 var piece = this.blockedPieces.pieceContaining(c, r);
                 if (4 <= piece.get('count')) {
                     this.blockedPieces.removeEach(piece);
-                    this.notifyChanged_();
-                    return true;
+                    cleanedPieces = true;
                 }
             }
         }
-        return false;
+        if (cleanedPieces) {
+            this.notifyChanged_();
+        }
+        return cleanedPieces;
     }
 });
 
