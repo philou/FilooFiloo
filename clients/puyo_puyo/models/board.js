@@ -26,11 +26,14 @@ PuyoPuyo.Board = SC.Record.extend(
     /**
       Starts the game.
     */
-    start: function() {
+    start: function(blockedPieces) {
+        blockedPieces = blockedPieces || PuyoPuyo.CoordMap.create();
 	this.set('playing', true);
 	this.ticker.start(this);
-	this.setBlockedPieces_(PuyoPuyo.CoordMap.create());
+	this.setBlockedPieces_(blockedPieces);
 	this.setCurrentPiece_(null);
+
+        this.onNextTick = "initCurrentPiece_";
     },
 
     /**
@@ -45,7 +48,6 @@ PuyoPuyo.Board = SC.Record.extend(
       Cell status for a given column and row, see PuyoPuyo.Game for a list of all available states.
     */
     cellState: function(col, row) {
-	// TODO changer tout cela par une expression booléenne bien ficelée,
 	if (this.currentPiece) {
 	    var result = this.currentPiece.cellState(col, row);
 	    if (result)
@@ -63,14 +65,11 @@ PuyoPuyo.Board = SC.Record.extend(
       Invoked by the ticker to bring the piece down.
     */
     tick: function() {
-	if (!this.currentPiece) {
-            if (!this.cleanBlockedPieces_()) {
-	        this.initCurrentPiece_(PuyoPuyo.Board.PieceStartOrigin);
-            }
-	}
-	else if (!this.moveCurrentPiece_("down")){
-	    this.blockCurrentPiece_();
-	}
+        PuyoPuyo.assert(this[this.onNextTick]);
+
+        this.onNextTick = this[this.onNextTick]();
+
+        PuyoPuyo.assert(this[this.onNextTick]);
     },
 
     /**
@@ -106,7 +105,7 @@ PuyoPuyo.Board = SC.Record.extend(
     */
     drop: function() {
 	if (this.currentPiece) {
-	    this.blockCurrentPiece_();
+	    this.onNextTick = this.blockCurrentPiece_();
 	}
     },
 
@@ -128,10 +127,21 @@ PuyoPuyo.Board = SC.Record.extend(
 	return new Date();
     },
     initCurrentPiece_: function(center) {
+        center = center || PuyoPuyo.Board.PieceStartOrigin;
 	this.setCurrentPiece_(PuyoPuyo.Piece.create({
 	    center: center,
 	    colors: {first: this.colorProvider.popFirstColor(), second: this.colorProvider.popSecondColor()}
 	}));
+
+        return "tickCurrentPiece_";
+    },
+    tickCurrentPiece_: function() {
+        PuyoPuyo.assert(this.currentPiece);
+
+	if (!this.moveCurrentPiece_("down")){
+	    return this.blockCurrentPiece_();
+	}
+        return "tickCurrentPiece_";
     },
     setCurrentPiece_: function(newPiece) {
 	this.currentPiece = newPiece;
@@ -153,12 +163,16 @@ PuyoPuyo.Board = SC.Record.extend(
     blockCurrentPiece_: function() {
 	var that = this;
 	this.currentPiece.forEach(function(row, col, color) {
-	    while (that.cellIsAllowed_(row + 1, col)) {
-		row = row + 1;
-	    }
-	    that.blockedPieces.put(col, row, color);
+            that.dropCell_(row, col, color);
 	});
 	this.setCurrentPiece_(null);
+        return "cleanBlockedPieces_";
+    },
+    dropCell_: function(row, col, color) {
+	while (this.cellIsAllowed_(row + 1, col)) {
+	    row = row + 1;
+	}
+	this.blockedPieces.put(col, row, color);
     },
     setBlockedPieces_: function(blockedPieces) {
 	this.blockedPieces = blockedPieces;
@@ -176,8 +190,29 @@ PuyoPuyo.Board = SC.Record.extend(
         }
         if (cleanedPieces) {
             this.notifyChanged_();
+            return "collapseBlockedPieces_";
         }
-        return cleanedPieces;
+
+        return this.initCurrentPiece_();
+    },
+    collapseBlockedPieces_: function() {
+        var collapsedPieces = false;
+        for(var r = PuyoPuyo.Board.MaxRow; 0 <= r; --r) {
+            for(var c = 0; c <= PuyoPuyo.Board.MaxCol; ++c) {
+                if (this.blockedPieces.getAt(c,r) && this.cellIsAllowed_(r+1, c)) {
+                    var color = this.blockedPieces.getAt(c,r);
+                    this.blockedPieces.remove(c,r);
+                    this.dropCell_(r, c, color);
+                    collapsedPieces = true;
+                }
+            }
+        }
+        if (collapsedPieces) {
+            this.notifyChanged_();
+            return "cleanBlockedPieces_";
+        }
+
+        return this.initCurrentPiece_();
     }
 });
 
