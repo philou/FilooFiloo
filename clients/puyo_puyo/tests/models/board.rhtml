@@ -373,12 +373,27 @@ Test.context("PuyoPuyo.Board",{
 			    "b   ", "b   ", "b   ", "p   ",
 			    "r   ", "r   ", "    ", "y   ",
 			    "r   ", "rrr ", "    ", "b   "]);
+    },
+
+    "Disappearing beans should cascade": function() {
+	board.startWithBoard(["    ",
+			      "    ",
+			      " r  ",
+			      " r  ",
+			      "rb  ",
+			      "rb  "]);
+	this.colorProvider.firstColor = PuyoPuyo.Game.Blue;
+	this.colorProvider.secondColor = PuyoPuyo.Game.Blue;
+
+	board.shouldFollow(["tick", "right","drop", "tick", "tick", "tick"],
+			   [" bb ", "  bb", "    ", "    ", "    ", "    ",
+			    "    ", "    ", "    ", "    ", "    ", "    ",
+			    " r  ", " r  ", " r  ", " r  ", "    ", "    ",
+			    " r  ", " r  ", " r  ", " r  ", "    ", "    ",
+			    "rb  ", "rb  ", "rb  ", "r   ", "rr  ", "    ",
+			    "rb  ", "rb  ", "rbbb", "r   ", "rr  ", "    "]);
     }
 /*
-    "Disappearing beans should cascade": function() {
-	fail("not yet implemented");
-    }
-
     "Game should be lost when there is no place for new pieces": function() {
         fail("not yet implemented");
     }
