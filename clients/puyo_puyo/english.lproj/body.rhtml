@@ -8,8 +8,18 @@
       :view => 'PuyoPuyo.BoardView',
       :bind => { :board => 'PuyoPuyo.playerController.board',
                  :boardTime => 'PuyoPuyo.playerController.board.time' } %>
-  <%= button_view :label => 'Start', :action => 'PuyoPuyo.playerController.start' %>
+  <%= button_view :label => 'Start', :action => 'PuyoPuyo.playerController.start', :default => true %>
   <%= button_view :label => 'Abort', :action => 'PuyoPuyo.playerController.abort' %>
   <p/>
 </div>
+
 <% end %>
+
+<% view :game_over_pane, :pane => :dialog, :visible => false, :width => 200 do %>
+  <div align="center">
+    <h1>Game Over</h1>
+    <p>Puyo Puyo rules !</p>
+    <%= button_view :label => 'Ok', :width => 60, :default => true, :action => 'PuyoPuyo.playerController.closeGameOverDialog' %>
+  </div>
+<% end %>
+

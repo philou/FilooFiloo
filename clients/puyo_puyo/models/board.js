@@ -18,10 +18,21 @@ PuyoPuyo.Board = SC.Record.extend(
 
     /**
       Is the game currently playing ?
-
       @type {Boolean}
     */
     playing: false,
+
+    /**
+      Time of the last change in the board.
+      @type {Date}
+    */
+    time: null,
+
+    /**
+      Time of the last gameover.
+      @type {Date}
+    */
+    gameOver: null,
 
     /**
       Starts the game.
@@ -126,6 +137,10 @@ PuyoPuyo.Board = SC.Record.extend(
     now_: function() {
 	return new Date();
     },
+    gameOver_: function() {
+        this.abort();
+        this.set('gameOver', this.now_());
+    },
     initCurrentPiece_: function(center) {
         center = center || PuyoPuyo.Board.PieceStartOrigin;
         var newPiece = PuyoPuyo.Piece.create({
@@ -134,7 +149,7 @@ PuyoPuyo.Board = SC.Record.extend(
 	});
 
         if (!this.pieceIsAllowed_(newPiece)) {
-            this.abort();
+            this.gameOver_();
             return null;
         }
 
