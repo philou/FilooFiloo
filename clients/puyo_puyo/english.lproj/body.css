@@ -146,13 +146,13 @@ body {
 
 /* custom */
 table { border-spacing: 1px }
-td.game_cell { width: 30px; height: 30px }
-td.clear { background-color: #DDDDDD }
-td.red { background-color: #CC0000 }
-td.blue { background-color: #0000CC }
-td.green { background-color: #00CC00 }
-td.purple { background-color: #CC00CC }
-td.yellow { background-color: #CCCC00 }
+td.game_cell { width: 30px; height: 30px; background-color: #DDDDDD; background-repeat: no-repeat}
+/* TODO essayer de remplacer cela par des img dans la vue */
+td.red { background-image: static_url('images/sprites_red.png')}
+td.blue { background-image: static_url('images/sprites_blue.png')}
+td.green { background-image: static_url('images/sprites_green.png')}
+td.purple { background-image: static_url('images/sprites_purple.png')}
+td.yellow { background-image: static_url('images/sprites_yellow.png')}*/
 
 /* @end */
 
