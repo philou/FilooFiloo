@@ -403,16 +403,22 @@ Test.context("PuyoPuyo.Board",{
 			      " bb "]);
 	true.shouldEqual(board.get('playing'));
 
+        var lastGameOverTime = board.get('gameOver');
 	board.tick();
 	false.shouldEqual(board.get('playing'));
+        assertNotIdentical(lastGameOverTime, board.get('gameOver'));
     }
 /*
     "Timer should be notified about playing and colapsing phases": function() {
         fail("not yet implemented");
     }
 
-    "Text to display the game status"
+    "Game over panel"
+    "glue between pieces"
+    "disappeared pieces"
+    "level"
     "Score"
+    "next piece"
 
 */
 }) ;
