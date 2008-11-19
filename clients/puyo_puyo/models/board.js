@@ -35,10 +35,17 @@ PuyoPuyo.Board = SC.Record.extend(
     gameOver: null,
 
     /**
+      Number of pieces disappeared since the start of the game.
+      @type {int}
+    */
+    disappearedPieces: 0,
+
+    /**
       Starts the game.
     */
     start: function(blockedPieces) {
         blockedPieces = blockedPieces || PuyoPuyo.CoordMap.create();
+        this.set('disappearedPieces', 0);
 	this.set('playing', true);
 	this.ticker.start(this);
 	this.setBlockedPieces_(blockedPieces);
@@ -204,6 +211,7 @@ PuyoPuyo.Board = SC.Record.extend(
             for(var c = 0; c <= PuyoPuyo.Board.MaxCol; ++c) {
                 var piece = this.blockedPieces.pieceContaining(c, r);
                 if (4 <= piece.get('count')) {
+                    this.set('disappearedPieces', this.get('disappearedPieces') + piece.get('count'));
                     this.blockedPieces.removeEach(piece);
                     cleanedPieces = true;
                 }

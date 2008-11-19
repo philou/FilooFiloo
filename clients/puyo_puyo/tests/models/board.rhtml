@@ -39,6 +39,17 @@ Test.context("PuyoPuyo.Board",{
             PuyoPuyo.TestsHelpers.assertStringRows(fixture, stringRows, PuyoPuyo.Board.RowCount, PuyoPuyo.Board.ColCount, function(c,r) { return board.cellState(c,r); }, message);
 	};
 
+        this.board.shouldBeEmpty = function(fixture, message) {
+            this.shouldBe(fixture, 
+			  ["    ",
+			   "    ",
+			   "    ",
+			   "    ",
+			   "    ",
+			   "    "],
+                          message);
+        };
+
 	this.board.shouldChangeWhen = function(that, actionName, message) {
 	    var beforeBoardTime = this.get('time');
 	    var result = this[actionName]();
@@ -407,18 +418,43 @@ Test.context("PuyoPuyo.Board",{
 	board.tick();
 	false.shouldEqual(board.get('playing'));
         assertNotIdentical(lastGameOverTime, board.get('gameOver'));
+    },
+
+    "Disappeared pieces should be counted": function() {
+	board.startWithBoard(["    ",
+			      "    ",
+			      "    ",
+			      "r   ",
+			      "r   ",
+			      "r   "]);
+	this.colorProvider.firstColor = PuyoPuyo.Game.Red;
+	this.colorProvider.secondColor = PuyoPuyo.Game.Red;
+
+        assertIdentical(0, board.get('disappearedPieces'));
+        
+        board.tick(); board.drop(); board.tick();
+
+        board.shouldBeEmpty();
+        assertIdentical(5, board.get('disappearedPieces'));
+
+        board.tick(); board.drop(); board.tick();
+        board.tick(); board.drop(); board.tick();
+
+        board.shouldBeEmpty();
+        assertIdentical(9, board.get('disappearedPieces'));
     }
+
 /*
     "Timer should be notified about playing and colapsing phases": function() {
         fail("not yet implemented");
     }
 
-    "Game over panel"
-    "glue between pieces"
-    "disappeared pieces"
     "level"
+    "glue between pieces"
     "Score"
+    "nicer style"
     "next piece"
+    "sounds"
 
 */
 }) ;
