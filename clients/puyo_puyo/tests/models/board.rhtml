@@ -13,12 +13,16 @@ Test.context("PuyoPuyo.Board",{
 
 	this.ticker = {
 	    running: false,
+            level: -1,
 	    start: function() {
 		this.running = true;
 	    },
 	    stop: function() {
 		this.running = false;
-	    }
+	    },
+            setLevel: function(level) {
+                this.level = level;
+            }
 	};
 
 	this.colorProvider = {
@@ -103,6 +107,13 @@ Test.context("PuyoPuyo.Board",{
                 this.tick();
             }
         };
+        this.board.dropPuyos = function(count){
+            var board = this;
+            PuyoPuyo.TestsHelpers.times(Math.floor(count/2), function() {
+                board.tick(); board.drop(); board.tick();
+            });
+        };
+
     },
 
     teardown: function() {
@@ -442,16 +453,40 @@ Test.context("PuyoPuyo.Board",{
 
         board.shouldBeEmpty();
         assertIdentical(9, board.get('disappearedPieces'));
+    },
+
+    "The level should increase at every 20 disappeared pieces": function() {
+	this.colorProvider.firstColor = PuyoPuyo.Game.Red;
+	this.colorProvider.secondColor = PuyoPuyo.Game.Red;
+
+	board.start();
+        assertIdentical(0, board.get('disappearedPieces'));
+        assertIdentical(1, board.get('level'));
+
+        board.dropPuyos(20);
+        assertIdentical(20, board.get('disappearedPieces'));
+        assertIdentical(2, board.get('level'));
+            
+        board.dropPuyos(20);
+        assertIdentical(40, board.get('disappearedPieces'));
+        assertIdentical(3, board.get('level'));
+    },
+    "Level changes should be forwarded to the ticker": function() {
+	this.colorProvider.firstColor = PuyoPuyo.Game.Red;
+	this.colorProvider.secondColor = PuyoPuyo.Game.Red;
+
+	board.start();
+        assertIdentical(1, board.get('level'));
+
+        board.dropPuyos(20);
+        assertIdentical(2, board.get('level'));
+
+        assertIdentical(2, this.ticker.level);
     }
 
 /*
-    "Timer should be notified about playing and colapsing phases": function() {
-        fail("not yet implemented");
-    }
-
-    "level"
+    "score"
     "glue between pieces"
-    "Score"
     "nicer style"
     "next piece"
     "sounds"

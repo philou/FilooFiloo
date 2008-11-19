@@ -41,6 +41,14 @@ PuyoPuyo.Board = SC.Record.extend(
     disappearedPieces: 0,
 
     /**
+      Difficulty level reached by the player.
+      #type {int}
+    */
+    level: function() {
+        return Math.floor(this.get('disappearedPieces') / 20) + 1;
+    }.property('disappearedPieces'),
+
+    /**
       Starts the game.
     */
     start: function(blockedPieces) {
@@ -242,7 +250,14 @@ PuyoPuyo.Board = SC.Record.extend(
         }
 
         return this.initCurrentPiece_();
-    }
+    },
+
+    // Forwards the level changes to the ticker
+    forwardLevelToTheTicker: function() {
+        if (this.ticker) {
+            this.ticker.setLevel(this.get('level'));
+        }
+    }.observes('level')
 });
 
 PuyoPuyo.Board.setDimensions = function(colCount, rowCount) {

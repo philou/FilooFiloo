@@ -25,7 +25,7 @@ PuyoPuyo.Ticker = SC.Record.extend(
 
 	this.game = game;
 	this.timer = SC.Timer.schedule({
-	    target: this.game, action: 'tick', repeats: YES, interval: 1000
+	    target: this.game, action: 'tick', repeats: YES, interval: this.interval_(game.get('level'))
 	});
     },
 
@@ -33,12 +33,22 @@ PuyoPuyo.Ticker = SC.Record.extend(
       Stops the game events.
     */
     stop: function() {
-	PuyoPuyo.assert(this.game);
-	PuyoPuyo.assert(this.timer);
-
 	this.timer.invalidate();
 	delete(this.timer);
 	delete(this.game);
     },
 
-}) ;
+    /**
+      Changes the speed of the game.
+    */
+    setLevel: function(level) {
+        if (this.timer) {
+            this.timer.set('interval', this.interval_(level));
+        }
+    },
+
+    // Time interval between tick at the given level
+    interval_: function(level) {
+        return 1000 * Math.pow(0.9, level-1);
+    }
+});
