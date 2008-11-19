@@ -10,6 +10,11 @@
                  :boardTime => 'PuyoPuyo.playerController.board.time' } %>
   <%= button_view :label => 'Start', :action => 'PuyoPuyo.playerController.start', :default => true %>
   <%= button_view :label => 'Abort', :action => 'PuyoPuyo.playerController.abort' %>
+  <table>
+    <tr>
+      <td>Poped puyos:</td><td><%= label_view :disappeared_pieces, :bind => {:value => 'PuyoPuyo.playerController.board.disappearedPieces' } %></td>
+    </tr>
+  </table>
   <p/>
 </div>
 
