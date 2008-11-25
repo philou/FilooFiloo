@@ -79,15 +79,20 @@ Test.context("PuyoPuyo.Board",{
 	/***
           Allows to specify test sequences from left to right instead of top to bottom.
         */
-	this.board.shouldFollow = function(that, actionNames, allStringRows) {
-	    var board = this;
+	this.board.shouldFollow = function(that, behaviour) {
 	    var steps = [];
-	    var count = actionNames.length;
+	    var count = behaviour.action.length;
 	    for(var i = 0; i < count; ++i) {
-		steps[i] = { actionName: actionNames[i],
-			     message: "step "+i+" : "+actionNames[i]};
+		steps[i] = { actionName: behaviour.action[i],
+			     message: "step "+i+" : "+behaviour.action[i],
+                             extraChecks: {}};
+                for(var name in behaviour) {
+                    if ((name !== "action") && (name !== "board") && behaviour.hasOwnProperty(name)) {
+                        steps[i].extraChecks[name] = behaviour[name][i];
+                    }
+                }
 	    }
-            var stringRows = PuyoPuyo.TestsHelpers.transpose(that, allStringRows, count);
+            var stringRows = PuyoPuyo.TestsHelpers.transpose(that, behaviour.board, count);
 
 	    for(var i = 0; i < steps.length; ++i) {
 		if (stringRows[i] === idem) {
@@ -96,6 +101,12 @@ Test.context("PuyoPuyo.Board",{
 		else {
 		    this.shouldChangeToWhen(that, steps[i].actionName, stringRows[i], steps[i].message);
 		}
+                var extraChecks = steps[i].extraChecks;
+                for (var name in extraChecks) {
+                    if (extraChecks.hasOwnProperty(name)) {
+                        that.assertIdentical(extraChecks[name], this.get(name), "wrong "+name+" at "+steps[i].message);
+                    }
+                }
 	    }
 	};
 
@@ -142,37 +153,37 @@ Test.context("PuyoPuyo.Board",{
     },
 
     "The board should start empty": function() {
-	board.shouldFollow(["start"],
-			   ["    ",
-			    "    ",
-			    "    ",
-			    "    ",
-			    "    ",
-			    "    "]);
+	board.shouldFollow({action:["start"],
+			    board: ["    ",
+			            "    ",
+			            "    ",
+			            "    ",
+			            "    ",
+			            "    "]});
     },
 
     "A piece should appear at first tick and move down at each tick.": function() {
 	board.start();
-	board.shouldFollow(["tick", "tick", "tick", "tick", "tick", "tick"],
-			   [" rb ", "    ", "    ", "    ", "    ", "    ",
-			    "    ", " rb ", "    ", "    ", "    ", "    ",
-			    "    ", "    ", " rb ", "    ", "    ", "    ",
-			    "    ", "    ", "    ", " rb ", "    ", "    ",
-			    "    ", "    ", "    ", "    ", " rb ", "    ",
-			    "    ", "    ", "    ", "    ", "    ", " rb "]);
+	board.shouldFollow({action:["tick", "tick", "tick", "tick", "tick", "tick"],
+			    board: [" rb ", "    ", "    ", "    ", "    ", "    ",
+			            "    ", " rb ", "    ", "    ", "    ", "    ",
+			            "    ", "    ", " rb ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", " rb ", "    ", "    ",
+			            "    ", "    ", "    ", "    ", " rb ", "    ",
+			            "    ", "    ", "    ", "    ", "    ", " rb "]});
     },
 
     "A new game should be started after an abort.": function() {
 	board.start();
 	board.tick();
 
-	board.shouldFollow(["tick", "abort", "start"], 
-			   ["    ",  idem,   "    ",
-			    " rb ",  idem,   "    ",
-			    "    ",  idem,   "    ",
-			    "    ",  idem,   "    ",
-			    "    ",  idem,   "    ",
-			    "    ",  idem,   "    "]);
+	board.shouldFollow({action:["tick", "abort", "start"], 
+			    board: ["    ",  idem,   "    ",
+			            " rb ",  idem,   "    ",
+			            "    ",  idem,   "    ",
+			            "    ",  idem,   "    ",
+			            "    ",  idem,   "    ",
+			            "    ",  idem,   "    "]});
     },
 
     "New pieces should have colors from colorProvider.": function() {
@@ -191,48 +202,48 @@ Test.context("PuyoPuyo.Board",{
 
     "A piece should move with left and right": function() {
 	board.start();
-	board.shouldFollow(["tick", "left", "right"],
-			   [" rb ", "rb  ", " rb ", 
-			    "    ", "    ", "    ",
-			    "    ", "    ", "    ",
-			    "    ", "    ", "    ",
-			    "    ", "    ", "    ",
-			    "    ", "    ", "    "]);
+	board.shouldFollow({action:["tick", "left", "right"],
+			    board: [" rb ", "rb  ", " rb ", 
+			            "    ", "    ", "    ",
+			            "    ", "    ", "    ",
+			            "    ", "    ", "    ",
+			            "    ", "    ", "    ",
+			            "    ", "    ", "    "]});
     },
 
     "A piece should rotate": function() {
 	board.start();
 	board.tick();
-	board.shouldFollow(["tick", "rotate", "rotate", "rotate", "rotate"],
-			   ["    ", " b  ",   "    ",   "    ",   "    ", 
-			    " rb ", " r  ",   "br  ",   " r  ",   " rb ",
-			    "    ", "    ",   "    ",   " b  ",   "    ",
-			    "    ", "    ",   "    ",   "    ",   "    ",
-			    "    ", "    ",   "    ",   "    ",   "    ",
-			    "    ", "    ",   "    ",   "    ",   "    "]);
+  	board.shouldFollow({action:["tick", "rotate", "rotate", "rotate", "rotate"],
+			    board: ["    ", " b  ",   "    ",   "    ",   "    ", 
+			            " rb ", " r  ",   "br  ",   " r  ",   " rb ",
+			            "    ", "    ",   "    ",   " b  ",   "    ",
+			            "    ", "    ",   "    ",   "    ",   "    ",
+			            "    ", "    ",   "    ",   "    ",   "    ",
+			            "    ", "    ",   "    ",   "    ",   "    "]});
     },
 
     "A piece should anti rotate": function() {
 	board.start();
 	board.tick();
-	board.shouldFollow(["tick", "antiRotate", "antiRotate", "antiRotate", "antiRotate"],
-			   ["    ", "    ",       "    ",       " b  ",       "    ", 
-			    " rb ", " r  ",       "br  ",       " r  ",       " rb ",
-			    "    ", " b  ",       "    ",       "    ",       "    ",
-			    "    ", "    ",       "    ",       "    ",       "    ",
-			    "    ", "    ",       "    ",       "    ",       "    ",
-			    "    ", "    ",       "    ",       "    ",       "    "]);
+	board.shouldFollow({action:["tick", "antiRotate", "antiRotate", "antiRotate", "antiRotate"],
+			    board: ["    ", "    ",       "    ",       " b  ",       "    ", 
+			            " rb ", " r  ",       "br  ",       " r  ",       " rb ",
+			            "    ", " b  ",       "    ",       "    ",       "    ",
+			            "    ", "    ",       "    ",       "    ",       "    ",
+			            "    ", "    ",       "    ",       "    ",       "    ",
+			            "    ", "    ",       "    ",       "    ",       "    "]});
     },
 
     "It should not be possible to move a piece outside the board": function() {
 	board.start();
-	board.shouldFollow(["tick", "left", "left", "right", "right", "right",],
-			   [" rb ", "rb  ", idem,   " rb ",  "  rb",  idem, 
-			    "    ", "    ", idem,   "    ",  "    ",  idem,
-			    "    ", "    ", idem,   "    ",  "    ",  idem,
-			    "    ", "    ", idem,   "    ",  "    ",  idem,
-			    "    ", "    ", idem,   "    ",  "    ",  idem,
-			    "    ", "    ", idem,   "    ",  "    ",  idem]);
+	board.shouldFollow({action:["tick", "left", "left", "right", "right", "right",],
+			    board: [" rb ", "rb  ", idem,   " rb ",  "  rb",  idem, 
+			            "    ", "    ", idem,   "    ",  "    ",  idem,
+			            "    ", "    ", idem,   "    ",  "    ",  idem,
+			            "    ", "    ", idem,   "    ",  "    ",  idem,
+			            "    ", "    ", idem,   "    ",  "    ",  idem,
+			            "    ", "    ", idem,   "    ",  "    ",  idem]});
     },
 
     "A new piece should appear when the previous one gets blocked at the bottom of the board": function() {
@@ -244,15 +255,15 @@ Test.context("PuyoPuyo.Board",{
 			"    ",
 			"    ",
 			" rb "],
-		      "initialy");
+		       "initialy");
 
-	board.shouldFollow(["tick", "tick"],
-			   ["    ", " rb ",
-			    "    ", "    ",
-			    "    ", "    ",
-			    "    ", "    ",
-			    "    ", "    ",
-			    " rb ", " rb "]);
+	board.shouldFollow({action:["tick", "tick"],
+			    board: ["    ", " rb ",
+			            "    ", "    ",
+			            "    ", "    ",
+			            "    ", "    ",
+			            "    ", "    ",
+			            " rb ", " rb "]});
     },
 
     "Blocked piece should pile on top of each other.": function() {
@@ -269,15 +280,15 @@ Test.context("PuyoPuyo.Board",{
 			" rb ",
 			"    ",
 			" yp "],
-		      "initialy");
+		       "initialy");
 
-	board.shouldFollow(["tick", "tick"],
-			   ["    ", "    ",
-			    "    ", "    ",
-			    "    ", "    ",
-			    "    ", "    ",
-			    " rb ", " rb ",
-			    " yp ", " yp "]);
+	board.shouldFollow({action:["tick", "tick"],
+			    board: ["    ", "    ",
+			            "    ", "    ",
+			            "    ", "    ",
+			            "    ", "    ",
+			            " rb ", " rb ",
+			            " yp ", " yp "]});
     },
 
     "Puyos of vertical pieces should be blocked on top of each other.": function() {
@@ -290,15 +301,15 @@ Test.context("PuyoPuyo.Board",{
 			"    ",
 			" r  ",
 			" b  "],
-		      "initialy");
+		       "initialy");
 
-	board.shouldFollow(["tick"],
-			   ["    ",
-			    "    ",
-			    "    ",
-			    "    ",
-			    " r  ",
-			    " b  "]);
+	board.shouldFollow({action:["tick"],
+			    board: ["    ",
+			            "    ",
+			            "    ",
+			            "    ",
+			            " r  ",
+			            " b  "]});
     },
 
     "Blocked beans should follow the law of gravity": function() {
@@ -315,37 +326,37 @@ Test.context("PuyoPuyo.Board",{
 			"    ",
 			" rb ",
 			"yp  "],
-		      "initialy");
+		       "initialy");
 
-	board.shouldFollow(["tick"],
-			   ["    ",
-			    "    ",
-			    "    ",
-			    "    ",
-			    " r  ",
-			    "ypb "]);
+	board.shouldFollow({action:["tick"],
+			    board: ["    ",
+			            "    ",
+			            "    ",
+			            "    ",
+			            " r  ",
+			            "ypb "]});
     },
 
     "Pieces should drop at the bottom.": function() {
 	board.start();
-	board.shouldFollow(["tick", "drop", "tick", "drop"],
-			   [" rb ", "    ", " rb ", "    ",
-			    "    ", "    ", "    ", "    ",
-			    "    ", "    ", "    ", "    ",
-			    "    ", "    ", "    ", "    ",
-			    "    ", "    ", "    ", " rb ",
-			    "    ", " rb ", " rb ", " rb "]);
+	board.shouldFollow({action:["tick", "drop", "tick", "drop"],
+			    board: [" rb ", "    ", " rb ", "    ",
+			            "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", " rb ",
+			            "    ", " rb ", " rb ", " rb "]});
     },
 
     "Pieces should follow the law of gravity when droped.": function() {
 	board.start();
-	board.shouldFollow(["tick", "drop", "tick", "right", "drop"],
-			   [" rb ", "    ", " rb ", "  rb",  "    ",
-			    "    ", "    ", "    ", "    ",  "    ",
-			    "    ", "    ", "    ", "    ",  "    ",
-			    "    ", "    ", "    ", "    ",  "    ",
-			    "    ", "    ", "    ", "    ",  "  r ",
-			    "    ", " rb ", " rb ", " rb ",  " rbb"]);
+	board.shouldFollow({action:["tick", "drop", "tick", "right", "drop"],
+			    board: [" rb ", "    ", " rb ", "  rb",  "    ",
+			            "    ", "    ", "    ", "    ",  "    ",
+			            "    ", "    ", "    ", "    ",  "    ",
+			            "    ", "    ", "    ", "    ",  "    ",
+			            "    ", "    ", "    ", "    ",  "  r ",
+			            "    ", " rb ", " rb ", " rb ",  " rbb"]});
     },
 
     "When grouped by 4 or more, beans of the same color should disappear": function() {
@@ -353,13 +364,13 @@ Test.context("PuyoPuyo.Board",{
 	this.colorProvider.secondColor = PuyoPuyo.Game.Red;
 
         board.start();
-	board.shouldFollow(["tick", "drop", "tick", "drop", "tick", "tick"],
-			   [" rr ", "    ", " rr ", "    ", "    ", " rr ",
-			    "    ", "    ", "    ", "    ", "    ", "    ",
-			    "    ", "    ", "    ", "    ", "    ", "    ",
-			    "    ", "    ", "    ", "    ", "    ", "    ",
-			    "    ", "    ", "    ", " rr ", "    ", "    ",
-			    "    ", " rr ", " rr ", " rr ", "    ", "    "]);
+	board.shouldFollow({action:["tick", "drop", "tick", "drop", "tick", "tick"],
+			    board: [" rr ", "    ", " rr ", "    ", "    ", " rr ",
+			            "    ", "    ", "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", " rr ", "    ", "    ",
+			            "    ", " rr ", " rr ", " rr ", "    ", "    "]});
     },
 
     "If blocking the piece several groups, all should disappear": function() {
@@ -369,13 +380,13 @@ Test.context("PuyoPuyo.Board",{
 			      "r  b",
 			      "r  b",
 			      "r  b"]);
-	board.shouldFollow(["tick", "drop", "tick"],
-			   [" rb ", "    ", "    ",
-			    "    ", "    ", "    ",
-			    "    ", "    ", "    ",
-			    "r  b", "r  b", "    ",
-			    "r  b", "r  b", "    ",
-			    "r  b", "rrbb", "    "]);
+	board.shouldFollow({action:["tick", "drop", "tick"],
+			    board: [" rb ", "    ", "    ",
+			            "    ", "    ", "    ",
+			            "    ", "    ", "    ",
+			            "r  b", "r  b", "    ",
+			            "r  b", "r  b", "    ",
+			            "r  b", "rrbb", "    "]});
     },
 
     "Pieces on top of a disappearing group should fall": function() {
@@ -388,13 +399,13 @@ Test.context("PuyoPuyo.Board",{
 	this.colorProvider.firstColor = PuyoPuyo.Game.Red;
 	this.colorProvider.secondColor = PuyoPuyo.Game.Red;
 
-	board.shouldFollow(["tick", "drop", "tick", "tick"],
-			   [" rr ", "    ", "    ", "    ",
-			    "p   ", "p   ", "p   ", "    ",
-			    "y   ", "y   ", "y   ", "    ",
-			    "b   ", "b   ", "b   ", "p   ",
-			    "r   ", "r   ", "    ", "y   ",
-			    "r   ", "rrr ", "    ", "b   "]);
+	board.shouldFollow({action:["tick", "drop", "tick", "tick"],
+			    board: [" rr ", "    ", "    ", "    ",
+			            "p   ", "p   ", "p   ", "    ",
+			            "y   ", "y   ", "y   ", "    ",
+			            "b   ", "b   ", "b   ", "p   ",
+			            "r   ", "r   ", "    ", "y   ",
+			            "r   ", "rrr ", "    ", "b   "]});
     },
 
     "Disappearing beans should cascade": function() {
@@ -407,13 +418,13 @@ Test.context("PuyoPuyo.Board",{
 	this.colorProvider.firstColor = PuyoPuyo.Game.Blue;
 	this.colorProvider.secondColor = PuyoPuyo.Game.Blue;
 
-	board.shouldFollow(["tick", "right","drop", "tick", "tick", "tick"],
-			   [" bb ", "  bb", "    ", "    ", "    ", "    ",
-			    "    ", "    ", "    ", "    ", "    ", "    ",
-			    " r  ", " r  ", " r  ", " r  ", "    ", "    ",
-			    " r  ", " r  ", " r  ", " r  ", "    ", "    ",
-			    "rb  ", "rb  ", "rb  ", "r   ", "rr  ", "    ",
-			    "rb  ", "rb  ", "rbbb", "r   ", "rr  ", "    "]);
+	board.shouldFollow({action:["tick", "right","drop", "tick", "tick", "tick"],
+			    board: [" bb ", "  bb", "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", "    ", "    ", "    ",
+			            " r  ", " r  ", " r  ", " r  ", "    ", "    ",
+			            " r  ", " r  ", " r  ", " r  ", "    ", "    ",
+			            "rb  ", "rb  ", "rb  ", "r   ", "rr  ", "    ",
+			            "rb  ", "rb  ", "rbbb", "r   ", "rr  ", "    "]});
     },
 
     "Game should be lost when there is no place for new pieces": function() {
@@ -455,7 +466,7 @@ Test.context("PuyoPuyo.Board",{
         assertIdentical(9, board.get('disappearedPieces'));
     },
 
-    "The level should increase at every 20 disappeared pieces": function() {
+    "The level should increase when pieces disappear": function() {
 	this.colorProvider.firstColor = PuyoPuyo.Game.Red;
 	this.colorProvider.secondColor = PuyoPuyo.Game.Red;
 
@@ -463,12 +474,12 @@ Test.context("PuyoPuyo.Board",{
         assertIdentical(0, board.get('disappearedPieces'));
         assertIdentical(1, board.get('level'));
 
-        board.dropPuyos(20);
-        assertIdentical(20, board.get('disappearedPieces'));
+        board.dropPuyos(PuyoPuyo.Game.LevelUpgrade + 2);
+        assertIdentical(PuyoPuyo.Game.LevelUpgrade + 2, board.get('disappearedPieces'));
         assertIdentical(2, board.get('level'));
-            
-        board.dropPuyos(20);
-        assertIdentical(40, board.get('disappearedPieces'));
+        
+        board.dropPuyos(PuyoPuyo.Game.LevelUpgrade + 2);
+        assertIdentical(2 * (PuyoPuyo.Game.LevelUpgrade + 2), board.get('disappearedPieces'));
         assertIdentical(3, board.get('level'));
     },
     "Level changes should be forwarded to the ticker": function() {
@@ -478,18 +489,41 @@ Test.context("PuyoPuyo.Board",{
 	board.start();
         assertIdentical(1, board.get('level'));
 
-        board.dropPuyos(20);
+        board.dropPuyos(PuyoPuyo.Game.LevelUpgrade + 2);
         assertIdentical(2, board.get('level'));
 
         assertIdentical(2, this.ticker.level);
+    },
+    "The score should be increased when pieces are disappeared": function() {
+	board.startWithBoard(["    ",
+			      " r  ",
+			      " r  ",
+			      " r  ",
+			      "rb  ",
+			      "rb  "]);
+	this.colorProvider.firstColor = PuyoPuyo.Game.Blue;
+	this.colorProvider.secondColor = PuyoPuyo.Game.Blue;
+
+	board.shouldFollow({action:["tick", "right","drop", "tick", "tick", "tick"],
+	                    board: [" bb ", "  bb", "    ", "    ", "    ", "    ",
+                                    " r  ", " r  ", " r  ", " r  ", "    ", "    ",
+	                            " r  ", " r  ", " r  ", " r  ", "    ", "    ",
+	                            " r  ", " r  ", " r  ", " r  ", " r  ", "    ",
+	                            "rb  ", "rb  ", "rb  ", "r   ", "rr  ", "    ",
+	                            "rb  ", "rb  ", "rbbb", "r   ", "rr  ", "    "],
+                            score: [     0,      0,      0,      4,      4,     14]});
     }
 
+
 /*
-    "score"
-    "glue between pieces"
-    "nicer style"
-    "next piece"
-    "sounds"
+    score
+    hall of fame
+    identification
+    sounds
+    glue between pieces
+    next piece
+
+    "nicer style" -> got to get a book or something
 
 */
 }) ;

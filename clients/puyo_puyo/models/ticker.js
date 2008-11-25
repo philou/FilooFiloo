@@ -49,6 +49,6 @@ PuyoPuyo.Ticker = SC.Record.extend(
 
     // Time interval between tick at the given level
     interval_: function(level) {
-        return 1000 * Math.pow(0.9, level-1);
+        return PuyoPuyo.Game.StartTickerInterval * Math.pow(PuyoPuyo.Game.LevelAcceleration, level-1);
     }
 });

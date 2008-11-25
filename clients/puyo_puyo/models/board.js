@@ -41,11 +41,16 @@ PuyoPuyo.Board = SC.Record.extend(
     disappearedPieces: 0,
 
     /**
+      @type {int}
+    */
+    score: 0,
+
+    /**
       Difficulty level reached by the player.
       #type {int}
     */
     level: function() {
-        return Math.floor(this.get('disappearedPieces') / 20) + 1;
+        return Math.floor(this.get('disappearedPieces') / PuyoPuyo.Game.LevelUpgrade) + 1;
     }.property('disappearedPieces'),
 
     /**
@@ -54,6 +59,7 @@ PuyoPuyo.Board = SC.Record.extend(
     start: function(blockedPieces) {
         blockedPieces = blockedPieces || PuyoPuyo.CoordMap.create();
         this.set('disappearedPieces', 0);
+        this.set('score', 0);
 	this.set('playing', true);
 	this.ticker.start(this);
 	this.setBlockedPieces_(blockedPieces);
@@ -168,6 +174,7 @@ PuyoPuyo.Board = SC.Record.extend(
             return null;
         }
 
+        this.scoreMultiplier = 1;
 	this.setCurrentPiece_(newPiece);
         return "tickCurrentPiece_";
     },
@@ -220,12 +227,14 @@ PuyoPuyo.Board = SC.Record.extend(
                 var piece = this.blockedPieces.pieceContaining(c, r);
                 if (4 <= piece.get('count')) {
                     this.set('disappearedPieces', this.get('disappearedPieces') + piece.get('count'));
+                    this.set('score', this.get('score') + this.scoreMultiplier * piece.get('count'));
                     this.blockedPieces.removeEach(piece);
                     cleanedPieces = true;
                 }
             }
         }
         if (cleanedPieces) {
+            this.scoreMultiplier = PuyoPuyo.Game.CascadeScoreMultiplier * this.scoreMultiplier;
             this.notifyChanged_();
             return "collapseBlockedPieces_";
         }

@@ -65,3 +65,11 @@ PuyoPuyo.Game.Colors.forEach(PuyoPuyo.Game.registerState);
 */
 PuyoPuyo.Game.ColCount = 6;
 PuyoPuyo.Game.RowCount = 12;
+
+/**
+  Gameplay parameters
+*/
+PuyoPuyo.Game.StartTickerInterval = 500;
+PuyoPuyo.Game.LevelAcceleration = 0.9;
+PuyoPuyo.Game.LevelUpgrade = 30;
+PuyoPuyo.Game.CascadeScoreMultiplier = 2;
