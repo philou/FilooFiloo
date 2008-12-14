@@ -14,6 +14,8 @@ require('core');
 PuyoPuyo.playerController = SC.Object.create(
 /** @scope PuyoPuyo.playerController */ {
 
+    name: 'anonymous',
+
     start: function() {
 	this.get('board').start();
     },
@@ -22,12 +24,12 @@ PuyoPuyo.playerController = SC.Object.create(
 	this.get('board').abort();
     },
 
-    openGameOverDialog: function() {
+    gameOver: function() {
         if (this.get('board').get('gameOver'))
             SC.page.get('gameOverPane').set('isVisible', YES);
     }.observes('.board.gameOver'),
 
-    closeGameOverDialog: function() {
+    submitScore: function() {
         SC.page.get('gameOverPane').set('isVisible', NO);
     }
     
