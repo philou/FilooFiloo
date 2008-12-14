@@ -26,11 +26,14 @@
 
 <% end %>
 
-<% view :game_over_pane, :pane => :dialog, :visible => false, :width => 200 do %>
+<% view :game_over_pane, :pane => :dialog, :visible => false, :width => 300 do %>
   <div align="center">
     <h1>Game Over</h1>
-    <p>Puyo Puyo rules !</p>
-    <%= button_view :label => 'Ok', :width => 60, :default => true, :action => 'PuyoPuyo.playerController.closeGameOverDialog' %>
+
+    <p>Puyo Puyo rules  ... but you somewhat managed to reach the high scores ! Please enter your name</p>
+    <p><%= text_field_view :bind => {:value => 'PuyoPuyo.playerController.name' } %></p>
+    <p><%= button_view :label => 'Ok', :default => true, :action => 'PuyoPuyo.playerController.submitScore' %></p>
+
   </div>
 <% end %>
 
