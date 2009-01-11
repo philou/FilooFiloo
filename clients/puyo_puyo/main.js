@@ -15,7 +15,10 @@ function main() {
   // The default code here will load the fixtures you have defined.
   // Comment out the preload line and add something to refresh from the server
   // when you are ready to pull data from your server.
-  PuyoPuyo.server.preload(PuyoPuyo.FIXTURES) ;
+  //PuyoPuyo.server.preload(PuyoPuyo.FIXTURES) ;
+  PuyoPuyo.server.listFor({ recordType: PuyoPuyo.HighScore});
+  var scores = PuyoPuyo.HighScore.collection();
+  scores.refresh();
 
   // TODO: refresh() any collections you have created to get their records.
   // ex: PuyoPuyo.contacts.refresh() ;
@@ -25,17 +28,17 @@ function main() {
   // your app gets any level of complexity, you should just get the views you
   // need to show the app in the first place, to speed things up.
   SC.page.awake() ;
-  SC.page.boardView.becomeFirstResponder();
 
   // Step 3. Set the content property on your primary controller.
   // This will make your app come alive!
 
   // TODO: Set the content property on your primary controller
   // ex: PuyoPuyo.contactsController.set('content',PuyoPuyo.contacts);
+  PuyoPuyo.highScoresController.set('content', scores);
 
-    PuyoPuyo.playerController.set('board', PuyoPuyo.Board.create({
-	ticker: PuyoPuyo.Ticker.create(),
-	colorProvider: PuyoPuyo.ColorProvider.create()
-    }));
+  PuyoPuyo.playerController.set('board', PuyoPuyo.Board.create({
+      ticker: PuyoPuyo.Ticker.create(),
+      colorProvider: PuyoPuyo.ColorProvider.create()
+  }));
 
 } ;

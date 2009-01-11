@@ -1,0 +1,7 @@
+add a server:
+    create a high score table. ok
+    create high score tab in the client
+    populate high score tab with data from the server
+    store high scores on game over
+
+add iphone compatible buttons
