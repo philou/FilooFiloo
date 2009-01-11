@@ -24,18 +24,18 @@ table.board {
     margin: 10px;
 }
 
-.board tr td {
+table.board td {
     width: 30px;
     height: 30px;
     background-color: #DDDDDD;
     background-repeat: no-repeat
 }
 
-.board tr td.red { background-image: static_url('images/sprites_red.png')}
-.board tr td.blue { background-image: static_url('images/sprites_blue.png')}
-.board tr td.green { background-image: static_url('images/sprites_green.png')}
-.board tr td.purple { background-image: static_url('images/sprites_purple.png')}
-.board tr td.yellow { background-image: static_url('images/sprites_yellow.png')}
+table.board td.red { background-image: static_url('images/sprites_red.png')}
+table.board td.blue { background-image: static_url('images/sprites_blue.png')}
+table.board td.green { background-image: static_url('images/sprites_green.png')}
+table.board td.purple { background-image: static_url('images/sprites_purple.png')}
+table.board td.yellow { background-image: static_url('images/sprites_yellow.png')}
 
 /* styles for the single player game */
 .single {
