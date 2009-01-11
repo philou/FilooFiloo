@@ -1,0 +1,15 @@
+<% view :high_scores_tab, :style => 'width: 100%; height: 100%; position: absolute;' do %>
+
+<div class="high_scores">
+  <% scroll_view :high_scores_scroll_view do %>
+    <%= list_view :high_scores_list_view,
+        :content_value_key => 'key',
+        :is_editable => false,
+        :content_value_editable => false,
+        :can_reorder_content => false,
+        :bind => {
+          :content => 'PuyoPuyo.highScoresController.arrangedObjects'
+        } %>
+  <% end %>
+</div>
+<% end %>

@@ -1,39 +1,12 @@
 <% content_for('body') do %>
 
-<p/>
-<div align="center">
-  <h1>Philou's Puyo-Puyo</h1>
-  <%= view :boardView,
-      :tag => :table,
-      :view => 'PuyoPuyo.BoardView',
-      :bind => { :board => 'PuyoPuyo.playerController.board',
-                 :boardTime => 'PuyoPuyo.playerController.board.time' } %>
-  <%= button_view :label => 'Start', :action => 'PuyoPuyo.playerController.start', :default => true %>
-  <%= button_view :label => 'Abort', :action => 'PuyoPuyo.playerController.abort' %>
-  <table>
-    <tr>
-      <td>Poped puyos:</td><td><%= label_view :disappeared_pieces, :value => "0", :bind => {:value => 'PuyoPuyo.playerController.board.disappearedPieces' } %></td>
-    </tr>
-    <tr>
-      <td>Score:</td><td><%= label_view :score, :value => "0", :bind => {:value => 'PuyoPuyo.playerController.board.score' } %></td>
-    </tr>
-    <tr>
-      <td>Level:</td><td><%= label_view :level, :value => "0", :bind => {:value => 'PuyoPuyo.playerController.board.level' } %></td>
-    </tr>
-  </table>
-  <p/>
-</div>
+<h1>Philou's Puyo-Puyo</h1>
 
+<%= tab_view :modes_tabs,
+             :lazy_tabs => true,
+             :segments => [
+                            [:single, "1 player"],
+                            [:high_scores, "High scores"]
+                          ],
+             :now_showing => :single %>
 <% end %>
-
-<% view :game_over_pane, :pane => :dialog, :visible => false, :width => 300 do %>
-  <div align="center">
-    <h1>Game Over</h1>
-
-    <p>Puyo Puyo rules  ... but you somewhat managed to reach the high scores ! Please enter your name</p>
-    <p><%= text_field_view :bind => {:value => 'PuyoPuyo.playerController.name' } %></p>
-    <p><%= button_view :label => 'Ok', :default => true, :action => 'PuyoPuyo.playerController.submitScore' %></p>
-
-  </div>
-<% end %>
-
