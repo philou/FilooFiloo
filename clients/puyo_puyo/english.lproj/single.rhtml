@@ -13,7 +13,6 @@
       <td>Level</td><td><%= label_view :level, :value => "0", :bind => {:value => 'PuyoPuyo.playerController.board.level' } %></td>
     </tr>
   </table>
-  <!-- TODO try to work out qualified property names later on -->
   <%= view :boardView,
       :tag => :table,
       :class => 'board',

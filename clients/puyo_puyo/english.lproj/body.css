@@ -60,6 +60,12 @@ table.scores tr, table.scores tr td {
 }
 
 /* styles for high scores */
+.high_scores_tab {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
 .high_scores_tab .high_scores_scroll_view {
  position: absolute ;
  left: 12px;

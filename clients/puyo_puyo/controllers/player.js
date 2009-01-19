@@ -46,7 +46,14 @@ PuyoPuyo.playerController = SC.Object.create(
     }.observes('.board.gameOver'),
 
     submitScore: function() {
-        // TODO save (player, name) to high scores
+        var values = { 
+            playerName: this.get('name'),
+            score: this.get('board').get('score')
+        };
+
+        var score = PuyoPuyo.HighScore.newRecord(values, PuyoPuyo.server);
+        score.commit();
+
         SC.page.get('gameOverPane').set('isVisible', NO);
     }
 
