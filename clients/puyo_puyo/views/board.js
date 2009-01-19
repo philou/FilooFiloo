@@ -18,6 +18,8 @@ PuyoPuyo.BoardView = SC.View.extend(function() {
 
     var renderHtml = function(elemValues) {
 	var html = [];
+        var row = 0;
+        var col = 0;
 
 	for (row = 0; row < PuyoPuyo.Board.RowCount; row++) {
 
