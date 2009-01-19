@@ -1479,3 +1479,913 @@ SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
   Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
   [4;36;1mHighScore Load (0.000714)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
 Completed in 0.08444 (11 reqs/sec) | Rendering: 0.00009 (0%) | DB: 0.00071 (0%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-11 23:45:52) [GET]
+  Session ID: 02d5a666a9103f39c240014263d7fdc3
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000677)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00852 (117 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00068 (7%) | 200 OK [http://192.168.0.10/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-11 23:50:09) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000618)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00779 (128 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-11 23:50:28) [GET]
+  Session ID: 57e3eb9dbdd4e745b57f0408a8e83dcc
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000673)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00793 (126 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00067 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-11 23:54:53) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000639)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00779 (128 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00064 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-11 23:57:34) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000600)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00780 (128 reqs/sec) | Rendering: 0.00020 (2%) | DB: 0.00060 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-11 23:58:12) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000621)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00810 (123 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-11 23:58:23) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000671)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00809 (123 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00067 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-14 23:16:19) [GET]
+  Session ID: d3217f6e3f18283d630d67605140f18d
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.001229)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.02736 (36 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00123 (4%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-14 23:17:21) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000760)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00846 (118 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00076 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-14 23:17:54) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000732)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.01064 (93 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00073 (6%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-14 23:18:02) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000634)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00821 (121 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00063 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-14 23:18:23) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000623)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00799 (125 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-14 23:21:57) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000631)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00802 (124 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00063 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-14 23:22:58) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000616)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00786 (127 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-14 23:23:40) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000634)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00886 (112 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00063 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-14 23:32:51) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000621)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00796 (125 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-14 23:32:59) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000635)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00813 (123 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00064 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-14 23:33:18) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000631)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.01178 (84 reqs/sec) | Rendering: 0.00262 (22%) | DB: 0.00063 (5%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-14 23:33:25) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000621)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00779 (128 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-15 23:37:57) [GET]
+  Session ID: faa8f735cc88a89e02f19cca8a12f587
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.001165)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.02493 (40 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00116 (4%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-15 23:38:30) [GET]
+  Session ID: 818f2383bb11641c33507b58c4266a31
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000718)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00894 (111 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00072 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-15 23:39:49) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000636)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.07564 (13 reqs/sec) | Rendering: 0.00011 (0%) | DB: 0.00064 (0%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-15 23:39:57) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000673)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00910 (109 reqs/sec) | Rendering: 0.00009 (1%) | DB: 0.00067 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 22:16:41) [GET]
+  Session ID: 30b30438795215581b655144b34bd3c0
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000915)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.02023 (49 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00091 (4%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 22:21:01) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000651)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00805 (124 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00065 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 22:22:28) [GET]
+  Session ID: 5f195d267940860dee0c13153b589ff6
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.070970)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.08071 (12 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.07097 (87%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 22:32:37) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000757)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00908 (110 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00076 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 22:35:01) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000661)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00826 (121 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00066 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 22:41:12) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000633)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00820 (121 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00063 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 22:42:00) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000624)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00976 (102 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00062 (6%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 22:42:09) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000620)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00798 (125 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 22:43:12) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000625)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00907 (110 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00063 (6%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 22:43:59) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000635)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00777 (128 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00063 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 22:45:09) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000626)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00793 (126 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00063 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 22:45:24) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000634)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00814 (122 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00063 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 23:11:50) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000807)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.09483 (10 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00081 (0%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 23:12:05) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000620)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.01211 (82 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00062 (5%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 23:12:11) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000618)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00800 (124 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 23:12:52) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000655)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00804 (124 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00065 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 23:16:40) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000617)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00806 (124 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 23:17:47) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000608)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00833 (120 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00061 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 23:21:14) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000622)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00792 (126 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 23:24:52) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000635)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00791 (126 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00063 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-16 23:26:52) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000717)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00891 (112 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00072 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 21:44:42) [GET]
+  Session ID: 18dd8cf7d947e4764fed1a6477062c98
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000939)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.02010 (49 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00094 (4%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 21:47:31) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000655)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00892 (112 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00065 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 21:47:42) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000724)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00896 (111 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00072 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 21:58:40) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000649)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00831 (120 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00065 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 21:59:32) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000618)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00801 (124 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:01:15) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000625)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00835 (119 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00063 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:04:09) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000665)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.01406 (71 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00066 (4%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:05:12) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000698)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.01089 (91 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00070 (6%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:06:31) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000607)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00781 (127 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00061 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:13:00) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000645)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00842 (118 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00064 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:13:43) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000644)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00801 (124 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00064 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:16:44) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000643)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.01453 (68 reqs/sec) | Rendering: 0.00013 (0%) | DB: 0.00064 (4%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:17:11) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000660)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00856 (116 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00066 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:18:41) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000661)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00836 (119 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00066 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:22:42) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000632)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00802 (124 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00063 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:48:37) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000658)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00913 (109 reqs/sec) | Rendering: 0.00024 (2%) | DB: 0.00066 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:49:19) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000627)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00822 (121 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00063 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:51:53) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000697)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00850 (117 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00070 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-19 22:52:13) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"10", "player_name"=>"Philou", "id"=>"@@1612", "_guid"=>"@1612"}}, "controller"=>"high_scores"}
+
+
+ActionController::InvalidAuthenticityToken (ActionController::InvalidAuthenticityToken):
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/request_forgery_protection.rb:86:in `verify_authenticity_token'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/callbacks.rb:173:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/callbacks.rb:173:in `evaluate_method'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/callbacks.rb:161:in `call'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/filters.rb:191:in `call'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/filters.rb:591:in `run_before_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/filters.rb:577:in `call_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/filters.rb:572:in `perform_action_without_benchmark'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/rescue.rb:201:in `perform_action_without_caching'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.1/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.1/lib/active_record/query_cache.rb:8:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/base.rb:529:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/base.rb:529:in `process_without_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/filters.rb:568:in `process_without_session_management_support'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/session_management.rb:130:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/base.rb:389:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:78:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:76:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:76:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:618:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:617:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:617:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:271:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:270:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:270:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/bin/mongrel_rails:127:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/command.rb:211:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/bin/mongrel_rails:243
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.1/lib/commands/servers/mongrel.rb:64
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:510:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:510:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.1/lib/commands/server.rb:39
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/templates/rescues/layout.erb (unprocessable_entity)
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:58:14) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000691)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00846 (118 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00069 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-19 22:58:59) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"21", "player_name"=>"Philou", "id"=>"@@2832", "_guid"=>"@2832"}}, "controller"=>"high_scores"}
+  [4;35;1mHighScore Create (0.340769)[0m   [0mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(21, '2009-01-19 21:58:59', 'Philou', '2009-01-19 21:58:59')[0m
+Completed in 0.35087 (2 reqs/sec) | Rendering: 0.00011 (0%) | DB: 0.34077 (97%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 22:59:12) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000746)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00864 (115 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00075 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-19 23:00:36) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"8", "player_name"=>"\"); CREATE TABLE \"TOTO\"(VAL NUMBER);", "id"=>"@@2883", "_guid"=>"@2883"}}, "controller"=>"high_scores"}
+  [4;35;1mHighScore Create (0.000719)[0m   [0mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(8, '2009-01-19 22:00:36', '"); CREATE TABLE "TOTO"(VAL NUMBER);', '2009-01-19 22:00:36')[0m
+Completed in 0.02318 (43 reqs/sec) | Rendering: 0.00011 (0%) | DB: 0.00072 (3%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-19 23:02:34) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"", "player_name"=>"'); CREATE TABLE \"TOTO\"(VAL NUMBER);", "id"=>"@@7198", "_guid"=>"@7198"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.000353)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(NULL, '2009-01-19 22:02:34', '''); CREATE TABLE "TOTO"(VAL NUMBER);', '2009-01-19 22:02:34')[0m
+Completed in 0.01243 (80 reqs/sec) | Rendering: 0.00015 (1%) | DB: 0.00035 (2%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-19 23:02:47) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"", "player_name"=>"'); CREATE TABLE \"TOTO\"(VAL NUMBER);", "id"=>"@@7469", "_guid"=>"@7469"}}, "controller"=>"high_scores"}
+  [4;35;1mHighScore Create (0.000348)[0m   [0mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(NULL, '2009-01-19 22:02:47', '''); CREATE TABLE "TOTO"(VAL NUMBER);', '2009-01-19 22:02:47')[0m
+Completed in 0.01173 (85 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00035 (2%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-19 23:02:48) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"", "player_name"=>"'); CREATE TABLE \"TOTO\"(VAL NUMBER);", "id"=>"@@7476", "_guid"=>"@7476"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.000366)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(NULL, '2009-01-19 22:02:48', '''); CREATE TABLE "TOTO"(VAL NUMBER);', '2009-01-19 22:02:48')[0m
+Completed in 0.01123 (89 reqs/sec) | Rendering: 0.00012 (1%) | DB: 0.00037 (3%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-19 23:03:03) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"", "player_name"=>"'); CREATE TABLE \"TOTO\"(VAL NUMBER);", "id"=>"@@7785", "_guid"=>"@7785"}}, "controller"=>"high_scores"}
+  [4;35;1mHighScore Create (0.000587)[0m   [0mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(NULL, '2009-01-19 22:03:03', '''); CREATE TABLE "TOTO"(VAL NUMBER);', '2009-01-19 22:03:03')[0m
+Completed in 0.01240 (80 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00059 (4%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 23:03:37) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.001157)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00934 (107 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00116 (12%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-01-19 23:04:36) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {}
+
+
+ActionController::RoutingError (No route matches "/puyo_puyo/sc" with {:method=>:get}):
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/routing/recognition_optimisation.rb:67:in `recognize_path'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/routing/route_set.rb:384:in `recognize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:148:in `handle_request'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:78:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:76:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:76:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:618:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:617:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:617:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:271:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:270:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:270:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/bin/mongrel_rails:127:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/command.rb:211:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/bin/mongrel_rails:243
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.1/lib/commands/servers/mongrel.rb:64
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:510:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:510:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.1/lib/commands/server.rb:39
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/templates/rescues/layout.erb (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-01-19 23:04:41) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {}
+
+
+ActionController::RoutingError (No route matches "/puyo_puyo/sc/list" with {:method=>:get}):
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/routing/recognition_optimisation.rb:67:in `recognize_path'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/routing/route_set.rb:384:in `recognize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:148:in `handle_request'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:78:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:76:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:76:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:618:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:617:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:617:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:271:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:270:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:270:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/bin/mongrel_rails:127:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/command.rb:211:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/bin/mongrel_rails:243
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.1/lib/commands/servers/mongrel.rb:64
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:510:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:510:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.1/lib/commands/server.rb:39
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/templates/rescues/layout.erb (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-01-19 23:05:11) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {}
+
+
+ActionController::RoutingError (No route matches "/puyo_puyo/sc/high_scores/list" with {:method=>:get}):
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/routing/recognition_optimisation.rb:67:in `recognize_path'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/routing/route_set.rb:384:in `recognize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:148:in `handle_request'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:78:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:76:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:76:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:618:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:617:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:617:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:271:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:270:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:270:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/bin/mongrel_rails:127:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/command.rb:211:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/bin/mongrel_rails:243
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.1/lib/commands/servers/mongrel.rb:64
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:510:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:510:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.1/lib/commands/server.rb:39
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/templates/rescues/layout.erb (not_found)
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 23:05:23) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.001108)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00927 (107 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00111 (11%) | 200 OK [http://localhost/sc/high_scores/list]
+  [4;36;1mSQL (0.000701)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000209)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateHighScores (20081220090012)
+  [4;36;1mSQL (0.000162)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000241)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000166)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000225)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000055)[0m   [0;1mPRAGMA index_list("high_scores")[0m
+  [4;36;1mSQL (0.000691)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000198)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateHighScores (20081220090012)
+  [4;36;1mSQL (0.000160)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000236)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000166)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000223)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000053)[0m   [0;1mPRAGMA index_list("high_scores")[0m
+  [4;36;1mSQL (0.000695)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000202)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateHighScores (20081220090012)
+  [4;36;1mSQL (0.000161)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000247)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000168)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000221)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000053)[0m   [0;1mPRAGMA index_list("high_scores")[0m
+  [4;36;1mSQL (0.000699)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000176)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000223)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000195)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateHighScores (20081220090012)
+  [4;36;1mSQL (0.003811)[0m   [0;1mDROP TABLE "high_scores"[0m
+  [4;35;1mSQL (0.003468)[0m   [0mDELETE FROM schema_migrations WHERE version = '20081220090012'[0m
+  [4;36;1mSQL (0.000272)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000321)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000126)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000214)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000629)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000139)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateHighScores (20081220090012)
+  [4;36;1mSQL (0.000168)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.004199)[0m   [0mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.001610)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20081220090012')[0m
+  [4;35;1mSQL (0.000288)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000169)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000221)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000089)[0m   [0;1mPRAGMA index_list("high_scores")[0m
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-19 23:25:22) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlYjUwNmZiZjJlYWY3NTVkOWI0YmY2NjlhZDVmZTc1
+NDMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000395)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00606 (164 reqs/sec) | Rendering: 0.00006 (1%) | DB: 0.00040 (6%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
