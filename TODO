@@ -1,7 +1,13 @@
 add a server:
-    create a high score table. ok
-    create high score tab in the client
-    populate high score tab with data from the server
-    store high scores on game over
+
+    blinder un peu le serveur : 
+        empêcher d'insérer des caractères spéciaux dans le nom ... seulement [a-zA-Z0-9 -_]*
+        gérer l'interdiction côté client
+        regarder ce que c'est le protect forgery ...
+        
+    style the high scores (even and odd)
+    GPL the code
+    add a rules tab
+    add a credit tab with links to the code
 
 add iphone compatible buttons
