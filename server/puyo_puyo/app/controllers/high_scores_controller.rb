@@ -18,20 +18,45 @@ class HighScoresController < ApplicationController
     end
   end
 
+  # needs testing ... 
   def create
     respond_to do |wants|
       wants.json do
-        response = []
-        params[:records].each_pair do |record_id, record|
-          record.delete(:id)
-          guid = record.delete(:_guid)
-          score = HighScore.new(record)
-          score.save
-          response << {:_guid => guid, :id => score.id}
+        if validate_player_names(params)
+          create_records(params)
         end
-        render :text => response.to_json
       end
     end
   end
 
+private
+
+  def validate_player_names(params)
+    result = true
+    response = []
+    params[:records].each_value do |record|
+      if not record[:player_name] =~ /\A[\d\s\w_\-]*\z/
+        result = false
+        record[:error] = "Invalid player name"
+        response << record;
+      end
+    end
+    if not result
+      render :text => response.to_json, :status => 500
+    end
+    return result
+  end
+
+  def create_records(params)
+    response = []
+    params[:records].each_pair do |record_id, record|
+      record.delete(:id)
+      guid = record.delete(:_guid)
+      score = HighScore.new(record)
+      score.save
+      response << {:_guid => guid, :id => score.id}
+    end
+    render :text => response.to_json
+  end
+    
 end

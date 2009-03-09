@@ -50,8 +50,9 @@ table.scores {
 }
 table.scores tr, table.scores tr td {
     color: #555555;
-    border: 1px solid #DDDDDD;
+    border: 1px solid #C9C9C9;
     margin: 0 auto;
+    padding: 1px 4px;
 }
 
 #startStop {
@@ -60,18 +61,30 @@ table.scores tr, table.scores tr td {
 }
 
 /* styles for high scores */
-.high_scores_tab {
-    position: absolute;
+
+.high_scores {
     width: 100%;
-    height: 100%;
+    margin: auto;
 }
 
-.high_scores_tab .high_scores_scroll_view {
- position: absolute ;
- left: 12px;
- top: 40px;
- bottom: 12px;
- width: 205px;
+table.high_scores_table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+table.high_scores_table th, table.high_scores_table td {
+    border: 1px solid #c9c9c9;
+    padding: 1px 4px;
+}
+
+table.high_scores_table th {
+    background-color: #DDDDDD;
+}
+
+/*information tabs */
+.information {
+    width: 300px;
+    margin: auto;
 }
 
 

@@ -19,6 +19,10 @@ PuyoPuyo.HighScore = SC.Record.extend(
     resourceURL: 'high_scores',
 
     properties: ['playerName', 'score'],
-    primaryKey: 'guid'
+    primaryKey: 'guid',
+
+    ranking: function() {
+        return -this.get('score');
+    }.property('score')
 
 }) ;

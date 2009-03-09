@@ -16,8 +16,9 @@ function main() {
   // Comment out the preload line and add something to refresh from the server
   // when you are ready to pull data from your server.
   //PuyoPuyo.server.preload(PuyoPuyo.FIXTURES) ;
-  PuyoPuyo.server.listFor({ recordType: PuyoPuyo.HighScore});
+  PuyoPuyo.server.listFor({ recordType: PuyoPuyo.HighScore, order: "-score"});
   var scores = PuyoPuyo.HighScore.collection();
+  scores.set('orderBy', 'ranking');
   scores.refresh();
 
   // TODO: refresh() any collections you have created to get their records.

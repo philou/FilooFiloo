@@ -1,13 +1,22 @@
 add a server:
 
     blinder un peu le serveur : 
-        empêcher d'insérer des caractères spéciaux dans le nom ... seulement [a-zA-Z0-9 -_]*
-        gérer l'interdiction côté client
-        regarder ce que c'est le protect forgery ...
-        
-    style the high scores (even and odd)
-    GPL the code
-    add a rules tab
-    add a credit tab with links to the code
+        empêcher d'insérer des caractères spéciaux dans le nom ... on est finalement pas obligé, rails protége déjà des injections sql, mais le client n'aime pas trop visiblement ... ok
+                 retourner un error code + json pour description de l'erreur. ok
+                 voir comment rattraper l'erreur dans sproutcore server _createFailure. visiblement un problème côté sproutcore ... on va pas s'embeter pour l'instant avec ça.
 
-add iphone compatible buttons
+                 gérer l'interdiction côté client
+        
+        passer au serveur Rest de sproutcore
+        passer au serveur Rails de sproutcore, ça fait le protect forgery ...
+
+
+    add the date to the high scores
+    only get the top 50 scores from the server
+    fill in the links in the credit tab.
+
+    change the name of the package FilooFiloo devient namespace FF dans le code JS ?
+    GPL the code, see http://www.gnu.org/licenses/gpl-howto.html
+    add a form to get feedback from the credit tab
+
+add iphone compatible buttons -> attendre la version 1.0 de sproutcore qui fera un truc expres pour ça.

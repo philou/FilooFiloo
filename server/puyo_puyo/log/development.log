@@ -2389,3 +2389,1158 @@ c2h7AAY6CkB1c2VkewA=--3bc7c012fb286a24349ffcf3fdd6e003aae8c6b9
   Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
   [4;36;1mHighScore Load (0.000395)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
 Completed in 0.00606 (164 reqs/sec) | Rendering: 0.00006 (1%) | DB: 0.00040 (6%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-20 23:10:45) [GET]
+  Session ID: a28d40821fdeba156974a8966f5b99f6
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000892)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.02662 (37 reqs/sec) | Rendering: 0.00009 (0%) | DB: 0.00089 (3%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-20 23:12:22) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"é\"'"=>nil, "action"=>"create", "\"'"=>nil, "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"79", "player_name"=>"Philou$é\"'é", "id"=>"@@5896", "_guid"=>"@5896"}}, "controller"=>"high_scores"}
+Completed in 0.00605 (165 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00000 (0%) | 500 Internal Server Error [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-20 23:12:35) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000417)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00632 (158 reqs/sec) | Rendering: 0.00007 (1%) | DB: 0.00042 (6%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-20 23:14:18) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"4", "player_name"=>"Philou", "id"=>"@@3108", "_guid"=>"@3108"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.136558)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(4, '2009-01-20 22:14:18', 'Philou', '2009-01-20 22:14:18')[0m
+
+
+ActionController::DoubleRenderError (Can only render or redirect once per action):
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/base.rb:842:in `render_with_no_layout'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/layout.rb:259:in `render_without_benchmark'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/benchmarking.rb:51:in `render'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/core_ext/benchmark.rb:8:in `realtime'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/benchmarking.rb:51:in `render'
+    /app/controllers/high_scores_controller.rb:56:in `create_records'
+    /app/controllers/high_scores_controller.rb:25:in `create'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/mime_responds.rb:131:in `call'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/mime_responds.rb:131:in `custom'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/mime_responds.rb:156:in `call'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/mime_responds.rb:156:in `respond'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/mime_responds.rb:154:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/mime_responds.rb:154:in `respond'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/mime_responds.rb:107:in `respond_to'
+    /app/controllers/high_scores_controller.rb:22:in `create'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/base.rb:1166:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/base.rb:1166:in `perform_action_without_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/filters.rb:579:in `call_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/filters.rb:572:in `perform_action_without_benchmark'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/rescue.rb:201:in `perform_action_without_caching'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.1/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.1/lib/active_record/query_cache.rb:8:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/base.rb:529:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/base.rb:529:in `process_without_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/filters.rb:568:in `process_without_session_management_support'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/session_management.rb:130:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/base.rb:389:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:78:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:76:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/rails.rb:76:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:618:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:617:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:617:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:736:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel.rb:720:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:271:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:270:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/configurator.rb:270:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/bin/mongrel_rails:127:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/lib/mongrel/command.rb:211:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.0.1/bin/mongrel_rails:243
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:503:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.1/lib/commands/servers/mongrel.rb:64
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:510:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.1/lib/active_support/dependencies.rb:510:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.1/lib/commands/server.rb:39
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.1/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-20 23:15:47) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000564)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00765 (130 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00056 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-20 23:16:15) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"5", "player_name"=>"Philou", "id"=>"@@1941", "_guid"=>"@1941"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.000465)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(5, '2009-01-20 22:16:15', 'Philou', '2009-01-20 22:16:15')[0m
+Completed in 0.01768 (56 reqs/sec) | Rendering: 0.00011 (0%) | DB: 0.00046 (2%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-20 23:18:25) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"12", "player_name"=>"'; DROP TABLE 'high_scores';", "id"=>"@@5595", "_guid"=>"@5595"}}, "controller"=>"high_scores"}
+Completed in 0.00308 (324 reqs/sec) | Rendering: 0.00007 (2%) | DB: 0.00000 (0%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-20 23:19:59) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000651)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00784 (127 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00065 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-20 23:20:35) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"é\"(\"'§é\"'i(y§é\"'("=>nil, "é\"'"=>nil, "action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"4", "player_name"=>"", "id"=>"@@1413", "_guid"=>"@1413"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.000436)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(4, '2009-01-20 22:20:35', '', '2009-01-20 22:20:35')[0m
+Completed in 0.02413 (41 reqs/sec) | Rendering: 0.00010 (0%) | DB: 0.00044 (1%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-20 23:22:05) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"12", "player_name"=>"Philou", "id"=>"@@4230", "_guid"=>"@4230"}}, "controller"=>"high_scores"}
+  [4;35;1mHighScore Create (0.000574)[0m   [0mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(12, '2009-01-20 22:22:05', 'Philou', '2009-01-20 22:22:05')[0m
+Completed in 0.01348 (74 reqs/sec) | Rendering: 0.00009 (0%) | DB: 0.00057 (4%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-20 23:24:09) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"9", "player_name"=>"é\"'\"'(§\"'", "id"=>"@@6971", "_guid"=>"@6971"}}, "controller"=>"high_scores"}
+Completed in 0.00261 (383 reqs/sec) | Rendering: 0.00006 (2%) | DB: 0.00000 (0%) | 500 Internal Server Error [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-20 23:26:15) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"4", "player_name"=>"Philou", "id"=>"@@7999", "_guid"=>"@7999"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.000573)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(4, '2009-01-20 22:26:15', 'Philou', '2009-01-20 22:26:15')[0m
+Completed in 0.01919 (52 reqs/sec) | Rendering: 0.00009 (0%) | DB: 0.00057 (2%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-20 23:31:30) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000903)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00876 (114 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00090 (10%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-20 23:32:17) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"", "player_name"=>"", "id"=>"@@1541", "_guid"=>"@1541"}}, "controller"=>"high_scores", "\"é''§(!(\"çèà$^ù`^^"=>nil}
+  [4;36;1mHighScore Create (0.000385)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(NULL, '2009-01-20 22:32:17', '', '2009-01-20 22:32:17')[0m
+Completed in 0.01153 (86 reqs/sec) | Rendering: 0.00009 (0%) | DB: 0.00039 (3%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-20 23:33:18) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"", "player_name"=>"", "id"=>"@@1806", "_guid"=>"@1806"}}, "controller"=>"high_scores", "\"é''§(!(\"çèà$^ù`^^"=>nil}
+  [4;35;1mHighScore Create (0.000379)[0m   [0mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(NULL, '2009-01-20 22:33:18', '', '2009-01-20 22:33:18')[0m
+Completed in 0.00981 (101 reqs/sec) | Rendering: 0.00011 (1%) | DB: 0.00038 (3%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-20 23:34:51) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"", "player_name"=>"", "id"=>"@@1843", "_guid"=>"@1843"}}, "controller"=>"high_scores", "\"é''§(!(\"çèà$^ù`^^"=>nil}
+  [4;36;1mHighScore Create (0.000537)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(NULL, '2009-01-20 22:34:51', '', '2009-01-20 22:34:51')[0m
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00009 (0%) | DB: 0.00054 (4%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-20 23:34:56) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.006515)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.01849 (54 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00652 (35%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+  [4;36;1mSQL (0.000677)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000175)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000278)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000392)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateHighScores (20081220090012)
+  [4;36;1mSQL (0.001678)[0m   [0;1mDROP TABLE "high_scores"[0m
+  [4;35;1mSQL (0.001374)[0m   [0mDELETE FROM schema_migrations WHERE version = '20081220090012'[0m
+  [4;36;1mSQL (0.000166)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000205)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000100)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000173)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000622)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000146)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateHighScores (20081220090012)
+  [4;36;1mSQL (0.000166)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.003792)[0m   [0mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.003167)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20081220090012')[0m
+  [4;35;1mSQL (0.000386)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000207)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000263)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000062)[0m   [0;1mPRAGMA index_list("high_scores")[0m
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-20 23:35:50) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000412)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00593 (168 reqs/sec) | Rendering: 0.00006 (1%) | DB: 0.00041 (6%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-23 22:21:09) [GET]
+  Session ID: 23df82ea8c568aa38d83ed55a952182b
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000691)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.02617 (38 reqs/sec) | Rendering: 0.00018 (0%) | DB: 0.00069 (2%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-23 22:24:46) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"36", "player_name"=>"seb ridicule", "id"=>"@@8596", "_guid"=>"@8596"}}, "controller"=>"high_scores"}
+  [4;35;1mHighScore Create (0.041844)[0m   [0mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(36, '2009-01-23 21:24:46', 'seb ridicule', '2009-01-23 21:24:46')[0m
+Completed in 0.05949 (16 reqs/sec) | Rendering: 0.00013 (0%) | DB: 0.04184 (70%) | 200 OK [http://localhost/sc/high_scores/create]
+  [4;36;1mSQL (0.001333)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000285)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000228)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000318)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.001348)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000322)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.001317)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001189)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000399)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000191)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001145)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-29 21:58:13) [GET]
+  Session ID: f8d1c5000c1c618df24b17c38aa77637
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000733)[0m   [0;1mSELECT * FROM "high_scores" [0m
+Completed in 0.00961 (104 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00073 (7%) | 200 OK [http://localhost/sc/high_scores/list]
+  [4;36;1mSQL (0.000686)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000176)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.002656)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000281)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.004553)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000364)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.002794)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001403)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000383)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000153)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001372)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000680)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000177)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000209)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000206)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.004332)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000369)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.002529)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001023)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000351)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000121)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001033)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000676)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000176)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000237)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000249)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.004669)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000276)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003005)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001571)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000272)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000105)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001474)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000688)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000175)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000237)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000482)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.004190)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000259)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003456)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001822)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000273)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000105)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001236)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000791)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000178)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000208)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000820)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.004213)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000260)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003034)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001417)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000384)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000150)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001530)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000683)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000178)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000272)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000318)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003888)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000241)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003449)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001834)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000322)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000129)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001374)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000694)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000177)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000266)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000241)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003624)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000323)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.002919)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.002456)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000378)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000157)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001484)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000685)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000175)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000259)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000229)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.005768)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000380)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.001089)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001397)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000257)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000104)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.003903)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000690)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000177)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.001297)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000279)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003509)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000441)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003007)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001485)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000258)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000104)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001426)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000685)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000176)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.002969)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000823)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003712)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000233)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003006)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001518)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000355)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000128)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001296)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000688)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000175)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.001647)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000254)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.004241)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000337)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003095)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001528)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000365)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000104)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001208)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000682)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000176)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000222)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000250)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003704)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000269)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003417)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001491)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000286)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000112)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001268)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000695)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000184)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000223)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000221)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.004320)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000269)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.001194)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001562)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000557)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000174)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.004707)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000690)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000176)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000218)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000213)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003349)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000298)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003031)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001826)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000322)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000135)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001329)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000679)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000174)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000198)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000207)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.004464)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000431)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.002277)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001540)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000319)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000106)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001363)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000682)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000175)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.001464)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000223)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003805)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000272)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.001217)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001416)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000419)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000110)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.003904)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000690)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000173)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000228)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000224)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.004397)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000284)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.001146)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001444)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000404)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000268)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.003860)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000684)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000174)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000363)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000350)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.004281)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000362)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.002946)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001749)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000384)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000107)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001411)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000681)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000174)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000523)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000228)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003336)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000269)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.002912)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001465)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000307)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000140)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001173)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-29 23:11:06) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000637)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00824 (121 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00064 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-29 23:13:38) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"95", "player_name"=>"\"DROP TABLE; SELECT *; Pé\"'(", "id"=>"@@7659", "_guid"=>"@7659"}}, "controller"=>"high_scores"}
+Completed in 0.00257 (389 reqs/sec) | Rendering: 0.00005 (2%) | DB: 0.00000 (0%) | 500 Internal Server Error [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-29 23:14:54) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000775)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00959 (104 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00078 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-29 23:16:59) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "é\"'è\"é(àç!è'(§)à!(è§$^`ù`^l;;;"=>nil, "records"=>{"0"=>{"score"=>"9", "player_name"=>"", "id"=>"@@3708", "_guid"=>"@3708"}}, "controller"=>"high_scores"}
+  [4;35;1mHighScore Create (0.138454)[0m   [0mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(9, '2009-01-29 22:16:59', '', '2009-01-29 22:16:59')[0m
+Completed in 0.15161 (6 reqs/sec) | Rendering: 0.00013 (0%) | DB: 0.13845 (91%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 13:59:38) [GET]
+  Session ID: 0c5bb2a79fc4f674ff4de66f889d8bba
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.001240)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.02660 (37 reqs/sec) | Rendering: 0.00009 (0%) | DB: 0.00124 (4%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:06:17) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000618)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00780 (128 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:08:04) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000635)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.07675 (13 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00063 (0%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:08:38) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000668)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00778 (128 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00067 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:09:10) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000611)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00768 (130 reqs/sec) | Rendering: 0.00006 (0%) | DB: 0.00061 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:10:04) [GET]
+  Session ID: 157c761e3dbb8ae8ff233d47c446e0c5
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000630)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00792 (126 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00063 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:11:00) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000661)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00810 (123 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00066 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:11:13) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000666)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.01213 (82 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00067 (5%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:11:43) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000683)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00827 (120 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00068 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:11:51) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000772)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00804 (124 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00077 (9%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:12:12) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000638)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00792 (126 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00064 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:12:24) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000741)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00873 (114 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00074 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:12:46) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000727)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.09315 (10 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00073 (0%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:14:44) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000639)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00808 (123 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00064 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:15:13) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000747)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00822 (121 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00075 (9%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:15:48) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000701)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00888 (112 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00070 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:16:25) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000629)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00821 (121 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00063 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:17:49) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000629)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.01544 (64 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00063 (4%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:18:23) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000618)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00835 (119 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:18:47) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000649)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00803 (124 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00065 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:38:45) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000622)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00795 (125 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00062 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:40:56) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000682)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00792 (126 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00068 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:41:23) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000665)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00816 (122 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00067 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:51:07) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000631)[0m   [0mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00826 (121 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00063 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:52:15) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000629)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.00804 (124 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00063 (7%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#create (for 127.0.0.1 at 2009-01-31 14:53:52) [POST]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"0"=>{"score"=>"92", "player_name"=>"Philou", "id"=>"@@5056", "_guid"=>"@5056"}}, "controller"=>"high_scores"}
+  [4;35;1mHighScore Create (0.000796)[0m   [0mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(92, '2009-01-31 13:53:52', 'Philou', '2009-01-31 13:53:52')[0m
+Completed in 0.01493 (66 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00080 (5%) | 200 OK [http://localhost/sc/high_scores/create]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 14:54:03) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"id", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000774)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY id[0m
+Completed in 0.01394 (71 reqs/sec) | Rendering: 0.00014 (1%) | DB: 0.00077 (5%) | 200 OK [http://localhost/sc/high_scores/list?order=id]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 15:01:06) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000747)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00865 (115 reqs/sec) | Rendering: 0.00009 (1%) | DB: 0.00075 (8%) | 200 OK [http://localhost/sc/high_scores/list]
+  [4;36;1mSQL (0.000665)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000175)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000242)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000251)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.002244)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000331)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.002791)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001821)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000333)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000112)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001041)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000663)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000173)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000338)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000221)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.004622)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000328)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003235)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001891)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000288)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000115)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001414)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000655)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000176)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000227)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000218)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.004834)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000307)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.002868)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001540)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000355)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000106)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001428)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+  [4;36;1mSQL (0.000661)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000174)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000383)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000230)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.003946)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000327)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.002935)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001741)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000323)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000126)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001050)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 15:23:50) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"score", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.001118)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY score[0m
+Completed in 0.00817 (122 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00112 (13%) | 200 OK [http://localhost/sc/high_scores/list?order=score]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 15:24:31) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"-score", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.001522)[0m   [0mSELECT * FROM "high_scores" ORDER BY -score[0m
+Completed in 0.00963 (103 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00152 (15%) | 200 OK [http://localhost/sc/high_scores/list?order=-score]
+  [4;36;1mSQL (0.000670)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000177)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000231)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000219)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.005228)[0m   [0;1mCREATE TABLE "high_scores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "player_name" varchar(255), "score" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.000369)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.002922)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.001651)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000321)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000104)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.001413)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081220090012')[0m
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 15:33:52) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"-score", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.001283)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY -score[0m
+Completed in 0.00916 (109 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00128 (14%) | 200 OK [http://localhost/sc/high_scores/list?order=-score]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 15:37:25) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"-score", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.001098)[0m   [0mSELECT * FROM "high_scores" ORDER BY -score[0m
+Completed in 0.00842 (118 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00110 (13%) | 200 OK [http://localhost/sc/high_scores/list?order=-score]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 15:38:30) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"-score", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.001131)[0m   [0;1mSELECT * FROM "high_scores" ORDER BY -score[0m
+Completed in 0.00908 (110 reqs/sec) | Rendering: 0.00008 (0%) | DB: 0.00113 (12%) | 200 OK [http://localhost/sc/high_scores/list?order=-score]
+
+
+Processing HighScoresController#list (for 127.0.0.1 at 2009-01-31 15:41:02) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--b26a20959f60928d444b9a56d78784f617c14fe1
+  Parameters: {"order"=>"-score", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.001207)[0m   [0mSELECT * FROM "high_scores" ORDER BY -score[0m
+Completed in 0.01412 (70 reqs/sec) | Rendering: 0.00028 (1%) | DB: 0.00121 (8%) | 200 OK [http://localhost/sc/high_scores/list?order=-score]
