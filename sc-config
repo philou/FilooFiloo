@@ -9,6 +9,10 @@
 #
 # require 'sproutcore'
 
+# monkey patch for http status error not getting to the client
+require 'proxy-patch'
+
+
 # This configuration section will be applied to all bundles used by your
 # application, even bundles that come from other gems.
 config :all do |c|
@@ -85,3 +89,5 @@ end
 #  c[:required] = [:sproutcore, :shared]
 # end
 #
+
+proxy '/sc', :to => 'localhost:3000'

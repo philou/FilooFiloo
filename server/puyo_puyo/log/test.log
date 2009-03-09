@@ -1,0 +1,304 @@
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:22:53) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000386)[0m   [0;1mSELECT * FROM "high_scores" [0m
+Completed in 0.00579 (172 reqs/sec) | Rendering: 0.00008 (1%) | DB: 0.00105 (18%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:24:05) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000357)[0m   [0;1mSELECT * FROM "high_scores" [0m
+Completed in 0.00445 (224 reqs/sec) | Rendering: 0.00007 (1%) | DB: 0.00102 (22%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:31:45) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "controller"=>"high_scores"}
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:31:45) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000253)[0m   [0;1mSELECT * FROM "high_scores" [0m
+Completed in 0.00134 (747 reqs/sec) | Rendering: 0.00006 (4%) | DB: 0.00092 (68%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:33:31) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{"score"=>666, "player_name"=>"Philou"}, "controller"=>"high_scores"}
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:33:31) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000240)[0m   [0;1mSELECT * FROM "high_scores" [0m
+Completed in 0.00125 (802 reqs/sec) | Rendering: 0.00007 (5%) | DB: 0.00097 (77%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:35:23) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>[{"score"=>666, "player_name"=>"Philou"}], "controller"=>"high_scores"}
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:35:23) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;36;1mHighScore Load (0.000238)[0m   [0;1mSELECT * FROM "high_scores" [0m
+Completed in 0.00123 (815 reqs/sec) | Rendering: 0.00007 (5%) | DB: 0.00114 (92%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:39:50) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"Philou"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.000446)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(666, '2009-01-29 21:39:50', 'Philou', '2009-01-29 21:39:50')[0m
+Completed in 0.00917 (109 reqs/sec) | Rendering: 0.00007 (0%) | DB: 0.00112 (12%) | 200 OK [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=Philou&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:39:50) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000238)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00107 (938 reqs/sec) | Rendering: 0.00007 (6%) | DB: 0.00024 (22%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:40:55) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"'; DROP TABLE TOTO;"}}, "controller"=>"high_scores"}
+Completed in 0.00461 (216 reqs/sec) | Rendering: 0.00015 (3%) | DB: 0.00066 (14%) | 500 Internal Server Error [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=%27%3B+DROP+TABLE+TOTO%3B&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:40:55) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"Philou"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.000476)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(666, '2009-01-29 21:40:55', 'Philou', '2009-01-29 21:40:55')[0m
+Completed in 0.00487 (205 reqs/sec) | Rendering: 0.00006 (1%) | DB: 0.00048 (9%) | 200 OK [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=Philou&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:40:55) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000214)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00101 (987 reqs/sec) | Rendering: 0.00006 (5%) | DB: 0.00021 (21%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:41:29) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"'; DROP TABLE TOTO;"}}, "controller"=>"high_scores"}
+Completed in 0.00536 (186 reqs/sec) | Rendering: 0.00008 (1%) | DB: 0.00068 (12%) | 500 Internal Server Error [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=%27%3B+DROP+TABLE+TOTO%3B&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:41:29) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"Philou"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.000496)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(666, '2009-01-29 21:41:29', 'Philou', '2009-01-29 21:41:29')[0m
+Completed in 0.00449 (222 reqs/sec) | Rendering: 0.00006 (1%) | DB: 0.00050 (11%) | 200 OK [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=Philou&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:41:29) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000159)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00071 (1418 reqs/sec) | Rendering: 0.00004 (6%) | DB: 0.00016 (22%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:41:46) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"'; DROP TABLE TOTO;"}}, "controller"=>"high_scores"}
+Completed in 0.00296 (337 reqs/sec) | Rendering: 0.00007 (2%) | DB: 0.00069 (23%) | 500 Internal Server Error [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=%27%3B+DROP+TABLE+TOTO%3B&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:41:46) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"Philou"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.000483)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(666, '2009-01-29 21:41:46', 'Philou', '2009-01-29 21:41:46')[0m
+Completed in 0.00590 (169 reqs/sec) | Rendering: 0.00007 (1%) | DB: 0.00048 (8%) | 200 OK [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=Philou&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:41:46) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000284)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00109 (919 reqs/sec) | Rendering: 0.00007 (6%) | DB: 0.00028 (26%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:47:41) [POST]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"'; DROP TABLE TOTO;"}}, "controller"=>"high_scores"}
+Completed in 0.00334 (299 reqs/sec) | Rendering: 0.00007 (2%) | DB: 0.00098 (29%) | 500 Internal Server Error [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=%27%3B+DROP+TABLE+TOTO%3B&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:47:41) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"Philou"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.000445)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(666, '2009-01-29 21:47:41', 'Philou', '2009-01-29 21:47:41')[0m
+Completed in 0.00386 (259 reqs/sec) | Rendering: 0.00005 (1%) | DB: 0.00045 (11%) | 200 OK [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=Philou&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:47:41) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000672)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00216 (462 reqs/sec) | Rendering: 0.00006 (2%) | DB: 0.00067 (31%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:53:17) [POST]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"'; DROP TABLE TOTO;"}}, "controller"=>"high_scores"}
+Completed in 0.00374 (267 reqs/sec) | Rendering: 0.00007 (1%) | DB: 0.00097 (25%) | 500 Internal Server Error [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=%27%3B+DROP+TABLE+TOTO%3B&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:53:17) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"Philou"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.000563)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(666, '2009-01-29 21:53:17', 'Philou', '2009-01-29 21:53:17')[0m
+Completed in 0.00405 (246 reqs/sec) | Rendering: 0.00007 (1%) | DB: 0.00056 (13%) | 200 OK [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=Philou&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:53:17) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000692)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00181 (553 reqs/sec) | Rendering: 0.00008 (4%) | DB: 0.00069 (38%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:56:10) [POST]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"'; DROP TABLE TOTO;"}}, "controller"=>"high_scores"}
+Completed in 0.00352 (284 reqs/sec) | Rendering: 0.00007 (1%) | DB: 0.00098 (27%) | 500 Internal Server Error [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=%27%3B+DROP+TABLE+TOTO%3B&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:56:10) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"Philou"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.000455)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(666, '2009-01-29 21:56:10', 'Philou', '2009-01-29 21:56:10')[0m
+Completed in 0.00330 (302 reqs/sec) | Rendering: 0.00005 (1%) | DB: 0.00045 (13%) | 200 OK [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=Philou&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:56:10) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000514)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00135 (739 reqs/sec) | Rendering: 0.00006 (4%) | DB: 0.00051 (37%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:56:52) [POST]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "controller"=>"high_scores", "records"=>{1=>{"score"=>666, "player_name"=>"'; DROP TABLE TOTO;"}}}
+Completed in 0.00348 (287 reqs/sec) | Rendering: 0.00006 (1%) | DB: 0.00097 (27%) | 500 Internal Server Error [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=%27%3B+DROP+TABLE+TOTO%3B&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:56:52) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "controller"=>"high_scores", "records"=>{1=>{"score"=>666, "player_name"=>"Philou"}}}
+  [4;36;1mHighScore Create (0.000449)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(666, '2009-01-29 21:56:52', 'Philou', '2009-01-29 21:56:52')[0m
+Completed in 0.00347 (288 reqs/sec) | Rendering: 0.00005 (1%) | DB: 0.00045 (12%) | 200 OK [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=Philou&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:56:52) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000675)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00173 (576 reqs/sec) | Rendering: 0.00007 (4%) | DB: 0.00067 (38%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:57:26) [POST]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"'; DROP TABLE TOTO;"}}, "controller"=>"high_scores"}
+Completed in 0.00280 (356 reqs/sec) | Rendering: 0.00006 (1%) | DB: 0.00097 (34%) | 500 Internal Server Error [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=%27%3B+DROP+TABLE+TOTO%3B&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-29 22:57:26) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "records"=>{1=>{"score"=>666, "player_name"=>"Philou"}}, "controller"=>"high_scores"}
+  [4;36;1mHighScore Create (0.000607)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(666, '2009-01-29 21:57:26', 'Philou', '2009-01-29 21:57:26')[0m
+Completed in 0.00534 (187 reqs/sec) | Rendering: 0.00007 (1%) | DB: 0.00061 (11%) | 200 OK [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=Philou&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-29 22:57:26) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000682)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00168 (593 reqs/sec) | Rendering: 0.00007 (3%) | DB: 0.00068 (40%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-31 15:15:56) [POST]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "controller"=>"high_scores", "records"=>{1=>{"score"=>666, "player_name"=>"'; DROP TABLE TOTO;"}}}
+Completed in 0.00221 (451 reqs/sec) | Rendering: 0.00005 (2%) | DB: 0.00102 (46%) | 500 Internal Server Error [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=%27%3B+DROP+TABLE+TOTO%3B&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-31 15:15:56) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "controller"=>"high_scores", "records"=>{1=>{"score"=>666, "player_name"=>"Philou"}}}
+  [4;36;1mHighScore Create (0.000429)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(666, '2009-01-31 14:15:56', 'Philou', '2009-01-31 14:15:56')[0m
+Completed in 0.00358 (279 reqs/sec) | Rendering: 0.00006 (1%) | DB: 0.00043 (11%) | 200 OK [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=Philou&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-31 15:15:56) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000501)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00118 (848 reqs/sec) | Rendering: 0.00005 (3%) | DB: 0.00050 (42%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-31 15:17:23) [POST]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "controller"=>"high_scores", "records"=>{1=>{"score"=>666, "player_name"=>"'; DROP TABLE TOTO;"}}}
+Completed in 0.00262 (382 reqs/sec) | Rendering: 0.00006 (2%) | DB: 0.00095 (36%) | 500 Internal Server Error [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=%27%3B+DROP+TABLE+TOTO%3B&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-31 15:17:23) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "controller"=>"high_scores", "records"=>{1=>{"score"=>666, "player_name"=>"Philou"}}}
+  [4;36;1mHighScore Create (0.000483)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(666, '2009-01-31 14:17:23', 'Philou', '2009-01-31 14:17:23')[0m
+Completed in 0.00338 (295 reqs/sec) | Rendering: 0.00005 (1%) | DB: 0.00048 (14%) | 200 OK [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=Philou&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-31 15:17:23) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000452)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00112 (896 reqs/sec) | Rendering: 0.00005 (4%) | DB: 0.00045 (40%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-31 15:19:30) [POST]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "controller"=>"high_scores", "records"=>{1=>{"score"=>666, "player_name"=>"'; DROP TABLE TOTO;"}}}
+Completed in 0.00307 (326 reqs/sec) | Rendering: 0.00007 (2%) | DB: 0.00096 (31%) | 500 Internal Server Error [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=%27%3B+DROP+TABLE+TOTO%3B&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-31 15:19:30) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "controller"=>"high_scores", "records"=>{1=>{"score"=>666, "player_name"=>"Philou"}}}
+  [4;36;1mHighScore Create (0.000493)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(666, '2009-01-31 14:19:30', 'Philou', '2009-01-31 14:19:30')[0m
+Completed in 0.00425 (235 reqs/sec) | Rendering: 0.00006 (1%) | DB: 0.00049 (11%) | 200 OK [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=Philou&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-31 15:19:30) [GET]
+  Session ID: 
+  Parameters: {"action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000743)[0m   [0mSELECT * FROM "high_scores" [0m
+Completed in 0.00171 (584 reqs/sec) | Rendering: 0.00006 (3%) | DB: 0.00074 (43%) | 200 OK [http://test.host/sc/high_scores/list]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-31 15:26:20) [POST]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "controller"=>"high_scores", "records"=>{1=>{"score"=>666, "player_name"=>"'; DROP TABLE TOTO;"}}}
+Completed in 0.00251 (397 reqs/sec) | Rendering: 0.00006 (2%) | DB: 0.00097 (38%) | 500 Internal Server Error [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=%27%3B+DROP+TABLE+TOTO%3B&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#create (for 0.0.0.0 at 2009-01-31 15:26:20) [GET]
+  Session ID: 
+  Parameters: {"action"=>"create", "path_prefix"=>"sc", "controller"=>"high_scores", "records"=>{1=>{"score"=>666, "player_name"=>"Philou"}}}
+  [4;36;1mHighScore Create (0.000443)[0m   [0;1mINSERT INTO "high_scores" ("score", "updated_at", "player_name", "created_at") VALUES(666, '2009-01-31 14:26:20', 'Philou', '2009-01-31 14:26:20')[0m
+Completed in 0.00335 (298 reqs/sec) | Rendering: 0.00005 (1%) | DB: 0.00044 (13%) | 200 OK [http://test.host/sc/high_scores/create?records%5B1%5D%5Bplayer_name%5D=Philou&records%5B1%5D%5Bscore%5D=666]
+
+
+Processing HighScoresController#list (for 0.0.0.0 at 2009-01-31 15:26:20) [GET]
+  Session ID: 
+  Parameters: {"order"=>"-score", "action"=>"list", "path_prefix"=>"sc", "controller"=>"high_scores"}
+  [4;35;1mHighScore Load (0.000810)[0m   [0mSELECT * FROM "high_scores" ORDER BY -score[0m
+Completed in 0.00161 (622 reqs/sec) | Rendering: 0.00005 (2%) | DB: 0.00081 (50%) | 200 OK [http://test.host/sc/high_scores/list?order=-score]
