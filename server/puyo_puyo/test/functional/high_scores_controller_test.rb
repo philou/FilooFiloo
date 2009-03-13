@@ -4,7 +4,7 @@ require 'json'
 class HighScoresControllerTest < ActionController::TestCase
 
   def test_routes
-    assert_routing "/sc/high_scores/list", {:controller => "high_scores", :action => "list", :path_prefix => "sc"}
+    assert_routing "/sc/high_scores/list", {:controller => "high_scores", :action => "list"}
   end
 
   def test_list
