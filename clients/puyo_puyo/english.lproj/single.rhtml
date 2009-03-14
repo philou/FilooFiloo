@@ -1,32 +1,24 @@
 <% view :single_tab do %>
 
 <div class="single">
-  <%= button_view :startStop, :action => 'PuyoPuyo.playerController.startStop', :default => true, :title => 'Start & stop', :bind => {:title => 'PuyoPuyo.playerController.startStopLabel' } %>
+  <%= button_view :startStop, :action => 'PuyoPuyo.gameController.startStop', :default => true, :title => 'Start & stop', :bind => {:title => 'PuyoPuyo.gameController.startStopLabel' } %>
   <table class="scores">
     <tr>
-      <td>Puyos</td><td><%= label_view :disappeared_pieces, :value => "0", :bind => {:value => 'PuyoPuyo.playerController.board.disappearedPieces' } %></td>
+      <td>Puyos</td><td><%= label_view :disappeared_pieces, :value => "0", :bind => {:value => 'PuyoPuyo.gameController.board.disappearedPieces' } %></td>
     </tr>
     <tr>
-      <td>Score</td><td><%= label_view :score, :value => "0", :bind => {:value => 'PuyoPuyo.playerController.board.score' } %></td>
+      <td>Score</td><td><%= label_view :score, :value => "0", :bind => {:value => 'PuyoPuyo.gameController.board.score' } %></td>
     </tr>
     <tr>
-      <td>Level</td><td><%= label_view :level, :value => "0", :bind => {:value => 'PuyoPuyo.playerController.board.level' } %></td>
+      <td>Level</td><td><%= label_view :level, :value => "0", :bind => {:value => 'PuyoPuyo.gameController.board.level' } %></td>
     </tr>
   </table>
   <%= view :boardView,
       :tag => :table,
       :class => 'board',
       :view => 'PuyoPuyo.BoardView',
-      :bind => { :board => 'PuyoPuyo.playerController.board',
-                 :boardTime => 'PuyoPuyo.playerController.board.time',
-                 :playing => 'PuyoPuyo.playerController.board.playing' } %>
+      :bind => { :board => 'PuyoPuyo.gameController.board',
+                 :boardTime => 'PuyoPuyo.gameController.board.time',
+                 :playing => 'PuyoPuyo.gameController.board.playing' } %>
 </div>
-<% end %>
-
-<% view :game_over_pane, :class => 'dialog', :pane => :dialog, :visible => false, :width => 300 do %>
-  <h1>Game Over</h1>
-
-  <p>Puyo Puyo rules  ... but you somewhat managed to reach the high scores ! Please enter your name</p>
-  <%= text_field_view :bind => {:value => 'PuyoPuyo.playerController.name' } %>
-  <%= button_view :title => 'Ok', :default => true, :action => 'PuyoPuyo.playerController.submitScore' %>
 <% end %>
