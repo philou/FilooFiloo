@@ -37,7 +37,7 @@ function main() {
   // ex: PuyoPuyo.contactsController.set('content',PuyoPuyo.contacts);
   PuyoPuyo.highScoresController.set('content', scores);
 
-  PuyoPuyo.playerController.set('board', PuyoPuyo.Board.create({
+  PuyoPuyo.gameController.set('board', PuyoPuyo.Board.create({
       ticker: PuyoPuyo.Ticker.create(),
       colorProvider: PuyoPuyo.ColorProvider.create()
   }));

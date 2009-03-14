@@ -2,6 +2,9 @@
 
 <h1>Philou's Puyo-Puyo</h1>
 
+<div id="login">
+  <%= text_field_view :bind => {:value => 'PuyoPuyo.playerController.name' } %>
+</div>
 <%= tab_view :modes_tabs,
              :lazy_tabs => true,
              :segments => [
@@ -13,3 +16,10 @@
              :now_showing => :single %>
 <% end %>
 
+<% view :game_over_pane, :class => 'dialog', :pane => :dialog, :visible => false, :width => 300 do %>
+  <h1>Game Over</h1>
+
+  <p>Puyo Puyo rules  ... but you somewhat managed to reach the high scores ! Please enter your name</p>
+  <%= text_field_view :bind => {:value => 'PuyoPuyo.playerController.name' } %>
+  <%= button_view :title => 'Ok', :default => true, :action => 'PuyoPuyo.playerController.closeGameOverPane' %>
+<% end %>
