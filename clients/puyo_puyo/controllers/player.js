@@ -16,17 +16,21 @@ require('core');
 PuyoPuyo.playerController = SC.Object.create(
 /** @scope PuyoPuyo.playerController */ {
 
-  name: 'anonymous',
+  name: undefined,
 
   _closeGameOverPaneContinuation: null,
 
   requestNameAfterGameOver: function(closeGameOverPaneContinuation) {
     this._closeGameOverPaneContinuation = closeGameOverPaneContinuation;
-    SC.page.get('gameOverPane').set('isVisible', YES);
+    var gameOverPane = SC.page.get('gameOverPane');
+    gameOverPane.get('requiredLoginText').set('isVisible', !this.get('name'));
+    gameOverPane.set('isVisible', YES);
   },
 
   closeGameOverPane: function() {
-    SC.page.get('gameOverPane').set('isVisible', NO);
-    this._closeGameOverPaneContinuation(this.get('name'));
+    if (this.get('name')) {
+      SC.page.get('gameOverPane').set('isVisible', NO);
+      this._closeGameOverPaneContinuation(this.get('name'));
+    }
   }
 }) ;
