@@ -2,18 +2,12 @@
 - when a new high score is entered, the high score collection is
    cleared on the client side
 
-* ajouter un login simplissime
-- Modifier le style, déplacer le titre FilooFiloo à gauche, et le login en haut à droite
-- ne pas demander plusieurs fois le login, juste afficher le texte du
-   game over
-
 * réflechir à comment tester le gui ???
 
 * ajouter un mode deux joureurs :
 - ouvrir une session avec un pseudo
  - utiliser la même popup que les high scores
  - afficher le pseudo sous la grille, faire une partie normale
- - kicker la vieille session sur le serveur si on a un relogin
 - commencer une partie avec un autre joueur libre séléctionné au hazard
 - afficher les grilles des deux joueurs
  - avec le pseudo en dessous de chacune
@@ -36,7 +30,8 @@
 - voir comment rattraper l'erreur dans sproutcore server _createFailure. visiblement un problème côté sproutcore ... on va pas s'embeter pour l'instant avec ça.
 - gérer l'interdiction côté client
 - passer au serveur Rest de sproutcore
-- passer au serveur Rails de sproutcore, ça fait le protect forgery ...
+- passer au serveur Rails de sproutcore, ça fait le protect forgery
+- faire quelque chose si deux personnes se connectent avec le meme pseudo
 
 * High scores
 - add the date to the high scores

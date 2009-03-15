@@ -1,25 +1,27 @@
 <% content_for('body') do %>
 
-<h1>Philou's Puyo-Puyo</h1>
-
-<div id="login">
-  <%= text_field_view :bind => {:value => 'PuyoPuyo.playerController.name' } %>
+<div id="header">
+  <h1 id="title">Philou's Puyo-Puyo</h1>
+  <div id="login">
+    <%= text_field_view :login_text, :hint => 'login here', :bind => {:value => 'PuyoPuyo.playerController.name' } %>
+  </div>
 </div>
-<%= tab_view :modes_tabs,
-             :lazy_tabs => true,
-             :segments => [
-                            [:single, "1 player"],
-                            [:high_scores, "High scores"],
-                            [:rules, "Rules"],
-                            [:credits, "Credits"]
-                          ],
-             :now_showing => :single %>
+
+<div id="content">
+  <%= tab_view :modes_tabs,
+               :lazy_tabs => true,
+               :segments => [[:single, "1 player"],
+                             [:high_scores, "High scores"],
+                             [:rules, "Rules"],
+                             [:credits, "Credits"]],
+               :now_showing => :single %>
+</div>
 <% end %>
 
 <% view :game_over_pane, :class => 'dialog', :pane => :dialog, :visible => false, :width => 300 do %>
   <h1>Game Over</h1>
 
-  <p>Puyo Puyo rules  ... but you somewhat managed to reach the high scores ! Please enter your name</p>
-  <%= text_field_view :bind => {:value => 'PuyoPuyo.playerController.name' } %>
+  <p>Puyo Puyo rules... but you somewhat managed to reach the high scores !</p>
+  <%= text_field_view :required_login_text, :hint => 'login here', :bind => {:value => 'PuyoPuyo.playerController.name' } %>
   <%= button_view :title => 'Ok', :default => true, :action => 'PuyoPuyo.playerController.closeGameOverPane' %>
 <% end %>
