@@ -13,7 +13,7 @@ require('core');
   @version 0.1
 */
 PuyoPuyo.HighScoresView = SC.View.extend( function() {
-    /** @scope PuyoPuyo.HighScoresView.prototype */ 
+    /** @scope PuyoPuyo.HighScoresView.prototype */
     var headerRow = '<tr><th>Rank</th><th>Player</th><th>Score</th></tr>';
 
     return {
@@ -35,10 +35,10 @@ PuyoPuyo.HighScoresView = SC.View.extend( function() {
                 html.push('</td><td>');
                 html.push(highScore.get('playerName'));
                 html.push('</td><td>');
-                html.push(highScore.get('score').toString());
+                html.push((highScore.get('score') || 0).toString());
                 html.push('</td></tr>');
             }
-        
+
             this.set('innerHTML', html.join(''));
         }.observes('content')
     };

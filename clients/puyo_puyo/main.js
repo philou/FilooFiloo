@@ -20,6 +20,10 @@ function main() {
   var scores = PuyoPuyo.HighScore.collection();
   scores.set('orderBy', 'ranking');
   scores.refresh();
+  if(scores.get('count') === 0){
+    // sometimes, no scores are loaded ... maybe my netbook is too slow ???
+    PuyoPuyo.server.listFor({ recordType: PuyoPuyo.HighScore, order: "-score"});
+  }
 
   // TODO: refresh() any collections you have created to get their records.
   // ex: PuyoPuyo.contacts.refresh() ;
