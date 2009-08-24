@@ -1,0 +1,13 @@
+<% view :high_scores_tab do %>
+
+<div class="high_scores">
+  <%= view :highScoresView,
+      :tag => :table,
+      :class => 'highScoresTable',
+      :view => 'FilooFiloo.HighScoresView',
+      :bind => {
+            :content => 'FilooFiloo.highScoresController.arrangedObjects'
+      } %>
+
+</div>
+<% end %>

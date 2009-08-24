@@ -1,0 +1,27 @@
+<% content_for('body') do %>
+
+<div id="header">
+  <h1 id="title">Philou's Filoo-Filoo</h1>
+  <div id="login">
+    <%= text_field_view :login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.playerController.name' } %>
+  </div>
+</div>
+
+<div id="content">
+  <%= tab_view :modes_tabs,
+               :lazy_tabs => true,
+               :segments => [[:single, "1 player"],
+                             [:high_scores, "High scores"],
+                             [:rules, "Rules"],
+                             [:credits, "Credits"]],
+               :now_showing => :single %>
+</div>
+<% end %>
+
+<% view :game_over_pane, :class => 'dialog', :pane => :dialog, :visible => false, :width => 300 do %>
+  <h1>Game Over</h1>
+
+  <p>Filoo Filoo rules... but you somewhat managed to reach the high scores !</p>
+  <%= text_field_view :required_login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.playerController.name' } %>
+  <%= button_view :title => 'Ok', :default => true, :action => 'FilooFiloo.playerController.closeGameOverPane' %>
+<% end %>

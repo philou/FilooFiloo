@@ -1,0 +1,534 @@
+<% # ========================================================================
+   # FilooFiloo.Board Unit Test
+   # ========================================================================
+%>
+<% content_for('final') do %>
+
+<script>
+
+Test.context("FilooFiloo.Board",{
+
+    setup: function() {
+	FilooFiloo.Board.setDimensions(4, 6);
+
+	this.ticker = {
+	    running: false,
+            level: -1,
+	    start: function() {
+		this.running = true;
+	    },
+	    stop: function() {
+		this.running = false;
+	    },
+            setLevel: function(level) {
+                this.level = level;
+            }
+	};
+
+	this.colorProvider = {
+	    firstColor: FilooFiloo.Game.Red,
+	    secondColor: FilooFiloo.Game.Blue,
+	    popFirstColor: function() {
+		return this.firstColor;
+	    },
+	    popSecondColor: function() {
+		return this.secondColor;
+	    }
+	};
+
+	this.board = FilooFiloo.Board.create({ticker: this.ticker, colorProvider: this.colorProvider});
+
+	this.board.shouldBe = function(fixture, stringRows, message) {
+            var board = this;
+            FilooFiloo.TestsHelpers.assertStringRows(fixture, stringRows, FilooFiloo.Board.RowCount, FilooFiloo.Board.ColCount, function(c,r) { return board.cellState(c,r); }, message);
+	};
+
+        this.board.shouldBeEmpty = function(fixture, message) {
+            this.shouldBe(fixture, 
+			  ["    ",
+			   "    ",
+			   "    ",
+			   "    ",
+			   "    ",
+			   "    "],
+                          message);
+        };
+
+	this.board.shouldChangeWhen = function(that, actionName, message) {
+	    var beforeBoardTime = this.get('time');
+	    var result = this[actionName]();
+	    var afterBoardTime = this.get('time');
+	    that.assertNotIdentical(beforeBoardTime, afterBoardTime, message + " : board time not updated");
+	    return result;
+	};
+
+	this.board.shouldNotChangeWhen = function(that, actionName, message) {
+	    var beforeBoardTime = this.get('time');
+	    var result = this[actionName]();
+	    var afterBoardTime = this.get('time');
+	    that.assertIdentical(beforeBoardTime, afterBoardTime, message + " : board time updated");
+	    return result;
+	};
+
+	this.board.shouldChangeToWhen = function(that, actionName, stringRows, message) {
+	    var result = this.shouldChangeWhen(that, actionName, message);
+	    this.shouldBe(that, stringRows, message + " : board different");
+	    return result;
+	};
+
+	/***
+          Allows to specify test sequences from left to right instead of top to bottom.
+        */
+	this.board.shouldFollow = function(that, behaviour) {
+	    var steps = [];
+	    var count = behaviour.action.length;
+	    for(var i = 0; i < count; ++i) {
+		steps[i] = { actionName: behaviour.action[i],
+			     message: "step "+i+" : "+behaviour.action[i],
+                             extraChecks: {}};
+                for(var name in behaviour) {
+                    if ((name !== "action") && (name !== "board") && behaviour.hasOwnProperty(name)) {
+                        steps[i].extraChecks[name] = behaviour[name][i];
+                    }
+                }
+	    }
+            var stringRows = FilooFiloo.TestsHelpers.transpose(that, behaviour.board, count);
+
+	    for(var i = 0; i < steps.length; ++i) {
+		if (stringRows[i] === idem) {
+		    this.shouldNotChangeWhen(that, steps[i].actionName, steps[i].message);
+		}
+		else {
+		    this.shouldChangeToWhen(that, steps[i].actionName, stringRows[i], steps[i].message);
+		}
+                var extraChecks = steps[i].extraChecks;
+                for (var name in extraChecks) {
+                    if (extraChecks.hasOwnProperty(name)) {
+                        that.assertIdentical(extraChecks[name], this.get(name), "wrong "+name+" at "+steps[i].message);
+                    }
+                }
+	    }
+	};
+
+	this.board.startWithBoard = function(stringRows) {
+	    this.start(FilooFiloo.TestsHelpers.newCoordMap(stringRows));
+	};
+        this.board.tickN = function(n) {
+            for(var i = 0; i < n; ++i) {
+                this.tick();
+            }
+        };
+        this.board.dropFiloos = function(count){
+            var board = this;
+            FilooFiloo.TestsHelpers.times(Math.floor(count/2), function() {
+                board.tick(); board.drop(); board.tick();
+            });
+        };
+
+    },
+
+    teardown: function() {
+	delete(this.board);
+    },
+
+    "The board's playing property should change with start and stop": function() {
+	assertNotNull(board);
+	false.shouldEqual(board.get('playing'));
+
+	board.start();
+	true.shouldEqual(board.get('playing'));
+
+	board.abort();
+	false.shouldEqual(board.get('playing'));
+    },
+
+    "The ticker should be started with the board": function() {
+	false.shouldEqual(ticker.running);
+
+	board.start();
+	true.shouldEqual(ticker.running);
+
+	board.abort();
+	false.shouldEqual(ticker.running);
+    },
+
+    "The board should start empty": function() {
+	board.shouldFollow({action:["start"],
+			    board: ["    ",
+			            "    ",
+			            "    ",
+			            "    ",
+			            "    ",
+			            "    "]});
+    },
+
+    "A piece should appear at first tick and move down at each tick.": function() {
+	board.start();
+	board.shouldFollow({action:["tick", "tick", "tick", "tick", "tick", "tick"],
+			    board: [" rb ", "    ", "    ", "    ", "    ", "    ",
+			            "    ", " rb ", "    ", "    ", "    ", "    ",
+			            "    ", "    ", " rb ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", " rb ", "    ", "    ",
+			            "    ", "    ", "    ", "    ", " rb ", "    ",
+			            "    ", "    ", "    ", "    ", "    ", " rb "]});
+    },
+
+    "A new game should be started after an abort.": function() {
+	board.start();
+	board.tick();
+
+	board.shouldFollow({action:["tick", "abort", "start"], 
+			    board: ["    ",  idem,   "    ",
+			            " rb ",  idem,   "    ",
+			            "    ",  idem,   "    ",
+			            "    ",  idem,   "    ",
+			            "    ",  idem,   "    ",
+			            "    ",  idem,   "    "]});
+    },
+
+    "New pieces should have colors from colorProvider.": function() {
+	this.colorProvider.firstColor = FilooFiloo.Game.Purple;
+	this.colorProvider.secondColor = FilooFiloo.Game.Yellow;
+
+	board.start();
+	board.shouldChangeToWhen("tick",
+				 [" py ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  "    ",
+				  "    "]);
+    },
+
+    "A piece should move with left and right": function() {
+	board.start();
+	board.shouldFollow({action:["tick", "left", "right"],
+			    board: [" rb ", "rb  ", " rb ", 
+			            "    ", "    ", "    ",
+			            "    ", "    ", "    ",
+			            "    ", "    ", "    ",
+			            "    ", "    ", "    ",
+			            "    ", "    ", "    "]});
+    },
+
+    "A piece should rotate": function() {
+	board.start();
+	board.tick();
+  	board.shouldFollow({action:["tick", "rotate", "rotate", "rotate", "rotate"],
+			    board: ["    ", " b  ",   "    ",   "    ",   "    ", 
+			            " rb ", " r  ",   "br  ",   " r  ",   " rb ",
+			            "    ", "    ",   "    ",   " b  ",   "    ",
+			            "    ", "    ",   "    ",   "    ",   "    ",
+			            "    ", "    ",   "    ",   "    ",   "    ",
+			            "    ", "    ",   "    ",   "    ",   "    "]});
+    },
+
+    "A piece should anti rotate": function() {
+	board.start();
+	board.tick();
+	board.shouldFollow({action:["tick", "antiRotate", "antiRotate", "antiRotate", "antiRotate"],
+			    board: ["    ", "    ",       "    ",       " b  ",       "    ", 
+			            " rb ", " r  ",       "br  ",       " r  ",       " rb ",
+			            "    ", " b  ",       "    ",       "    ",       "    ",
+			            "    ", "    ",       "    ",       "    ",       "    ",
+			            "    ", "    ",       "    ",       "    ",       "    ",
+			            "    ", "    ",       "    ",       "    ",       "    "]});
+    },
+
+    "It should not be possible to move a piece outside the board": function() {
+	board.start();
+	board.shouldFollow({action:["tick", "left", "left", "right", "right", "right",],
+			    board: [" rb ", "rb  ", idem,   " rb ",  "  rb",  idem, 
+			            "    ", "    ", idem,   "    ",  "    ",  idem,
+			            "    ", "    ", idem,   "    ",  "    ",  idem,
+			            "    ", "    ", idem,   "    ",  "    ",  idem,
+			            "    ", "    ", idem,   "    ",  "    ",  idem,
+			            "    ", "    ", idem,   "    ",  "    ",  idem]});
+    },
+
+    "A new piece should appear when the previous one gets blocked at the bottom of the board": function() {
+	board.start();
+        board.tickN(FilooFiloo.Board.MaxRow + 1);
+	board.shouldBe(["    ",
+			"    ",
+			"    ",
+			"    ",
+			"    ",
+			" rb "],
+		       "initialy");
+
+	board.shouldFollow({action:["tick", "tick"],
+			    board: ["    ", " rb ",
+			            "    ", "    ",
+			            "    ", "    ",
+			            "    ", "    ",
+			            "    ", "    ",
+			            " rb ", " rb "]});
+    },
+
+    "Blocked piece should pile on top of each other.": function() {
+	board.startWithBoard(["    ",
+			      "    ",
+			      "    ",
+			      "    ",
+			      "    ",
+			      " yp "]);
+        board.tickN(FilooFiloo.Board.MaxRow -1);
+	board.shouldBe(["    ",
+			"    ",
+			"    ",
+			" rb ",
+			"    ",
+			" yp "],
+		       "initialy");
+
+	board.shouldFollow({action:["tick", "tick"],
+			    board: ["    ", "    ",
+			            "    ", "    ",
+			            "    ", "    ",
+			            "    ", "    ",
+			            " rb ", " rb ",
+			            " yp ", " yp "]});
+    },
+
+    "Filoos of vertical pieces should be blocked on top of each other.": function() {
+	board.start();
+        board.tickN(FilooFiloo.Board.MaxRow);
+	board.antiRotate();
+	board.shouldBe(["    ",
+			"    ",
+			"    ",
+			"    ",
+			" r  ",
+			" b  "],
+		       "initialy");
+
+	board.shouldFollow({action:["tick"],
+			    board: ["    ",
+			            "    ",
+			            "    ",
+			            "    ",
+			            " r  ",
+			            " b  "]});
+    },
+
+    "Blocked beans should follow the law of gravity": function() {
+	board.startWithBoard(["    ",
+			      "    ",
+			      "    ",
+			      "    ",
+			      "    ",
+			      "yp  "]);
+        board.tickN(FilooFiloo.Board.MaxRow);
+	board.shouldBe(["    ",
+			"    ",
+			"    ",
+			"    ",
+			" rb ",
+			"yp  "],
+		       "initialy");
+
+	board.shouldFollow({action:["tick"],
+			    board: ["    ",
+			            "    ",
+			            "    ",
+			            "    ",
+			            " r  ",
+			            "ypb "]});
+    },
+
+    "Pieces should drop at the bottom.": function() {
+	board.start();
+	board.shouldFollow({action:["tick", "drop", "tick", "drop"],
+			    board: [" rb ", "    ", " rb ", "    ",
+			            "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", " rb ",
+			            "    ", " rb ", " rb ", " rb "]});
+    },
+
+    "Pieces should follow the law of gravity when droped.": function() {
+	board.start();
+	board.shouldFollow({action:["tick", "drop", "tick", "right", "drop"],
+			    board: [" rb ", "    ", " rb ", "  rb",  "    ",
+			            "    ", "    ", "    ", "    ",  "    ",
+			            "    ", "    ", "    ", "    ",  "    ",
+			            "    ", "    ", "    ", "    ",  "    ",
+			            "    ", "    ", "    ", "    ",  "  r ",
+			            "    ", " rb ", " rb ", " rb ",  " rbb"]});
+    },
+
+    "When grouped by 4 or more, beans of the same color should disappear": function() {
+	this.colorProvider.firstColor = FilooFiloo.Game.Red;
+	this.colorProvider.secondColor = FilooFiloo.Game.Red;
+
+        board.start();
+	board.shouldFollow({action:["tick", "drop", "tick", "drop", "tick", "tick"],
+			    board: [" rr ", "    ", " rr ", "    ", "    ", " rr ",
+			            "    ", "    ", "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", " rr ", "    ", "    ",
+			            "    ", " rr ", " rr ", " rr ", "    ", "    "]});
+    },
+
+    "If blocking the piece several groups, all should disappear": function() {
+	board.startWithBoard(["    ",
+			      "    ",
+			      "    ",
+			      "r  b",
+			      "r  b",
+			      "r  b"]);
+	board.shouldFollow({action:["tick", "drop", "tick"],
+			    board: [" rb ", "    ", "    ",
+			            "    ", "    ", "    ",
+			            "    ", "    ", "    ",
+			            "r  b", "r  b", "    ",
+			            "r  b", "r  b", "    ",
+			            "r  b", "rrbb", "    "]});
+    },
+
+    "Pieces on top of a disappearing group should fall": function() {
+	board.startWithBoard(["    ",
+			      "p   ",
+			      "y   ",
+			      "b   ",
+			      "r   ",
+			      "r   "]);
+	this.colorProvider.firstColor = FilooFiloo.Game.Red;
+	this.colorProvider.secondColor = FilooFiloo.Game.Red;
+
+	board.shouldFollow({action:["tick", "drop", "tick", "tick"],
+			    board: [" rr ", "    ", "    ", "    ",
+			            "p   ", "p   ", "p   ", "    ",
+			            "y   ", "y   ", "y   ", "    ",
+			            "b   ", "b   ", "b   ", "p   ",
+			            "r   ", "r   ", "    ", "y   ",
+			            "r   ", "rrr ", "    ", "b   "]});
+    },
+
+    "Disappearing beans should cascade": function() {
+	board.startWithBoard(["    ",
+			      "    ",
+			      " r  ",
+			      " r  ",
+			      "rb  ",
+			      "rb  "]);
+	this.colorProvider.firstColor = FilooFiloo.Game.Blue;
+	this.colorProvider.secondColor = FilooFiloo.Game.Blue;
+
+	board.shouldFollow({action:["tick", "right","drop", "tick", "tick", "tick"],
+			    board: [" bb ", "  bb", "    ", "    ", "    ", "    ",
+			            "    ", "    ", "    ", "    ", "    ", "    ",
+			            " r  ", " r  ", " r  ", " r  ", "    ", "    ",
+			            " r  ", " r  ", " r  ", " r  ", "    ", "    ",
+			            "rb  ", "rb  ", "rb  ", "r   ", "rr  ", "    ",
+			            "rb  ", "rb  ", "rbbb", "r   ", "rr  ", "    "]});
+    },
+
+    "Game should be lost when there is no place for new pieces": function() {
+	board.startWithBoard([" rr ",
+			      " bb ",
+			      " rr ",
+			      " bb ",
+			      " rr ",
+			      " bb "]);
+	true.shouldEqual(board.get('playing'));
+
+        var lastGameOverTime = board.get('gameOver');
+	board.tick();
+	false.shouldEqual(board.get('playing'));
+        assertNotIdentical(lastGameOverTime, board.get('gameOver'));
+    },
+
+    "Disappeared pieces should be counted": function() {
+	board.startWithBoard(["    ",
+			      "    ",
+			      "    ",
+			      "r   ",
+			      "r   ",
+			      "r   "]);
+	this.colorProvider.firstColor = FilooFiloo.Game.Red;
+	this.colorProvider.secondColor = FilooFiloo.Game.Red;
+
+        assertIdentical(0, board.get('disappearedPieces'));
+        
+        board.tick(); board.drop(); board.tick();
+
+        board.shouldBeEmpty();
+        assertIdentical(5, board.get('disappearedPieces'));
+
+        board.tick(); board.drop(); board.tick();
+        board.tick(); board.drop(); board.tick();
+
+        board.shouldBeEmpty();
+        assertIdentical(9, board.get('disappearedPieces'));
+    },
+
+    "The level should increase when pieces disappear": function() {
+	this.colorProvider.firstColor = FilooFiloo.Game.Red;
+	this.colorProvider.secondColor = FilooFiloo.Game.Red;
+
+	board.start();
+        assertIdentical(0, board.get('disappearedPieces'));
+        assertIdentical(1, board.get('level'));
+
+        board.dropFiloos(FilooFiloo.Game.LevelUpgrade + 2);
+        assertIdentical(FilooFiloo.Game.LevelUpgrade + 2, board.get('disappearedPieces'));
+        assertIdentical(2, board.get('level'));
+        
+        board.dropFiloos(FilooFiloo.Game.LevelUpgrade + 2);
+        assertIdentical(2 * (FilooFiloo.Game.LevelUpgrade + 2), board.get('disappearedPieces'));
+        assertIdentical(3, board.get('level'));
+    },
+    "Level changes should be forwarded to the ticker": function() {
+	this.colorProvider.firstColor = FilooFiloo.Game.Red;
+	this.colorProvider.secondColor = FilooFiloo.Game.Red;
+
+	board.start();
+        assertIdentical(1, board.get('level'));
+
+        board.dropFiloos(FilooFiloo.Game.LevelUpgrade + 2);
+        assertIdentical(2, board.get('level'));
+
+        assertIdentical(2, this.ticker.level);
+    },
+    "The score should be increased when pieces are disappeared": function() {
+	board.startWithBoard(["    ",
+			      " r  ",
+			      " r  ",
+			      " r  ",
+			      "rb  ",
+			      "rb  "]);
+	this.colorProvider.firstColor = FilooFiloo.Game.Blue;
+	this.colorProvider.secondColor = FilooFiloo.Game.Blue;
+
+	board.shouldFollow({action:["tick", "right","drop", "tick", "tick", "tick"],
+	                    board: [" bb ", "  bb", "    ", "    ", "    ", "    ",
+                                    " r  ", " r  ", " r  ", " r  ", "    ", "    ",
+	                            " r  ", " r  ", " r  ", " r  ", "    ", "    ",
+	                            " r  ", " r  ", " r  ", " r  ", " r  ", "    ",
+	                            "rb  ", "rb  ", "rb  ", "r   ", "rr  ", "    ",
+	                            "rb  ", "rb  ", "rbbb", "r   ", "rr  ", "    "],
+                            score: [     0,      0,      0,      4,      4,     14]});
+    }
+
+
+/*
+    hall of fame
+    identification
+    sounds
+    glue between pieces
+    next piece
+
+    "nicer style" -> got to get a book or something
+
+*/
+}) ;
+
+if (window.main && (appMain = main)) main = null ;
+
+</script>
+
+<% end %>
