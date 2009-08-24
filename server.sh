@@ -1,4 +1,4 @@
 #!/bin/bash
 sc-server &
-cd server/puyo_puyo
+cd server/filoo_filoo
 script/server &
