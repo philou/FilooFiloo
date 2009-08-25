@@ -1,14 +1,17 @@
 * BUGS
-- when a new high score is entered, the high score collection is
-   cleared on the client side
 
 * réflechir à comment tester le gui ???
 
 * ajouter un mode deux joureurs :
-- ouvrir une session avec un pseudo
- - utiliser la même popup que les high scores
- - afficher le pseudo sous la grille, faire une partie normale
-- commencer une partie avec un autre joueur libre séléctionné au hazard
+- ouvrir une session avec un pseudo - DONE
+ - utiliser la même popup que les high scores - DONE
+- commencer une partie avec un autre joueur libre séléctionné au
+   hazard
+ - on enregistre qu'on cherche un adversaire
+  - le client envoie un post au serveur
+ - des qu'il y en a deux, on démarre une partie ensemble
+  - le client pool le serveur avec un get jusqu'à ce qu'il ait le nom
+   de l'adversaire
 - afficher les grilles des deux joueurs
  - avec le pseudo en dessous de chacune
  - envoyer la grille au serveur à chaque fois qu'elle change
@@ -39,7 +42,6 @@
 
 * Administrativ
 - fill in the links in the credit tab.
-- change the name of the package FilooFiloo devient namespace FF dans le code JS ?
 - GPL the code, see http://www.gnu.org/licenses/gpl-howto.html
 - add a form to get feedback from the credit tab
 
