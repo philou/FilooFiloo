@@ -40,7 +40,8 @@ FilooFiloo.gameController = SC.Object.create(
     gameOver: function() {
       if (this.get('board').get('gameOver')) {
 	var that = this;
-	FilooFiloo.playerController.requestNameAfterGameOver(function(playerName) {
+	FilooFiloo.playerController.forceLoginAndDo('Game Over', 'Filoo Filoo rules... but you somewhat managed to reach the '
+						                 + 'high scores !', function(playerName) {
 	  var values = {
 	    "playerName": playerName,
             "score": that.get('board').get('score')
@@ -48,8 +49,8 @@ FilooFiloo.gameController = SC.Object.create(
 
 	  var score = FilooFiloo.HighScore.newRecord(values, FilooFiloo.server);
 	  score.commit();
-	    });
-	}
+	});
+      }
     }.observes('.board.gameOver')
 
   });
