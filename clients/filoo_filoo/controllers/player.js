@@ -3,6 +3,7 @@
 // ==========================================================================
 
 require('core');
+require('models/player');
 
 /** @class
 
@@ -32,6 +33,11 @@ FilooFiloo.playerController = SC.Object.create(
   loginCaption: 'Please choose a surname.',
   _doAfterLogin: null,
 
+  /*
+   * What is the player doing now ?
+   */
+  whatIsPlayerDoing: 'nope',
+
   forceLoginAndDo: function(loginTitle, loginCaption, doAfterLogin) {
     this.set('loginTitle', loginTitle);
     this.set('loginCaption', loginCaption);
@@ -50,9 +56,33 @@ FilooFiloo.playerController = SC.Object.create(
 
   requestNameForVersusMode: function() {
     if( !this.get('name') && ('versus' === this.get('currentMode'))) {
-      this.forceLoginAndDo('Login', 'Filoo Filoo rules... '
-				    + 'you need to login in order to play against someone.', function() {});
+      this.forceLoginAndDo('Login', 'Filoo Filoo rules... you need to login in order to play against someone.',
+			   this.startWaitingForOpponent);
+    } else {
+      this.startWaitingForOpponent();
     }
-  }.observes('currentMode')
+  }.observes('currentMode'),
+
+  startWaitingForOpponent: function() {
+    this.set('whatIsPlayerDoing', 'Waiting for an opponent ...');
+
+    this.player = FilooFiloo.Player.newRecord({name: this.name}, FilooFiloo.server);
+    this.player.commit();
+
+    this.ticks = 0;
+    this.timer = SC.Timer.schedule({
+      target: this, action: 'checkForOpponent', repeats: YES, interval: 1000});
+  },
+
+  checkForOpponent: function() {
+    this.player.refresh();
+    if (this.player.get('opponentName')) {
+      this.set('whatIsPlayerDoing', 'Playing against '+this.player.get('opponentName'));
+      this.timer.invalidate();
+    } else {
+      this.ticks = this.ticks + 1;
+      this.set('whatIsPlayerDoing', 'Waiting for an opponent ... '+this.ticks+' seconds');
+    }
+  }
 
 }) ;
