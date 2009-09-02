@@ -3,7 +3,7 @@ class HighScoresController < ApplicationController
 
   def list
     respond_to do |wants|
-      wants.js {
+      wants.js do
         scores = HighScore.all(:order => params[:order])
         records = scores.map do |score|
           {
@@ -14,7 +14,7 @@ class HighScoresController < ApplicationController
           }
         end
         render :text => { :records => records, :ids => scores.map(&:id) }.to_json
-      }
+      end
     end
   end
 

@@ -17,10 +17,10 @@ class HighScoresControllerTest < ActionController::TestCase
   end
 
   def test_create_valid
-    get(:create, {
-          :path_prefix => "sc", 
-          :records => { 
-            1 => {:player_name => "Philou", :score => 666 }}})
+    post(:create, {
+           :path_prefix => "sc", 
+           :records => { 
+             1 => {:player_name => "Philou", :score => 666 }}})
     assert_response :success
   end
 

@@ -6,12 +6,8 @@
 - ouvrir une session avec un pseudo - DONE
  - utiliser la même popup que les high scores - DONE
 - commencer une partie avec un autre joueur libre séléctionné au
-   hazard
- - on enregistre qu'on cherche un adversaire
-  - le client envoie un post au serveur
- - des qu'il y en a deux, on démarre une partie ensemble
-  - le client pool le serveur avec un get jusqu'à ce qu'il ait le nom
-   de l'adversaire
+   hazard - DONE
+
 - afficher les grilles des deux joueurs
  - avec le pseudo en dessous de chacune
  - envoyer la grille au serveur à chaque fois qu'elle change
@@ -19,6 +15,9 @@
   - faire un autre model de grille pour les grilles externes, qui se
     mette à jour régulièrement, mais sans aucune intelligence de jeu
 - envoyer des saletés à l'autre quand on marque des points
+
+- supprimer les joueurs quand la partie est finie
+- détecté les déconnexions
 
 * mode 1 joueur
 - afficher la prochaine pièce
