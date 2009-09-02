@@ -2,4 +2,5 @@
 *#
 .DS_Store
 *.log
+*.sqlite3
 public
