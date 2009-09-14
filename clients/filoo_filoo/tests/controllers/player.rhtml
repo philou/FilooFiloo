@@ -8,8 +8,116 @@
 
 Test.context("FilooFiloo.PlayerController",{
 
-  "TODO: Add your own tests here": function() {
-    true.shouldEqual(true) ;
+  setup: function()  {
+    this.playerController = FilooFiloo.createPlayerController();
+
+    that = this;
+
+    this.player = null;
+    this.playerController.Player = {
+      newRecord: function(values, datasource) {
+        that.player = FilooFiloo.Player.newRecord(values, datasource);
+	that.player.commitCalled = NO;
+        that.player.commit = function() {
+          that.player.commitCalled = YES;
+        };
+	that.player.refreshCalled = NO;
+        that.player.refresh = function() {
+          that.player.refreshCalled = YES;
+        };
+        return that.player;
+      }
+    };
+
+    this.timer = null;
+    this.playerController.Timer = {
+      schedule: function(params) {
+        that.timer = {
+          parameters: params,
+	  invalidateCalled: NO,
+          invalidate: function() {
+	     this.invalidateCalled = YES;
+	  }
+        }
+	return that.timer;
+      }
+    };
+  },
+
+  "forceLoginAndDo should set up the login panel": function() {
+    var closeLoginPaneCalled = NO;
+    this.playerController.forceLoginAndDo('Test login', 'login, tester:', function() { closeLoginPaneCalled = YES; });
+
+    'Test login'.shouldEqual(this.playerController.get('loginTitle'));
+    'login, tester:'.shouldEqual(this.playerController.get('loginCaption'));
+    YES.shouldEqual(this.playerController.get('loginTextRequired'));
+    YES.shouldEqual(this.playerController.get('loginPaneVisible'));
+    NO.shouldEqual(closeLoginPaneCalled);
+
+    this.playerController.set('name', 'johnny be good');
+    this.playerController.closeLoginPane();
+    NO.shouldEqual(this.playerController.get('loginPaneVisible'));
+    YES.shouldEqual(closeLoginPaneCalled);
+  },
+
+  "The login pane should not be closed if no name was entered": function() {
+    var closeLoginPaneCalled = NO;
+    this.playerController.forceLoginAndDo('Test login', 'login, tester:', function() { closeLoginPaneCalled = YES; });
+    this.playerController.closeLoginPane();
+    YES.shouldEqual(this.playerController.get('loginPaneVisible'));
+    NO.shouldEqual(closeLoginPaneCalled);
+  },
+
+  "If already entered, the login pane should not ask for a name": function() {
+    this.playerController.set('name', 'already');
+    this.playerController.forceLoginAndDo('Test login', 'login, tester:', function() {});
+
+    NO.shouldEqual(this.playerController.get('loginTextRequired'));
+    YES.shouldEqual(this.playerController.get('loginPaneVisible'));
+  },
+
+  "Entering versus mode should force a login and start waiting for an opponent": function() {
+
+    this.playerController.set('currentMode', 'versus')
+    YES.shouldEqual(this.playerController.get('loginPaneVisible'));
+
+    this.playerController.set('name', 'zinzin');
+    this.playerController.closeLoginPane();
+
+    'Waiting for an opponent ...'.shouldEqual(this.playerController.get('whatIsPlayerDoing'));
+    assertNotNull(this.player);
+
+    YES.shouldEqual(this.player.commitCalled);
+
+    assertNotNull(this.timer);
+    assertNotNull(this.timer.parameters);
+    assertNotNull(this.timer.parameters.target);
+    assertNotNull(this.timer.parameters.action);
+    YES.shouldEqual(this.timer.parameters.repeats);
+
+    NO.shouldEqual(this.player.refreshCalled);
+    this.timer.parameters.target[this.timer.parameters.action]();
+    YES.shouldEqual(this.player.refreshCalled);
+
+    this.player.set('opponentName', 'gyzmo');
+    this.timer.parameters.target[this.timer.parameters.action]();
+    'Playing against gyzmo'.shouldEqual(this.playerController.get('whatIsPlayerDoing'));
+  },
+
+  "No login dialog should be shown when entering versus mode with a name": function() {
+    this.playerController.set('name', 'zinzin');
+    this.playerController.set('currentMode', 'versus')
+    NO.shouldEqual(this.playerController.get('loginPaneVisible'));
+  },
+  "We should start waiting for an opponent even if a name was already set": function() {
+    this.playerController.set('name', 'zinzin');
+    this.playerController.set('currentMode', 'versus')
+    'Waiting for an opponent ...'.shouldEqual(this.playerController.get('whatIsPlayerDoing'));
+  },
+  "We should only start waiting for an opponent in versus mode": function() {
+    this.playerController.set('currentMode', 'high_scores')
+    NO.shouldEqual(this.playerController.get('loginPaneVisible'));
+    assertNotIdentical('Waiting for an opponent ...', this.playerController.get('whatIsPlayerDoing'));
   }
 
 }) ;
