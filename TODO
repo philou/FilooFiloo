@@ -1,6 +1,15 @@
 * BUGS
 
 * réflechir à comment tester le gui ???
+ - utiliser le databinding pour afficher le login dialog
+ - utiliser des variables intermediaires FilooFiloo.Timer à la place
+   de SC.Timer, et les mocker dans les tests
+ - hériter des classes de models et surcharger les var globales.
+
+ - checker si le isVisible est data bindable, voire comment faire
+   autrement
+ - vérifier si les surcharges globales sont bien indépendantes d'un
+   test à l'autre, sinon il faudra rollbacker dans le tearDown
 
 * ajouter un mode deux joureurs :
 - ouvrir une session avec un pseudo - DONE
