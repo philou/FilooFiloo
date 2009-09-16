@@ -1,15 +1,15 @@
 * BUGS
 
-* réflechir à comment tester le gui ???
- - utiliser le databinding pour afficher le login dialog
+* réflechir à comment tester le gui ??? - DONE
+ - utiliser le databinding pour afficher le login dialog - DONE
  - utiliser des variables intermediaires FilooFiloo.Timer à la place
-   de SC.Timer, et les mocker dans les tests
- - hériter des classes de models et surcharger les var globales.
+   de SC.Timer, et les mocker dans les tests - DONE
+ - hériter des classes de models et surcharger les var globales. - DONE
 
  - checker si le isVisible est data bindable, voire comment faire
-   autrement
+   autrement - DONE
  - vérifier si les surcharges globales sont bien indépendantes d'un
-   test à l'autre, sinon il faudra rollbacker dans le tearDown
+   test à l'autre, sinon il faudra rollbacker dans le tearDown - DONE
 
 * ajouter un mode deux joureurs :
 - ouvrir une session avec un pseudo - DONE
@@ -30,7 +30,7 @@
 
 * mode 1 joueur
 - afficher la prochaine pièce
-- faire une IA pour une deuxième joueur
+- faire une IA pour un deuxième joueur
 
 * add iphone compatible buttons
 - attendre la version 1.0 de sproutcore qui fera un truc expres pour ça.
@@ -50,7 +50,7 @@
 
 * Administrativ
 - fill in the links in the credit tab.
-- GPL the code, see http://www.gnu.org/licenses/gpl-howto.html
+- BSD the code
 - add a form to get feedback from the credit tab
 
 
