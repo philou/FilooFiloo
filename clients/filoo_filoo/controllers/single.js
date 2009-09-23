@@ -27,8 +27,10 @@ require('core');
  @version 0.1
  @static
  */
-FilooFiloo.gameController = SC.Object.create(
-  /** @scope FilooFiloo.gameController */ {
+FilooFiloo.versusController = SC.Object.create(
+  /** @scope FilooFiloo.versusController */ {
+
+    board: FilooFiloo.Board.create(),
 
     startStopLabel: 'Play !',
 
@@ -56,7 +58,7 @@ FilooFiloo.gameController = SC.Object.create(
     gameOver: function() {
       if (this.get('board').get('gameOver')) {
 	var that = this;
-	FilooFiloo.playerController.forceLoginAndDo('Game Over', 'Filoo Filoo rules... but you somewhat managed to reach the '
+	FilooFiloo.versusController.forceLoginAndDo('Game Over', 'Filoo Filoo rules... but you somewhat managed to reach the '
 						                 + 'high scores !', function(playerName) {
 	  var values = {
 	    "playerName": playerName,

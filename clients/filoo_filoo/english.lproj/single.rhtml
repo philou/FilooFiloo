@@ -17,24 +17,19 @@
 <% view :single_tab do %>
 
 <div class="single">
-  <%= button_view :startStop, :action => 'FilooFiloo.gameController.startStop', :default => true, :title => 'Start & stop', :bind => {:title => 'FilooFiloo.gameController.startStopLabel' } %>
+  <%= button_view :startStop, :action => 'FilooFiloo.versusController.startStop', :default => true, :title => 'Start & stop', :bind => {:title => 'FilooFiloo.versusController.startStopLabel' } %>
   <table class="scores">
     <tr>
-      <td>Filoos</td><td><%= label_view :disappeared_pieces, :value => "0", :bind => {:value => 'FilooFiloo.gameController.board.disappearedPieces' } %></td>
+      <td>Filoos</td><td><%= label_view :disappeared_pieces, :value => "0", :bind => {:value => 'FilooFiloo.versusController.board.disappearedPieces' } %></td>
     </tr>
     <tr>
-      <td>Score</td><td><%= label_view :score, :value => "0", :bind => {:value => 'FilooFiloo.gameController.board.score' } %></td>
+      <td>Score</td><td><%= label_view :score, :value => "0", :bind => {:value => 'FilooFiloo.versusController.board.score' } %></td>
     </tr>
     <tr>
-      <td>Level</td><td><%= label_view :level, :value => "0", :bind => {:value => 'FilooFiloo.gameController.board.level' } %></td>
+      <td>Level</td><td><%= label_view :level, :value => "0", :bind => {:value => 'FilooFiloo.versusController.board.level' } %></td>
     </tr>
   </table>
-  <%= view :boardView,
-      :tag => :table,
-      :class => 'board',
-      :view => 'FilooFiloo.BoardView',
-      :bind => { :board => 'FilooFiloo.gameController.board',
-                 :boardTime => 'FilooFiloo.gameController.board.time',
-                 :playing => 'FilooFiloo.gameController.board.playing' } %>
+  <%= view :singleBoardView, :tag => :table, :class => 'board', :view => 'FilooFiloo.BoardView',
+      :bind => { :board => 'FilooFiloo.versusController.board' } %>
 </div>
 <% end %>

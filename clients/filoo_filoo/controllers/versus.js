@@ -30,9 +30,14 @@ require('models/player');
  @version 0.1
  @static
  */
-FilooFiloo.createPlayerController = function() {
+FilooFiloo.createVersusController = function() {
   return SC.Object.create(
-    /** @scope FilooFiloo.playerController */ {
+    /** @scope FilooFiloo.versusController */ {
+
+      /**
+       * Current player's board.
+       */
+      board: FilooFiloo.Board.create(),
 
       /* current mode (single, versus ...)
        * corresponds to the current main tab
@@ -71,8 +76,9 @@ FilooFiloo.createPlayerController = function() {
 	this.set('loginTitle', loginTitle);
 	this.set('loginCaption', loginCaption);
 	this._doAfterLogin = doAfterLogin;
-	this.set('loginTextRequired', !this.get('name')); // this property is not bound to name dynamicaly, otherwise the
+	// loginTextRequired is not bound to name dynamicaly, otherwise the
         // text box would disappear after the first entered letter
+	this.set('loginTextRequired', !this.get('name'));
 	this.set('loginPaneVisible', YES);
       },
 
@@ -109,6 +115,7 @@ FilooFiloo.createPlayerController = function() {
 	if (this.player.get('opponentName')) {
 	  this.set('whatIsPlayerDoing', 'Playing against '+this.player.get('opponentName'));
 	  this.timer.invalidate();
+	  this.get('board').start();
 	} else {
 	  this.ticks = this.ticks + 1;
 	  this.set('whatIsPlayerDoing', 'Waiting for an opponent ... '+this.ticks+' seconds');
@@ -118,4 +125,4 @@ FilooFiloo.createPlayerController = function() {
   );
 };
 
-FilooFiloo.playerController = FilooFiloo.createPlayerController();
+FilooFiloo.versusController = FilooFiloo.createPlayerController();
