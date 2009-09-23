@@ -18,6 +18,8 @@
 
 require('core');
 require('models/game');
+require('models/ticker');
+require('models/color_provider');
 
 /** @class
 
@@ -68,6 +70,16 @@ FilooFiloo.Board = SC.Record.extend(
     }.property('disappearedPieces'),
 
     /**
+     * Ticker responsible of time.
+     */
+    ticker: FilooFiloo.Ticker.create(),
+
+    /**
+     * Random color provider.
+     */
+    colorProvider: FilooFiloo.ColorProvider.create(),
+
+    /**
       Starts the game.
     */
     start: function(blockedPieces) {
@@ -90,7 +102,7 @@ FilooFiloo.Board = SC.Record.extend(
 	this.set('playing', false);
     },
 
-    /** 
+    /**
       Cell status for a given column and row, see FilooFiloo.Game for a list of all available states.
     */
     cellState: function(col, row) {
@@ -164,7 +176,7 @@ FilooFiloo.Board = SC.Record.extend(
 	    }
 	}
 	return false;
-    },	
+    },
 
     notifyChanged_: function() {
 	this.set('time', this.now_());

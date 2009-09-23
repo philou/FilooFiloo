@@ -17,8 +17,15 @@
 - commencer une partie avec un autre joueur libre séléctionné au
    hazard - DONE
 
-- afficher les grilles des deux joueurs
- - avec le pseudo en dessous de chacune
+- BUG quand on va et vient de l'onglet versus, on peut jouer contre
+   sois même ...
+- afficher sa grille à gauche, indiquer que c'est la sienne -DONE
+ - nettoyage de l'initialization des boards dans les controllers - DONE
+ - renomage des controllers game et player en single, versus - DONE
+ - démarrer la partie ! - DONE
+ - extraire la partie dialog de login dans un loginController
+- afficher la grille de l'autre joueur à droite, mettre le nom de
+   l'adversaire en dessous
  - envoyer la grille au serveur à chaque fois qu'elle change
  - demander la grille de l'autre joueur régulièrement
   - faire un autre model de grille pour les grilles externes, qui se
@@ -27,10 +34,19 @@
 
 - supprimer les joueurs quand la partie est finie
 - détecté les déconnexions
+- styler un peu
+- deploy to cheap heroku
 
 * mode 1 joueur
 - afficher la prochaine pièce
 - faire une IA pour un deuxième joueur
+
+* Administrativ
+- fill in the links in the credit tab. - DONE
+- BSD the code - DONE
+
+
+NICE TO HAVE
 
 * add iphone compatible buttons
 - attendre la version 1.0 de sproutcore qui fera un truc expres pour ça.
@@ -48,10 +64,6 @@
 - add the date to the high scores
 - only get the top 50 scores from the server
 
-* Administrativ
-- fill in the links in the credit tab.
-- BSD the code
-- add a form to get feedback from the credit tab
 
 
 

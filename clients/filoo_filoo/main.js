@@ -54,10 +54,4 @@ function main() {
   // TODO: Set the content property on your primary controller
   // ex: FilooFiloo.contactsController.set('content',FilooFiloo.contacts);
   FilooFiloo.highScoresController.set('content', scores);
-
-  FilooFiloo.gameController.set('board', FilooFiloo.Board.create({
-      ticker: FilooFiloo.Ticker.create(),
-      colorProvider: FilooFiloo.ColorProvider.create()
-  }));
-
 } ;

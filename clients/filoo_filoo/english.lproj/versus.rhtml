@@ -15,6 +15,13 @@
 <% view :versus_tab do %>
 
 <div class="versus">
-  <p><%= label_view :bind => { :value => 'FilooFiloo.playerController.whatIsPlayerDoing' } %></p>
+  <p><%= label_view :bind => { :value => 'FilooFiloo.versusController.whatIsPlayerDoing' } %></p>
+  <div id="boards">
+    <div id="yourArea">
+      <%= view :yourBoardView, :tag => :table, :class => 'board', :view => 'FilooFiloo.BoardView',
+        :bind => { :board => 'FilooFiloo.versusController.board' } %>
+      <p>YOU</p>
+    </div>
+  </div>
 </div>
 <% end %>

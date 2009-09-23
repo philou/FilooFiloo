@@ -17,7 +17,7 @@
 <div id="header">
   <h1 id="title">Philou's Filoo-Filoo</h1>
   <div id="login">
-    <%= text_field_view :login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.playerController.name' } %>
+    <%= text_field_view :login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.versusController.name' } %>
   </div>
 </div>
 
@@ -29,15 +29,15 @@
                              [:high_scores, "High scores"],
                              [:rules, "Rules"],
                              [:credits, "Credits"]],
-               :now_showing => :single, :bind => { :now_showing => 'FilooFiloo.playerController.currentMode' } %>
+               :now_showing => :single, :bind => { :now_showing => 'FilooFiloo.versusController.currentMode' } %>
 </div>
 <% end %>
 
-<% view :login_pane, :class => 'dialog', :pane => :dialog, :width => 300, :bind => {:visible => 'FilooFiloo.playerController.loginPaneVisible' } do %>
-  <h1><%= label_view :bind => { :value => 'FilooFiloo.playerController.loginTitle' } %></h1>
+<% view :login_pane, :class => 'dialog', :pane => :dialog, :width => 300, :bind => {:visible => 'FilooFiloo.versusController.loginPaneVisible' } do %>
+  <h1><%= label_view :bind => { :value => 'FilooFiloo.versusController.loginTitle' } %></h1>
 
-  <p><%= label_view :bind => { :value => 'FilooFiloo.playerController.loginCaption' } %></p>
-  <%= text_field_view :required_login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.playerController.name', :visible => 'FilooFiloo.playerController.loginTextRequired' } %>
-  <%= button_view :title => 'Ok', :default => true, :action => 'FilooFiloo.playerController.closeLoginPane' %>
+  <p><%= label_view :bind => { :value => 'FilooFiloo.versusController.loginCaption' } %></p>
+  <%= text_field_view :required_login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.versusController.name', :visible => 'FilooFiloo.versusController.loginTextRequired' } %>
+  <%= button_view :title => 'Ok', :default => true, :action => 'FilooFiloo.versusController.closeLoginPane' %>
 <% end %>
 

@@ -38,7 +38,7 @@ FilooFiloo.BoardView = SC.View.extend(function() {
 	for (row = 0; row < FilooFiloo.Board.RowCount; row++) {
 
 	    html.push('<tr>');
-	    
+
 	    for (col = 0; col < FilooFiloo.Board.ColCount; col++) {
 
 		html.push('<td class="');
@@ -52,29 +52,28 @@ FilooFiloo.BoardView = SC.View.extend(function() {
     };
 
     return {
-	
+
 	board: null,
 
-	boardTime: null,
-        playing: false,
 	acceptsFirstResponder: true,
 
 	emptyElement: '<table>' + renderHtml(function(_row, _col) { return false; }) + '</table>',
 
 	render: function() {
-	    var board = this.get('board');
-	    this.set('innerHTML', renderHtml( function(row, col) {
-		return FilooFiloo.Game.stateToName[board.cellState(col, row)];
-	    }));
-	}.observes('boardTime', 'board'),
+	  var board = this.get('board');
+	  this.set('innerHTML', renderHtml( function(row, col) {
+	    return FilooFiloo.Game.stateToName[board.cellState(col, row)];
+	  }));
+	}.observes('board', '.board.time'),
 
         focus: function() {
-            if(this.get('playing')) {
-                this.becomeFirstResponder();
-            } else {
-                this.resignFirstResponder();
-            }
-        }.observes('playing', 'board'),
+	  var board = this.get('board');
+          if(board && board.get('playing')) {
+            this.becomeFirstResponder();
+          } else {
+            this.resignFirstResponder();
+          }
+        }.observes('board', '.board.playing'),
 
 	keyDown: function(evt) {
 	    return this.interpretKeyEvents(evt) ;
