@@ -18,6 +18,7 @@
 
 require('core');
 require('models/player');
+require('models/board');
 
 /** @class
 
@@ -37,27 +38,10 @@ FilooFiloo.createVersusController = function() {
        */
       board: FilooFiloo.Board.create(),
 
-      /* current mode (single, versus ...)
+      /* mode (single, versus ...)
        * corresponds to the current main tab
        */
       currentMode: undefined,
-
-      /* Name of the current player
-       */
-      name: undefined,
-
-      /*
-       * Content of the login pane
-       */
-      loginPaneVisible: NO,
-      loginTextRequired: YES,
-
-      /*
-       * Text in the login pane
-       */
-      loginTitle: 'Login',
-      loginCaption: 'Please choose a surname.',
-      _doAfterLogin: null,
 
       /*
        * What is the player doing now ?
@@ -70,38 +54,26 @@ FilooFiloo.createVersusController = function() {
       Timer: SC.Timer,
       Player: FilooFiloo.Player,
 
-      forceLoginAndDo: function(loginTitle, loginCaption, doAfterLogin) {
-	this.set('loginTitle', loginTitle);
-	this.set('loginCaption', loginCaption);
-	this._doAfterLogin = doAfterLogin;
-	// loginTextRequired is not bound to name dynamicaly, otherwise the
-        // text box would disappear after the first entered letter
-	this.set('loginTextRequired', !this.get('name'));
-	this.set('loginPaneVisible', YES);
-      },
-
-      closeLoginPane: function() {
-	if (this.get('name')) {
-	  this.set('loginPaneVisible', NO);
-	  this._doAfterLogin(this.get('name'));
-	}
-      },
-
-      requestNameForVersusMode: function() {
+      currentModeObserver: function() {
         if ('versus' === this.get('currentMode')) {
-	  if(!this.get('name')) {
-	    this.forceLoginAndDo('Login', 'Filoo Filoo rules... you need to login in order to play against someone.',
-				 this._startWaitingForOpponent);
-	  } else {
-	    this._startWaitingForOpponent();
-	  }
+	  this.requestLogin();
 	}
       }.observes('currentMode'),
+
+      requestLogin: function() {
+	if(!FilooFiloo.loginController.get('name')) {
+	  var that = this;
+	  FilooFiloo.loginController.forceLoginAndDo('Login', 'Filoo Filoo rules... you need to login in order to play against someone.',
+						     function() { that._startWaitingForOpponent(); });
+	} else {
+	  this._startWaitingForOpponent();
+	}
+      },
 
       _startWaitingForOpponent: function() {
 	this.set('whatIsPlayerDoing', 'Waiting for an opponent ...');
 
-	this.player = this.Player.newRecord({name: this.name}, FilooFiloo.server);
+	this.player = this.Player.newRecord({name: FilooFiloo.loginController.get('name')}, FilooFiloo.server);
 	this.player.commit();
 
 	this.ticks = 0;
@@ -123,4 +95,4 @@ FilooFiloo.createVersusController = function() {
   );
 };
 
-FilooFiloo.versusController = FilooFiloo.createPlayerController();
+FilooFiloo.versusController = FilooFiloo.createVersusController();

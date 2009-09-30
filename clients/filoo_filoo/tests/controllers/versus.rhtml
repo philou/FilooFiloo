@@ -58,45 +58,13 @@ Test.context("FilooFiloo.VersusController",{
     };
   },
 
-  "forceLoginAndDo should set up the login panel": function() {
-    var closeLoginPaneCalled = NO;
-    this.versusController.forceLoginAndDo('Test login', 'login, tester:', function() { closeLoginPaneCalled = YES; });
-
-    'Test login'.shouldEqual(this.versusController.get('loginTitle'));
-    'login, tester:'.shouldEqual(this.versusController.get('loginCaption'));
-    YES.shouldEqual(this.versusController.get('loginTextRequired'));
-    YES.shouldEqual(this.versusController.get('loginPaneVisible'));
-    NO.shouldEqual(closeLoginPaneCalled);
-
-    this.versusController.set('name', 'johnny be good');
-    this.versusController.closeLoginPane();
-    NO.shouldEqual(this.versusController.get('loginPaneVisible'));
-    YES.shouldEqual(closeLoginPaneCalled);
-  },
-
-  "The login pane should not be closed if no name was entered": function() {
-    var closeLoginPaneCalled = NO;
-    this.versusController.forceLoginAndDo('Test login', 'login, tester:', function() { closeLoginPaneCalled = YES; });
-    this.versusController.closeLoginPane();
-    YES.shouldEqual(this.versusController.get('loginPaneVisible'));
-    NO.shouldEqual(closeLoginPaneCalled);
-  },
-
-  "If already entered, the login pane should not ask for a name": function() {
-    this.versusController.set('name', 'already');
-    this.versusController.forceLoginAndDo('Test login', 'login, tester:', function() {});
-
-    NO.shouldEqual(this.versusController.get('loginTextRequired'));
-    YES.shouldEqual(this.versusController.get('loginPaneVisible'));
-  },
-
   "Entering versus mode should force a login and start waiting for an opponent": function() {
 
     this.versusController.set('currentMode', 'versus')
-    YES.shouldEqual(this.versusController.get('loginPaneVisible'));
+    YES.shouldEqual(FilooFiloo.loginController.get('loginPaneVisible'));
 
-    this.versusController.set('name', 'zinzin');
-    this.versusController.closeLoginPane();
+    FilooFiloo.loginController.set('name', 'zinzin');
+    FilooFiloo.loginController.closeLoginPane();
 
     'Waiting for an opponent ...'.shouldEqual(this.versusController.get('whatIsPlayerDoing'));
     assertNotNull(this.player);
@@ -120,18 +88,18 @@ Test.context("FilooFiloo.VersusController",{
   },
 
   "No login dialog should be shown when entering versus mode with a name": function() {
-    this.versusController.set('name', 'zinzin');
+    FilooFiloo.loginController.set('name', 'zinzin');
     this.versusController.set('currentMode', 'versus')
-    NO.shouldEqual(this.versusController.get('loginPaneVisible'));
+    NO.shouldEqual(FilooFiloo.loginController.get('loginPaneVisible'));
   },
   "We should start waiting for an opponent even if a name was already set": function() {
-    this.versusController.set('name', 'zinzin');
+    FilooFiloo.loginController.set('name', 'zinzin');
     this.versusController.set('currentMode', 'versus')
     'Waiting for an opponent ...'.shouldEqual(this.versusController.get('whatIsPlayerDoing'));
   },
   "We should only start waiting for an opponent in versus mode": function() {
     this.versusController.set('currentMode', 'high_scores')
-    NO.shouldEqual(this.versusController.get('loginPaneVisible'));
+    NO.shouldEqual(FilooFiloo.loginController.get('loginPaneVisible'));
     assertNotIdentical('Waiting for an opponent ...', this.versusController.get('whatIsPlayerDoing'));
   }
 

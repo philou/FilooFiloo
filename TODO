@@ -23,7 +23,8 @@
  - nettoyage de l'initialization des boards dans les controllers - DONE
  - renomage des controllers game et player en single, versus - DONE
  - démarrer la partie ! - DONE
- - extraire la partie dialog de login dans un loginController
+ - extraire la partie dialog de login dans un loginController - DONE
+ - passer la textbox en first responder quand on affiche le login
 - afficher la grille de l'autre joueur à droite, mettre le nom de
    l'adversaire en dessous
  - envoyer la grille au serveur à chaque fois qu'elle change
