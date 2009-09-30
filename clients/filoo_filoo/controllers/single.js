@@ -19,6 +19,7 @@
 // ==========================================================================
 
 require('core');
+require('models/board');
 
 /** @class
 
@@ -27,8 +28,8 @@ require('core');
  @version 0.1
  @static
  */
-FilooFiloo.versusController = SC.Object.create(
-  /** @scope FilooFiloo.versusController */ {
+FilooFiloo.singleController = SC.Object.create(
+  /** @scope FilooFiloo.singleController */ {
 
     board: FilooFiloo.Board.create(),
 
@@ -58,7 +59,7 @@ FilooFiloo.versusController = SC.Object.create(
     gameOver: function() {
       if (this.get('board').get('gameOver')) {
 	var that = this;
-	FilooFiloo.versusController.forceLoginAndDo('Game Over', 'Filoo Filoo rules... but you somewhat managed to reach the '
+	FilooFiloo.loginController.forceLoginAndDo('Game Over', 'Filoo Filoo rules... but you somewhat managed to reach the '
 						                 + 'high scores !', function(playerName) {
 	  var values = {
 	    "playerName": playerName,

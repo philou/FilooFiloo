@@ -19,7 +19,7 @@
 <div id="header">
   <h1 id="title">Philou's Filoo-Filoo</h1>
   <div id="login">
-    <%= text_field_view :login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.versusController.name' } %>
+    <%= text_field_view :login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.loginController.name' } %>
   </div>
 </div>
 
@@ -35,11 +35,11 @@
 </div>
 <% end %>
 
-<% view :login_pane, :class => 'dialog', :pane => :dialog, :width => 300, :bind => {:visible => 'FilooFiloo.versusController.loginPaneVisible' } do %>
-  <h1><%= label_view :bind => { :value => 'FilooFiloo.versusController.loginTitle' } %></h1>
+<% view :login_pane, :class => 'dialog', :pane => :dialog, :width => 300, :bind => {:visible => 'FilooFiloo.loginController.loginPaneVisible' } do %>
+  <h1><%= label_view :bind => { :value => 'FilooFiloo.loginController.loginTitle' } %></h1>
 
-  <p><%= label_view :bind => { :value => 'FilooFiloo.versusController.loginCaption' } %></p>
-  <%= text_field_view :required_login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.versusController.name', :visible => 'FilooFiloo.versusController.loginTextRequired' } %>
-  <%= button_view :title => 'Ok', :default => true, :action => 'FilooFiloo.versusController.closeLoginPane' %>
+  <p><%= label_view :bind => { :value => 'FilooFiloo.loginController.loginCaption' } %></p>
+  <%= text_field_view :required_login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.loginController.name', :visible => 'FilooFiloo.loginController.loginTextRequired' } %>
+  <%= button_view :title => 'Ok', :default => true, :action => 'FilooFiloo.loginController.closeLoginPane' %>
 <% end %>
 
