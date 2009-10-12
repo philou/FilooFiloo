@@ -1,46 +1,54 @@
 * BUGS
 
-* réflechir à comment tester le gui ??? - DONE
+* rï¿½flechir ï¿½ comment tester le gui ??? - DONE
  - utiliser le databinding pour afficher le login dialog - DONE
- - utiliser des variables intermediaires FilooFiloo.Timer à la place
+ - utiliser des variables intermediaires FilooFiloo.Timer ï¿½ la place
    de SC.Timer, et les mocker dans les tests - DONE
- - hériter des classes de models et surcharger les var globales. - DONE
+ - hï¿½riter des classes de models et surcharger les var globales. - DONE
 
  - checker si le isVisible est data bindable, voire comment faire
    autrement - DONE
- - vérifier si les surcharges globales sont bien indépendantes d'un
-   test à l'autre, sinon il faudra rollbacker dans le tearDown - DONE
+ - vï¿½rifier si les surcharges globales sont bien indï¿½pendantes d'un
+   test ï¿½ l'autre, sinon il faudra rollbacker dans le tearDown - DONE
 
 * ajouter un mode deux joureurs :
 - ouvrir une session avec un pseudo - DONE
- - utiliser la même popup que les high scores - DONE
-- commencer une partie avec un autre joueur libre séléctionné au
+ - utiliser la mï¿½me popup que les high scores - DONE
+- commencer une partie avec un autre joueur libre sï¿½lï¿½ctionnï¿½ au
    hazard - DONE
 
 - BUG quand on va et vient de l'onglet versus, on peut jouer contre
-   sois même ...
-- afficher sa grille à gauche, indiquer que c'est la sienne -DONE
+   sois mï¿½me ...
+- afficher sa grille ï¿½ gauche, indiquer que c'est la sienne -DONE
  - nettoyage de l'initialization des boards dans les controllers - DONE
  - renomage des controllers game et player en single, versus - DONE
- - démarrer la partie ! - DONE
+ - dï¿½marrer la partie ! - DONE
  - extraire la partie dialog de login dans un loginController - DONE
- - passer la textbox en first responder quand on affiche le login
-- afficher la grille de l'autre joueur à droite, mettre le nom de
-   l'adversaire en dessous
- - envoyer la grille au serveur à chaque fois qu'elle change
- - demander la grille de l'autre joueur régulièrement
-  - faire un autre model de grille pour les grilles externes, qui se
-    mette à jour régulièrement, mais sans aucune intelligence de jeu
-- envoyer des saletés à l'autre quand on marque des points
+- afficher la grille de l'autre joueur ï¿½ droite, mettre le nom de
+  l'adversaire en dessous
+ - ajouter la grille (string) au Player, client et serveur
+ - avoir deux fonctions de conversion: function(row,col) <-> string
+ - envoyer la grille au serveur ï¿½ chaque fois qu'elle change
+ - faire un autre model de grille pour les grilles externes, qui se
+   mette ï¿½ jour rï¿½guliï¿½rement, mais sans aucune intelligence de jeu
+- envoyer des saletï¿½s ï¿½ l'autre quand on marque des points
+ - ajouter deux champs "nasties" au Player (to give, to get ?)
+ - sur le serveur, transfÃ©rer les nasties d'un joueur vers son 
+   adversaire
+ - rÃ©cupÃ©rer et ajouter les saletÃ©s dans le client
+- GÃ©rer correctement les saletÃ©s
+ - elles doivent avoir une couleur Ã  elles
+ - elles ne doivent pas pÃ©tÃ©es seules
+ - elles doivent disparaitre avec leurs voisines
 
 - supprimer les joueurs quand la partie est finie
-- détecté les déconnexions
+- dï¿½tectï¿½ les dï¿½connexions
 - styler un peu
 - deploy to cheap heroku
 
 * mode 1 joueur
-- afficher la prochaine pièce
-- faire une IA pour un deuxième joueur
+- afficher la prochaine piï¿½ce
+- faire une IA pour un deuxiï¿½me joueur
 
 * Administrativ
 - fill in the links in the credit tab. - DONE
@@ -49,16 +57,18 @@
 
 NICE TO HAVE
 
+* passer la textbox en first responder quand on affiche le login
+
 * add iphone compatible buttons
-- attendre la version 1.0 de sproutcore qui fera un truc expres pour ça.
+- attendre la version 1.0 de sproutcore qui fera un truc expres pour ï¿½a.
 
 
 * blinder un peu le serveur : 
 - retourner un error code + json pour description de l'erreur. ok
-- voir comment rattraper l'erreur dans sproutcore server _createFailure. visiblement un problème côté sproutcore ... on va pas s'embeter pour l'instant avec ça.
-- gérer l'interdiction côté client
+- voir comment rattraper l'erreur dans sproutcore server _createFailure. visiblement un problï¿½me cï¿½tï¿½ sproutcore ... on va pas s'embeter pour l'instant avec ï¿½a.
+- gï¿½rer l'interdiction cï¿½tï¿½ client
 - passer au serveur Rest de sproutcore
-- passer au serveur Rails de sproutcore, ça fait le protect forgery
+- passer au serveur Rails de sproutcore, ï¿½a fait le protect forgery
 - faire quelque chose si deux personnes se connectent avec le meme pseudo
 
 * High scores
