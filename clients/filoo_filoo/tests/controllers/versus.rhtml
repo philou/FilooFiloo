@@ -23,11 +23,15 @@
 Test.context("FilooFiloo.VersusController",{
 
   setup: function()  {
+    FilooFiloo.loginController = FilooFiloo.createLoginController();
     this.versusController = FilooFiloo.createVersusController();
 
-    that = this;
-
     this.player = null;
+    this.waitTimer = null;
+    this.playerTimer = null;
+
+    var that = this;
+
     this.versusController.Player = {
       newRecord: function(values, datasource) {
         that.player = FilooFiloo.Player.newRecord(values, datasource);
@@ -43,24 +47,52 @@ Test.context("FilooFiloo.VersusController",{
       }
     };
 
-    this.timer = null;
     this.versusController.Timer = {
       schedule: function(params) {
-        that.timer = {
+        var result = {
           parameters: params,
 	  invalidateCalled: NO,
           invalidate: function() {
 	     this.invalidateCalled = YES;
 	  }
+        };
+        if (!that.waitTimer) {
+          that.waitTimer = result;
         }
-	return that.timer;
+        else {
+          that.playerTimer = result;
+        }
+	return result;
       }
+    };
+    this.tickTimer = function(timer) {
+      this.assertNotNull(timer);
+      this.assertNotNull(timer.parameters);
+      this.assertNotNull(timer.parameters.target);
+      this.assertNotNull(timer.parameters.action);
+      this.assertIdentical(YES, timer.parameters.repeats);
+
+      timer.parameters.target[timer.parameters.action]();
+    };
+    this.tickWaitTimer = function() {
+      this.tickTimer(this.waitTimer);
+    };
+    this.tickPlayerTimer = function() {
+      this.tickTimer(this.playerTimer);
+    };
+
+    this.startAGame = function() {
+      FilooFiloo.loginController.set('name', 'zinzin');
+      this.versusController.set('currentMode', 'versus')
+
+      this.player.set('opponentName', 'gyzmo');
+      this.tickWaitTimer();
     };
   },
 
   "Entering versus mode should force a login and start waiting for an opponent": function() {
 
-    this.versusController.set('currentMode', 'versus')
+    this.versusController.set('currentMode', 'versus');
     YES.shouldEqual(FilooFiloo.loginController.get('loginPaneVisible'));
 
     FilooFiloo.loginController.set('name', 'zinzin');
@@ -68,21 +100,14 @@ Test.context("FilooFiloo.VersusController",{
 
     'Waiting for an opponent ...'.shouldEqual(this.versusController.get('whatIsPlayerDoing'));
     assertNotNull(this.player);
-
     YES.shouldEqual(this.player.commitCalled);
-
-    assertNotNull(this.timer);
-    assertNotNull(this.timer.parameters);
-    assertNotNull(this.timer.parameters.target);
-    assertNotNull(this.timer.parameters.action);
-    YES.shouldEqual(this.timer.parameters.repeats);
-
     NO.shouldEqual(this.player.refreshCalled);
-    this.timer.parameters.target[this.timer.parameters.action]();
+
+    this.tickWaitTimer();
     YES.shouldEqual(this.player.refreshCalled);
 
     this.player.set('opponentName', 'gyzmo');
-    this.timer.parameters.target[this.timer.parameters.action]();
+    this.tickWaitTimer();
     'Playing against gyzmo'.shouldEqual(this.versusController.get('whatIsPlayerDoing'));
     YES.shouldEqual(this.versusController.get('board').get('playing'));
   },
@@ -101,6 +126,21 @@ Test.context("FilooFiloo.VersusController",{
     this.versusController.set('currentMode', 'high_scores')
     NO.shouldEqual(FilooFiloo.loginController.get('loginPaneVisible'));
     assertNotIdentical('Waiting for an opponent ...', this.versusController.get('whatIsPlayerDoing'));
+  },
+  "Once the game is started, the player should be commited regularly with a valid board": function() {
+    this.startAGame();
+
+    this.player.commitCalled = NO;
+    this.tickPlayerTimer();
+    assertNotNull(this.player.get('boardString'));
+    YES.shouldEqual(this.player.commitCalled);    
+  },
+
+  "If a game stops, the player timer shouls be invalidated": function() {
+    this.startAGame();
+
+    this.versusController.get('board').abort();
+    YES.shouldEqual(this.playerTimer.invalidateCalled);
   }
 
 }) ;

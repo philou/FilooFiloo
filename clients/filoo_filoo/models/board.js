@@ -72,12 +72,22 @@ FilooFiloo.Board = SC.Record.extend(
     /**
      * Ticker responsible of time.
      */
-    ticker: FilooFiloo.Ticker.create(),
+    getTicker: function() {
+      if (!this.ticker) {
+	this.ticker = FilooFiloo.Ticker.create();
+      }
+      return this.ticker;
+    },
 
     /**
      * Random color provider.
      */
-    colorProvider: FilooFiloo.ColorProvider.create(),
+    getColorProvider: function() {
+      if(!this.colorProvider) {
+	this.colorProvider = FilooFiloo.ColorProvider.create();
+      }
+      return this.colorProvider;
+    },
 
     /**
       Starts the game.
@@ -87,7 +97,7 @@ FilooFiloo.Board = SC.Record.extend(
         this.set('disappearedPieces', 0);
         this.set('score', 0);
 	this.set('playing', true);
-	this.ticker.start(this);
+	this.getTicker().start(this);
 	this.setBlockedPieces_(blockedPieces);
 	this.setCurrentPiece_(null);
 
@@ -98,7 +108,7 @@ FilooFiloo.Board = SC.Record.extend(
       Aborts the game.
     */
     abort: function() {
-	this.ticker.stop();
+	this.getTicker().stop();
 	this.set('playing', false);
     },
 
@@ -192,7 +202,7 @@ FilooFiloo.Board = SC.Record.extend(
         center = center || FilooFiloo.Board.PieceStartOrigin;
         var newPiece = FilooFiloo.Piece.create({
 	    center: center,
-	    colors: {first: this.colorProvider.popFirstColor(), second: this.colorProvider.popSecondColor()}
+	    colors: {first: this.getColorProvider().popFirstColor(), second: this.getColorProvider().popSecondColor()}
 	});
 
         if (!this.pieceIsAllowed_(newPiece)) {
@@ -287,11 +297,8 @@ FilooFiloo.Board = SC.Record.extend(
         return this.initCurrentPiece_();
     },
 
-    // Forwards the level changes to the ticker
     forwardLevelToTheTicker: function() {
-        if (this.ticker) {
-            this.ticker.setLevel(this.get('level'));
-        }
+      this.getTicker().setLevel(this.get('level'));
     }.observes('level')
 });
 
@@ -306,5 +313,19 @@ FilooFiloo.Board.setDimensions = function(colCount, rowCount) {
 };
 
 FilooFiloo.Board.setDimensions(FilooFiloo.Game.ColCount, FilooFiloo.Game.RowCount);
+
+FilooFiloo.Board.boardToString = function(board) {
+  result = [];
+  for (row = 0; row < FilooFiloo.Board.RowCount; row++) {
+    for (col = 0; col < FilooFiloo.Board.ColCount; col++) {
+
+      result.push(FilooFiloo.Game.stateToInitial[board.cellState(col, row)]);
+    }
+    result.push("\n");
+  }
+
+  return result.join("");
+};
+
 
 

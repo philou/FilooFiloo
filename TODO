@@ -28,6 +28,11 @@
 - afficher la grille de l'autre joueur à droite, mettre le nom de
    l'adversaire en dessous
  - envoyer la grille au serveur à chaque fois qu'elle change
+  - ajouter une grille au player server - DONE
+  - faire une conversion de function à string pour la grille - DONE
+  - faire un timer qui met à jour la grille du player et la commit
+   dans le controller du player - DONE
+  - checker que ça fonctionne bien avec le serveur - DONE
  - demander la grille de l'autre joueur régulièrement
   - faire un autre model de grille pour les grilles externes, qui se
     mette à jour régulièrement, mais sans aucune intelligence de jeu

@@ -48,7 +48,28 @@ class PlayersController < ApplicationController
 
             player.save
             response << {:_guid => guid, :id => player.id}
+            #maybe we could send back the whole data ...
 
+          end
+        end
+        render :text => response.to_json
+      end
+    end
+  end
+
+  def update
+    respond_to do |wants|
+      wants.json do
+        response = []
+        params[:records].each_pair do |_record_id, record|
+          Player.transaction do
+
+            player = Player.find(record[:id])
+            player.opponent_name = record[:opponent_name]
+            player.board_string = record[:board_string]
+            player.save
+
+            response << player2Record(player)
           end
         end
         render :text => response.to_json
@@ -72,7 +93,8 @@ private
     { :id => player.id,
       :name => player.name,
       :opponent_name => player.opponent_name,
-      :type => "player"}
+      :type => "player",
+      :board_string => player.board_string}
   end
 
 end

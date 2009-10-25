@@ -33,28 +33,49 @@ class PlayersControllerTest < ActionController::TestCase
     verify_player_opponent(y, "X")
   end
 
+  def test_update_player
+    x = create_player("X")
+    verify_player(x, "board_string", nil)
+
+    x = post_player(:update, {:name => x["name"], :id => x["id"], :board_string => "bobo"})
+    verify_player(x, "board_string", "bobo")
+  end
+  
 private
 
   def create_player(player_name)
-    post(:create, {
-           :path_prefix => "sc",
-           :records => {
-             0 => {:name => player_name}}})
-    assert_response :success
-
-    player = JSON.parse(@response.body)
-    return player[0]["id"]
+    return post_player(:create, {:name => player_name})
   end
 
-  def verify_player_opponent(player_id, opponent_name)
+  def post_player(action, player)
+    post(action, {
+           :path_prefix => "sc",
+           :records => {
+             0 => player}})
+    assert_response :success
+
+    fresh_players = JSON.parse(@response.body)
+    return fresh_players[0]
+  end
+
+  def verify_player_opponent(player, opponent_name)
+    verify_player(player, "opponent_name", opponent_name)
+  end
+
+  def verify_player(player, key, value)
+    fresh_player = get_player(player["id"])
+    assert_equal(value, fresh_player[key])
+  end
+
+  def get_player(player_id)
     get(:show, {:path_prefix => "sc", :id => player_id})
     assert_response :success
 
-    player = JSON.parse(@response.body)
-    assert_equal(1, player.length)
-    assert_equal(player_id, player[0]["id"])
-    assert_equal("player", player[0]["type"])
-    assert_equal(opponent_name, player[0]["opponent_name"])
+    players = JSON.parse(@response.body)
+    assert_equal(1, players.length)
+    assert_equal(player_id, players[0]["id"])
+    assert_equal("player", players[0]["type"])
+    return players[0]
   end
 
 end
