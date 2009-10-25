@@ -35,6 +35,6 @@ FilooFiloo.Player = SC.Record.extend(
   resourceURL: 'players',
   type: 'Player', // I added this for the refresh function to know the type of the incoming json record
 
-  properties: ['name', 'opponentName'],
+  properties: ['name', 'opponentName', 'boardString'],
   primaryKey: 'guid'
 }) ;

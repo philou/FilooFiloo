@@ -60,7 +60,7 @@ Test.context("FilooFiloo.Board",{
 	};
 
         this.board.shouldBeEmpty = function(fixture, message) {
-            this.shouldBe(fixture, 
+            this.shouldBe(fixture,
 			  ["    ",
 			   "    ",
 			   "    ",
@@ -193,7 +193,7 @@ Test.context("FilooFiloo.Board",{
 	board.start();
 	board.tick();
 
-	board.shouldFollow({action:["tick", "abort", "start"], 
+	board.shouldFollow({action:["tick", "abort", "start"],
 			    board: ["    ",  idem,   "    ",
 			            " rb ",  idem,   "    ",
 			            "    ",  idem,   "    ",
@@ -219,7 +219,7 @@ Test.context("FilooFiloo.Board",{
     "A piece should move with left and right": function() {
 	board.start();
 	board.shouldFollow({action:["tick", "left", "right"],
-			    board: [" rb ", "rb  ", " rb ", 
+			    board: [" rb ", "rb  ", " rb ",
 			            "    ", "    ", "    ",
 			            "    ", "    ", "    ",
 			            "    ", "    ", "    ",
@@ -231,7 +231,7 @@ Test.context("FilooFiloo.Board",{
 	board.start();
 	board.tick();
   	board.shouldFollow({action:["tick", "rotate", "rotate", "rotate", "rotate"],
-			    board: ["    ", " b  ",   "    ",   "    ",   "    ", 
+			    board: ["    ", " b  ",   "    ",   "    ",   "    ",
 			            " rb ", " r  ",   "br  ",   " r  ",   " rb ",
 			            "    ", "    ",   "    ",   " b  ",   "    ",
 			            "    ", "    ",   "    ",   "    ",   "    ",
@@ -243,7 +243,7 @@ Test.context("FilooFiloo.Board",{
 	board.start();
 	board.tick();
 	board.shouldFollow({action:["tick", "antiRotate", "antiRotate", "antiRotate", "antiRotate"],
-			    board: ["    ", "    ",       "    ",       " b  ",       "    ", 
+			    board: ["    ", "    ",       "    ",       " b  ",       "    ",
 			            " rb ", " r  ",       "br  ",       " r  ",       " rb ",
 			            "    ", " b  ",       "    ",       "    ",       "    ",
 			            "    ", "    ",       "    ",       "    ",       "    ",
@@ -254,7 +254,7 @@ Test.context("FilooFiloo.Board",{
     "It should not be possible to move a piece outside the board": function() {
 	board.start();
 	board.shouldFollow({action:["tick", "left", "left", "right", "right", "right",],
-			    board: [" rb ", "rb  ", idem,   " rb ",  "  rb",  idem, 
+			    board: [" rb ", "rb  ", idem,   " rb ",  "  rb",  idem,
 			            "    ", "    ", idem,   "    ",  "    ",  idem,
 			            "    ", "    ", idem,   "    ",  "    ",  idem,
 			            "    ", "    ", idem,   "    ",  "    ",  idem,
@@ -469,7 +469,7 @@ Test.context("FilooFiloo.Board",{
 	this.colorProvider.secondColor = FilooFiloo.Game.Red;
 
         assertIdentical(0, board.get('disappearedPieces'));
-        
+
         board.tick(); board.drop(); board.tick();
 
         board.shouldBeEmpty();
@@ -493,7 +493,7 @@ Test.context("FilooFiloo.Board",{
         board.dropFiloos(FilooFiloo.Game.LevelUpgrade + 2);
         assertIdentical(FilooFiloo.Game.LevelUpgrade + 2, board.get('disappearedPieces'));
         assertIdentical(2, board.get('level'));
-        
+
         board.dropFiloos(FilooFiloo.Game.LevelUpgrade + 2);
         assertIdentical(2 * (FilooFiloo.Game.LevelUpgrade + 2), board.get('disappearedPieces'));
         assertIdentical(3, board.get('level'));
@@ -528,19 +528,27 @@ Test.context("FilooFiloo.Board",{
 	                            "rb  ", "rb  ", "rb  ", "r   ", "rr  ", "    ",
 	                            "rb  ", "rb  ", "rbbb", "r   ", "rr  ", "    "],
                             score: [     0,      0,      0,      4,      4,     14]});
+    },
+
+    "board to string should handle main colors": function() {
+      boardArray = [" bb ",
+                    " r  ",
+		    " r  ",
+	            " r  ",
+	            "rb  ",
+	            "rb  "];
+
+      fakeBoard = {
+        cellState: function(col, row) {
+          return FilooFiloo.Game.initialToState[boardArray[row].charAt(col)];
+        }
+      };
+ 
+      assertIdentical(boardArray.join("\n")+"\n", FilooFiloo.Board.boardToString(fakeBoard));
     }
 
 
-/*
-    hall of fame
-    identification
-    sounds
-    glue between pieces
-    next piece
 
-    "nicer style" -> got to get a book or something
-
-*/
 }) ;
 
 if (window.main && (appMain = main)) main = null ;

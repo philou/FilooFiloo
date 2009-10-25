@@ -79,20 +79,40 @@ FilooFiloo.createVersusController = function() {
 	this.player.commit();
 
 	this.ticks = 0;
-	this.timer = this.Timer.schedule({target: this, action: '_checkForOpponent', repeats: YES, interval: 1000});
+	this.waitTimer = this.Timer.schedule({target: this, action: '_checkForOpponent', repeats: YES, interval: 1000});
       },
 
       _checkForOpponent: function() {
 	this.player.refresh();
 	if (this.player.get('opponentName')) {
 	  this.set('whatIsPlayerDoing', 'Playing against '+this.player.get('opponentName'));
-	  this.timer.invalidate();
-	  this.get('board').start();
+	  this.waitTimer.invalidate();
+	  this._startPlaying();
 	} else {
 	  this.ticks = this.ticks + 1;
 	  this.set('whatIsPlayerDoing', 'Waiting for an opponent ... '+this.ticks+' seconds');
 	}
-      }
+      },
+
+      _startPlaying: function() {
+	this.get('board').start();
+	this.playerTimer = this.Timer.schedule({target: this, action: '_commitPlayer', repeats: YES, interval: 3000});
+      },
+      _commitPlayer: function() {
+	var boardString = FilooFiloo.Board.boardToString(this.get('board'));
+	this.player.set('boardString', boardString);
+	this.player.commit();
+      },
+      playingObserver: function() {
+	if (!this.get('board').get('playing')) {
+	  if (this.waitTimer) {
+	    this.waitTimer.invalidate();
+	  }
+	  if (this.playerTimer) {
+	    this.playerTimer.invalidate();
+	  }
+	}
+      }.observes('.board.playing')
     }
   );
 };

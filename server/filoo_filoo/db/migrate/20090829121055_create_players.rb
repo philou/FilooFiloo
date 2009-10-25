@@ -18,6 +18,7 @@ class CreatePlayers < ActiveRecord::Migration
     create_table :players do |t|
       t.column :name, :string
       t.column :opponent_name, :string
+      t.column :board_string, :string
       t.column :lock_version, :int
       t.timestamps
     end

@@ -56,6 +56,7 @@ ActionController::Routing::Routes.draw do |map|
   map.with_options(:path_prefix => "sc") do |m|
     m.connect ':controller/:action'
     m.connect ':controller/show/:id', :action => "show", :method => :get
+    m.connect ':controller/update/:id', :action => "update", :method => :post
     #m.connect ':controller/destroy/:id', :action => "destroy", :method => :post
   end
 end
