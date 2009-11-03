@@ -34,8 +34,12 @@
    dans le controller du player - DONE
   - checker que ça fonctionne bien avec le serveur - DONE
  - demander la grille de l'autre joueur régulièrement
-  - faire un autre model de grille pour les grilles externes, qui se
-    mette à jour régulièrement, mais sans aucune intelligence de jeu
+  - migrer à sproutcore 1.0 pour avoir les foreign keys ...
+  - dans le player serveur, remplacer l'opponent_name par l'opponent
+   id
+  - dans le client, récupérer l'opponent complet plutôt que l'opponent_name
+ - faire un autre model de grille pour les grilles externes, qui se
+   mette à jour régulièrement, mais sans aucune intelligence de jeu
 - envoyer des saletés à l'autre quand on marque des points
 
 - supprimer les joueurs quand la partie est finie
