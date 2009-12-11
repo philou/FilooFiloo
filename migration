@@ -1,0 +1,23 @@
+o [DONE] perform tutorial
+
+* migrate 1 player mode
+ o [DONE] check how to define a custom view
+ o [DONE] change the sc-config for BuildFile, try to remove the proxy-patch.rb
+ o [DONE] rename client dir to apps
+ o [DONE] is it required to rename english.lproj to resources ? don't know, did it.
+ o [DONE] add a loading.rhtml file in resources (standard file)
+ o [DONE] check the startup files, main.js and core.js
+ - change the main page, remove unmigrated tabs
+ - migrate the board view
+ - fix the body.css file
+
+* migrate high scores
+ - migrate the high scores view -> maybe possible to use a listView
+   this time
+ - finish the tutorial, with rails AND sinatra
+ - migrate the server calls, rewrite with sinatra if really simpler
+ - check errors codes getting back from the server, I had included
+   proxy-patch.rb at the top level Buildfile to fix this before
+
+* migrate 2 players mode
+   - migrate server
