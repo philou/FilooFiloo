@@ -1,13 +1,25 @@
 // ==========================================================================
 // Project:   FilooFiloo
-// Copyright: ©2009 My Company, Inc.
+// Copyright: ©2008-2009 Philippe Bourgau, Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the MIT License.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the MIT
+// License for more details.
+//
+// You should have received a copy of the MIT License along with this
+// program. If not, see <http://www.opensource.org/licenses/mit-license.php>
+//
 // ==========================================================================
 /*globals FilooFiloo */
 
 /** @namespace
 
   My cool new app.  Describe your application.
-  
+
   @extends SC.Object
 */
 FilooFiloo = SC.Application.create(
@@ -21,7 +33,7 @@ FilooFiloo = SC.Application.create(
   // connect to a backend server.  The default setup below connects the store
   // to any fixtures you define.
   store: SC.Store.create().from(SC.Record.fixtures)
-  
+
   // TODO: Add global constants or singleton objects needed by your app here.
 
 }) ;
