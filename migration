@@ -1,12 +1,18 @@
 o [DONE] perform tutorial
 
+o [DONE] create a new empty app
+ o [DONE] sc-init
+ o [DONE] apply licence to all files
+
+* migrate credits and rules tabs
+ 
 * migrate 1 player mode
- o [DONE] check how to define a custom view
- o [DONE] change the sc-config for BuildFile, try to remove the proxy-patch.rb
- o [DONE] rename client dir to apps
- o [DONE] is it required to rename english.lproj to resources ? don't know, did it.
- o [DONE] add a loading.rhtml file in resources (standard file)
- o [DONE] check the startup files, main.js and core.js
+ - check how to define a custom view
+ - change the sc-config for BuildFile, try to remove the proxy-patch.rb
+ - rename client dir to apps
+ - is it required to rename english.lproj to resources ? don't know, did it.
+ - add a loading.rhtml file in resources (standard file)
+ - check the startup files, main.js and core.js
  - change the main page, remove unmigrated tabs
  - migrate the board view
  - fix the body.css file
@@ -21,3 +27,4 @@ o [DONE] perform tutorial
 
 * migrate 2 players mode
    - migrate server
+
