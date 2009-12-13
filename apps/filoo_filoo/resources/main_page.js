@@ -23,14 +23,56 @@ FilooFiloo.mainPage = SC.Page.design({
   // Add childViews to this pane for views to display immediately on page
   // load.
   mainPane: SC.MainPane.design({
-    childViews: 'labelView'.w(),
+    childViews: 'tabView'.w(),
 
-    labelView: SC.LabelView.design({
-      layout: { centerX: 0, centerY: 0, width: 200, height: 18 },
-      textAlign: SC.ALIGN_CENTER,
-      tagName: "h1",
-      value: "Welcome to SproutCore!"
+    tabView: SC.TabView.design({
+
+      value: "Rules",
+      items: [
+	{ title: "Rules", value: "FilooFiloo.rulesPage.mainView" },
+	{ title: "Credits", value: "FilooFiloo.creditsPage.mainView" }
+      ],
+
+      itemTitleKey: 'title',
+      itemValueKey: 'value',
+
+      layout: { left:12, right:12, top:12, bottom:12 },
+
+      userDefaultKey: "mainPane"
     })
   })
 
 });
+
+/*
+
+<% content_for('body') do %>
+
+<div id="header">
+  <h1 id="title">Philou's Filoo-Filoo</h1>
+  <div id="login">
+    <%= text_field_view :login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.loginController.name' } %>
+  </div>
+</div>
+
+<div id="content">
+  <%= tab_view :modes_tabs,
+               :lazy_tabs => true,
+               :segments => [[:single, "1 player"],
+                             [:versus, "2 players"],
+                             [:high_scores, "High scores"],
+                             [:rules, "Rules"],
+                             [:credits, "Credits"]],
+               :now_showing => :single, :bind => { :now_showing => 'FilooFiloo.versusController.currentMode' } %>
+</div>
+<% end %>
+
+<% view :login_pane, :class => 'dialog', :pane => :dialog, :width => 300, :bind => {:visible => 'FilooFiloo.loginController.loginPaneVisible' } do %>
+  <h1><%= label_view :bind => { :value => 'FilooFiloo.loginController.loginTitle' } %></h1>
+
+  <p><%= label_view :bind => { :value => 'FilooFiloo.loginController.loginCaption' } %></p>
+  <%= text_field_view :required_login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.loginController.name', :visible => 'FilooFiloo.loginController.loginTextRequired' } %>
+  <%= button_view :title => 'Ok', :default => true, :action => 'FilooFiloo.loginController.closeLoginPane' %>
+<% end %>
+
+*/

@@ -4,7 +4,9 @@ o [DONE] create a new empty app
  o [DONE] sc-init
  o [DONE] apply licence to all files
 
-* migrate credits and rules tabs
+* migrate passiv tabs
+ o [DONE] credit tabs
+ - rules tabs, with scroller ... is it possible to insert html ???
  
 * migrate 1 player mode
  - check how to define a custom view
