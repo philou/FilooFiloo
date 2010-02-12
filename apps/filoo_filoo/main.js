@@ -39,6 +39,6 @@ FilooFiloo.main = function main() {
   // TODO: Set the content property on your primary controller
   // ex: FilooFiloo.contactsController.set('content',FilooFiloo.contacts);
 
-} ;
+};
 
 function main() { FilooFiloo.main(); }
