@@ -17,17 +17,32 @@
 /*globals FilooFiloo */
 
 // This page describes the main user interface for your application.
-FilooFiloo.mainPage = SC.Page.design({
-
+FilooFiloo.mainPage = SC.Page.design(
+{
   // The main pane is made visible on screen as soon as your app is loaded.
   // Add childViews to this pane for views to display immediately on page
   // load.
-  mainPane: SC.MainPane.design({
-    childViews: 'tabView'.w(),
+  mainPane: SC.MainPane.design(
+  {
+    childViews: 'headerView modesTabView'.w(),
 
-    tabView: SC.TabView.design({
+    headerView: SC.ToolbarView.design(
+    {
+      layout: { top: 0, left: 0, right: 0, height: 36 },
+      anchorLocation: SC.ANCHOR_TOP,
+      childViews: 'titleView'.w(),
 
-      value: "Rules",
+      titleView: SC.LabelView.design(
+      {
+	tagName: 'h1',
+	value: "Philou's Filoo-Filoo",
+	layout: { top: 0, left: 0, height: 36 }
+      })
+    }),
+
+    modesTabView: SC.TabView.design(
+    {
+      nowShowing: "FilooFiloo.rulesPage.mainView", // ça n'a pas l'air d'être ça.
       items: [
 	{ title: "Rules", value: "FilooFiloo.rulesPage.mainView" },
 	{ title: "Credits", value: "FilooFiloo.creditsPage.mainView" }
@@ -36,7 +51,7 @@ FilooFiloo.mainPage = SC.Page.design({
       itemTitleKey: 'title',
       itemValueKey: 'value',
 
-      layout: { left:12, right:12, top:12, bottom:12 },
+      layout: { left:12, right:12, top:48, bottom:12 },
 
       userDefaultKey: "mainPane"
     })
@@ -76,3 +91,4 @@ FilooFiloo.mainPage = SC.Page.design({
 <% end %>
 
 */
+

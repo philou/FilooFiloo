@@ -6,16 +6,18 @@ o [DONE] create a new empty app
 
 * migrate passiv tabs
  o [DONE] credit tabs
- - rules tabs, with scroller ... is it possible to insert html ???
+ o [DONE] rules tabs, with scroller
+ o [DONE] insert a title to the main page. ajouter, problemes de style, comment mettre une id à un élément ? comment virer les layouts du code pour les mettres dans la css -> positionement dans le code, pas plus mal, on peut faire des calculs qu'on peut pas faire en CSS
+ - faire une page par defaut nowShowing? pas concluant
  
 * migrate 1 player mode
+ o [DONE] change the sc-config for BuildFile, try to remove the proxy-patch.rb
+ o [DONE] rename client dir to apps
+ o [DONE] is it required to rename english.lproj to resources ? don't know, did it.
+ o [DONE] add a loading.rhtml file in resources (standard file)
+ o [DONE] change the main page, remove unmigrated tabs
  - check how to define a custom view
- - change the sc-config for BuildFile, try to remove the proxy-patch.rb
- - rename client dir to apps
- - is it required to rename english.lproj to resources ? don't know, did it.
- - add a loading.rhtml file in resources (standard file)
  - check the startup files, main.js and core.js
- - change the main page, remove unmigrated tabs
  - migrate the board view
  - fix the body.css file
 

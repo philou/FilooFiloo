@@ -16,7 +16,8 @@
 // ==========================================================================
 /*globals FilooFiloo */
 
-FilooFiloo.creditsPage = SC.Page.design({
+FilooFiloo.creditsPage = SC.Page.design(
+  {
 
   mainView: SC.LabelView.design({
     escapeHTML: NO,

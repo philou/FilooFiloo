@@ -2,30 +2,20 @@
 
 /* general styles */
 h1 {
-    text-align: left
-}
-
-#title {
-    float: left
-}
-#login_text {
-    float: right
-}
-#header {
-    height: 20px
+    text-align: left;
 }
 
 /* styles for dialogs */
 .dialog {
-    text-align: center
+    text-align: center;
 }
 
 .dialog input {
-    width: 100%
+    width: 100%;
 }
 
 .dialog .button {
-    margin: 10px 0 0
+    margin: 10px 0 0;
 }
 
 /* styles for game board. */
@@ -38,7 +28,7 @@ table.board td {
     width: 30px;
     height: 30px;
     background-color: #DDDDDD;
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
 }
 
 table.board td.red { background-image: static_url('images/sprites_red.png')}
@@ -94,9 +84,13 @@ table.high_scores_table th {
 /*information tabs */
 .information {
     width: 300px;
-    margin: auto;
+    margin: 20px auto;
+    overflow: auto;
 }
 
+.information table {
+    margin: auto;
+}
 
 /* @end */
 
