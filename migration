@@ -16,6 +16,7 @@ o [DONE] create a new empty app
  o [DONE] is it required to rename english.lproj to resources ? don't know, did it.
  o [DONE] add a loading.rhtml file in resources (standard file)
  o [DONE] change the main page, remove unmigrated tabs
+ - afficher un stub static de la page (tableaux statiques ...)
  - check how to define a custom view
  - check the startup files, main.js and core.js
  - migrate the board view

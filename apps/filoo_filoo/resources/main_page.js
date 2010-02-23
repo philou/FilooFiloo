@@ -46,6 +46,7 @@ FilooFiloo.mainPage = SC.Page.design(
     {
       nowShowing: "FilooFiloo.rulesPage.mainView", // ça n'a pas l'air d'être ça.
       items: [
+	{ title: "Single player", value: "FilooFiloo.singlePage.mainView" },
 	{ title: "Rules", value: "FilooFiloo.rulesPage.mainView" },
 	{ title: "Credits", value: "FilooFiloo.creditsPage.mainView" }
       ],
