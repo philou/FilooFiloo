@@ -22,8 +22,9 @@ FilooFiloo.creditsPage = SC.Page.design(
   {
 
   mainView: SC.LabelView.design({
-    escapeHTML: NO,
+    layout: { top: 20, bottom: 0, centerX: 0, width: 300 },
     classNames: 'information',
+    escapeHTML: NO,
     value: "<h2>Contributors</h2><p>This game was done by Philippe Bourgau, 2008-2009.</p><h2>Licence</h2><p><a href=\"http://\">GNU Affero General Public License</a>, the code can be found <a href=\"http://www.gnu.org/licenses/\">here</a>.</p><h2>Main third parties</h2><p><ul><li><a href=\"http://www.sproutcore.com/\">Sproutcore</a></li><li><a href=\"http://rubyonrails.org/\">Rails</a></li><li><a href=\"http://www.povray.org/\">POV Ray</a></li></ul></p>"
   })
 });
