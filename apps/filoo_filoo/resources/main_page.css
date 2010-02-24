@@ -83,8 +83,6 @@ table.high_scores_table th {
 
 /*information tabs */
 .information {
-    width: 300px;
-    margin: 20px auto;
     overflow: auto;
 }
 

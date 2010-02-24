@@ -22,17 +22,17 @@ FilooFiloo.singlePageInternals = {
   {
     return SC.View.design(
     {
-      layout: { left: 0, right: 0, top: top, height: 24 },
+      layout: { left: 1, right: 1, top: top, height: 24 },
       childViews:
       [
 	SC.LabelView.design(
 	{
-	  layout: { left: 0, width: 100 },
+	  layout: { left: 0, width: 149 },
 	  value: title
 	}),
 	SC.LabelView.design(
 	{
-	  layout: { right: 0, width: 200 },
+	  layout: { right: 0, width: 149 },
 	  value: '0'
 	})
 	]
@@ -42,21 +42,21 @@ FilooFiloo.singlePageInternals = {
 
 FilooFiloo.singlePage = SC.Page.design(
 {
-
   mainView: SC.ScrollView.design(
   {
+    layout: { top: 20, bottom: 0, centerX: 0, width: 300 },
     contentView: SC.View.design(
     {
       childViews:
       [
 	SC.ButtonView.design(
 	{
-	  layout: { left: 0, right: 0, top: 0, height: 24 },
+	  layout: { left: 1, right: 1, top: 1, height: 24 },
 	  title: 'Start / Stop'
 	}),
-	FilooFiloo.singlePageInternals.newScoreBoardRow('Filoos', 24),
-	FilooFiloo.singlePageInternals.newScoreBoardRow('Score', 48),
-	FilooFiloo.singlePageInternals.newScoreBoardRow('Level', 72)
+	FilooFiloo.singlePageInternals.newScoreBoardRow('Filoos', 26),
+	FilooFiloo.singlePageInternals.newScoreBoardRow('Score', 51),
+	FilooFiloo.singlePageInternals.newScoreBoardRow('Level', 76)
       ]
     })
   })
