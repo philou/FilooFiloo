@@ -58,7 +58,11 @@ FilooFiloo.singlePage = SC.Page.design(
 	}),
 	FilooFiloo.singlePageInternals.newScoreBoardRow('Filoos', 26),
 	FilooFiloo.singlePageInternals.newScoreBoardRow('Score', 51),
-	FilooFiloo.singlePageInternals.newScoreBoardRow('Level', 76)
+	FilooFiloo.singlePageInternals.newScoreBoardRow('Level', 76),
+	FilooFiloo.BoardView.design(
+	{
+	  layout: { left: 1, right: 1, top: 101, height: 200 }
+	})
       ]
     })
   })
