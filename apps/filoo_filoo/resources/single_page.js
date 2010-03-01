@@ -1,6 +1,6 @@
 // ==========================================================================
 // Project:   FilooFiloo - rules page
-// Copyright: ©2008-2009 Philippe Bourgau, Inc.
+// Copyright: ©2008-2010 Philippe Bourgau, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -20,51 +20,56 @@
 
 FilooFiloo.singlePageInternals = {
 
-  newScoreBoardRow: function(title, top)
+  newScoreBoardRow: function(title, index)
   {
     return SC.View.design(
     {
-      layout: { left: 1, right: 1, top: top, height: 24 },
+      layout: FilooFiloo.Layout.scoreRow(index),
       childViews:
       [
 	SC.LabelView.design(
 	{
-	  layout: { left: 0, width: 149 },
+	  layout: { left: 0, width: FilooFiloo.Layout.SCORE_ROW_WIDTH / 2 - 1 },
 	  value: title
 	}),
 	SC.LabelView.design(
 	{
-	  layout: { right: 0, width: 149 },
+	  layout: { right: 0, width: FilooFiloo.Layout.SCORE_ROW_WIDTH / 2 -1 },
 	  value: '0'
 	})
-	]
-      });
-    }
+      ]
+    });
+  }
 };
 
 FilooFiloo.singlePage = SC.Page.design(
 {
-  mainView: SC.ScrollView.design(
+  mainView: SC.View.design(
   {
-    layout: { top: 20, bottom: 0, centerX: 0, width: 300 },
-    contentView: SC.View.design(
-    {
-      childViews:
-      [
-	SC.ButtonView.design(
-	{
-	  layout: { left: 1, right: 1, top: 1, height: 24 },
-	  title: 'Start / Stop'
-	}),
-	FilooFiloo.singlePageInternals.newScoreBoardRow('Filoos', 26),
-	FilooFiloo.singlePageInternals.newScoreBoardRow('Score', 51),
-	FilooFiloo.singlePageInternals.newScoreBoardRow('Level', 76),
-	FilooFiloo.BoardView.design(
-	{
-	  layout: { left: 1, right: 1, top: 101, height: 200 }
-	})
-      ]
-    })
+    classNames: ['main-view'],
+    layout: FilooFiloo.Layout.MAIN_VIEW,
+    childViews:
+    [
+      SC.ButtonView.design(
+      {
+	layout: FilooFiloo.Layout.scoreRow(0),
+	title: 'Start / Stop'
+      }),
+      SC.View.design(
+      {
+	classNames: ['scores'],
+	childViews:
+	[
+	  FilooFiloo.singlePageInternals.newScoreBoardRow('Filoos', 1),
+	  FilooFiloo.singlePageInternals.newScoreBoardRow('Score', 2),
+	  FilooFiloo.singlePageInternals.newScoreBoardRow('Level', 3)
+	]
+      }),
+      FilooFiloo.BoardView.design(
+      {
+	layout: { left: 1, right: 1, top: FilooFiloo.Layout.scoreRowTop(4), height: 380 }
+      })
+    ]
   })
 });
 

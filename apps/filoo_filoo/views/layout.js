@@ -1,5 +1,5 @@
 // ==========================================================================
-// Project:   FilooFiloo - credits page
+// Project:   FilooFiloo - mainPage
 // Copyright: ©2008-2010 Philippe Bourgau, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
@@ -18,13 +18,25 @@
 // ==========================================================================
 /*globals FilooFiloo */
 
-FilooFiloo.creditsPage = SC.Page.design(
-  {
+/** @class
 
-  mainView: SC.LabelView.design({
-    layout: FilooFiloo.Layout.MAIN_VIEW,
-    classNames: ['main-view', 'information'],
-    escapeHTML: NO,
-    value: "<h2>Contributors</h2><p>This game was done by Philippe Bourgau, 2008-2010.</p><h2>Licence</h2><p><a href=\"http://\">GNU Affero General Public License</a>, the code can be found <a href=\"http://www.gnu.org/licenses/\">here</a>.</p><h2>Main third parties</h2><p><ul><li><a href=\"http://www.sproutcore.com/\">Sproutcore</a></li><li><a href=\"http://rubyonrails.org/\">Rails</a></li><li><a href=\"http://www.povray.org/\">POV Ray</a></li></ul></p>"
-  })
-});
+  Constants for layout.
+
+*/
+FilooFiloo.Layout = {
+
+  MAIN_VIEW: { top: 20, bottom: 0, centerX: 0, width: 300 },
+  SCORE_ROW_HEIGHT: 24,
+  SCORE_ROW_WIDTH: 200,
+  scoreRowTop: function(index) {
+    return index*(this.SCORE_ROW_HEIGHT+1)+1;
+  },
+  scoreRow: function(index) {
+    return {
+      width: this.SCORE_ROW_WIDTH,
+      centerX: 0,
+      height: this.SCORE_ROW_HEIGHT,
+      top: this.scoreRowTop(index)
+    };
+  }
+};
