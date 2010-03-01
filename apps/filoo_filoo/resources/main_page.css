@@ -4,6 +4,9 @@
 h1 {
     text-align: left;
 }
+.main-view {
+    overflow: auto;
+}
 
 /* styles for dialogs */
 .dialog {
@@ -19,49 +22,31 @@ h1 {
 }
 
 /* styles for game board. */
-table.board {
+table.board-view-table {
     border-spacing: 1px;
-    margin: 10px;
+    margin: 1px auto;
 }
 
-table.board td {
+table.board-view-table td {
     width: 30px;
     height: 30px;
-    background-color: #DDDDDD;
+    padding: 0;
+    background-color: #FFFFFF;
     background-repeat: no-repeat;
 }
 
-table.board td.red { background-image: static_url('images/sprites_red.png')}
-table.board td.blue { background-image: static_url('images/sprites_blue.png')}
-table.board td.green { background-image: static_url('images/sprites_green.png')}
-table.board td.purple { background-image: static_url('images/sprites_purple.png')}
-table.board td.yellow { background-image: static_url('images/sprites_yellow.png')}
+table.board-view-table td.red { background-image: static_url('images/sprites_red.png')}
+table.board-view-table td.blue { background-image: static_url('images/sprites_blue.png')}
+table.board-view-table td.green { background-image: static_url('images/sprites_green.png')}
+table.board-view-table td.purple { background-image: static_url('images/sprites_purple.png')}
+table.board-view-table td.yellow { background-image: static_url('images/sprites_yellow.png')}
 
 /* styles for the single player game */
-.single {
-    width: 205px; /* width of the board ... kind of ugly !!! */
-    margin: 0 auto;
-}
-
-table.scores {
-    border-collapse: collapse;
-    width: 185px;
-    margin: 10px auto 0;
-}
-table.scores tr, table.scores tr td {
-    color: #555555;
-    border: 1px solid #C9C9C9;
-    margin: 0 auto;
-    padding: 1px 4px;
-}
-
-#startStop {
-    width: 185px;
-    margin: 0 auto;
+.scores {
+    color: #444444;
 }
 
 /* styles for high scores */
-
 .high_scores {
     width: 100%;
     margin: auto;
@@ -82,10 +67,6 @@ table.high_scores_table th {
 }
 
 /*information tabs */
-.information {
-    overflow: auto;
-}
-
 .information table {
     margin: auto;
 }

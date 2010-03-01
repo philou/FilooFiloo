@@ -1,5 +1,5 @@
 // ==========================================================================
-// Project:   FilooFiloo
+// Project:   FilooFiloo - mainPage
 // Copyright: ©2008-2010 Philippe Bourgau, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,24 +16,25 @@
 // ==========================================================================
 /*globals FilooFiloo */
 
-/** @namespace
+/** @class
 
-  My cool new app.  Describe your application.
+  Constants for layout.
 
-  @extends SC.Object
 */
-FilooFiloo = SC.Application.create(
-  /** @scope FilooFiloo.prototype */ {
+FilooFiloo.Layout = {
 
-  NAMESPACE: 'FilooFiloo',
-  VERSION: '0.1.0',
-
-  // This is your application store.  You will use this store to access all
-  // of your model data.  You can also set a data source on this store to
-  // connect to a backend server.  The default setup below connects the store
-  // to any fixtures you define.
-  store: SC.Store.create().from(SC.Record.fixtures)
-
-  // TODO: Add global constants or singleton objects needed by your app here.
-
-}) ;
+  MAIN_VIEW: { top: 20, bottom: 0, centerX: 0, width: 300 },
+  SCORE_ROW_HEIGHT: 24,
+  SCORE_ROW_WIDTH: 200,
+  scoreRowTop: function(index) {
+    return index*(this.SCORE_ROW_HEIGHT+1)+1;
+  },
+  scoreRow: function(index) {
+    return {
+      width: this.SCORE_ROW_WIDTH,
+      centerX: 0,
+      height: this.SCORE_ROW_HEIGHT,
+      top: this.scoreRowTop(index)
+    };
+  }
+};
