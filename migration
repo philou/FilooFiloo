@@ -23,13 +23,17 @@ o [DONE] create a new empty app
  - check the startup files, main.js and core.js
  - migrate the source files
   o [DONE] comment les lancer
-  * experimenter avec les tests, voire les should... le with(this), et où est le this
-  * Test helpers
-  * Tests (rhtml -> js, it's better ...), virer les tests vides ?
-  * CoordMap
+  o [DONE] experimenter avec les tests, voire les should... le with(this), et où est le this
+  o [DONE] Test helpers
+  o [DONE] Tests (rhtml -> js, it's better ...), virer les tests vides ?
+  o [DONE] CoordMap
+  o [DONE] Piece
   * Board
-  * Piece
   * les autres sans test
+  * virer les tests vides
+  * migrer les controlleurs
+  * faire les liens vues controlleurs
+  * faire fonctionner le mode 1 joueur
 
 * migrate high scores
  - migrate the high scores view -> maybe possible to use a listView

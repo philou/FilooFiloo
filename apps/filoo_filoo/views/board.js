@@ -18,9 +18,6 @@
 // ==========================================================================
 /*globals FilooFiloo */
 
-// TODO move this elsewhere
-FilooFiloo.Board = { RowCount: 12, ColCount: 6 };
-
 /** @class
 
   (Document Your View Here)

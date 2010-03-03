@@ -17,3 +17,5 @@ FilooFiloo.Board = SC.Record.extend(
   // TODO: Add your own code here.
 
 }) ;
+
+FilooFiloo.Board = { RowCount: 12, ColCount: 6, MaxRow: 11, MaxCol: 5 };
