@@ -22,7 +22,7 @@ module("FilooFiloo.Piece",{
 
     setup: function() {
       assertPiece = function(stringRows, piece) {
-	FilooFiloo.TestsHelpers.assertStringRows(this, stringRows, 5, 5, function(c,r) {
+	FilooFiloo.TestsHelpers.assertStringRows(stringRows, 5, 5, function(c,r) {
 	  return piece.cellState(piece.get('center').col + c - 2, piece.get('center').row + r - 2);
         }, "");
       };
@@ -30,6 +30,10 @@ module("FilooFiloo.Piece",{
       piece = FilooFiloo.Piece.create({
 	center: {row: 3, col: 2},
 	colors: {first: FilooFiloo.Game.Red, second: FilooFiloo.Game.Blue}});
+    },
+    teardown: function() {
+      assertPiece = undefined;
+      piece = undefined;
     }
 });
 
