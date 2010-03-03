@@ -20,7 +20,7 @@ FilooFiloo.TestsHelpers = {
     /**
       Asserts the actual values against the values passed in a string rows list.
     */
-    assertStringRows: function(fixture, stringRows, nRows, nCols, actualValues, message) {
+    assertStringRows: function(stringRows, nRows, nCols, actualValues, message) {
 	equals(nRows, stringRows.length, message + ", row count is different");
 
 	for(var r = 0; r < nRows; ++r) {
@@ -52,13 +52,14 @@ FilooFiloo.TestsHelpers = {
     /**
       Transposes a list of cells representing a matrix with n rows of size nCols, into nCols lists of n elements representing the columns.
     */
-    transpose: function(fixture, cellsList, nCols) {
+    transpose: function(cellsList, nCols) {
         var result = [];
-        for(var i = 0; i < nCols; ++i) {
+	var i = 0;
+        for(i = 0; i < nCols; ++i) {
             result[i] = [];
         }
 	equals(0, cellsList.length % nCols);
-	for(var i = 0; i < cellsList.length; ++i) {
+	for(i = 0; i < cellsList.length; ++i) {
 	    if (cellsList[i] === idem) {
 		result[i % nCols] = idem;
 	    }
