@@ -30,14 +30,15 @@ FilooFiloo.mainPage = SC.Page.design(
     {
       layout: { top: 0, left: 0, right: 0, height: 36 },
       anchorLocation: SC.ANCHOR_TOP,
-      childViews: 'titleView'.w(),
-
-      titleView: SC.LabelView.design(
-      {
-	tagName: 'h1',
-	value: "Philou's Filoo-Filoo",
-	layout: { top: 0, left: 0, height: 36 }
-      })
+      childViews:
+      [
+	SC.LabelView.design(
+	{
+	  tagName: 'h1',
+	  value: "Philou's Filoo-Filoo",
+	  layout: { top: 0, left: 0, height: 36 }
+	})
+      ]
     }),
 
     modesTabView: SC.TabView.design(

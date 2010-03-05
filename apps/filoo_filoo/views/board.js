@@ -22,27 +22,26 @@
 
   @extends SC.View
 */
-FilooFiloo.BoardView = SC.View.extend({
+FilooFiloo.BoardView = SC.View.extend(SC.ContentDisplay, {
 /** @scope FilooFiloo.BoardView.prototype */
 
   classNames: ['board-view'],
 
-  board: null,
-
-  displayProperties: ['board'],
+  contentDisplayProperties: 'time playing'.w(),
 
   acceptsFirstResponder: YES,
 
   render: function(context, firstTime)
   {
-    var cellClass = function() { return ""; };
+    var setCellClass = function(context) { return context; };
     var row = 0;
     var col = 0;
-    var board = this.get('board');
+    var board = this.get('content');
 
     if (board) {
-      cellClass = function(row, col) {
-	return FilooFiloo.Game.stateToName[board.cellState(col, row)];
+      setCellClass = function(context, row, col) {
+	context = context.addClass(FilooFiloo.Game.stateToName[board.cellState(col, row)]);
+	return context;
       };
     }
 
@@ -53,7 +52,9 @@ FilooFiloo.BoardView = SC.View.extend({
 
       for (col = 0; col < FilooFiloo.Board.ColCount; col++) {
 
-	context = context.begin('td').addClass(cellClass(row,col)).end();
+	context = context.begin('td');
+	context = setCellClass(context,row,col);
+	context = context.end();
       }
       context = context.end();
     }
@@ -64,13 +65,13 @@ FilooFiloo.BoardView = SC.View.extend({
 
   /** Intercept key strokes when the game is playing. */
   focus: function() {
-    var board = this.get('board');
+    var board = this.get('content');
     if(board && board.get('playing')) {
       this.becomeFirstResponder();
     } else {
       this.resignFirstResponder();
     }
-  }.observes('board', '.board.playing'),
+  }.observes('content', '.content.playing'),
 
   // key handling methods
   // TODO: debug and ensure that it works
@@ -78,24 +79,24 @@ FilooFiloo.BoardView = SC.View.extend({
     return this.interpretKeyEvents(evt) ;
   },
   moveRight: function(sender, evt) {
-    this.get('board').right();
+    this.get('content').right();
     return true;
   },
   moveLeft: function(sender, evt) {
-    this.get('board').left();
+    this.get('content').left();
     return true;
   },
   moveUp: function(sender, evt) {
-    this.get('board').rotate();
+    this.get('content').rotate();
     return true;
   },
   moveDown: function(sender, evt) {
-    this.get('board').antiRotate();
+    this.get('content').antiRotate();
     return true;
   },
   insertText: function(chr) {
     if (" " === chr) {
-      this.get('board').drop();
+      this.get('content').drop();
       return true;
     }
     return false;

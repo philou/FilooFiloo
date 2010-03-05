@@ -30,11 +30,14 @@ FilooFiloo.Layout = {
     return index*(this.SCORE_ROW_HEIGHT+1)+1;
   },
   scoreRow: function(index) {
+    return this.scoreRows(index,index);
+  },
+  scoreRows: function(startIndex, endIndex) {
     return {
       width: this.SCORE_ROW_WIDTH,
       centerX: 0,
-      height: this.SCORE_ROW_HEIGHT,
-      top: this.scoreRowTop(index)
+      height: this.SCORE_ROW_HEIGHT*(endIndex+1-startIndex) + endIndex-startIndex,
+      top: this.scoreRowTop(startIndex)
     };
   }
 };

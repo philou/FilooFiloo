@@ -20,7 +20,7 @@ o [DONE] create a new empty app
  o [DONE] check how to define a custom view
  o [DONE] migrate the board view
  o [DONE] fix the body.css file
- - check the startup files, main.js and core.js
+ o [DONE] check the startup files, main.js and core.js
  - migrate the source files
   o [DONE] comment les lancer
   o [DONE] experimenter avec les tests, voire les should... le with(this), et où est le this
@@ -28,14 +28,14 @@ o [DONE] create a new empty app
   o [DONE] Tests (rhtml -> js, it's better ...), virer les tests vides ?
   o [DONE] CoordMap
   o [DONE] Piece
-  * Board
-  * les autres sans test
-  * virer les tests vides
-  * migrer les controlleurs
+  o [DONE] Board
+  o [DONE] les autres sans test
+  o [DONE] virer les tests vides
+  * migrer le controlleur du mono joueur
   * faire les liens vues controlleurs
-  * faire fonctionner le mode 1 joueur
+ - faire fonctionner le mode 1 joueur
 
-* migrate high scores
+* migrate high scores & login
  - migrate the high scores view -> maybe possible to use a listView
    this time
  - finish the tutorial, with rails AND sinatra
