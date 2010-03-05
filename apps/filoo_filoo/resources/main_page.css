@@ -35,11 +35,18 @@ table.board-view-table td {
     background-repeat: no-repeat;
 }
 
-table.board-view-table td.red { background-image: static_url('images/sprites_red.png')}
+/*table.board-view-table td.red { background-image: static_url('images/sprites_red.png')}
 table.board-view-table td.blue { background-image: static_url('images/sprites_blue.png')}
 table.board-view-table td.green { background-image: static_url('images/sprites_green.png')}
 table.board-view-table td.purple { background-image: static_url('images/sprites_purple.png')}
 table.board-view-table td.yellow { background-image: static_url('images/sprites_yellow.png')}
+*/
+table.board-view-table td.red { background-color: #FF0000 }
+table.board-view-table td.blue { background-color: #0000FF }
+table.board-view-table td.green { background-color: #00FF00 }
+table.board-view-table td.purple { background-color: #FF00FF }
+table.board-view-table td.yellow { background-color: #00FFFF }
+
 
 /* styles for the single player game */
 .scores {
