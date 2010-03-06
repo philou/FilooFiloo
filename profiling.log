@@ -1,0 +1,579 @@
+ ....loading....
+Firebug a atteint sa limite d'enregistrements. 0 entrée n'est pas montrées.		Préférences	 
+BENCH 951 msec: ready (1x)
+Profilage (66772.05 ms, 490479 appels)
+
+
+Fonction  	Appels	%       Temps net	Temps brut	Moy.		Min.	Max.		Fichier
+end()		16235	79.42%	53028.866ms	53029.355ms	3.266ms		0.065ms	218.29ms	javasc...7860791 (ligne 17752)
+update()	206	3.03%	2023.323ms	2344.104ms	11.379ms	1.61ms	31.452ms	javasc...7860791 (ligne 17653)
+init()		16441	1.27%	847.684ms	2104.591ms	0.128ms		0.072ms	3.371ms		javasc...7860791 (ligne 17421)
+construct()	16844	1.24%	826.086ms	3882.612ms	0.231ms		0.101ms	3.527ms		javasc...7860791 (ligne 3157)
+beget()		18095	1.11%	741.254ms	1018.12ms	0.056ms		0.044ms	1.016ms		javasc...7860791 (ligne 583)
+
+
+
+Event()	270	0.82%	550.314ms	554.474ms	2.054ms	1.008ms	4.626ms	
+javasc...7860791 (ligne 5347)
+getAt()	25985	0.81%	541.945ms	1005.161ms	0.039ms	0.009ms	7.916ms	
+coord_...7510746 (ligne 39)
+guidFor()	19783	0.68%	452.721ms	452.721ms	0.023ms	0.007ms	2.158ms	
+javasc...7860791 (ligne 349)
+hashFor()	19165	0.66%	440.547ms	887.235ms	0.046ms	0.018ms	3.231ms	
+javasc...7860791 (ligne 419)
+render()	191	0.51%	339.595ms	59315.279ms	310.551ms	39.561ms	683.661ms	
+board....7825447 (ligne 35)
+key_()	28685	0.48%	321.892ms	321.892ms	0.011ms	0.007ms	7.26ms	
+coord_...7510746 (ligne 143)
+classNames()	14359	0.48%	317.699ms	317.699ms	0.022ms	0.006ms	0.095ms	
+javasc...7860791 (ligne 17913)
+contains()	16235	0.47%	311.066ms	1128.658ms	0.07ms	0.059ms	3.282ms	
+javasc...7860791 (ligne 6585)
+begin()	16235	0.46%	306.127ms	4057.198ms	0.25ms	0.209ms	3.552ms	
+javasc...7860791 (ligne 17586)
+typeOf()	38388	0.44%	293.469ms	293.469ms	0.008ms	0.004ms	2.144ms	
+javasc...7860791 (ligne 223)
+addClass()	14153	0.4%	269.771ms	584.864ms	0.041ms	0.027ms	3.221ms	
+javasc...7860791 (ligne 17954)
+setCellClass()	13752	0.39%	257.843ms	1876.148ms	0.136ms	0.067ms	3.324ms	
+board....7825447 (ligne 43)
+get()	10211	0.37%	243.836ms	279.165ms	0.027ms	0.005ms	1.554ms	
+javasc...7860791 (ligne 2700)
+cellState()	13752	0.36%	239.802ms	1053.349ms	0.077ms	0.015ms	2.229ms	
+board....7597984 (ligne 118)
+registerDependentKey()	1521	0.34%	226.837ms	242.052ms	0.159ms	0.029ms	1.411ms	
+javasc...7860791 (ligne 2980)
+secondCell_()	12468	0.3%	202.937ms	202.937ms	0.016ms	0.011ms	2.163ms	
+piece....7597973 (ligne 125)
+none()	38319	0.3%	199.061ms	199.061ms	0.005ms	0.004ms	2.151ms	
+javasc...7860791 (ligne 254)
+values_()	28710	0.29%	191.697ms	191.697ms	0.007ms	0.004ms	0.335ms	
+coord_...7510746 (ligne 136)
+cellState()	11376	0.23%	153.141ms	346.509ms	0.03ms	0.005ms	2.175ms	
+piece....7597973 (ligne 51)
+_notifyPropertyObservers()	978	0.22%	146.843ms	803.931ms	0.822ms	0.262ms	9.114ms	
+javasc...7860791 (ligne 3392)
+sendEvent()	130	0.17%	113.934ms	556.816ms	4.283ms	0.297ms	26.833ms	
+javasc...7860791 (ligne 9710)
+scheduleNextTimeout()	645	0.15%	102.949ms	118.186ms	0.183ms	0.006ms	0.464ms	
+javasc...7860791 (ligne 10652)
+displayDidChange()	234	0.14%	94.25ms	290.892ms	1.243ms	0.031ms	4.672ms	
+javasc...7860791 (ligne 7458)
+initObservable()	2568	0.14%	92.052ms	334.104ms	0.13ms	0.016ms	3.682ms	
+javasc...7860791 (ligne 3297)
+collectPieceIfValue_()	5352	0.13%	89.991ms	394.734ms	0.074ms	0.035ms	1.465ms	
+coord_...7510746 (ligne 129)
+collectPieceContaining_()	3518	0.13%	87.457ms	770.472ms	0.219ms	0.091ms	3.448ms	
+coord_...7510746 (ligne 113)
+create()	2568	0.13%	86.332ms	671.65ms	0.262ms	0.095ms	12.638ms	
+javasc...7860791 (ligne 7136)
+_object_init()	2568	0.13%	85.649ms	551.794ms	0.215ms	0.063ms	4.4ms	
+javasc...7860791 (ligne 7236)
+K()	18095	0.13%	84.275ms	84.275ms	0.005ms	0.003ms	0.073ms	
+javasc...7860791 (ligne 539)
+mousemove()	74	0.12%	77.334ms	367.264ms	4.963ms	1.076ms	66.941ms	
+javasc...7860791 (ligne 6654)
+put()	1404	0.12%	76.848ms	125.51ms	0.089ms	0.06ms	2.982ms	
+coord_...7510746 (ligne 50)
+pieceContaining()	2376	0.1%	69.705ms	1143.077ms	0.481ms	0.21ms	13.286ms	
+coord_...7510746 (ligne 109)
+collapseBlockedPieces_()	5	0.1%	66.874ms	150.949ms	30.19ms	10.764ms	51.313ms	
+board....7597984 (ligne 280)
+endRunLoop()	645	0.1%	64.63ms	62378.223ms	96.71ms	0.141ms	696.285ms	
+javasc...7860791 (ligne 11171)
+create()	2046	0.09%	61.803ms	143.884ms	0.07ms	0.014ms	1.534ms	
+javasc...7860791 (ligne 6517)
+add()	1442	0.09%	57.978ms	129.036ms	0.089ms	0.039ms	4.119ms	
+javasc...7860791 (ligne 6625)
+A()	646	0.08%	56.146ms	80.601ms	0.125ms	0.018ms	1.229ms	
+javasc...7860791 (ligne 307)
+_checkWindowLocation()	388	0.08%	54.331ms	127.829ms	0.329ms	0.146ms	0.64ms	
+javasc...7860791 (ligne 20287)
+invokeCheckWindowLocation()	388	0.08%	52.09ms	52.09ms	0.134ms	0.059ms	0.278ms	
+javasc...7860791 (ligne 20145)
+endRunLoop()	645	0.07%	49.973ms	65021.996ms	100.809ms	0.225ms	701.412ms	
+javasc...7860791 (ligne 10563)
+remove()	1218	0.07%	49.206ms	120.937ms	0.099ms	0.055ms	0.45ms	
+javasc...7860791 (ligne 6680)
+cleanBlockedPieces_()	33	0.07%	48.859ms	1392.29ms	42.191ms	24.031ms	75.378ms	
+board....7597984 (ligne 259)
+resumePropertyObserving()	845	0.07%	46.839ms	167.504ms	0.198ms	0.045ms	7.763ms	
+javasc...7860791 (ligne 7990)
+generateGuid()	2568	0.07%	46.05ms	46.05ms	0.018ms	0.013ms	0.07ms	
+javasc...7860791 (ligne 397)
+handle()	270	0.07%	45.504ms	37457.056ms	138.73ms	2.224ms	707.066ms	
+javasc...7860791 (ligne 5773)
+respondsTo()	890	0.07%	45.408ms	71.816ms	0.081ms	0.016ms	1.059ms	
+javasc...7860791 (ligne 7357)
+flushPendingChanges()	845	0.07%	45.376ms	241.808ms	0.286ms	0.067ms	13.421ms	
+javasc...7860791 (ligne 8726)
+propertyDidChange()	998	0.07%	45.017ms	778.621ms	0.78ms	0ms	9.159ms	
+javasc...7860791 (ligne 2909)
+set()	1214	0.07%	44.631ms	755.291ms	0.622ms	0ms	9.231ms	
+javasc...7860791 (ligne 2760)
+_object_extend	188	0.07%	44.553ms	54.671ms	0.291ms	0.159ms	1.133ms	
+javasc...7860791 (ligne 6874)
+normalizeEvent()	270	0.07%	44.2ms	608.117ms	2.252ms	1.155ms	5.004ms	
+javasc...7860791 (ligne 6009)
+cellIsAllowed_()	636	0.06%	39.446ms	108.467ms	0.171ms	0.004ms	8.409ms	
+board....7597984 (ligne 229)
+attr()	236	0.06%	39.239ms	80.421ms	0.341ms	0.134ms	1.415ms	
+javasc...7860791 (ligne 4660)
+add()	206	0.05%	33.976ms	69.357ms	0.337ms	0.2ms	0.739ms	
+javasc...7860791 (ligne 123)
+ret()	2568	0.05%	33.524ms	585.318ms	0.228ms	0.073ms	4.433ms	
+javasc...7860791 (ligne 7088)
+fireExpiredTimers()	645	0.05%	32.732ms	2475.614ms	3.838ms	0.007ms	77.544ms	
+javasc...7860791 (ligne 10618)
+dropCell_()	66	0.05%	32.022ms	70.915ms	1.074ms	0.119ms	4.114ms	
+board....7597984 (ligne 250)
+init()	2568	0.05%	31.277ms	365.381ms	0.142ms	0.026ms	3.711ms	
+javasc...7860791 (ligne 7309)
+beginRunLoop()	645	0.05%	31.256ms	31.256ms	0.048ms	0.024ms	0.171ms	
+javasc...7860791 (ligne 11154)
+join()	201	0.05%	30.268ms	30.268ms	0.151ms	0.022ms	0.331ms	
+javasc...7860791 (ligne 17567)
+isXMLDoc()	236	0.04%	29.213ms	29.213ms	0.124ms	0.044ms	0.249ms	
+javasc...7860791 (ligne 4070)
+prepareContext()	206	0.04%	26.714ms	59444.222ms	288.564ms	2.978ms	684.009ms	
+javasc...7860791 (ligne 7683)
+destroy()	995	0.04%	26.073ms	33.476ms	0.034ms	0.019ms	0.133ms	
+javasc...7860791 (ligne 6759)
+(?)()	270	0.04%	25.012ms	37482.068ms	138.822ms	2.31ms	707.155ms	
+javasc...7860791 (ligne 5954)
+_display_contentPropertyDidChange()	231	0.03%	22.538ms	322.249ms	1.395ms	0.022ms	5.961ms	
+javasc...7860791 (ligne 11159)
+tryToPerform()	649	0.03%	22.208ms	2527.695ms	3.895ms	0.026ms	75.503ms	
+javasc...7860791 (ligne 7374)
+flushApplicationQueues()	845	0.03%	21.598ms	62303.868ms	73.732ms	0.075ms	696.146ms	
+javasc...7860791 (ligne 11267)
+keyFor()	2412	0.03%	21.576ms	21.576ms	0.009ms	0.005ms	0.057ms	
+javasc...7860791 (ligne 381)
+now()	661	0.03%	21.46ms	21.46ms	0.032ms	0.017ms	0.395ms	
+javasc...7860791 (ligne 20632)
+clear()	1843	0.03%	21.228ms	21.228ms	0.012ms	0.005ms	0.259ms	
+javasc...7860791 (ligne 6574)
+_timeoutDidFire()	439	0.03%	20.756ms	29278.274ms	66.693ms	0.5ms	699.525ms	
+javasc...7860791 (ligne 10682)
+pop()	1225	0.03%	20.599ms	141.536ms	0.116ms	0.007ms	0.472ms	
+javasc...7860791 (ligne 6712)
+assert()	3946	0.03%	20.527ms	20.527ms	0.005ms	0.003ms	0.057ms	
+assert...7513268 (ligne 31)
+setClass()	35	0.03%	20.391ms	20.44ms	0.584ms	0.02ms	1.791ms	
+javasc...7860791 (ligne 18016)
+invokeMethods()	200	0.03%	20.022ms	62040.462ms	310.202ms	8.884ms	696.013ms	
+javasc...7860791 (ligne 188)
+_sc_view_clippingFrameDidChange()	176	0.03%	19.518ms	53.137ms	0.302ms	0ms	7.786ms	
+javasc...7860791 (ligne 8750)
+fireTime()	154	0.03%	19.08ms	19.08ms	0.124ms	0.083ms	0.261ms	
+javasc...7860791 (ligne 21200)
+(?)()	226	0.03%	18.431ms	102.75ms	0.455ms	0.208ms	1.541ms	
+javasc...7860791 (ligne 3697)
+updateLayer()	206	0.03%	17.938ms	61876.601ms	300.372ms	7.086ms	695.319ms	
+javasc...7860791 (ligne 7535)
+end()	645	0.02%	16.502ms	65038.498ms	100.835ms	0.242ms	701.44ms	
+javasc...7860791 (ligne 11330)
+invokeOnce()	206	0.02%	14.88ms	111.37ms	0.541ms	0.282ms	1.2ms	
+javasc...7860791 (ligne 242)
+each()	236	0.02%	14.434ms	118.454ms	0.502ms	0ms	1.601ms	
+javasc...7860791 (ligne 4042)
+updateLayerIfNeeded()	206	0.02%	14.025ms	62020.44ms	301.07ms	7.691ms	695.928ms	
+javasc...7860791 (ligne 7502)
+begin()	645	0.02%	13.382ms	44.638ms	0.069ms	0.036ms	0.206ms	
+javasc...7860791 (ligne 11317)
+init()	403	0.02%	13.127ms	28.763ms	0.071ms	0.012ms	2.538ms	
+javasc...7860791 (ligne 3451)
+data()	270	0.02%	12.912ms	35.761ms	0.132ms	0.08ms	0.288ms	
+javasc...7860791 (ligne 374)
+flush()	978	0.02%	11.932ms	11.932ms	0.012ms	0.007ms	0.461ms	
+javasc...7860791 (ligne 7930)
+fire()	153	0.02%	11.91ms	2406.386ms	15.728ms	3.853ms	77.392ms	
+javasc...7860791 (ligne 21289)
+isArray()	270	0.02%	11.827ms	20.214ms	0.075ms	0.049ms	0.196ms	
+javasc...7860791 (ligne 280)
+_view_layerNeedsUpdateDidChange()	412	0.02%	11.185ms	127.712ms	0.31ms	0.016ms	1.34ms	
+javasc...7860791 (ligne 7478)
+view()	75	0.02%	11.175ms	11.175ms	0.149ms	0.057ms	0.563ms	
+javasc...7860791 (ligne 5161)
+schedule()	154	0.02%	11.071ms	35.628ms	0.231ms	0.017ms	1.253ms	
+javasc...7860791 (ligne 21241)
+forEach()	221	0.02%	10.954ms	128.259ms	0.58ms	0.186ms	5.99ms	
+piece....7597973 (ligne 64)
+(?)()	376	0.02%	10.154ms	36.02ms	0.096ms	0.018ms	0.96ms	
+board....7597984 (ligne 237)
+endPropertyChanges()	568	0.01%	9.805ms	78.029ms	0.137ms	0.007ms	2.221ms	
+javasc...7860791 (ligne 2863)
+_flushinvokeLastQueue()	645	0.01%	9.725ms	9.725ms	0.015ms	0.007ms	0.177ms	
+javasc...7860791 (ligne 11283)
+attr()	236	0.01%	9.497ms	131.99ms	0.559ms	0.219ms	1.669ms	
+javasc...7860791 (ligne 3683)
+create()	270	0.01%	9.443ms	563.917ms	2.089ms	1.035ms	4.692ms	
+javasc...7860791 (ligne 5428)
+down()	114	0.01%	9.287ms	234.56ms	2.058ms	0.74ms	4.665ms	
+piece....7597973 (ligne 78)
+invokeOnce()	206	0.01%	8.766ms	96.49ms	0.468ms	0.235ms	1.023ms	
+javasc...7860791 (ligne 272)
+targetForAction()	154	0.01%	8.415ms	21.21ms	0.138ms	0.093ms	0.505ms	
+javasc...7860791 (ligne 19703)
+__checkWindowLocation()	388	0.01%	8.259ms	136.088ms	0.351ms	0.157ms	0.685ms	
+javasc...7860791 (ligne 20148)
+performAction()	153	0.01%	8.188ms	2164.51ms	14.147ms	2.728ms	75.749ms	
+javasc...7860791 (ligne 21312)
+nodeName()	206	0.01%	8.185ms	8.185ms	0.04ms	0.024ms	0.083ms	
+javasc...7860791 (ligne 3996)
+moveCurrentPiece_()	155	0.01%	7.703ms	696.587ms	4.494ms	0.006ms	10.796ms	
+board....7597984 (ligne 180)
+suspendPropertyObserving()	835	0.01%	7.631ms	7.631ms	0.009ms	0.005ms	0.114ms	
+javasc...7860791 (ligne 7983)
+tick()	153	0.01%	7.598ms	2121.816ms	13.868ms	2.526ms	75.447ms	
+board....7597984 (ligne 135)
+collectExpiredTimers()	608	0.01%	7.357ms	7.357ms	0.012ms	0.004ms	0.073ms	
+javasc...7860791 (ligne 21440)
+automaticallyNotifiesObserversFor()	1214	0.01%	7.299ms	7.299ms	0.006ms	0.003ms	0.039ms	
+javasc...7860791 (ligne 2655)
+sendEvent()	130	0.01%	7.191ms	36217.265ms	278.594ms	2.714ms	704.753ms	
+javasc...7860791 (ligne 19787)
+map()	80	0.01%	6.147ms	24.158ms	0.302ms	0.11ms	1.783ms	
+javasc...7860791 (ligne 4018)
+getMembers()	277	0.01%	6.075ms	6.075ms	0.022ms	0.004ms	1.56ms	
+javasc...7860791 (ligne 2424)
+startTime()	609	0.01%	6.015ms	6.015ms	0.01ms	0.005ms	0.083ms	
+javasc...7860791 (ligne 10550)
+now_()	214	0.01%	5.781ms	5.781ms	0.027ms	0.017ms	0.08ms	
+board....7597984 (ligne 194)
+propertyWillChange()	998	0.01%	5.598ms	5.598ms	0.006ms	0.003ms	0.053ms	
+javasc...7860791 (ligne 2888)
+makeArray()	80	0.01%	5.496ms	5.496ms	0.069ms	0.022ms	0.414ms	
+javasc...7860791 (ligne 4407)
+renderContext()	206	0.01%	5.353ms	54.987ms	0.267ms	0.19ms	0.584ms	
+javasc...7860791 (ligne 7557)
+interpretKeyEvents()	64	0.01%	5.19ms	299.61ms	4.681ms	0.199ms	12.705ms	
+javasc...7860791 (ligne 8002)
+pushStack()	80	0.01%	5.113ms	26.831ms	0.335ms	0.219ms	0.722ms	
+javasc...7860791 (ligne 3221)
+styles()	20	0.01%	4.969ms	11.279ms	0.564ms	0.006ms	1.611ms	
+javasc...7860791 (ligne 18074)
+pieceIsAllowed_()	188	0.01%	4.905ms	58.769ms	0.313ms	0.207ms	1.215ms	
+board....7597984 (ligne 234)
+notifyChanged_()	213	0.01%	4.865ms	478.859ms	2.248ms	1.416ms	7.648ms	
+board....7597984 (ligne 191)
+initCurrentPiece_()	34	0.01%	4.701ms	154.194ms	4.535ms	2.613ms	9.689ms	
+board....7597984 (ligne 201)
+sendAction()	154	0.01%	4.611ms	2172.849ms	14.109ms	2.679ms	75.682ms	
+javasc...7860791 (ligne 19651)
+beginPropertyChanges()	568	0.01%	4.601ms	4.601ms	0.008ms	0.006ms	0.081ms	
+javasc...7860791 (ligne 2846)
+resetClassNames()	206	0.01%	4.569ms	4.569ms	0.022ms	0.012ms	0.106ms	
+javasc...7860791 (ligne 17998)
+preventDefault()	66	0.01%	4.545ms	4.545ms	0.069ms	0.052ms	0.112ms	
+javasc...7860791 (ligne 6049)
+location()	388	0.01%	4.316ms	4.316ms	0.011ms	0.005ms	0.027ms	
+javasc...7860791 (ligne 20008)
+prop()	226	0.01%	4.121ms	6.019ms	0.027ms	0.017ms	0.071ms	
+javasc...7860791 (ligne 4444)
+scheduleTimer()	153	0.01%	4.038ms	6.98ms	0.046ms	0.034ms	0.099ms	
+javasc...7860791 (ligne 10586)
+stopPropagation()	66	0.01%	4.016ms	4.016ms	0.061ms	0.051ms	0.106ms	
+javasc...7860791 (ligne 6064)
+keydown()	64	0.01%	4.007ms	7.71ms	0.12ms	0.094ms	0.232ms	
+javasc...7860791 (ligne 6440)
+find()	5	0.01%	3.844ms	4.774ms	0.955ms	0.516ms	1.558ms	
+javasc...7860791 (ligne 4206)
+each()	231	0.01%	3.622ms	122.076ms	0.528ms	0.216ms	1.619ms	
+javasc...7860791 (ligne 3626)
+map()	75	0.01%	3.594ms	47.799ms	0.637ms	0.365ms	1.576ms	
+javasc...7860791 (ligne 3612)
+setCurrentPiece_()	208	0%	3.194ms	465.082ms	2.236ms	1.428ms	7.667ms	
+board....7597984 (ligne 225)
+tickCurrentPiece_()	114	0%	3.189ms	561.662ms	4.927ms	2.476ms	10.836ms	
+board....7597984 (ligne 217)
+_handleModifierChanges()	128	0%	3.115ms	3.115ms	0.024ms	0.013ms	0.078ms	
+javasc...7860791 (ligne 6401)
+tupleForPropertyPath()	13	0%	3.075ms	6.008ms	0.462ms	0.062ms	1.451ms	
+javasc...7860791 (ligne 681)
+keypress()	64	0%	2.929ms	20556.366ms	321.193ms	2.754ms	703.009ms	
+javasc...7860791 (ligne 6489)
+_notifyDidAppendToDocument()	201	0%	2.923ms	4.827ms	0.024ms	0.021ms	0.064ms	
+javasc...7860791 (ligne 7773)
+targetViewForEvent()	75	0%	2.874ms	66.782ms	0.89ms	0.548ms	1.851ms	
+javasc...7860791 (ligne 19769)
+keyup()	64	0%	2.759ms	15546.426ms	242.913ms	3.661ms	704.826ms	
+javasc...7860791 (ligne 6509)
+create()	200	0%	2.7ms	15.021ms	0.075ms	0.056ms	0.16ms	
+javasc...7860791 (ligne 2481)
+push()	10	0%	2.423ms	2.423ms	0.242ms	0.023ms	0.607ms	
+javasc...7860791 (ligne 17528)
+renderTitle()	5	0%	2.394ms	13.834ms	2.767ms	1.926ms	3.253ms	
+javasc...7860791 (ligne 10874)
+camelize	60	0%	2.261ms	2.477ms	0.041ms	0.025ms	0.109ms	
+javasc...7860791 (ligne 213)
+setArray()	80	0%	2.255ms	2.255ms	0.028ms	0.018ms	0.061ms	
+javasc...7860791 (ligne 3587)
+commandCodes()	64	0%	2.109ms	2.109ms	0.033ms	0.024ms	0.06ms	
+javasc...7860791 (ligne 6104)
+decamelize()	80	0%	2.029ms	2.029ms	0.025ms	0.018ms	0.095ms	
+javasc...7860791 (ligne 6618)
+map()	75	0%	1.91ms	13.085ms	0.174ms	0.068ms	0.612ms	
+javasc...7860791 (ligne 3613)
+each()	5	0%	1.859ms	8.821ms	1.764ms	1.681ms	1.877ms	
+coord_...7510746 (ligne 65)
+right()	26	0%	1.849ms	49.93ms	1.92ms	1.642ms	3.217ms	
+piece....7597973 (ligne 98)
+remove()	20	0%	1.843ms	5.841ms	0.292ms	0.063ms	1.003ms	
+coord_...7510746 (ligne 75)
+applyBindingValue()	12	0%	1.817ms	20.311ms	1.693ms	0.527ms	4.347ms	
+javasc...7860791 (ligne 8776)
+viewDidResize()	36	0%	1.724ms	62.019ms	1.723ms	0ms	31.647ms	
+javasc...7860791 (ligne 8795)
+view()	75	0%	1.713ms	51.103ms	0.681ms	0.397ms	1.634ms	
+javasc...7860791 (ligne 5160)
+escapeHTML()	10	0%	1.668ms	1.717ms	0.172ms	0.143ms	0.213ms	
+javasc...7860791 (ligne 18258)
+objectForPropertyPath()	14	0%	1.664ms	2.459ms	0.176ms	0.02ms	0.529ms	
+javasc...7860791 (ligne 706)
+removeFromTimerQueue()	154	0%	1.637ms	1.637ms	0.011ms	0.007ms	0.021ms	
+javasc...7860791 (ligne 21396)
+map()	75	0%	1.591ms	49.39ms	0.659ms	0.381ms	1.603ms	
+javasc...7860791 (ligne 5280)
+dasherize()	80	0%	1.553ms	3.582ms	0.045ms	0.034ms	0.122ms	
+javasc...7860791 (ligne 6636)
+pane()	1	0%	1.514ms	1.514ms	1.514ms	1.514ms	1.514ms	
+javasc...7860791 (ligne 6937)
+getPath()	13	0%	1.494ms	8.462ms	0.651ms	0.097ms	2.048ms	
+javasc...7860791 (ligne 3650)
+reset()	1	0%	1.428ms	1.932ms	1.932ms	1.932ms	1.932ms	
+javasc...7860791 (ligne 21372)
+getDelegateProperty()	30	0%	1.379ms	1.452ms	0.048ms	0.027ms	0.151ms	
+javasc...7860791 (ligne 6280)
+scheduleInTimerQueue()	153	0%	1.314ms	1.314ms	0.009ms	0.006ms	0.056ms	
+javasc...7860791 (ligne 21409)
+displayValue()	10	0%	1.305ms	3.833ms	0.383ms	0.322ms	0.496ms	
+javasc...7860791 (ligne 23559)
+_isModifierKey()	128	0%	1.3ms	1.3ms	0.01ms	0.006ms	0.021ms	
+javasc...7860791 (ligne 6428)
+_computeBindingValue()	12	0%	1.273ms	9.495ms	0.791ms	0.118ms	2.358ms	
+javasc...7860791 (ligne 8689)
+focus()	75	0%	1.271ms	3.002ms	0.04ms	0.028ms	0.069ms	
+javasc...7860791 (ligne 6359)
+blockCurrentPiece_()	33	0%	1.212ms	147.96ms	4.484ms	1.835ms	12.478ms	
+board....7597984 (ligne 242)
+randomColor_()	68	0%	1.187ms	1.187ms	0.017ms	0.008ms	0.05ms	
+color_...7596511 (ligne 34)
+makeFirstResponder()	2	0%	1.129ms	6.005ms	3.003ms	2.025ms	3.98ms	
+javasc...7860791 (ligne 9838)
+updateStartStopLabel()	2	0%	1.105ms	2.83ms	1.415ms	1.353ms	1.477ms	
+single...7599434 (ligne 41)
+keyDown()	64	0%	1.1ms	300.71ms	4.699ms	0.211ms	12.729ms	
+board....7825447 (ligne 79)
+toPropertyDidChange()	12	0%	1.073ms	2.181ms	0.182ms	0.031ms	0.46ms	
+javasc...7860791 (ligne 8662)
+_isFunctionOrNonPrintableKey()	64	0%	1.053ms	1.053ms	0.016ms	0.013ms	0.036ms	
+javasc...7860791 (ligne 6420)
+renderMixin()	15	0%	1.029ms	18.194ms	1.213ms	0.803ms	2.024ms	
+javasc...7860791 (ligne 11510)
+render()	191	0%	0.997ms	0.997ms	0.005ms	0.004ms	0.008ms	
+javasc...7860791 (ligne 7763)
+_computeBindingTargets()	12	0%	0.981ms	0.981ms	0.082ms	0.006ms	0.301ms	
+javasc...7860791 (ligne 8849)
+render()	10	0%	0.903ms	20.66ms	2.066ms	1.82ms	2.796ms	
+javasc...7860791 (ligne 23709)
+fromPropertyDidChange()	17	0%	0.854ms	2.814ms	0.166ms	0.062ms	0.307ms	
+javasc...7860791 (ligne 8637)
+blockCurrentPiece_()	66	0%	0.801ms	71.716ms	1.087ms	0.128ms	4.134ms	
+board....7597984 (ligne 244)
+computeWindowSize()	2	0%	0.789ms	0.789ms	0.394ms	0.202ms	0.587ms	
+javasc...7860791 (ligne 6296)
+invoke()	2	0%	0.771ms	81.36ms	40.68ms	39.093ms	42.267ms	
+javasc...7860791 (ligne 4592)
+left()	9	0%	0.679ms	18.155ms	2.017ms	1.393ms	3.079ms	
+piece....7597973 (ligne 88)
+add()	5	0%	0.675ms	1.119ms	0.224ms	0.151ms	0.466ms	
+javasc...7860791 (ligne 4468)
+merge()	5	0%	0.654ms	0.654ms	0.131ms	0.039ms	0.328ms	
+javasc...7860791 (ligne 4388)
+notifyPropertyChange()	176	0%	0.585ms	77.021ms	0.438ms	0ms	9.145ms	
+javasc...7860791 (ligne 3760)
+moveRight()	27	0%	0.528ms	103.077ms	3.818ms	0.045ms	6.732ms	
+board....7825447 (ligne 82)
+insertText()	23	0%	0.523ms	118.46ms	5.15ms	2.018ms	12.556ms	
+board....7825447 (ligne 98)
+addStyle()	20	0%	0.515ms	11.794ms	0.59ms	0.022ms	1.663ms	
+javasc...7860791 (ligne 18135)
+render()	5	0%	0.512ms	19.25ms	3.85ms	2.904ms	4.341ms	
+javasc...7860791 (ligne 2062)
+getColorProvider()	68	0%	0.502ms	3.201ms	0.047ms	0.004ms	2.768ms	
+board....7597984 (ligne 85)
+(?)()	20	0%	0.46ms	6.301ms	0.315ms	0.072ms	1.068ms	
+coord_...7510746 (ligne 89)
+_kvo_computeCachedDependentsFor()	12	0%	0.445ms	1.14ms	0.095ms	0.011ms	0.533ms	
+javasc...7860791 (ligne 3055)
+updateContentWithValueObserver()	10	0%	0.43ms	1.278ms	0.128ms	0.092ms	0.217ms	
+javasc...7860791 (ligne 11425)
+popFirstColor()	34	0%	0.422ms	1.265ms	0.037ms	0.026ms	0.08ms	
+color_...7596511 (ligne 45)
+setPathIfChanged()	24	0%	0.415ms	8.018ms	0.334ms	0.04ms	1.226ms	
+javasc...7860791 (ligne 3681)
+mousedown()	1	0%	0.41ms	14.751ms	14.751ms	14.751ms	14.751ms	
+javasc...7860791 (ligne 6519)
+drop()	23	0%	0.398ms	117.631ms	5.114ms	1.988ms	12.504ms	
+board....7597984 (ligne 174)
+setIfChanged()	24	0%	0.391ms	7.603ms	0.317ms	0.023ms	1.201ms	
+javasc...7860791 (ligne 3641)
+popSecondColor()	34	0%	0.363ms	0.707ms	0.021ms	0.017ms	0.035ms	
+color_...7596511 (ligne 51)
+right()	27	0%	0.361ms	102.189ms	3.785ms	0.018ms	6.68ms	
+board....7597984 (ligne 153)
+within()	1	0%	0.333ms	0.515ms	0.515ms	0.515ms	0.515ms	
+javasc...7860791 (ligne 5223)
+level()	11	0%	0.301ms	0.301ms	0.027ms	0.02ms	0.034ms	
+board....7597984 (ligne 68)
+_resize()	2	0%	0.3ms	84.766ms	42.383ms	40.238ms	44.528ms	
+javasc...7860791 (ligne 6330)
+attr()	10	0%	0.267ms	0.267ms	0.027ms	0.012ms	0.075ms	
+javasc...7860791 (ligne 18203)
+rotate()	3	0%	0.26ms	6.529ms	2.176ms	1.671ms	3.154ms	
+piece....7597973 (ligne 108)
+has()	5	0%	0.222ms	0.273ms	0.055ms	0.05ms	0.058ms	
+javasc...7860791 (ligne 4488)
+camelize()	20	0%	0.216ms	0.216ms	0.011ms	0.009ms	0.017ms	
+javasc...7860791 (ligne 215)
+uniq()	5	0%	0.212ms	0.276ms	0.055ms	0.044ms	0.083ms	
+javasc...7860791 (ligne 5768)
+find()	5	0%	0.207ms	6.991ms	1.398ms	0.901ms	2.304ms	
+javasc...7860791 (ligne 3524)
+antiRotate()	2	0%	0.195ms	4.968ms	2.484ms	1.712ms	3.256ms	
+piece....7597973 (ligne 118)
+moveLeft()	9	0%	0.195ms	45.843ms	5.094ms	3.547ms	10.376ms	
+board....7825447 (ligne 86)
+setLevel()	5	0%	0.194ms	0.289ms	0.058ms	0.053ms	0.068ms	
+ticker...7596515 (ligne 57)
+$()	6	0%	0.186ms	9.241ms	1.54ms	0.346ms	2.685ms	
+javasc...7860791 (ligne 7364)
+removeEach()	5	0%	0.176ms	9.022ms	1.804ms	1.721ms	1.917ms	
+coord_...7510746 (ligne 85)
+add()	5	0%	0.171ms	0.444ms	0.089ms	0.071ms	0.096ms	
+javasc...7860791 (ligne 4470)
+playing()	3	0%	0.169ms	0.169ms	0.056ms	0.03ms	0.079ms	
+single...7599434 (ligne 36)
+forwardLevelToTheTicker()	5	0%	0.165ms	0.726ms	0.145ms	0.124ms	0.172ms	
+board....7597984 (ligne 300)
+find()	5	0%	0.152ms	4.926ms	0.985ms	0.54ms	1.605ms	
+javasc...7860791 (ligne 3525)
+addClass()	5	0%	0.151ms	1.27ms	0.254ms	0.175ms	0.494ms	
+javasc...7860791 (ligne 4828)
+objectHasPendingChanges()	12	0%	0.15ms	0.731ms	0.061ms	0.053ms	0.09ms	
+javasc...7860791 (ligne 7977)
+find()	5	0%	0.137ms	7.128ms	1.426ms	0.931ms	2.33ms	
+javasc...7860791 (ligne 5256)
+left()	9	0%	0.133ms	45.522ms	5.058ms	3.518ms	10.327ms	
+board....7597984 (ligne 146)
+start()	1	0%	0.125ms	17.257ms	17.257ms	17.257ms	17.257ms	
+board....7597984 (ligne 95)
+mouseUp()	1	0%	0.12ms	26.73ms	26.73ms	26.73ms	26.73ms	
+javasc...7860791 (ligne 2165)
+_kvo_addCachedDependents()	3	0%	0.116ms	0.344ms	0.115ms	0.086ms	0.172ms	
+javasc...7860791 (ligne 3023)
+parentViewDidResize()	36	0%	0.111ms	79.191ms	2.2ms	0ms	40.886ms	
+javasc...7860791 (ligne 8768)
+start()	1	0%	0.106ms	4.257ms	4.257ms	4.257ms	4.257ms	
+ticker...7596515 (ligne 34)
+_setBindingValue()	12	0%	0.1ms	0.1ms	0.008ms	0.007ms	0.013ms	
+javasc...7860791 (ligne 8680)
+_runAction()	1	0%	0.091ms	18.55ms	18.55ms	18.55ms	18.55ms	
+javasc...7860791 (ligne 2234)
+(?)()	5	0%	0.088ms	1.792ms	0.358ms	0.232ms	0.768ms	
+javasc...7860791 (ligne 4861)
+mouseup()	1	0%	0.088ms	111.289ms	111.289ms	111.289ms	111.289ms	
+javasc...7860791 (ligne 6571)
+interval_()	6	0%	0.087ms	0.087ms	0.014ms	0.013ms	0.018ms	
+ticker...7596515 (ligne 64)
+focus()	2	0%	0.085ms	6.326ms	3.163ms	2.123ms	4.203ms	
+board....7825447 (ligne 68)
+renderMixin()	5	0%	0.083ms	0.226ms	0.045ms	0.042ms	0.048ms	
+javasc...7860791 (ligne 12438)
+getTicker()	7	0%	0.08ms	1.52ms	0.217ms	0.006ms	1.482ms	
+board....7597984 (ligne 75)
+mouseExited()	1	0%	0.073ms	0.073ms	0.073ms	0.073ms	0.073ms	
+javasc...7860791 (ligne 2149)
+windowSizeDidChange()	2	0%	0.073ms	80.477ms	40.239ms	38.721ms	41.756ms	
+javasc...7860791 (ligne 9692)
+moveUp()	3	0%	0.072ms	12.157ms	4.052ms	1.955ms	6.588ms	
+board....7825447 (ligne 90)
+stop()	1	0%	0.069ms	1.594ms	1.594ms	1.594ms	1.594ms	
+ticker...7596515 (ligne 48)
+rectsEqual()	2	0%	0.065ms	0.065ms	0.033ms	0.022ms	0.043ms	
+javasc...7860791 (ligne 21873)
+uniq()	5	0%	0.064ms	0.064ms	0.013ms	0.011ms	0.019ms	
+javasc...7860791 (ligne 5770)
+becomeFirstResponder()	1	0%	0.064ms	4.103ms	4.103ms	4.103ms	4.103ms	
+javasc...7860791 (ligne 6381)
+_hasLegacyActionHandler()	1	0%	0.063ms	0.112ms	0.112ms	0.112ms	0.112ms	
+javasc...7860791 (ligne 2263)
+displayTitle()	2	0%	0.062ms	0.062ms	0.031ms	0.03ms	0.032ms	
+javasc...7860791 (ligne 10849)
+moveDown()	2	0%	0.058ms	10.395ms	5.198ms	3.654ms	6.741ms	
+board....7825447 (ligne 94)
+resize()	2	0%	0.058ms	84.824ms	42.412ms	40.255ms	44.569ms	
+javasc...7860791 (ligne 6324)
+invalidate()	1	0%	0.053ms	1.525ms	1.525ms	1.525ms	1.525ms	
+javasc...7860791 (ligne 21269)
+timerFromPool()	1	0%	0.053ms	2.784ms	2.784ms	2.784ms	2.784ms	
+javasc...7860791 (ligne 21479)
+inArray()	5	0%	0.051ms	0.051ms	0.01ms	0.009ms	0.011ms	
+javasc...7860791 (ligne 4424)
+removeClass()	5	0%	0.049ms	0.049ms	0.01ms	0.009ms	0.01ms	
+javasc...7860791 (ligne 17970)
+_action()	1	0%	0.048ms	18.63ms	18.63ms	18.63ms	18.63ms	
+javasc...7860791 (ligne 2200)
+mouseDown()	1	0%	0.046ms	1.431ms	1.431ms	1.431ms	1.431ms	
+javasc...7860791 (ligne 2126)
+init()	1	0%	0.043ms	0.706ms	0.706ms	0.706ms	0.706ms	
+javasc...7860791 (ligne 21342)
+rotate()	3	0%	0.043ms	12.043ms	4.014ms	1.925ms	6.533ms	
+board....7597984 (ligne 160)
+startStop()	1	0%	0.042ms	17.412ms	17.412ms	17.412ms	17.412ms	
+single...7599434 (ligne 49)
+antiRotate()	2	0%	0.035ms	10.299ms	5.15ms	3.625ms	6.674ms	
+board....7597984 (ligne 167)
+nextResponder()	2	0%	0.033ms	0.033ms	0.017ms	0.016ms	0.017ms	
+javasc...7860791 (ligne 7946)
+schedule()	1	0%	0.033ms	4.075ms	4.075ms	4.075ms	4.075ms	
+javasc...7860791 (ligne 21465)
+abort()	1	0%	0.033ms	5.697ms	5.697ms	5.697ms	5.697ms	
+board....7597984 (ligne 110)
+_popContext()	2	0%	0.031ms	0.031ms	0.016ms	0.012ms	0.019ms	
+javasc...7860791 (ligne 3925)
+resignFirstResponder()	1	0%	0.03ms	2.078ms	2.078ms	2.078ms	2.078ms	
+javasc...7860791 (ligne 6397)
+gameOver_()	1	0%	0.028ms	7.677ms	7.677ms	7.677ms	7.677ms	
+board....7597984 (ligne 197)
+_button_displayObserver()	2	0%	0.027ms	0.101ms	0.051ms	0.048ms	0.053ms	
+javasc...7860791 (ligne 10957)
+_pushContext()	2	0%	0.021ms	0.021ms	0.01ms	0.01ms	0.011ms	
+javasc...7860791 (ligne 3930)
+rotateOrientation_()	3	0%	0.019ms	0.019ms	0.006ms	0.005ms	0.009ms	
+piece....7597973 (ligne 136)
+mouseEntered()	1	0%	0.019ms	1.936ms	1.936ms	1.936ms	1.936ms	
+javasc...7860791 (ligne 2157)
+nextObject()	2	0%	0.018ms	0.018ms	0.009ms	0.006ms	0.012ms	
+javasc...7860791 (ligne 4028)
+cancelTimer()	1	0%	0.015ms	0.024ms	0.024ms	0.024ms	0.024ms	
+javasc...7860791 (ligne 10603)
+antiRotateOrientation_()	2	0%	0.014ms	0.014ms	0.007ms	0.005ms	0.009ms	
+piece....7597973 (ligne 147)
+unknownProperty()	2	0%	0.013ms	0.013ms	0.007ms	0.006ms	0.007ms	
+javasc...7860791 (ligne 2829)
+setBlockedPieces_()	1	0%	0.01ms	0.01ms	0.01ms	0.01ms	0.01ms	
+board....7597984 (ligne 256)
+didBecomeFirstResponder()	1	0%	0.006ms	0.006ms	0.006ms	0.006ms	0.006ms	
+javasc...7860791 (ligne 6428)
+willBecomeKeyResponderFrom()	1	0%	0.006ms	0.006ms	0.006ms	0.006ms	0.006ms	
+javasc...7860791 (ligne 7984)
+didBecomeKeyResponderFrom()	1	0%	0.006ms	0.006ms	0.006ms	0.006ms	0.006ms	
+javasc...7860791 (ligne 7994)
+willLoseFirstResponder()	1	0%	0.004ms	0.004ms	0.004ms	0.004ms	0.004ms	
+javasc...7860791 (ligne 6416)
+willLoseKeyResponderTo()	1	0%	0.004ms	0.004ms	0.004ms	0.004ms	0.004ms	
+javasc...7860791 (ligne 7975)
+didLoseKeyResponderTo()	1	0%	0.004ms	0.004ms	0.004ms	0.004ms	0.004ms	
+javasc...7860791 (ligne 7989)

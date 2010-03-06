@@ -31,9 +31,21 @@ o [DONE] create a new empty app
   o [DONE] Board
   o [DONE] les autres sans test
   o [DONE] virer les tests vides
-  * migrer le controlleur du mono joueur
-  * faire les liens vues controlleurs
- - faire fonctionner le mode 1 joueur
+  o [DONE] migrer le controlleur du mono joueur
+  o [DONE] faire les liens vues controlleurs
+ o [DONE] faire fonctionner le mode 1 joueur
+
+* why is it so slow !!!
+ o [DONE]restart laptop
+ o [DONE] build the static javascript, and see (I had to patch: http://groups.google.com/group/sproutcore/browse_thread/thread/f88f20f0b1a9ed9) builds, but the output does not work.
+ o [DONE] try on AC's laptop, it worked fine ...
+ o [DONE] try a profiler, it seems to be related with the number of piled pieces (maybe it's the counting) -> it the new rendering mecanism
+ - try to update cell elements instead of rebuilding the table each time
+ - create a view per cell, bind them all once for all, keep the element, only change the class
+
+ - dump sproutcore, learn jQuery, and do something with less fat
+  
+* change the view so it fits on the screen
 
 * migrate high scores & login
  - migrate the high scores view -> maybe possible to use a listView
