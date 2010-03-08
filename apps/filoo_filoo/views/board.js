@@ -35,32 +35,37 @@ FilooFiloo.BoardView = SC.View.extend(SC.ContentDisplay, {
 
   render: function(context, firstTime)
   {
-    var setCellClass = function(context) { return context; };
-    var row = 0;
-    var col = 0;
     var board = this.get('content');
 
+    var cellClass = function() { return ''; };
     if (board) {
-      setCellClass = function(context, row, col) {
-	context = context.addClass(FilooFiloo.Game.stateToName[board.cellState(col, row)]);
-	return context;
+      cellClass = function(row, col) {
+	return FilooFiloo.Game.stateToName[board.cellState(col, row)];
       };
     }
 
-    context = context.begin('table').addClass("board-view-table");
-    for (row = 0; row < FilooFiloo.Board.RowCount; row++) {
+    var renderHtml= function() {
+      var result = [];
+      var row = 0;
+      var col = 0;
 
-      context = context.begin('tr');
+      for (row = 0; row < FilooFiloo.Board.RowCount; row++) {
 
-      for (col = 0; col < FilooFiloo.Board.ColCount; col++) {
+	result.push('<tr>');
 
-	context = context.begin('td');
-	context = setCellClass(context,row,col);
-	context = context.end();
+	for (col = 0; col < FilooFiloo.Board.ColCount; col++) {
+
+	  result.push('<td class="');
+	  result.push(cellClass(row,col));
+	  result.push('" />');
+	}
+	result.push('</tr>');
       }
-      context = context.end();
-    }
-    context = context.end();
+      return result.join('');
+
+    };
+
+    context = context.begin('table').addClass("board-view-table").push(renderHtml()).end();
 
     sc_super();
   },
