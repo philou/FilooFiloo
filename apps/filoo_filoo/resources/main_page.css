@@ -1,24 +1,8 @@
 /* Main stylesheet for puyo puyo game. */
 
 /* general styles */
-h1 {
-    text-align: left;
-}
 .main-view {
     overflow: auto;
-}
-
-/* styles for dialogs */
-.dialog {
-    text-align: center;
-}
-
-.dialog input {
-    width: 100%;
-}
-
-.dialog .button {
-    margin: 10px 0 0;
 }
 
 /* styles for game board. */

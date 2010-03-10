@@ -36,7 +36,6 @@ FilooFiloo.mainPage = SC.Page.design(
       [
 	SC.LabelView.design(
 	{
-	  tagName: 'h1',
 	  value: "Philou's Filoo-Filoo",
 	  layout: { top: 0, left: 0, height: 36 }
 	}),
@@ -76,24 +75,27 @@ FilooFiloo.mainPage = SC.Page.design(
       [
 	SC.LabelView.extend(
 	{
-	  layout: { centerX: 0, height: 36, top: 0, left: 10, right: 10 },
+	  layout: { height: 36, top: 10, left: 10, right: 10 },
+	  textAlign: SC.ALIGN_CENTER,
 	  valueBinding: 'FilooFiloo.loginController.loginTitle'
 	}),
 	SC.LabelView.extend(
 	{
-	  layout: { centerX: 0, height: 24, top: 36, left: 10, right: 10 },
+	  layout: { height: 50, top: 50, left: 10, right: 10 },
+	  textAlign: SC.ALIGN_CENTER,
 	  valueBinding: 'FilooFiloo.loginController.loginCaption'
 	}),
 	SC.TextFieldView.extend(
 	{
-	  layout: { centerX: 0, height: 24, top: 60, left: 10, right: 10 },
+	  layout: { centerX: 0, height: 24, bottom: 50, width: 200 },
 	  hint: "login here",
 	  valueBinding: 'FilooFiloo.loginController.name',
 	  isVisibleBinding: 'FilooFiloo.loginController.loginTextRequired'
 	}),
 	SC.ButtonView.extend(
 	{
-	  layout: { centerX: 0, height: 24, top: 84, left: 10, right: 10 },
+	  layout: { centerX: 0, height: 24, bottom: 10, width: 100 },
+	  textAlign: SC.ALIGN_CENTER,
 	  title: "OK",
 	  action: 'closeLoginPane',
 	  target: 'FilooFiloo.loginController'
