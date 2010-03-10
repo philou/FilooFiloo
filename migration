@@ -42,16 +42,17 @@ o [DONE] why is it so slow !!!
  o [DONE] try a profiler, it seems to be related with the number of piled pieces (maybe it's the counting) -> it the new rendering mecanism
  o [DONE] push whole html in context
   
-* change the view so it fits on the screen
-
 * migrate high scores & login
+ - migrate the login panel
  - migrate the high scores view -> maybe possible to use a listView
    this time
  - finish the tutorial, with rails AND sinatra
- - migrate the server calls, rewrite with sinatra if really simpler
+ - migrate the server calls, rewrite with sinatra if really simpler (it deploys to Heroku !)
  - check errors codes getting back from the server, I had included
    proxy-patch.rb at the top level Buildfile to fix this before
 
 * migrate 2 players mode
    - migrate server
+
+* change the view so it fits on the screen
 

@@ -39,6 +39,12 @@ FilooFiloo.mainPage = SC.Page.design(
 	  tagName: 'h1',
 	  value: "Philou's Filoo-Filoo",
 	  layout: { top: 0, left: 0, height: 36 }
+	}),
+	SC.TextFieldView.design(
+	{
+	  hint: "login here",
+	  layout: { bottom: 0, right: 0, height: 24, width: 200 },
+	  valueBinding: 'FilooFiloo.loginController.name'
 	})
       ]
     }),
@@ -59,40 +65,41 @@ FilooFiloo.mainPage = SC.Page.design(
 
       userDefaultKey: "mainPane"
     })
+  }),
+  loginPane: SC.SheetPane.create(
+  {
+    layout: { width: 400, height: 200, centerX: 0 },
+    contentView: SC.View.extend(
+    {
+      layout: { top: 0, left: 0, bottom: 0, right: 0 },
+      childViews:
+      [
+	SC.LabelView.extend(
+	{
+	  layout: { centerX: 0, height: 36, top: 0, left: 10, right: 10 },
+	  valueBinding: 'FilooFiloo.loginController.loginTitle'
+	}),
+	SC.LabelView.extend(
+	{
+	  layout: { centerX: 0, height: 24, top: 36, left: 10, right: 10 },
+	  valueBinding: 'FilooFiloo.loginController.loginCaption'
+	}),
+	SC.TextFieldView.extend(
+	{
+	  layout: { centerX: 0, height: 24, top: 60, left: 10, right: 10 },
+	  hint: "login here",
+	  valueBinding: 'FilooFiloo.loginController.name',
+	  isVisibleBinding: 'FilooFiloo.loginController.loginTextRequired'
+	}),
+	SC.ButtonView.extend(
+	{
+	  layout: { centerX: 0, height: 24, top: 84, left: 10, right: 10 },
+	  title: "OK",
+	  action: 'closeLoginPane',
+	  target: 'FilooFiloo.loginController'
+	})
+      ]
+    })
   })
-
 });
-
-/*
-
-<% content_for('body') do %>
-
-<div id="header">
-  <h1 id="title">Philou's Filoo-Filoo</h1>
-  <div id="login">
-    <%= text_field_view :login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.loginController.name' } %>
-  </div>
-</div>
-
-<div id="content">
-  <%= tab_view :modes_tabs,
-               :lazy_tabs => true,
-               :segments => [[:single, "1 player"],
-                             [:versus, "2 players"],
-                             [:high_scores, "High scores"],
-                             [:rules, "Rules"],
-                             [:credits, "Credits"]],
-               :now_showing => :single, :bind => { :now_showing => 'FilooFiloo.versusController.currentMode' } %>
-</div>
-<% end %>
-
-<% view :login_pane, :class => 'dialog', :pane => :dialog, :width => 300, :bind => {:visible => 'FilooFiloo.loginController.loginPaneVisible' } do %>
-  <h1><%= label_view :bind => { :value => 'FilooFiloo.loginController.loginTitle' } %></h1>
-
-  <p><%= label_view :bind => { :value => 'FilooFiloo.loginController.loginCaption' } %></p>
-  <%= text_field_view :required_login_text, :hint => 'login here', :bind => {:value => 'FilooFiloo.loginController.name', :visible => 'FilooFiloo.loginController.loginTextRequired' } %>
-  <%= button_view :title => 'Ok', :default => true, :action => 'FilooFiloo.loginController.closeLoginPane' %>
-<% end %>
-
-*/
 

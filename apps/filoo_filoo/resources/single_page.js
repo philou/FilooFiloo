@@ -78,23 +78,3 @@ FilooFiloo.singlePage = SC.Page.design(
   })
 });
 
-/*<% view :single_tab do %>
-
-<div class="single">
-  <%= button_view :startStop, :action => 'FilooFiloo.singleController.startStop', :default => true, :title => 'Start & stop', :bind => {:title => 'FilooFiloo.singleController.startStopLabel' } %>
-  <table class="scores">
-    <tr>
-      <td>Filoos</td><td><%= label_view :disappeared_pieces, :value => "0", :bind => {:value => 'FilooFiloo.singleController.board.disappearedPieces' } %></td>
-    </tr>
-    <tr>
-      <td>Score</td><td><%= label_view :score, :value => "0", :bind => {:value => 'FilooFiloo.singleController.board.score' } %></td>
-    </tr>
-    <tr>
-      <td>Level</td><td><%= label_view :level, :value => "0", :bind => {:value => 'FilooFiloo.singleController.board.level' } %></td>
-    </tr>
-  </table>
-  <%= view :singleBoardView, :tag => :table, :class => 'board', :view => 'FilooFiloo.BoardView',
-      :bind => { :board => 'FilooFiloo.singleController.board' } %>
-</div>
-<% end %>
-*/
