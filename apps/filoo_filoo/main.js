@@ -35,7 +35,9 @@ FilooFiloo.main = function main() {
   // This will make your app come alive!
 
   // TODO: Set the content property on your primary controller
-  // ex: FilooFiloo.contactsController.set('content',FilooFiloo.contacts);
+  var highScoresQuery = SC.Query.local(FilooFiloo.HighScore, {orderBy: 'ranking'});
+  var highScores = FilooFiloo.store.find(highScoresQuery);
+  FilooFiloo.highScoresController.set('content',highScores);
 
 };
 
