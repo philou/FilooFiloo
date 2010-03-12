@@ -30,4 +30,6 @@
 FilooFiloo.highScoresController = SC.ArrayController.create(
 /** @scope FilooFiloo.highScoresController */ {
 
+  orderBy: 'ranking'
+
 }) ;

@@ -18,7 +18,8 @@
 // FilooFiloo.GameController
 // ==========================================================================
 
-require('models/board');
+sc_require('models/board');
+sc_require('models/high_score');
 
 /** @class
 
@@ -53,7 +54,7 @@ FilooFiloo.singleController = SC.Object.create(
       } else {
         this.get('board').abort();
       }
-    }/*,
+    },
 
     gameOver: function() {
       if (this.get('board').get('gameOver')) {
@@ -65,10 +66,10 @@ FilooFiloo.singleController = SC.Object.create(
             "score": that.get('board').get('score')
 	  };
 
-	  var score = FilooFiloo.HighScore.newRecord(values, FilooFiloo.server);
-	  score.commit();
+	  var score = FilooFiloo.store.createRecord(FilooFiloo.HighScore, values);
+	  score.commitRecord();
 	});
       }
-    }.observes('.board.gameOver')*/
+    }.observes('.board.gameOver')
 
   });
