@@ -46,7 +46,7 @@ o [DONE] why is it so slow !!!
  o [DONE] migrate the login panel
  o [DONE] migrate the high scores view -> maybe possible to use a listView
    this time
- - link the single player mode and the high scores
+ o [DONE] link the single player mode and the high scores
  - finish the tutorial, with rails AND sinatra
  - migrate the server calls, rewrite with sinatra if really simpler (it deploys to Heroku !)
  - check errors codes getting back from the server, I had included
