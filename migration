@@ -49,9 +49,10 @@ o [DONE] why is it so slow !!!
  o [DONE] link the single player mode and the high scores
  o [DONE] finish the tutorial, with rails AND sinatra
  o [DONE] rewrite with sinatra if really simpler (it deploys to Heroku !)
- - migrate the server calls
- - check errors codes getting back from the server, I had included
+ o [DONE] migrate the server calls
+ o [DONE] check errors codes getting back from the server, I had included
    proxy-patch.rb at the top level Buildfile to fix this before
+ o [DONE] use a different db for tests
 
 * migrate 2 players mode
    - migrate server

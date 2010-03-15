@@ -18,6 +18,8 @@
 // ==========================================================================
 /*globals FilooFiloo */
 
+sc_require('data_sources/main');
+
 // This is the function that will start your app running.  The default
 // implementation will load any fixtures you have created then instantiate
 // your controllers and awake the elements on your page.
@@ -37,7 +39,7 @@ FilooFiloo.main = function main() {
   // This will make your app come alive!
 
   // TODO: Set the content property on your primary controller
-  var highScores = FilooFiloo.store.find(FilooFiloo.HighScore);
+  var highScores = FilooFiloo.store.find(FilooFiloo.HIGH_SCORES_QUERY);
   FilooFiloo.highScoresController.set('content',highScores);
 
 };
