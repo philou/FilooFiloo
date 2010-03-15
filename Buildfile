@@ -17,3 +17,6 @@
 
 # Add initial buildfile information here
 config :all, :required => :sproutcore
+
+proxy "/high_scores", :to => "localhost:4567"
+# add other records here

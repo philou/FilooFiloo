@@ -1,5 +1,12 @@
 #!/usr/bin/env ruby
 
+require 'fileutils'
+
+# better to start from a empty test database
+DB_FILE = "/tmp/filoo_filoo_tests.db"
+ENV['DATABASE_URL'] = "sqlite3://#{DB_FILE}"
+FileUtils.rm_f(DB_FILE)
+
 require 'filoo_filoo'
 require 'test/unit'
 require 'rack/test'
@@ -40,13 +47,13 @@ class HighScoreTest < Test::Unit::TestCase
 
   def test_a_posted_scores_should_appear_in_all_scores
     get '/high_scores'
-    previous_length = JSON.parse(last_response.body)["content"].length
+    assert_equal 0, JSON.parse(last_response.body)["content"].length
 
     post '/high_scores', '{ "playerName": "AC", "score":666 }'
     post '/high_scores', '{ "playerName": "DC", "score":667 }'
 
     get '/high_scores'
-    assert_equal previous_length + 2, JSON.parse(last_response.body)["content"].length
+    assert_equal 2, JSON.parse(last_response.body)["content"].length
   end
 
 end
