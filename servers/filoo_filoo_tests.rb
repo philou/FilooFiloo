@@ -3,6 +3,7 @@
 require 'filoo_filoo'
 require 'test/unit'
 require 'rack/test'
+require 'json'
 
 set :environment, :test
 
@@ -20,8 +21,6 @@ class HighScoreTest < Test::Unit::TestCase
     }
   end
 
-  # TODO install rack_test gem for this to work
-
   def app
     Sinatra::Application
   end
@@ -34,20 +33,20 @@ class HighScoreTest < Test::Unit::TestCase
   end
 
   def test_posting_a_score_should_ok
-    post '/high_scores/1', '{ "id":1, "playerName": "Philou", "score":007 }' # should we add a guid to the request body ?
-    assert last_response.ok?
-    # TODO test for the location inside the respone -> how to find the response["Location"] set in the server ?
+    post '/high_scores', '{"playerName":"Philou","score":7}'
+    assert_equal 201, last_response.status
+    assert last_response.headers.has_key?("Location")
   end
 
   def test_a_posted_scores_should_appear_in_all_scores
     get '/high_scores'
-    assert JSON.parse(last_response.body)["content"].empty
+    previous_length = JSON.parse(last_response.body)["content"].length
 
-    post '/high_scores/2', '{ "id": 2, "playerName": "AC", "score":666 }' # should we add a guid to the request body ?
-    post '/high_scores/3', '{ "id": 3, "playerName": "DC", "score":667 }' # should we add a guid to the request body ?
+    post '/high_scores', '{ "playerName": "AC", "score":666 }'
+    post '/high_scores', '{ "playerName": "DC", "score":667 }'
 
     get '/high_scores'
-    assert_equal 2 JSON.parse(last_response.body)["content"].length
+    assert_equal previous_length + 2, JSON.parse(last_response.body)["content"].length
   end
 
 end
