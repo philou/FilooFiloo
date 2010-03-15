@@ -56,7 +56,8 @@ end
 
 # create a new high score. Request body to contain json
 post '/high_scores' do
-  opts = HighScore.parse_json(request.body.read) rescue nil
+  body = request.body.read
+  opts = HighScore.parse_json(body) rescue nil
   halt(401, 'Invalid Format') if opts.nil?
 
   score = HighScore.new(opts)
