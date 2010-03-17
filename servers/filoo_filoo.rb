@@ -9,8 +9,6 @@ require 'json'
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 
     "sqlite3://#{File.join(File.dirname(__FILE__), 'tmp', 'filoo_filoo.db')}")
 
-# Model objects that will be used to store data in the server.
-# "id" will be used as the GUID.
 class HighScore
   include DataMapper::Resource
 
@@ -18,12 +16,10 @@ class HighScore
   property :player_name, Text, :required => true
   property :score, Integer, :required => true
 
-  # helper method returns the URL for a high_score based on id  
   def url
     "/high_scores/#{self.id}"
   end
 
-  # helper method that converts to json.
   def to_json(*a)
     {
       'guid'       => self.url, 
@@ -35,7 +31,6 @@ class HighScore
   # keys that MUST be found in the json
   REQUIRED = [:player_name, :score]
 
-  # ensure json is safe.  If invalid json is received returns nil
   def self.parse_json(body)
     json = JSON.parse(body)
     ret = { :player_name => json['playerName'], :score => json['score'] }
@@ -45,16 +40,48 @@ class HighScore
 
 end
 
-# instructs DataMapper to setup your database as needed
+class Player
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :name, Text, :required => true
+  property :opponent_name, Text
+  property :board_string, Text
+
+  def url
+    "/players/#{self.id}"
+  end
+
+  def to_json(*a)
+    {
+      'guid'         => self.url, 
+      'name'         => self.name,
+      'opponentName' => self.opponent_name,
+      'boardString'  => self.board_string
+    }.to_json(*a)
+  end
+
+  # keys that MUST be found in the json
+  REQUIRED = [:name]
+
+  def self.parse_json(body)
+    json = JSON.parse(body)
+    ret = { :name => json['name'], :opponent_name => json['opponentName'], :board_string => json['boardString'] }
+    return nil if REQUIRED.find { |r| ret[r].nil? }
+    ret
+  end
+
+end
+
+
+# upgrade your database as needed
 DataMapper.auto_upgrade!
 
-# return list of all high scores.
 get '/high_scores' do
   content_type 'application/json'
   { 'content' => Array(HighScore.all) }.to_json
 end
 
-# create a new high score. Request body to contain json
 post '/high_scores' do
   body = request.body.read
   opts = HighScore.parse_json(body) rescue nil
@@ -66,3 +93,32 @@ post '/high_scores' do
   response['Location'] = score.url
   response.status = 201
 end
+
+get '/players/:id' do
+  player = Player.get(params[:id]) rescue nil
+  halt(404, 'Not Found') if player.nil?
+
+  content_type 'application/json'
+  { 'content' => player }.to_json
+end
+
+post '/players' do
+  body = request.body.read
+  opts = Player.parse_json(body) rescue nil
+  halt(401, 'Invalid Format') if opts.nil?
+
+  opponent = Player.first(:opponent_name => nil)
+  if (nil != opponent)
+    opts[:opponent_name] = opponent.name
+    opponent.update(:opponent_name => opts[:name])
+
+    halt(500, 'Could not update opponent') unless opponent.save
+  end
+
+  player = Player.new(opts)
+  halt(500, 'Could not save player') unless player.save
+
+  response['Location'] = player.url
+  response.status = 201
+end
+
