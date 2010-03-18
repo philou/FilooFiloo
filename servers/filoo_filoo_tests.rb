@@ -30,10 +30,16 @@ module FilooFilooTestMethods
     end
   end
 
-  def test_json_roundtrip(fixtures, klass)
+  def test_instances_via_json_roundtrip(klass, fixtures)
     fixtures.each do |attributes|
       converted = klass.parse_json(klass.new(attributes).to_json)
       attributes.each { |key, value| assert_equal value, converted[key] }
+    end
+  end
+  def test_json_via_instances_roundtrip(klass, jsons)
+    jsons.each do |json|
+      converted = JSON.parse(klass.new(klass.parse_json(json.to_json)).to_json)
+      json.each { |key, value| assert_equal value, converted[key] }
     end
   end
 
@@ -41,8 +47,8 @@ module FilooFilooTestMethods
     Sinatra::Application
   end
 
-  def test_post(url, json, location_regex)
-    post url, json
+  def test_post(url, body, location_regex)
+    post url, body.to_json()
     assert_equal 201, last_response.status
     assert last_response.headers.has_key?("Location")
     location = last_response.headers["Location"]
@@ -64,8 +70,9 @@ class HighScoreTest  < Test::Unit::TestCase
   include FilooFilooTestMethods
 
   def test_ruby_to_json_to_ruby_should_look_alike
-    test_json_roundtrip([{:player_name => "Philou", :score => 666},
-                         {:player_name => "AC", :score => 123}], HighScore)
+    test_instances_via_json_roundtrip(HighScore,
+                                      [{:player_name => "Philou", :score => 666},
+                                       {:player_name => "AC", :score => 123}])
   end
 
   def test_all_scores_should_have_a_content
@@ -76,15 +83,15 @@ class HighScoreTest  < Test::Unit::TestCase
     get '/high_scores'
     assert_equal 0, JSON.parse(last_response.body)["content"].length
 
-    test_post '/high_scores', '{"playerName":"Philou","score":7}', /\/high_scores\/[0-9]+/
+    test_post '/high_scores', {"playerName"=>"Philou","score"=>7}, /\/high_scores\/[0-9]+/
   end
 
   def test_a_posted_scores_should_appear_in_all_scores
     get '/high_scores'
     scoresCount = JSON.parse(last_response.body)["content"].length
 
-    post '/high_scores', '{ "playerName": "AC", "score":666 }'
-    post '/high_scores', '{ "playerName": "DC", "score":667 }'
+    post '/high_scores', { "playerName"=> "AC", "score"=>666 }.to_json()
+    post '/high_scores', { "playerName"=> "DC", "score"=>667 }.to_json()
 
     get '/high_scores'
     assert_equal scoresCount + 2, JSON.parse(last_response.body)["content"].length
@@ -96,22 +103,32 @@ class PlayerTest < Test::Unit::TestCase
   include FilooFilooTestMethods
 
   def test_ruby_to_json_to_ruby_should_look_alike
-    test_json_roundtrip([{:name => "Philou",},
-                         {:name => "AC", :opponent_name => "Philou", :board_string => " br "}], Player)
+    test_instances_via_json_roundtrip(Player,
+                                      [{:name => "Philou",},
+                                       {:name => "AC", :opponent_name => "Philou", :board_string => " br "}])
+  end
+  def test_json_to_ruby_to_json_should_look_alike
+    test_json_via_instances_roundtrip(Player,
+                                      [{"name"=>"benyb", "opponentName"=>nil, "boardString"=>nil}])
   end
 
   def test_create_player(name="Philou")
-    test_post '/players', "{\"name\": \"#{name}\"}", /\/players\/[0-9]+/
+    test_post '/players', {"name"=> name}, /\/players\/[0-9]+/
   end
 
   def test_create_and_get_player(name="AC")
     location = test_create_player(name)
     player_json = test_get location
+    assert_equal location, player_json["guid"]
     assert_equal name, player_json["name"]
     player_json
   end
 
-  def _test_put_player_should_ok
+  def test_put_player_should_ok
+    benyb = test_create_and_get_player("benyb")
+    url = benyb.delete("guid")
+    put url, benyb.to_json
+    assert last_response.ok?
   end
 
   def test_a_lonely_player_should_not_get_an_opponent
@@ -127,7 +144,14 @@ class PlayerTest < Test::Unit::TestCase
     assert_equal "Clide", (test_get bonnyUrl)["opponentName"]
   end
   
-  def _test_grid_of_a_player_should_be_updatable
+  def test_grid_of_a_player_should_be_updatable
+    goofy = test_create_and_get_player("Goofy")
+    url = goofy.delete("guid")
+    assert goofy["boardString"].nil?
+    goofy["boardString"] = " rb "
+    put url, goofy.to_json
+    goofy2 = test_get url
+    assert_equal " rb ", goofy2["boardString"]
   end
 
 end
