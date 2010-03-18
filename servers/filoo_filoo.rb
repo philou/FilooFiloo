@@ -122,3 +122,16 @@ post '/players' do
   response.status = 201
 end
 
+put '/players/:id' do
+  player = Player.get(params[:id]) rescue nil
+  halt(404, 'Not Found') if player.nil?
+
+  opts = Player.parse_json(request.body.read) rescue nil
+  halt(401, 'Invalid Format') if opts.nil?
+
+  player.board_string = opts[:board_string]
+  player.save
+
+  response['Content-Type'] = 'application/json'
+  { 'content' => player }.to_json
+end
