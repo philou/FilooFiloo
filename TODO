@@ -10,11 +10,6 @@
  - faire un lock optimiste (celui que j'ai trouvé sur le web ne fait pas de SQL !!!, pareil pour les transactions)
 
 * 2 joueurs
- - migrer ce qui a déjà été fait
-  - la vue
-  - le model du joueur (surement pas trés gros)
-  - le controller
-
  - ouvrir une session avec un pseudo (was done)
   - utiliser la même popup que les high scores (was done)
  - commencer une partie avec un autre joueur libre séléctionné au

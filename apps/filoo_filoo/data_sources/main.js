@@ -5,6 +5,7 @@
 /*globals FilooFiloo */
 
 sc_require('models/high_score');
+sc_require('models/player');
 
 FilooFiloo.HIGH_SCORES_QUERY = SC.Query.local(FilooFiloo.HighScore, { orderBy: 'score' });
 
@@ -46,27 +47,50 @@ FilooFiloo.MainDataSource = SC.DataSource.extend(
   // RECORD SUPPORT
   //
 
+  handlesRecordType: function(store, storeKey) {
+    return SC.kindOf(store.recordTypeFor(storeKey), FilooFiloo.HighScore) ||
+      SC.kindOf(store.recordTypeFor(storeKey), FilooFiloo.Player);
+  },
+  recordTypeUrl: function(store, storeKey) {
+    if (SC.kindOf(store.recordTypeFor(storeKey), FilooFiloo.HighScore))
+      return "/high_scores";
+    if (SC.kindOf(store.recordTypeFor(storeKey), FilooFiloo.Player))
+      return "/players";
+    throw "unhandled record type.";
+  },
+
   retrieveRecord: function(store, storeKey) {
+    if (this.handlesRecordType(store, storeKey)) {
 
-    // TODO: Add handlers to retrieve an individual record's contents
-    // call store.dataSourceDidComplete(storeKey) when done.
-
-    return NO ; // return YES if you handled the storeKey
+      var url = store.idFor(storeKey);
+      SC.Request.getUrl(url).json()
+	.notify(this, 'didRetrieveRecord', store, storeKey)
+	.send();
+      return YES;
+    }
+    return NO;
+  },
+  didRetrieveRecord: function(response, store, storeKey) {
+    if (SC.ok(response)) {
+      var dataHash = response.get('body').content;
+      store.dataSourceDidComplete(storeKey, dataHash);
+    }
+    else {
+      store.dataSourceDidError(storeKey, response);
+    }
   },
 
   createRecord: function(store, storeKey) {
-
-    if(SC.kindOf(store.recordTypeFor(storeKey), FilooFiloo.HighScore)) {
-      SC.Request.postUrl('/high_scores').json()
-	.notify(this, 'didCreateHighScore', store, storeKey)
+    if(this.handlesRecordType(store,storeKey)) {
+      SC.Request.postUrl(this.recordTypeUrl(store, storeKey)).json()
+	.notify(this, 'didCreateRecord', store, storeKey)
 	.send(store.readDataHash(storeKey));
       return YES;
     }
-
     return NO;
   },
 
-  didCreateHighScore: function(response, store, storeKey) {
+  didCreateRecord: function(response, store, storeKey) {
     if (SC.ok(response)) {
       // Adapted from parseUri 1.2.2
       // (c) Steven Levithan <stevenlevithan.com>
@@ -81,11 +105,27 @@ FilooFiloo.MainDataSource = SC.DataSource.extend(
   },
 
   updateRecord: function(store, storeKey) {
+    if (this.handlesRecordType(store, storeKey)) {
+      SC.Request.putUrl(store.idFor(storeKey)).json()
+      .notify(this, this.didUpdateRecord, store, storeKey)
+      .send(store.readDataHash(storeKey));
 
-    // TODO: Add handlers to submit modified record to the data source
-    // call store.dataSourceDidComplete(storeKey) when done.
+      return YES;
+    }
+    return NO ;
+  },
 
-    return NO ; // return YES if you handled the storeKey
+  didUpdateRecord: function(response, store, storeKey) {
+    if (SC.ok(response)) {
+      var data = response.get('body');
+      if (data) {
+	data = data.content; // if hash is returned; use it.
+      }
+      store.dataSourceDidComplete(storeKey, data) ;
+    }
+    else {
+      store.dataSourceDidError(storeKey);
+    }
   },
 
   destroyRecord: function(store, storeKey) {
