@@ -75,7 +75,7 @@ FilooFiloo.createVersusController = function() {
 	this.set('whatIsPlayerDoing', 'Waiting for an opponent ...');
 
 	this.player = this.store.createRecord(FilooFiloo.Player, {name: FilooFiloo.loginController.get('name')});
-	this.player.commit();
+	this.player.commitRecord();
 
 	this.ticks = 0;
 	this.waitTimer = this.Timer.schedule({target: this, action: '_checkForOpponent', repeats: YES, interval: 1000});
@@ -100,7 +100,7 @@ FilooFiloo.createVersusController = function() {
       _commitPlayer: function() {
 	var boardString = FilooFiloo.Board.boardToString(this.get('board'));
 	this.player.set('boardString', boardString);
-	this.player.commit();
+	this.player.commitRecord();
       },
       playingObserver: function() {
 	if (!this.get('board').get('playing')) {
