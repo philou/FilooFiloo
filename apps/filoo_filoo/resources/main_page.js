@@ -48,9 +48,10 @@ FilooFiloo.mainPage = SC.Page.design(
 
     modesTabView: SC.TabView.design(
     {
-      nowShowing: "FilooFiloo.rulesPage.mainView", // ça n'a pas l'air d'être ça.
+      nowShowing: "FilooFiloo.singlePage.mainView",
       items: [
 	{ title: "Single player", value: "FilooFiloo.singlePage.mainView" },
+	{ title: "Versus", value: "FilooFiloo.versusPage.mainView" },
 	{ title: "High Scores", value: "FilooFiloo.highScoresPage.mainView" },
 	{ title: "Rules", value: "FilooFiloo.rulesPage.mainView" },
 	{ title: "Credits", value: "FilooFiloo.creditsPage.mainView" }
@@ -61,7 +62,8 @@ FilooFiloo.mainPage = SC.Page.design(
 
       layout: { left:12, right:12, top:48, bottom:12 },
 
-      userDefaultKey: "mainPane"
+      userDefaultKey: "mainPane",
+      nowShowingBinding: 'FilooFiloo.versusController.currentMode'
     })
   }),
   loginPane: SC.SheetPane.create(

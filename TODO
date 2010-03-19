@@ -1,79 +1,49 @@
-* BUGS
-
-* réflechir à comment tester le gui ??? - DONE
- - utiliser le databinding pour afficher le login dialog - DONE
- - utiliser des variables intermediaires FilooFiloo.Timer à la place
-   de SC.Timer, et les mocker dans les tests - DONE
- - hériter des classes de models et surcharger les var globales. - DONE
-
- - checker si le isVisible est data bindable, voire comment faire
-   autrement - DONE
- - vérifier si les surcharges globales sont bien indépendantes d'un
-   test à l'autre, sinon il faudra rollbacker dans le tearDown - DONE
-
-* ajouter un mode deux joureurs :
-- ouvrir une session avec un pseudo - DONE
- - utiliser la même popup que les high scores - DONE
-- commencer une partie avec un autre joueur libre séléctionné au
-   hazard - DONE
-
-- BUG quand on va et vient de l'onglet versus, on peut jouer contre
-   sois même ...
-- afficher sa grille à gauche, indiquer que c'est la sienne -DONE
- - nettoyage de l'initialization des boards dans les controllers - DONE
- - renomage des controllers game et player en single, versus - DONE
- - démarrer la partie ! - DONE
- - extraire la partie dialog de login dans un loginController - DONE
- - passer la textbox en first responder quand on affiche le login
-- afficher la grille de l'autre joueur à droite, mettre le nom de
-   l'adversaire en dessous
- - envoyer la grille au serveur à chaque fois qu'elle change
-  - ajouter une grille au player server - DONE
-  - faire une conversion de function à string pour la grille - DONE
-  - faire un timer qui met à jour la grille du player et la commit
-   dans le controller du player - DONE
-  - checker que ça fonctionne bien avec le serveur - DONE
- - demander la grille de l'autre joueur régulièrement
-  - migrer à sproutcore 1.0 pour avoir les foreign keys ...
-  - dans le player serveur, remplacer l'opponent_name par l'opponent
-   id
-  - dans le client, récupérer l'opponent complet plutôt que l'opponent_name
- - faire un autre model de grille pour les grilles externes, qui se
-   mette à jour régulièrement, mais sans aucune intelligence de jeu
-- envoyer des saletés à l'autre quand on marque des points
-
-- supprimer les joueurs quand la partie est finie
-- détecté les déconnexions
-- styler un peu
-- deploy to cheap heroku
-
-* mode 1 joueur
-- afficher la prochaine pièce
-- faire une IA pour un deuxième joueur
-
 * Administrativ
-- fill in the links in the credit tab. - DONE
-- BSD the code - DONE
+- GPL the code
 
+* Bugs
+ - si on tourne une piece qui vient d'apparaitre, elle peut sortir vers le haut ... ça fini la partie
+ - quand on va et vient de l'onglet versus, on peut jouer contre sois même ...
+ - authentifier le client
+ - faire quelque chose si deux personnes se connectent avec le meme pseudo
+ - détecter les déconnexions
+ - faire un lock optimiste (celui que j'ai trouvé sur le web ne fait pas de SQL !!!, pareil pour les transactions)
 
-NICE TO HAVE
+* 2 joueurs
+ - migrer ce qui a déjà été fait
+  - la vue
+  - le model du joueur (surement pas trés gros)
+  - le controller
 
-* add iphone compatible buttons
-- attendre la version 1.0 de sproutcore qui fera un truc expres pour ça.
+ - ouvrir une session avec un pseudo (was done)
+  - utiliser la même popup que les high scores (was done)
+ - commencer une partie avec un autre joueur libre séléctionné au
+   hazard (was done)
+ - afficher sa grille à gauche, indiquer que c'est la sienne (was done)
+  - nettoyage de l'initialization des boards dans les controllers (was done)
+  - renomage des controllers game et player en single, versus (was done)
+  - démarrer la partie ! (was done)
+  - extraire la partie dialog de login dans un loginController (was done)
+  - passer la textbox en first responder quand on affiche le login
+ - afficher la grille de l'autre joueur à droite, mettre le nom de
+   l'adversaire en dessous
+  - envoyer la grille au serveur à chaque fois qu'elle change
+   - ajouter une grille au player server (was done)
+   - faire une conversion de function à string pour la grille (was done)
+   - faire un timer qui met à jour la grille du player et la commit
+     dans le controller du player (was done)
+   - checker que ça fonctionne bien avec le serveur (was done)
+  - demander la grille de l'autre joueur régulièrement
+   - migrer à sproutcore 1.0 pour avoir les foreign keys ...
+   - dans le player serveur, remplacer l'opponent_name par l'opponent
+     id
+   - dans le client, récupérer l'opponent complet plutôt que l'opponent_name
+  - faire un autre model de grille pour les grilles externes, qui se
+    mette à jour régulièrement, mais sans aucune intelligence de jeu
+ - envoyer des saletés à l'autre quand on marque des points
 
+* Change the view so it fits on the screen, make something like 80's games
 
-* blinder un peu le serveur : 
-- retourner un error code + json pour description de l'erreur. ok
-- voir comment rattraper l'erreur dans sproutcore server _createFailure. visiblement un problème côté sproutcore ... on va pas s'embeter pour l'instant avec ça.
-- gérer l'interdiction côté client
-- passer au serveur Rest de sproutcore
-- passer au serveur Rails de sproutcore, ça fait le protect forgery
-- faire quelque chose si deux personnes se connectent avec le meme pseudo
-
-* High scores
-- add the date to the high scores
-- only get the top 50 scores from the server
-
-
+* Deploy to free + heroku
 
 
