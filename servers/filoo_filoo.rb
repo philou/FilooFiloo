@@ -45,19 +45,36 @@ class Player
 
   property :id, Serial
   property :name, Text, :required => true
-  property :opponent_name, Text
+  property :opponent, Integer
   property :board_string, Text
 
+  def self.id2url(id)
+    if id.nil?
+      nil
+    else
+      "/players/#{id}"
+    end
+  end
+  def self.url2id(url)
+    if url.nil?
+      nil
+    elsif url =~ /^\/players\/(\d+)$/
+      return $1.to_i
+    else
+      raise RuntimeError.new("Invalid url for a player \"#{url}\"")
+    end
+  end
+
   def url
-    "/players/#{self.id}"
+    Player.id2url(self.id)
   end
 
   def to_json(*a)
     {
-      'guid'         => self.url, 
-      'name'         => self.name,
-      'opponentName' => self.opponent_name,
-      'boardString'  => self.board_string
+      'guid'        => self.url, 
+      'name'        => self.name,
+      'opponent'    => Player.id2url(self.opponent),
+      'boardString' => self.board_string
     }.to_json(*a)
   end
 
@@ -66,7 +83,7 @@ class Player
 
   def self.parse_json(body)
     json = JSON.parse(body)
-    ret = { :name => json['name'], :opponent_name => json['opponentName'], :board_string => json['boardString'] }
+    ret = { :name => json['name'], :opponent => Player.url2id(json['opponent']), :board_string => json['boardString'] }
     return nil if REQUIRED.find { |r| ret[r].nil? }
     ret
   end
@@ -107,18 +124,20 @@ post '/players' do
   opts = Player.parse_json(body) rescue nil
   halt(401, 'Invalid Format') if opts.nil?
 
-  opponent = Player.first(:opponent_name => nil)
-  if (nil != opponent)
-    opts[:opponent_name] = opponent.name
-    opponent.update(:opponent_name => opts[:name])
+  waiting_player = Player.first(:opponent => nil)
 
-    halt(500, 'Could not update opponent') unless opponent.save
+  new_player = Player.new(opts)
+  halt(500, 'Could not save player') unless new_player.save
+
+  if (nil != waiting_player)
+    new_player.update(:opponent => waiting_player.id)
+    waiting_player.update(:opponent => new_player.id)
+
+    halt(500, 'Could not update player') unless new_player.save
+    halt(500, 'Could not update opponent') unless waiting_player.save
   end
 
-  player = Player.new(opts)
-  halt(500, 'Could not save player') unless player.save
-
-  response['Location'] = player.url
+  response['Location'] = new_player.url
   response.status = 201
 end
 

@@ -102,14 +102,28 @@ end
 class PlayerTest < Test::Unit::TestCase
   include FilooFilooTestMethods
 
+  def test_url_2_id
+    assert_equal nil, Player.url2id(nil)
+    assert_equal 2, Player.url2id("/players/2")
+    assert_equal 1, Player.url2id("/players/1")
+    assert_raise RuntimeError do
+      Player.url2id("invalid player url") 
+    end
+  end
+
+  def test_id_2_url
+    assert_equal nil, Player.id2url(nil)
+    assert_equal "/players/2", Player.id2url(2)
+  end
+
   def test_ruby_to_json_to_ruby_should_look_alike
     test_instances_via_json_roundtrip(Player,
                                       [{:name => "Philou",},
-                                       {:name => "AC", :opponent_name => "Philou", :board_string => " br "}])
+                                       {:name => "AC", :opponent => 2, :board_string => " br "}])
   end
   def test_json_to_ruby_to_json_should_look_alike
     test_json_via_instances_roundtrip(Player,
-                                      [{"name"=>"benyb", "opponentName"=>nil, "boardString"=>nil}])
+                                      [{"name"=>"benyb", "opponent"=>nil, "boardString"=>nil}])
   end
 
   def test_create_player(name="Philou")
@@ -133,15 +147,16 @@ class PlayerTest < Test::Unit::TestCase
 
   def test_a_lonely_player_should_not_get_an_opponent
     player_json = test_create_and_get_player("Donald")
-    assert player_json["opponentName"].nil?
+    assert player_json["opponent"].nil?
   end
 
   def test_two_players_should_play_against_each_other
     bonnyUrl = test_create_player("Bonny")
     clide = test_create_and_get_player("Clide")
+    bonny = test_get bonnyUrl
 
-    assert_equal "Bonny", clide["opponentName"]
-    assert_equal "Clide", (test_get bonnyUrl)["opponentName"]
+    assert_equal bonny["guid"], clide["opponent"]
+    assert_equal clide["guid"], bonny["opponent"]
   end
   
   def test_grid_of_a_player_should_be_updatable

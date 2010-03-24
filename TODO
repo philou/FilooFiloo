@@ -10,29 +10,29 @@
  - faire un lock optimiste (celui que j'ai trouvé sur le web ne fait pas de SQL !!!, pareil pour les transactions)
 
 * 2 joueurs
- - ouvrir une session avec un pseudo (was done)
-  - utiliser la même popup que les high scores (was done)
+ - ouvrir une session avec un pseudo [DONE]
+  - utiliser la même popup que les high scores [DONE]
  - commencer une partie avec un autre joueur libre séléctionné au
-   hazard (was done)
- - afficher sa grille à gauche, indiquer que c'est la sienne (was done)
-  - nettoyage de l'initialization des boards dans les controllers (was done)
-  - renomage des controllers game et player en single, versus (was done)
-  - démarrer la partie ! (was done)
-  - extraire la partie dialog de login dans un loginController (was done)
+   hazard [DONE]
+ - afficher sa grille à gauche, indiquer que c'est la sienne [DONE]
+  - nettoyage de l'initialization des boards dans les controllers [DONE]
+  - renomage des controllers game et player en single, versus [DONE]
+  - démarrer la partie ! [DONE]
+  - extraire la partie dialog de login dans un loginController [DONE]
   - passer la textbox en first responder quand on affiche le login
  - afficher la grille de l'autre joueur à droite, mettre le nom de
    l'adversaire en dessous
   - envoyer la grille au serveur à chaque fois qu'elle change
-   - ajouter une grille au player server (was done)
-   - faire une conversion de function à string pour la grille (was done)
+   - ajouter une grille au player server [DONE]
+   - faire une conversion de function à string pour la grille [DONE]
    - faire un timer qui met à jour la grille du player et la commit
-     dans le controller du player (was done)
-   - checker que ça fonctionne bien avec le serveur (was done)
+     dans le controller du player [DONE]
+   - checker que ça fonctionne bien avec le serveur [DONE]
   - demander la grille de l'autre joueur régulièrement
-   - migrer à sproutcore 1.0 pour avoir les foreign keys ...
+   - migrer à sproutcore 1.0 pour avoir les foreign keys ... [DONE]
    - dans le player serveur, remplacer l'opponent_name par l'opponent
-     id
-   - dans le client, récupérer l'opponent complet plutôt que l'opponent_name
+     id [DONE]
+   - dans le client, récupérer l'opponent complet plutôt que l'opponent_name, voire SC.Record.toOne...
   - faire un autre model de grille pour les grilles externes, qui se
     mette à jour régulièrement, mais sans aucune intelligence de jeu
  - envoyer des saletés à l'autre quand on marque des points
