@@ -19,6 +19,12 @@
 sc_require('models/player');
 sc_require('models/board');
 
+FilooFiloo.VersusController = {
+  PENDING: "pending",
+  WAITING: "waiting for opponent",
+  PLAYING: "playing"
+};
+
 /** @class
 
  Represents the current player's attributes
@@ -37,15 +43,31 @@ FilooFiloo.createVersusController = function() {
        */
       board: FilooFiloo.Board.create(),
 
+
       /* mode (single, versus ...)
        * corresponds to the current main tab
        */
       currentMode: undefined,
 
       /*
+       * Current status
+       */
+      gameStatus: FilooFiloo.VersusController.PENDING,
+
+      /*
        * What is the player doing now ?
        */
-      whatIsPlayerDoing: 'nothing',
+      whatIsPlayerDoing: function() {
+	if (this.get('opponent')) {
+	  return "Playing against "+this.get('opponent').get('name');
+	}
+	else if (this.get('waitingTime')) {
+	  return "Waiting for an opponent ... "+this.get('waitingTime')+" seconds";
+	}
+	else {
+	  return "pending";
+	}
+      }.property('opponent','waitingTime'),
 
       /*
        * External refs
@@ -70,44 +92,46 @@ FilooFiloo.createVersusController = function() {
       },
 
       _startWaitingForOpponent: function() {
-	this.set('whatIsPlayerDoing', 'Waiting for an opponent ...');
+	this.set('gameStatus', FilooFiloo.VersusController.WAITING);
 
-	this.player = this.store.createRecord(FilooFiloo.Player, {name: FilooFiloo.loginController.get('name')});
-	this.player.commitRecord();
+	this.set('player', this.store.createRecord(FilooFiloo.Player, {name: FilooFiloo.loginController.get('name')}));
+	this.get('player').commitRecord();
 
-	this.ticks = 0;
-	this.waitTimer = this.Timer.schedule({target: this, action: '_checkForOpponent', repeats: YES, interval: 1000});
+	this.set('waitingTime', 0);
+	this.set('timer', this.Timer.schedule({target: this, action: '_checkForOpponent', repeats: YES, interval: 1000}));
       },
 
       _checkForOpponent: function() {
-	this.player.refresh();
-	if (this.player.get('opponentName')) {
-	  this.set('whatIsPlayerDoing', 'Playing against '+this.player.get('opponentName'));
-	  this.waitTimer.invalidate();
+	this.get('player').refresh();
+	var opponent = this.get('player').get('opponent');
+	if (opponent && opponent.get('name')) {
+	  this.set('gameStatus', FilooFiloo.VersusController.PLAYING);
+	  this.set('opponent', opponent);
+	  this.get('timer').invalidate();
 	  this._startPlaying();
 	} else {
-	  this.ticks = this.ticks + 1;
-	  this.set('whatIsPlayerDoing', 'Waiting for an opponent ... '+this.ticks+' seconds');
+	  this.set('waitingTime', this.get('waitingTime') + 1);
 	}
       },
 
       _startPlaying: function() {
 	this.get('board').start();
-	this.playerTimer = this.Timer.schedule({target: this, action: '_commitPlayer', repeats: YES, interval: 3000});
+	this.set('timer', this.Timer.schedule({target: this, action: '_updatePlayers', repeats: YES, interval: 3000}));
       },
-      _commitPlayer: function() {
+      _updatePlayers: function() {
 	var boardString = FilooFiloo.Board.boardToString(this.get('board'));
-	this.player.set('boardString', boardString);
-	this.player.commitRecord();
+	this.get('player').set('boardString', boardString);
+
+	this.get('player').commitRecord();
+	this.get('player').get('opponent').refresh();
       },
       playingObserver: function() {
 	if (!this.get('board').get('playing')) {
-	  if (this.waitTimer) {
-	    this.waitTimer.invalidate();
+	  if (this.get('timer')) {
+	    this.get('timer').invalidate();
 	  }
-	  if (this.playerTimer) {
-	    this.playerTimer.invalidate();
-	  }
+	  this.set('opponent', undefined);
+	  this.set('waitingTime', undefined);
 	}
       }.observes('.board.playing')
     }

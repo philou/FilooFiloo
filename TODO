@@ -32,7 +32,14 @@
    - migrer à sproutcore 1.0 pour avoir les foreign keys ... [DONE]
    - dans le player serveur, remplacer l'opponent_name par l'opponent
      id [DONE]
-   - dans le client, récupérer l'opponent complet plutôt que l'opponent_name, voire SC.Record.toOne...
+   - dans le client, foreign key vers l'opponent [DONE]
+   - loader l'opponent régulièrement
+    - faire un membre "status" dans le controller, le construire comme une machine à état [DONE]
+    - calculer le 'what is player doing' à chaque fois, plutot que de l'utiliser comme état [DONE]
+    - n'utiliser qu'un seul timer dans les tests et dans le controller [DONE]
+    - REM : je n'ai pas réussi à calculer le whatIsPlayerDoing en utilisant le status ... j'ai du le faire sur l'état
+    - faire un model de board qui n'utilise qu'un player comme source:
+      il faut un time, un playing toujours faux, et une fonction cellState
   - faire un autre model de grille pour les grilles externes, qui se
     mette à jour régulièrement, mais sans aucune intelligence de jeu
  - envoyer des saletés à l'autre quand on marque des points

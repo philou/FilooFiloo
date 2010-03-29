@@ -27,7 +27,7 @@
 FilooFiloo.Player = SC.Record.extend(
 /** @scope FilooFiloo.Player.prototype */ {
 
-  playerName: SC.Record.attr(String),
-  opponentName: SC.Record.attr(String),
+  name: SC.Record.attr(String),
+  opponent: SC.Record.toOne("FilooFiloo.Player", {inverse: "opponent", isMaster: YES}),
   boardString: SC.Record.attr(String)
 }) ;

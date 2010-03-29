@@ -119,6 +119,11 @@ get '/players/:id' do
   { 'content' => player }.to_json
 end
 
+get '/players' do
+  content_type 'application/json'
+  { 'content' => Array(Player.all) }.to_json
+end
+
 post '/players' do
   body = request.body.read
   opts = Player.parse_json(body) rescue nil

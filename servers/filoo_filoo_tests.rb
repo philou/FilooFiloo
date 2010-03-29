@@ -126,6 +126,10 @@ class PlayerTest < Test::Unit::TestCase
                                       [{"name"=>"benyb", "opponent"=>nil, "boardString"=>nil}])
   end
 
+  def test_all_players_should_have_a_content
+    test_get '/players'
+  end
+
   def test_create_player(name="Philou")
     test_post '/players', {"name"=> name}, /\/players\/[0-9]+/
   end
