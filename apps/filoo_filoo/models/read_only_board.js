@@ -43,10 +43,16 @@ FilooFiloo.ReadOnlyBoard = SC.Record.extend(
   }.observes('boardString'),
 
   cellState: function(col, row) {
+    if (!this.cells)
+      return FilooFiloo.Game.Clear;
+
     return this.cells[row][col];
   },
 
   computeCells: function(boardString) {
+    if (!boardString)
+      return null;
+
     var result = [];
     var strings = boardString.split('\n');
     for (var i = 0; i < strings.length; i++) {

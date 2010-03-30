@@ -72,7 +72,7 @@ module("FilooFiloo.VersusController",{
       FilooFiloo.loginController.set('name', 'zinzin');
       enterVersusMode();
 
-      versusController.get('player').set('opponent', store.createRecord(FilooFiloo.Player, {name:"gyzmo"}));
+      versusController.get('player').set('opponent', store.createRecord(FilooFiloo.Player, {name:"gyzmo", boardString: " rp "}));
       tickTimer();
     };
   }
@@ -134,6 +134,17 @@ test("Once the game is started, the opponent should be refreshed regularly", fun
   versusController.get('opponent').refreshCalled = NO;
   tickTimer();
   equals(YES,versusController.get('opponent').refreshCalled, "the opponent should have been refreshed");
+});
+
+test("The opponent board should be refreshed regularly", function() {
+  ok(versusController.get('opponentBoard'), "opponent board should exist from the begining");
+
+  startAGame();
+
+  var oldBoardString = versusController.get('opponentBoard').get('boardString');
+  tickTimer();
+  var newBoardString = versusController.get('opponentBoard').get('boardString');
+  ok(oldBoardString !== newBoardString, "The time of the opponent's board should change at each tick");
 });
 
 test("If a game stops, the player timer should be invalidated", function() {
