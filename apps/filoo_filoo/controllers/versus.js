@@ -18,6 +18,7 @@
 
 sc_require('models/player');
 sc_require('models/board');
+sc_require('models/read_only_board');
 
 FilooFiloo.VersusController = {
   PENDING: "pending",
@@ -43,6 +44,10 @@ FilooFiloo.createVersusController = function() {
        */
       board: FilooFiloo.Board.create(),
 
+      /**
+       * Opponent's board.
+       */
+      opponentBoard: FilooFiloo.ReadOnlyBoard.create(),
 
       /* mode (single, versus ...)
        * corresponds to the current main tab
@@ -123,7 +128,11 @@ FilooFiloo.createVersusController = function() {
 	this.get('player').set('boardString', boardString);
 
 	this.get('player').commitRecord();
-	this.get('player').get('opponent').refresh();
+	this.get('opponent').refresh();
+
+	var opponentBoardString = this.get('opponent').get('boardString');
+	this.get('opponentBoard').set('boardString', opponentBoardString);
+	// maybe replace this by a binding ?
       },
       playingObserver: function() {
 	if (!this.get('board').get('playing')) {

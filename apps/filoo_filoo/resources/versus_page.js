@@ -17,42 +17,50 @@ FilooFiloo.versusPage = SC.Page.design(
   mainView: SC.View.design(
   {
     classNames: ['main-view'],
-    layout: FilooFiloo.Layout.MAIN_VIEW,
+    layout: { top: 20, bottom: 0, centerX: 0, width: 600 },
     childViews:
     [
-      SC.LabelView.design(
+      SC.View.design(
       {
-	layout: FilooFiloo.Layout.scoreRow(0),
-	value: 'YOU'
+	layout: { top: 0, bottom: 0, left: 0, width: 300 },
+	childViews:
+	[
+	  SC.LabelView.design(
+	  {
+	    layout: FilooFiloo.Layout.scoreRow(0),
+	    value: 'You'
+	  }),
+	  SC.LabelView.design(
+	  {
+	    layout: FilooFiloo.Layout.scoreRow(1),
+	    valueBinding: 'FilooFiloo.versusController.whatIsPlayerDoing'
+	  }),
+	  FilooFiloo.BoardView.design(
+	  {
+	    layout: { left: 1, right: 1, top: FilooFiloo.Layout.scoreRowTop(2), height: 380 },
+	    contentBinding: 'FilooFiloo.versusController.board'
+	  })
+	]
       }),
-      SC.LabelView.design(
+      SC.View.design(
       {
-	layout: FilooFiloo.Layout.scoreRow(1),
-	valueBinding: 'FilooFiloo.versusController.whatIsPlayerDoing'
-      }),
-      FilooFiloo.BoardView.design(
-      {
-	layout: { left: 1, right: 1, top: FilooFiloo.Layout.scoreRowTop(2), height: 380 },
-	contentBinding: 'FilooFiloo.versusController.board'
+	layout: { top: 0, bottom: 0, right: 0, width: 300 },
+	childViews:
+	[
+	  SC.LabelView.design(
+	  {
+	    layout: FilooFiloo.Layout.scoreRow(0),
+	    value: 'Opponent'
+	  }),
+	  FilooFiloo.BoardView.design(
+	  {
+	    layout: { left: 1, right: 1, top: FilooFiloo.Layout.scoreRowTop(2), height: 380 },
+	    contentBinding: 'FilooFiloo.versusController.opponentBoard'
+	  })
+	]
       })
+
     ]
   })
 });
-
-/*
-<% view :versus_tab do %>
-
-<div class="versus">
-  <p><%= label_view :bind => { :value => 'FilooFiloo.versusController.whatIsPlayerDoing' } %></p>
-  <div id="boards">
-    <div id="yourArea">
-      <%= view :yourBoardView, :tag => :table, :class => 'board', :view => 'FilooFiloo.BoardView',
-        :bind => { :board => 'FilooFiloo.versusController.board' } %>
-      <p>YOU</p>
-    </div>
-  </div>
-</div>
-<% end %>
-*/
-
 
