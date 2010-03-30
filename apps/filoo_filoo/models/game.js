@@ -44,13 +44,13 @@ FilooFiloo.Game.Purple = 'purple';
 FilooFiloo.Game.Yellow = 'yellow';
 
 FilooFiloo.Game.Colors = [ FilooFiloo.Game.Red,
-			 FilooFiloo.Game.Green,
-			 FilooFiloo.Game.Blue,
-			 FilooFiloo.Game.Purple,
-			 FilooFiloo.Game.Yellow];
+			   FilooFiloo.Game.Green,
+			   FilooFiloo.Game.Blue,
+			   FilooFiloo.Game.Purple,
+			   FilooFiloo.Game.Yellow];
 
 /**
-  Association between states and initials.
+  Association between states and initiaTo.
 */
 FilooFiloo.Game.initialToState = {};
 FilooFiloo.Game.stateToInitial = {};

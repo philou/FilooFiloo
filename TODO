@@ -38,10 +38,11 @@
     - calculer le 'what is player doing' à chaque fois, plutot que de l'utiliser comme état [DONE]
     - n'utiliser qu'un seul timer dans les tests et dans le controller [DONE]
     - REM : je n'ai pas réussi à calculer le whatIsPlayerDoing en utilisant le status ... j'ai du le faire sur l'état
-    - faire un model de board qui n'utilise qu'un player comme source:
-      il faut un time, un playing toujours faux, et une fonction cellState
-  - faire un autre model de grille pour les grilles externes, qui se
-    mette à jour régulièrement, mais sans aucune intelligence de jeu
+  - faire un model de board qui n'utilise qu'un player comme source:
+    il faut un time, un playing toujours faux, et une fonction cellState [DONE]
+   - quand on change la boardString, time doit changer [DONE]
+   - verifier la fonction cellState [DONE]
+   - créer une nouvelle vue sur la grille de l'adversaire
  - envoyer des saletés à l'autre quand on marque des points
 
 * Change the view so it fits on the screen, make something like 80's games
