@@ -165,6 +165,7 @@ test("The opponent board should be refreshed regularly", function() {
   ok(oldBoardString !== newBoardString, "The opponent's board should change at each tick previous '"+oldBoardString+"' current '"+newBoardString+"'");
 
   // how to test the binding to opponentBoard.boardString ?
+  ok(versusController.boardStringBinding);
 });
 
 test("If a game stops, the player timer should be invalidated", function() {
