@@ -159,10 +159,12 @@ test("The opponent board should be refreshed regularly", function() {
 
   startAGame();
 
-  var oldBoardString = versusController.get('opponentBoard').get('boardString');
+  var oldBoardString = versusController.get('opponent').get('boardString');
   tickTimer();
-  var newBoardString = versusController.get('opponentBoard').get('boardString');
+  var newBoardString = versusController.get('opponent').get('boardString');
   ok(oldBoardString !== newBoardString, "The opponent's board should change at each tick previous '"+oldBoardString+"' current '"+newBoardString+"'");
+
+  // how to test the binding to opponentBoard.boardString ?
 });
 
 test("If a game stops, the player timer should be invalidated", function() {
