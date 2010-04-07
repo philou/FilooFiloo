@@ -54,6 +54,9 @@ FilooFiloo.createVersusController = function() {
        */
       currentMode: undefined,
 
+      /** Binding for the opponent's board string */
+      boardStringBinding: SC.Binding.from('opponent.boardString', this).to('opponentBoard.boardString', this),
+
       /*
        * Current status
        */
@@ -124,11 +127,13 @@ FilooFiloo.createVersusController = function() {
       playerOpponentObserver: function() {
 	var opponent = this.get('player').get('opponent');
 	if (opponent && opponent.get('name')) {
+	  this.removeObserver('player.opponent', this, 'playerOpponentObserver');
 	  this.set('opponent', opponent);
 	  this.get('timer').set('interval',3000);
 	  this.get('timer').set('action','_updatePlayers');
 	  this.get('board').start();
-	  this.removeObserver('player.opponent', this, 'playerOpponentObserver');
+
+	  this.boardStringBinding.connect();
 	}
       },
 
@@ -138,10 +143,6 @@ FilooFiloo.createVersusController = function() {
 
 	this.get('player').commitRecord();
 	this.get('opponent').refresh();
-
-	// maybe replace this by a binding ?
-	var opponentBoardString = this.get('opponent').get('boardString');
-	this.get('opponentBoard').set('boardString', opponentBoardString);
       },
       playingObserver: function() {
 	if (!this.get('board').get('playing')) {
@@ -150,6 +151,8 @@ FilooFiloo.createVersusController = function() {
 	  }
 	  this.set('opponent', undefined);
 	  this.set('waitingTime', undefined);
+	  this.removeObserver('player.opponent', this, 'playerOpponentObserver');
+	  this.boardStringBinding.disconnect();
 	}
       }.observes('.board.playing')
     }
