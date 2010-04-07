@@ -54,9 +54,6 @@ FilooFiloo.createVersusController = function() {
        */
       currentMode: undefined,
 
-      /** Binding for the opponent's board string */
-      boardStringBinding: SC.Binding.from('opponent.boardString', this).to('opponentBoard.boardString', this),
-
       /*
        * Current status
        */
@@ -129,11 +126,11 @@ FilooFiloo.createVersusController = function() {
 	if (opponent && opponent.get('name')) {
 	  this.removeObserver('player.opponent', this, 'playerOpponentObserver');
 	  this.set('opponent', opponent);
-	  this.get('timer').set('interval',3000);
+	  this.get('timer').set('interval',3131);
 	  this.get('timer').set('action','_updatePlayers');
 	  this.get('board').start();
 
-	  this.boardStringBinding.connect();
+	  this.boardStringBinding = SC.Binding.from('opponent.boardString', this).to('opponentBoard.boardString', this).connect();
 	}
       },
 
@@ -152,7 +149,10 @@ FilooFiloo.createVersusController = function() {
 	  this.set('opponent', undefined);
 	  this.set('waitingTime', undefined);
 	  this.removeObserver('player.opponent', this, 'playerOpponentObserver');
-	  this.boardStringBinding.disconnect();
+	  if (this.boardStringBinding) {
+	    this.boardStringBinding.disconnect();
+	    delete this.boardStringBinding;
+	  }
 	}
       }.observes('.board.playing')
     }
