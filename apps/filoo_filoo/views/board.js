@@ -47,6 +47,7 @@ FilooFiloo.BoardView = SC.View.extend(SC.ContentDisplay, {
       var row = 0;
       var col = 0;
 
+      result.push('<table class="board-view-table">');
       for (row = 0; row < FilooFiloo.Board.RowCount; row++) {
 
 	result.push('<tr>');
@@ -59,11 +60,12 @@ FilooFiloo.BoardView = SC.View.extend(SC.ContentDisplay, {
 	}
 	result.push('</tr>');
       }
+      result.push('</table>');
       return result.join('');
 
     };
 
-    context = context.begin('table').addClass("board-view-table").push(renderHtml()).end();
+    context = context.push(renderHtml());
 
     sc_super();
   },
@@ -79,7 +81,6 @@ FilooFiloo.BoardView = SC.View.extend(SC.ContentDisplay, {
   }.observes('content', '.content.playing'),
 
   // key handling methods
-  // TODO: debug and ensure that it works
   keyDown: function(evt) {
     return this.interpretKeyEvents(evt) ;
   },

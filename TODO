@@ -43,13 +43,17 @@
    - quand on change la boardString, time doit changer [DONE]
    - verifier la fonction cellState [DONE]
    - créer une nouvelle vue sur la grille de l'adversaire [DONE]
-   - regarder pourquoi parfois un seul puyo s'affiche
-   - regarder pourquoi au début les puyos ne s'affichent pas
-   - regarder pourquoi parfois ça s'arrête sans explication
+   - regarder pourquoi parfois un seul puyo s'affiche [DONE]
+   - regarder pourquoi au début les puyos ne s'affichent pas [DONE]
+   - regarder pourquoi parfois ça s'arrête sans explication [DONE]
    - regarder comment améliorer les perfs (pas de truc particulier au profiler)
-    - faire en sorte que les loads soit plus découpés dans la run loop (granularité plus faible)
-    - choisir des fréquences de rafraichissement différentes
+    - faire en sorte que les loads soit plus découpés dans la run loop (granularité plus faible) [DONE]
+    - choisir des fréquences de rafraichissement différentes [DONE]
     - voir pour améliorer le render de la board view
+      Il faut implémenter un hook pour construire les vues filles pour les cases
+      Elle doivent conserver leur RenderContext, pour ne faire qu'un update de la
+      class, seulement si nécessaire. Il leur faudra les coordonnées, et le board.
+ - virer les héritages inutiles sur SC.Record
  - gérer le gagnant: le premier qui perd (comme en single) a perdu
  - envoyer des saletés à l'autre quand on marque des points
 
