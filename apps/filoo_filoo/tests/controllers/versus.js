@@ -27,6 +27,8 @@ module("FilooFiloo.VersusController",{
 
     store = {
       createRecord: function(klass, values) {
+	var rp = " rp ";
+	var pr = " pr ";
         var result = FilooFiloo.store.createRecord(klass, values);
 	result.commitCalled = NO;
 	result.commitRecord = function() {
@@ -34,7 +36,11 @@ module("FilooFiloo.VersusController",{
         };
   	result.refreshCalled = NO;
 	result.refresh = function() {
-          result.refreshCalled = YES;
+          this.refreshCalled = YES;
+	  if (this.get('boardString') == rp)
+	    this.set('boardString', pr);
+	  else
+	    this.set('boardString', rp);
         };
         return result;
       }
@@ -44,25 +50,21 @@ module("FilooFiloo.VersusController",{
 
     versusController.Timer = {
       schedule: function(params) {
-        var result = {
-          parameters: params,
-  	  invalidateCalled: NO,
-          invalidate: function() {
-  	     this.invalidateCalled = YES;
-  	  }
-        };
-  	return result;
+	params.invalidateCalled = NO;
+	params.invalidate= function() {
+  	  this.invalidateCalled = YES;
+  	};
+        return SC.Object.create(params);
       }
     };
     tickTimer = function() {
       var timer = versusController.get('timer');
       ok(timer, "The timer should have been created");
-      ok(timer.parameters, "The timer should have parameters");
-      ok(timer.parameters.target, "The timer should have a target");
-      ok(timer.parameters.action, "The timer should have an action");
-      equals(YES, timer.parameters.repeats,"The timer should repeat");
+      ok(timer.get('target'), "The timer should have a target");
+      ok(timer.get('action'), "The timer should have an action");
+      equals(YES, timer.get('repeats'),"The timer should repeat");
 
-      timer.parameters.target[timer.parameters.action]();
+      timer.get('target')[timer.get('action')]();
     };
     enterVersusMode = function() {
       versusController.set('currentMode', 'FilooFiloo.versusPage.mainView');
@@ -94,11 +96,22 @@ test("Entering versus mode should force a login and start waiting for an opponen
   tickTimer();
   equals(YES,versusController.get('player').refreshCalled, "The player should be refreshed at each tick");
 
-  versusController.get('player').set('opponent', FilooFiloo.store.createRecord(FilooFiloo.Player, {name:"gyzmo"}));
+  versusController.get('player').set('opponent', store.createRecord(FilooFiloo.Player, {name:"gyzmo"}));
   tickTimer();
   equals(FilooFiloo.VersusController.PLAYING, versusController.get('gameStatus'), "Once an opponent is found, the status should be playing");
   equals("gyzmo", versusController.get('opponent').get('name'), "Once an opponent is found, the status should be playing");
   equals(YES,versusController.get('board').get('playing'), "The board should be 'playing' once an opponent was found");
+});
+
+test("Waiting time should be incremented when waiting for an opponent", function() {
+
+  FilooFiloo.loginController.set('name', 'zinzin');
+  enterVersusMode();
+  tickTimer();
+
+  var oldWaitingTime = versusController.get('waitingTime');
+  tickTimer();
+  equals(oldWaitingTime+1, versusController.get('waitingTime'), "waiting time should be incremented at each tick");
 });
 
 test("No login dialog should be shown when entering versus mode with a name", function() {
@@ -117,6 +130,11 @@ test("We should only start waiting for an opponent in versus mode", function() {
   versusController.set('currentMode', 'FilooFiloo.highScorePage.mainView');
   equals(NO,FilooFiloo.loginController.get('loginPaneVisible'));
   ok(FilooFiloo.VersusController.PENDING, versusController.get('gameStatus'), "Outside versus mode, status should be pending");
+});
+
+test("We should not try to start the game multiple times", function() {
+  startAGame();
+  versusController.get('player').set('opponent', store.createRecord(FilooFiloo.Player, {name:"gyzmo", boardString: " rp "}));
 });
 
 test("Once the game is started, the player should be commited regularly with a valid board", function() {
@@ -144,7 +162,7 @@ test("The opponent board should be refreshed regularly", function() {
   var oldBoardString = versusController.get('opponentBoard').get('boardString');
   tickTimer();
   var newBoardString = versusController.get('opponentBoard').get('boardString');
-  ok(oldBoardString !== newBoardString, "The time of the opponent's board should change at each tick");
+  ok(oldBoardString !== newBoardString, "The opponent's board should change at each tick previous '"+oldBoardString+"' current '"+newBoardString+"'");
 });
 
 test("If a game stops, the player timer should be invalidated", function() {
