@@ -6,24 +6,17 @@
 }
 
 /* styles for game board. */
-table.board-view-table {
-    border-spacing: 1px;
-    margin: 1px auto;
-}
-
-table.board-view-table td {
-    width: 30px;
-    height: 30px;
+.board-view .cell-view {
     padding: 0;
     background-color: #FFFFFF;
     background-repeat: no-repeat;
 }
 
-table.board-view-table td.red { background-image: static_url('images/sprites_red.png')}
-table.board-view-table td.blue { background-image: static_url('images/sprites_blue.png')}
-table.board-view-table td.green { background-image: static_url('images/sprites_green.png')}
-table.board-view-table td.purple { background-image: static_url('images/sprites_purple.png')}
-table.board-view-table td.yellow { background-image: static_url('images/sprites_yellow.png')}
+.board-view .red { background-image: static_url('images/sprites_red.png')}
+.board-view .blue { background-image: static_url('images/sprites_blue.png')}
+.board-view .green { background-image: static_url('images/sprites_green.png')}
+.board-view .purple { background-image: static_url('images/sprites_purple.png')}
+.board-view .yellow { background-image: static_url('images/sprites_yellow.png')}
 
 /* styles for the single player game */
 .scores {

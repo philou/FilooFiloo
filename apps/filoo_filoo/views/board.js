@@ -18,59 +18,51 @@
 // ==========================================================================
 /*globals FilooFiloo */
 
+sc_require('views/cell');
+
 /** @class
 
   (Document Your View Here)
 
   @extends SC.View
 */
-FilooFiloo.BoardView = SC.View.extend(SC.ContentDisplay, {
+FilooFiloo.BoardView = SC.View.extend({
 /** @scope FilooFiloo.BoardView.prototype */
 
   classNames: ['board-view'],
 
-  contentDisplayProperties: 'time playing'.w(),
-
   acceptsFirstResponder: YES,
 
-  render: function(context, firstTime)
-  {
-    var board = this.get('content');
+  childViews: function() {
 
-    var cellClass = function() { return ''; };
-    if (board) {
-      cellClass = function(row, col) {
-	return FilooFiloo.Game.stateToName[board.cellState(col, row)];
-      };
+    var result = [];
+
+    for (var col = 0; col < FilooFiloo.Board.ColCount; col++) {
+      for (var row = 0; row < FilooFiloo.Board.RowCount; row++) {
+	var cell = FilooFiloo.CellView.design(
+	{
+	  layout: { width: 30, height: 30, left: 31*col, top: 31*row },
+	  col: col,
+	  row: row
+	});
+	result.push(cell);
+      }
     }
 
-    var renderHtml= function() {
-      var result = [];
-      var row = 0;
-      var col = 0;
+    return result;
+  }(),
 
-      result.push('<table class="board-view-table">');
-      for (row = 0; row < FilooFiloo.Board.RowCount; row++) {
+  contentObserver: function() {
 
-	result.push('<tr>');
+    var board = this.get('content');
+    var childViews = this.get('childViews');
+    var len = childViews.length;
 
-	for (col = 0; col < FilooFiloo.Board.ColCount; col++) {
+    for(var i = 0; i < len; i++) {
+      childViews[i].set('content', board);
+    }
 
-	  result.push('<td class="');
-	  result.push(cellClass(row,col));
-	  result.push('" />');
-	}
-	result.push('</tr>');
-      }
-      result.push('</table>');
-      return result.join('');
-
-    };
-
-    context = context.push(renderHtml());
-
-    sc_super();
-  },
+  }.observes('content'),
 
   /** Intercept key strokes when the game is playing. */
   focus: function() {

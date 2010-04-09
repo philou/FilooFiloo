@@ -71,7 +71,7 @@ FilooFiloo.singlePage = SC.Page.design(
       }),
       FilooFiloo.BoardView.design(
       {
-	layout: { left: 1, right: 1, top: FilooFiloo.Layout.scoreRowTop(4), height: 380 },
+	layout: { centerX: 0, width: 185, top: FilooFiloo.Layout.scoreRowTop(4), height: 380 },
 	contentBinding: 'FilooFiloo.singleController.board'
       })
     ]
