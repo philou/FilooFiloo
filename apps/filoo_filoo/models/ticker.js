@@ -19,14 +19,9 @@
 // ==========================================================================
 
 /** @class
-
   Metronomes for the game.
-
-  @extends SC.Record
-  @author Philou
-  @version 0.1
 */
-FilooFiloo.Ticker = SC.Record.extend(
+FilooFiloo.Ticker = SC.Object.extend(
 /** @scope FilooFiloo.Ticker.prototype */ {
 
     /**

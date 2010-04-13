@@ -21,14 +21,9 @@
 require('models/game');
 
 /** @class
-
   Objects representing the current falling filoo-filoo couple.
-
-  @extends SC.Record
-  @author Philou
-  @version 0.1
 */
-FilooFiloo.Piece = SC.Record.extend(
+FilooFiloo.Piece = SC.Object.extend(
 /** @scope FilooFiloo.Piece.prototype */ {
 
     /**

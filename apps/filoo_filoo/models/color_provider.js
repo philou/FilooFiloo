@@ -19,14 +19,9 @@
 // ==========================================================================
 
 /** @class
-
   Random color generator
-
-  @extends SC.Record
-  @author Philou
-  @version 0.1
 */
-FilooFiloo.ColorProvider = SC.Record.extend(
+FilooFiloo.ColorProvider = SC.Object.extend(
 /** @scope FilooFiloo.ColorProvider.prototype */ {
 
     /**

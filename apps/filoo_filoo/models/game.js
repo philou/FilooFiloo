@@ -19,14 +19,9 @@
 // ==========================================================================
 
 /** @class
-
   Currently static class holding constants.
-
-  @extends SC.Record
-  @author Philou
-  @version 0.1
 */
-FilooFiloo.Game = SC.Record.extend(
+FilooFiloo.Game = SC.Object.extend(
 /** @scope FilooFiloo.Game.prototype */ {
 
 }) ;

@@ -20,11 +20,7 @@
 /*globals FilooFiloo */
 
 /** @class
-
   (Document your Model here)
-
-  @extends SC.Record
-  @version 0.1
 */
 FilooFiloo.ReadOnlyBoard = SC.Object.extend(
 /** @scope FilooFiloo.ReadOnlyBoard.prototype */ {

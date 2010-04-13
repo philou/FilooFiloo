@@ -23,12 +23,7 @@ require('models/ticker');
 require('models/color_provider');
 
 /** @class
-
   Objects representing a players board.
-
-  @extends SC.Record
-  @author Philou
-  @version 0.1
 */
 FilooFiloo.Board = SC.Object.extend(
 /** @scope FilooFiloo.Board.prototype */ {

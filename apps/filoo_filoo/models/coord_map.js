@@ -19,12 +19,7 @@
 // ==========================================================================
 
 /** @class
-
   Helper class for a map from a coord to some value.
-
-  @extends SC.Record
-  @author Philou
-  @version 0.1
 */
 FilooFiloo.CoordMap = SC.Object.extend(
 /** @scope FilooFiloo.CoordMap.prototype */ {
