@@ -52,7 +52,23 @@
     - voir pour améliorer le render de la board view
       Il faut implémenter un hook pour construire les vues filles pour les cases
       Elle doivent conserver leur RenderContext, pour ne faire qu'un update de la
-      class, seulement si nécessaire. Il leur faudra les coordonnées, et le board.
+      class, seulement si nécessaire. Il leur faudra les coordonnées, et le board. [DONE]
+
+      C'est fait, mais c'est pire ... ça doit surcharger la runLoop avec des tout petits renders ...
+      On pourrait pousser le truc jusque dans la board avec une pty pour chaque cellule. ça éviterait
+      les updates inutiles, on pourrait supprimer le time de la board, qui met tout à jour et déclenche plein
+      d'événements. Il suffirait de modifier notifyChanged_ pour mettre à jour les propriétés qui ont changées.
+      On ne ferait la boucle sur toutes les cases qu'une seule fois et hors de la runLoop. Il faut une 
+      fonction pour calculer rapidement le nom de la propriété en fonction de col et row 
+      (quelque chose comme "cell#"+(row*ColCount+col)) Meme chose pour la ReadOnlyBoard
+      Il faut aussi modifier les cellBoard pour n'observer que la case qui les interesse !
+    - faire une fonction qui calcule le nom d'une property [DONE]
+    - faire les properties dans la board [DONE]
+    - faire les properties dans les tests de la board [DONE]
+    - faire les properties dans la ROBoard [DONE]
+    - utiliser les properties dans la cellView [DONE]
+    - supprimer les 'time' properties inutilisées [DONE]
+
  - virer les héritages inutiles sur SC.Record
  - gérer le gagnant: le premier qui perd (comme en single) a perdu
  - envoyer des saletés à l'autre quand on marque des points

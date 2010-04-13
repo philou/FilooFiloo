@@ -24,44 +24,40 @@
   @extends SC.Record
   @version 0.1
 */
-FilooFiloo.ReadOnlyBoard = SC.Record.extend(
+FilooFiloo.ReadOnlyBoard = SC.Object.extend(
 /** @scope FilooFiloo.ReadOnlyBoard.prototype */ {
-
-  time: null,
 
   boardString: "",
 
   playing: NO,
 
-  cells: null,
-
-  boardStringObserver: function() {
-    this.set('time', new Date());
-    this.cells = this.computeCells(this.get('boardString'));
-  }.observes('boardString'),
-
-  cellState: function(col, row) {
-    if (!this.cells)
-      return FilooFiloo.Game.Clear;
-
-    return this.cells[row][col];
+  init: function() {
+    sc_super();
+    this.updateCells();
   },
 
-  computeCells: function(boardString) {
-    if (!boardString)
-      return null;
+  boardStringObserver: function() {
+    this.updateCells(this.get('boardString'));
+  }.observes('boardString'),
 
-    var result = [];
-    var strings = boardString.split('\n');
-    for (var i = 0; i < strings.length; i++) {
-      var string = strings[i];
-      var row = [];
-      for (var j = 0; j < string.length; j++) {
-	row.push(FilooFiloo.Game.initialToState[string.charAt(j)]);
+  updateCells: function(boardString) {
+    if (!boardString) {
+      for(var col = 0; col < FilooFiloo.Board.ColCount; col++) {
+	for(var row = 0; row < FilooFiloo.Board.RowCount; row++) {
+	  this.set(FilooFiloo.Board.cellProperty(col, row), FilooFiloo.Game.Clear);
+	}
       }
-      result.push(row);
+      return;
     }
-    return result;
+
+    var rows = boardString.split('\n');
+    for (var iRow = 0; iRow < rows.length; iRow++) {
+      var row = rows[iRow];
+      for (var iCol = 0; iCol < row.length; iCol++) {
+	this.setIfChanged(FilooFiloo.Board.cellProperty(iCol,iRow),
+			  FilooFiloo.Game.initialToState[row.charAt(iCol)]);
+      }
+    }
   }
 
 });

@@ -28,7 +28,7 @@ require('models/color_provider');
   @author Philou
   @version 0.1
 */
-FilooFiloo.Board = SC.Record.extend(
+FilooFiloo.Board = SC.Object.extend(
 /** @scope FilooFiloo.Board.prototype */ {
 
     /**
@@ -36,12 +36,6 @@ FilooFiloo.Board = SC.Record.extend(
       @type {Boolean}
     */
     playing: false,
-
-    /**
-      Time of the last change in the board.
-      @type {Date}
-    */
-    time: null,
 
     /**
       Time of the last gameover.
@@ -86,6 +80,15 @@ FilooFiloo.Board = SC.Record.extend(
 	this.colorProvider = FilooFiloo.ColorProvider.create();
       }
       return this.colorProvider;
+    },
+
+    init: function() {
+      sc_super();
+      for(var col = 0; col < FilooFiloo.Board.ColCount; col++) {
+	for(var row = 0; row < FilooFiloo.Board.RowCount; row++) {
+	  this.set(FilooFiloo.Board.cellProperty(col, row), FilooFiloo.Game.Clear);
+	}
+      }
     },
 
     /**
@@ -188,7 +191,11 @@ FilooFiloo.Board = SC.Record.extend(
     },
 
     notifyChanged_: function() {
-	this.set('time', this.now_());
+      for(var col = 0; col < FilooFiloo.Board.ColCount; col++) {
+	for(var row = 0; row < FilooFiloo.Board.RowCount; row++) {
+	  this.setIfChanged(FilooFiloo.Board.cellProperty(col, row), this.cellState(col, row));
+	}
+      }
     },
     now_: function() {
 	return new Date();
@@ -298,7 +305,19 @@ FilooFiloo.Board = SC.Record.extend(
 
     forwardLevelToTheTicker: function() {
       this.getTicker().setLevel(this.get('level'));
-    }.observes('level')
+    }.observes('level'),
+
+    cellsToString: function() {
+      result = [];
+      for (row = 0; row < FilooFiloo.Board.RowCount; row++) {
+	for (col = 0; col < FilooFiloo.Board.ColCount; col++) {
+	  result.push(FilooFiloo.Game.stateToInitial[this.cellState(col, row)]);
+	}
+	result.push("\n");
+      }
+      return result.join("");
+    }
+
 });
 
 FilooFiloo.Board.setDimensions = function(colCount, rowCount) {
@@ -313,18 +332,7 @@ FilooFiloo.Board.setDimensions = function(colCount, rowCount) {
 
 FilooFiloo.Board.setDimensions(FilooFiloo.Game.ColCount, FilooFiloo.Game.RowCount);
 
-FilooFiloo.Board.boardToString = function(board) {
-  result = [];
-  for (row = 0; row < FilooFiloo.Board.RowCount; row++) {
-    for (col = 0; col < FilooFiloo.Board.ColCount; col++) {
-
-      result.push(FilooFiloo.Game.stateToInitial[board.cellState(col, row)]);
-    }
-    result.push("\n");
-  }
-
-  return result.join("");
+/** Unique cell property name for a column and a row */
+FilooFiloo.Board.cellProperty = function(col, row) {
+  return "cell-"+(row*FilooFiloo.Board.ColCount + col);
 };
-
-
-

@@ -135,10 +135,13 @@ FilooFiloo.createVersusController = function() {
       },
 
       _updatePlayers: function() {
-	var boardString = FilooFiloo.Board.boardToString(this.get('board'));
-	this.get('player').set('boardString', boardString);
+	var boardString = this.get('board').cellsToString();
+	var player = this.get('player');
+	if (player.get('isEditable')) {
+	  this.get('player').set('boardString', boardString);
+	  this.get('player').commitRecord();
+	}
 
-	this.get('player').commitRecord();
 	this.get('opponent').refresh();
       },
       playingObserver: function() {

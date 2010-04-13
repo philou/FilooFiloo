@@ -50,40 +50,21 @@ module("FilooFiloo.Board",{
 
 	board.shouldBe = function(stringRows, message) {
             var board = this;
-            FilooFiloo.TestsHelpers.assertStringRows(stringRows, FilooFiloo.Board.RowCount, FilooFiloo.Board.ColCount, function(c,r) { return board.cellState(c,r); }, message);
+            FilooFiloo.TestsHelpers.assertStringRows(stringRows, FilooFiloo.Board.RowCount, FilooFiloo.Board.ColCount,
+						     function(c,r) {
+						       return board.get(FilooFiloo.Board.cellProperty(c,r));
+						     }, message);
 	};
 
         board.shouldBeEmpty = function(message) {
-            this.shouldBe( ["    ",
-			   "    ",
-			   "    ",
-			   "    ",
-			   "    ",
-			   "    "],
+          this.shouldBe( ["    ",
+			  "    ",
+			  "    ",
+			  "    ",
+			  "    ",
+			  "    "],
                           message);
         };
-
-	board.shouldChangeWhen = function(actionName, message) {
-	    var beforeBoardTime = this.get('time');
-	    var result = this[actionName]();
-	    var afterBoardTime = this.get('time');
-	    ok(beforeBoardTime !== afterBoardTime, message + " : board time not updated");
-	    return result;
-	};
-
-	board.shouldNotChangeWhen = function(actionName, message) {
-	    var beforeBoardTime = this.get('time');
-	    var result = this[actionName]();
-	    var afterBoardTime = this.get('time');
-	    equals(beforeBoardTime, afterBoardTime, message + " : board time updated");
-	    return result;
-	};
-
-	board.shouldChangeToWhen = function(actionName, stringRows, message) {
-	    var result = this.shouldChangeWhen(actionName, message);
-	    this.shouldBe(stringRows, message + " : board different");
-	    return result;
-	};
 
 	/***
           Allows to specify test sequences from left to right instead of top to bottom.
@@ -104,18 +85,20 @@ module("FilooFiloo.Board",{
             var stringRows = FilooFiloo.TestsHelpers.transpose(behaviour.board, count);
 
 	    for(var i = 0; i < steps.length; ++i) {
+	      var result = this[steps[i].actionName]();
+	      var iExpectedRows = function() {
 		if (stringRows[i] === idem) {
-		    this.shouldNotChangeWhen(steps[i].actionName, steps[i].message);
+		  return i-1;
 		}
-		else {
-		    this.shouldChangeToWhen(steps[i].actionName, stringRows[i], steps[i].message);
-		}
-                var extraChecks = steps[i].extraChecks;
-                for (var name in extraChecks) {
-                    if (extraChecks.hasOwnProperty(name)) {
-                        equals(extraChecks[name], this.get(name), "wrong "+name+" at "+steps[i].message);
-                    }
+		return i;
+	      }();
+	      this.shouldBe(stringRows[iExpectedRows], steps[i].message);
+              var extraChecks = steps[i].extraChecks;
+              for (var name in extraChecks) {
+                if (extraChecks.hasOwnProperty(name)) {
+                  equals(extraChecks[name], this.get(name), "wrong "+name+" at "+steps[i].message);
                 }
+	      }
 	    }
 	};
 
@@ -201,13 +184,13 @@ test("New pieces should have colors from colorProvider.", function() {
 	colorProvider.secondColor = FilooFiloo.Game.Yellow;
 
 	board.start();
-	board.shouldChangeToWhen("tick",
-				 [" py ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  "    ",
-				  "    "]);
+	board.tick();
+	board.shouldBe([" py ",
+			"    ",
+			"    ",
+			"    ",
+			"    ",
+			"    "]);
 });
 
 test("A piece should move with left and right", function() {
@@ -532,11 +515,23 @@ test("board to string should handle main colors", function() {
 	            "rb  ",
 	            "rb  "];
 
-      fakeBoard = {
-        cellState: function(col, row) {
-          return FilooFiloo.Game.initialToState[boardArray[row].charAt(col)];
-        }
-      };
+      board.startWithBoard(boardArray);
 
-      equals(boardArray.join("\n")+"\n", FilooFiloo.Board.boardToString(fakeBoard));
+      equals(boardArray.join("\n")+"\n", board.cellsToString());
 });
+
+test("Cells property names should be unique", function() {
+
+  var memo = {};
+
+  for(var col = 0; col < FilooFiloo.Board.ColCount; col++) {
+    for(var row = 0; row < FilooFiloo.Board.RowCount; row++) {
+      var cellProperty = FilooFiloo.Board.cellProperty(col, row);
+      ok(!memo[cellProperty], "Duplicate cell property name: "+cellProperty );
+      memo[cellProperty] = YES;
+    }
+  }
+
+});
+
+// tester le nouveau mode de propriétés: changer la fonction principale?
