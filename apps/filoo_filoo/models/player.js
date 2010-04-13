@@ -26,5 +26,12 @@ FilooFiloo.Player = SC.Record.extend(
 
   name: SC.Record.attr(String),
   opponent: SC.Record.toOne("FilooFiloo.Player", {inverse: "opponent", isMaster: YES}),
-  boardString: SC.Record.attr(String)
-}) ;
+  boardString: SC.Record.attr(String),
+  outcome: SC.Record.attr(String)
+});
+
+// Outcomes of the game for a player. Let's
+// use undefined or null for not yet unknown
+FilooFiloo.Player.WIN = "win";
+FilooFiloo.Player.LOST = "lost";
+

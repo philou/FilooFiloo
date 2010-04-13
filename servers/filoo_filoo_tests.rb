@@ -119,12 +119,15 @@ class PlayerTest < Test::Unit::TestCase
   def test_ruby_to_json_to_ruby_should_look_alike
     test_instances_via_json_roundtrip(Player,
                                       [{:name => "Philou",},
-                                       {:name => "AC", :opponent => 2, :board_string => " br "}])
+                                       {:name => "AC", :opponent => 2, :board_string => " br "},
+                                       {:name => "DC", :opponent => 2, :board_string => " rp ", :outcome => "win"}])
   end
   def test_json_to_ruby_to_json_should_look_alike
     test_json_via_instances_roundtrip(Player,
-                                      [{"name"=>"benyb", "opponent"=>nil, "boardString"=>nil}])
+                                      [{"name"=>"benyb", "opponent"=>nil, "boardString"=>nil, "outcome"=>nil},
+                                       {"name"=>"benyb", "opponent"=>nil, "boardString"=>nil, "outcome"=>"lost"}])
   end
+
 
   def test_all_players_should_have_a_content
     test_get '/players'
@@ -161,6 +164,22 @@ class PlayerTest < Test::Unit::TestCase
 
     assert_equal bonny["guid"], clide["opponent"]
     assert_equal clide["guid"], bonny["opponent"]
+  end
+
+  def test_the_last_to_loose_should_be_the_winner
+    mickey = test_create_and_get_player("Mickey")
+    mickeyUrl = mickey.delete("guid")
+
+    mimieUrl = test_create_player("Mimie")
+
+    mickey["outcome"] = "lost"
+    put mickeyUrl, mickey.to_json
+
+    mickey = test_get mickeyUrl
+    assert_equal "lost", mickey["outcome"]
+
+    mimie = test_get mimieUrl
+    assert_equal "win", mimie["outcome"]
   end
   
   def test_grid_of_a_player_should_be_updatable
