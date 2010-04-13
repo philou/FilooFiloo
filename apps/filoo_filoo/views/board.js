@@ -39,11 +39,9 @@ FilooFiloo.BoardView = SC.View.extend({
 
     for (var col = 0; col < FilooFiloo.Board.ColCount; col++) {
       for (var row = 0; row < FilooFiloo.Board.RowCount; row++) {
-	var cell = FilooFiloo.CellView.design(
+	var cell = FilooFiloo.createCellView(col, row).design(
 	{
-	  layout: { width: 30, height: 30, left: 31*col, top: 31*row },
-	  col: col,
-	  row: row
+	  layout: { width: 30, height: 30, left: 31*col, top: 31*row }
 	});
 	result.push(cell);
       }

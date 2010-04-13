@@ -168,6 +168,18 @@ test("The opponent board should be refreshed regularly", function() {
   ok(versusController.boardStringBinding);
 });
 
+test("Player should not be commited if still BUSY", function() {
+  startAGame();
+
+  var player = versusController.get('player');
+  player.commitCalled = NO;
+  player.set('isEditable', NO);
+  tickTimer();
+
+  equals(player.commitCalled, NO, "When busy, player should not be commited");
+});
+
+
 test("If a game stops, the player timer should be invalidated", function() {
   startAGame();
 

@@ -26,47 +26,51 @@ module("FilooFiloo.ReadOnlyBoard", {
 
     roBoard = FilooFiloo.ReadOnlyBoard.create({});
 
-    roBoard.cellStateShouldEqual = function(stringRows, message) {
-      FilooFiloo.TestsHelpers.assertStringRows(stringRows, FilooFiloo.Board.RowCount, FilooFiloo.Board.ColCount, function(c,r) { return roBoard.cellState(c,r); }, message);
+    roBoard.cellsStateShouldEqual = function(stringRows, message) {
+      FilooFiloo.TestsHelpers.assertStringRows(stringRows, FilooFiloo.Board.RowCount, FilooFiloo.Board.ColCount,
+					       function(c,r) {
+						 return roBoard.get(FilooFiloo.Board.cellProperty(c,r));
+					       }, message);
     };
 
-    roBoard.cellStateShouldReflectStringBoard = function(stringRows) {
+    roBoard.cellsStateShouldReflectStringBoard = function(stringRows) {
       roBoard.set('boardString', stringRows.join('\n'));
-      roBoard.cellStateShouldEqual(stringRows, "cellState should reflect specified string rows");
+      roBoard.cellsStateShouldEqual(stringRows, "cellsState should reflect specified string rows");
     };
   }
 
 });
 
-test("Updating the boardString should change the time", function() {
+test("Updating the boardString should change the cells", function() {
 
-  var oldTime = roBoard.get('time');
+  var cell = FilooFiloo.Board.cellProperty(1,0);
+  var oldState = roBoard.get(cell);
   roBoard.set('boardString', " r\nb ");
-  var time = roBoard.get('time');
+  var newState = roBoard.get(cell);
 
-  ok(oldTime != time, "the time should have changed");
+  ok(oldState != newState, "the state of the cell should have changed");
 });
 
 test("The board should be clear when created", function() {
 
-  roBoard.cellStateShouldEqual(["  ","  "], "Should be clear after creation");
+  roBoard.cellsStateShouldEqual(["  ","  "], "Should be clear after creation");
 });
 
-test("The cellState function should reflect the specified boardString", function() {
+test("The cellsState function should reflect the specified boardString", function() {
 
-  roBoard.cellStateShouldReflectStringBoard(["  ",
-					     "  "]);
-  roBoard.cellStateShouldReflectStringBoard(["rb",
-					     "py"]);
+  roBoard.cellsStateShouldReflectStringBoard(["  ",
+					      "  "]);
+  roBoard.cellsStateShouldReflectStringBoard(["rb",
+					      "py"]);
 });
 
 test("The board should be cleared when set a null boardString", function() {
 
-  roBoard.cellStateShouldReflectStringBoard(["rb",
-					     "py"]);
+  roBoard.cellsStateShouldReflectStringBoard(["rb",
+					      "py"]);
 
   roBoard.set('boardString', null);
-  roBoard.cellStateShouldEqual(["  ","  "], "Should be cleared by a null boardString");
+  roBoard.cellsStateShouldEqual(["  ","  "], "Should be cleared by a null boardString");
 });
 
 test("The read only board should never be playing", function() {

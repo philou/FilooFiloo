@@ -26,39 +26,26 @@ sc_require('models/game');
 
   @extends SC.View
 */
-FilooFiloo.CellView = SC.View.extend(SC.ContentDisplay, {
-/** @scope FilooFiloo.BoardView.prototype */
+FilooFiloo.createCellView = function(iCol, iRow) {
 
-  classNames: ['cell-view', 'cell'],
+  return SC.View.extend(SC.ContentDisplay, {
+  /** @scope FilooFiloo.BoardView.prototype */
 
-  tagName: 'div',
+    classNames: ['cell-view', 'cell'],
 
-  contentDisplayProperties: 'time playing'.w(),
+    tagName: 'div',
 
-  /** Virtual properties to be specified when specialized */
-  row: 0,
-  col: 0,
+    contentDisplayProperties: ['playing', FilooFiloo.Board.cellProperty(iCol, iRow)],
 
-  previousState: FilooFiloo.Game.Clear,
+    cellProperty: FilooFiloo.Board.cellProperty(iCol, iRow),
 
-  render: function(context, firstTime)
-  {
-    var previousState = this.get('previousState');
-    var currentState = previousState;
-    var board = this.get('content');
-
-    if (board) {
-      currentState = board.cellState(this.get('col'), this.get('row'));
+    render: function(context, firstTime)
+    {
+      var board = this.get('content');
+      if (board) {
+	context.addClass(FilooFiloo.Game.stateToName[board.get(this.cellProperty)]);
+      }
+      //sc_super(); no children
     }
-
-    if (firstTime || (previousState != currentState)) {
-      var classes = {};
-      classes[FilooFiloo.Game.stateToName[previousState]] = NO;
-      classes[FilooFiloo.Game.stateToName[currentState]] = YES;
-      context.setClass(classes);
-    }
-
-    //sc_super(); no children
-  }
-
-});
+  });
+};
