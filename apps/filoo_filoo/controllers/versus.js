@@ -25,7 +25,8 @@ sc_require('models/read_only_board');
 FilooFiloo.VersusController = {
   PENDING: "pending",
   WAITING: "waiting for opponent",
-  PLAYING: "playing"
+  PLAYING: "playing",
+  FINISHED: "finished"
 };
 
 /** @class
@@ -60,7 +61,11 @@ FilooFiloo.createVersusController = function() {
        * Current status
        */
       gameStatus: function() {
-	if (this.get('opponent')) {
+	var opponent = this.get('opponent');
+	if (opponent && opponent.get('outcome')) {
+	  return FilooFiloo.VersusController.FINISHED;
+	}
+	else if (opponent) {
 	  return FilooFiloo.VersusController.PLAYING;
 	}
 	else if (undefined != this.get('waitingTime')) { // 0 evals to false ...
@@ -69,7 +74,7 @@ FilooFiloo.createVersusController = function() {
 	else {
 	  return FilooFiloo.VersusController.PENDING;
 	}
-      }.property('opponent','waitingTime'),
+      }.property('opponent','waitingTime','opponentOutcome'),
 
 
       /*
@@ -78,6 +83,8 @@ FilooFiloo.createVersusController = function() {
       whatIsPlayerDoing: function() {
 	switch(this.get('gameStatus'))
 	{
+	case FilooFiloo.VersusController.FINISHED:
+	  return this.outcomeToString(this.get('player').get('outcome'))+" against "+this.get('opponent').get('name');
 	case FilooFiloo.VersusController.PLAYING:
 	  return "Playing against "+this.get('opponent').get('name');
 	case FilooFiloo.VersusController.WAITING:
@@ -85,7 +92,33 @@ FilooFiloo.createVersusController = function() {
 	default:
 	  return "pending";
 	}
-      }.property('opponent','waitingTime'),
+      }.property('gameStatus'),
+
+      /*
+       * What is the opponent doing now ?
+       */
+      whatIsOpponentDoing: function() {
+	switch(this.get('gameStatus'))
+	{
+	case FilooFiloo.VersusController.FINISHED:
+	  return this.outcomeToString(this.get('opponent').get('outcome'))+" against "+this.get('player').get('name');
+	case FilooFiloo.VersusController.PLAYING:
+	  return "Playing against "+this.get('player').get('name');
+	default:
+	  return "";
+	}
+      }.property('gameStatus'),
+
+      outcomeToString: function(outcome) {
+	switch(outcome) {
+	case FilooFiloo.Player.WIN:
+	  return "Won";
+	case FilooFiloo.Player.LOST:
+	  return "Lost";
+	default:
+	  return "Unexpected outcome";
+	}
+      },
 
       /*
        * External refs
@@ -133,33 +166,55 @@ FilooFiloo.createVersusController = function() {
 	  this.get('board').start();
 
 	  this.boardStringBinding = SC.Binding.from('opponent.boardString', this).to('opponentBoard.boardString', this).connect();
+	  this.outcomeBinding = SC.Binding.from('opponent.outcome', this).to('opponentOutcome', this).connect();
 	}
       },
 
       _updatePlayers: function() {
-	var boardString = this.get('board').cellsToString();
 	var player = this.get('player');
-	if (player.get('isEditable')) {
-	  this.get('player').set('boardString', boardString);
-	  this.get('player').commitRecord();
+	var opponent = this.get('opponent');
+
+	if (player.get('outcome') && opponent.get('outcome')) {
+	  this.stopTheGame();
+	  return;
 	}
 
-	this.get('opponent').refresh();
-      },
-      playingObserver: function() {
-	if (!this.get('board').get('playing')) {
-	  if (this.get('timer')) {
-	    this.get('timer').invalidate();
+	if (player.get('isEditable')) {
+
+	  player.set('boardString', this.get('board').cellsToString());
+
+	  if (this.get('board').get('gameOver')) {
+	    player.set('outcome', FilooFiloo.Player.LOST);
 	  }
-	  this.set('opponent', undefined);
-	  this.set('waitingTime', undefined);
-	  this.removeObserver('player.opponent', this, 'playerOpponentObserver');
-	  if (this.boardStringBinding) {
-	    this.boardStringBinding.disconnect();
-	    delete this.boardStringBinding;
-	  }
+
+	  player.commitRecord();
 	}
-      }.observes('.board.playing')
+
+	opponent.refresh();
+      },
+
+      stopTheGame: function() {
+	if (this.get('timer')) {
+	  this.get('timer').invalidate();
+	}
+
+	this.removeObserver('player.opponent', this, 'playerOpponentObserver');
+
+	if (this.boardStringBinding) {
+	  this.boardStringBinding.disconnect();
+	  delete this.boardStringBinding;
+	}
+
+	if (this.outcomeBinding) {
+	  this.outcomeBinding.disconnect();
+	  delete this.outcomeBinding;
+	}
+
+	var board = this.get('board');
+	if (board && board.get('playing')) {
+	  board.abort();
+	}
+      }
     }
   );
 };

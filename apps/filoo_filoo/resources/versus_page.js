@@ -54,6 +54,11 @@ FilooFiloo.versusPage = SC.Page.design(
 	    layout: FilooFiloo.Layout.scoreRow(0),
 	    value: 'Opponent'
 	  }),
+	  SC.LabelView.design(
+	  {
+	    layout: FilooFiloo.Layout.scoreRow(1),
+	    valueBinding: 'FilooFiloo.versusController.whatIsOpponentDoing'
+	  }),
 	  FilooFiloo.BoardView.design(
 	  {
 	    layout: { left: 1, right: 1, top: FilooFiloo.Layout.scoreRowTop(2), height: 380 },

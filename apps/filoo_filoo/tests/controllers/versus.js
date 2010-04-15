@@ -179,10 +179,26 @@ test("Player should not be commited if still BUSY", function() {
   equals(player.commitCalled, NO, "When busy, player should not be commited");
 });
 
-
-test("If a game stops, the player timer should be invalidated", function() {
+test("When a player looses, the information should be sent to the server", function() {
   startAGame();
 
-  versusController.get('board').abort();
+  var player = versusController.get('player');
+  player.commitCalled = NO;
+  versusController.get('board').set('gameOver', new Date());
+  tickTimer();
+
+  equals(FilooFiloo.Player.LOST, player.get('outcome'), "player should be flagged as 'lost' at gameOver");
+  equals(YES, player.commitCalled, "player should be commited when loosing");
+});
+
+test("The game should end when the outcome of both players is known", function() {
+  startAGame();
+
+  versusController.get('player').set('outcome', FilooFiloo.Player.WIN);
+  versusController.get('opponent').set('outcome', FilooFiloo.Player.LOST);
+  tickTimer();
+
+  equals(FilooFiloo.VersusController.FINISHED,versusController.get('gameStatus'));
   equals(YES,versusController.get('timer').invalidateCalled);
+  equals(NO, versusController.get('board').get('playing'));
 });
