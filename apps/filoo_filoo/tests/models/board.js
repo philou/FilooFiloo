@@ -98,7 +98,7 @@ module("FilooFiloo.Board",{
               var extraChecks = steps[i].extraChecks;
               for (var name in extraChecks) {
                 if (extraChecks.hasOwnProperty(name)) {
-                  equals(extraChecks[name], this.get(name), "wrong "+name+" at "+steps[i].message);
+                  equals(this.get(name), extraChecks[name], "wrong "+name+" at "+steps[i].message);
                 }
 	      }
 	    }
@@ -128,23 +128,23 @@ module("FilooFiloo.Board",{
 
 test("The board's playing property should change with start and stop", function() {
 	ok(board);
-	equals(false, board.get('playing'));
+	equals(board.get('playing'), false);
 
 	board.start();
-	equals(true, board.get('playing'));
+	equals(board.get('playing'), true);
 
 	board.abort();
-	equals(false, board.get('playing'));
+	equals(board.get('playing'), false);
 });
 
 test("The ticker should be started with the board", function() {
-	equals(false, ticker.running);
+	equals(ticker.running, false);
 
 	board.start();
-	equals(true, ticker.running);
+	equals(ticker.running, true);
 
 	board.abort();
-	equals(false, ticker.running);
+	equals(ticker.running, false);
 });
 
 test("The board should start empty", function() {
@@ -429,11 +429,11 @@ test("Game should be lost when there is no place for new pieces", function() {
 			      " bb ",
 			      " rr ",
 			      " bb "]);
-	equals(true, board.get('playing'));
+	equals(board.get('playing'), true);
 
         var lastGameOverTime = board.get('gameOver');
 	board.tick();
-	equals(false, board.get('playing'));
+	equals(board.get('playing'), false);
         ok(lastGameOverTime !== board.get('gameOver'));
 });
 
@@ -447,18 +447,18 @@ test("Disappeared pieces should be counted", function() {
 	colorProvider.firstColor = FilooFiloo.Game.Red;
 	colorProvider.secondColor = FilooFiloo.Game.Red;
 
-        equals(0, board.get('disappearedPieces'));
+        equals(board.get('disappearedPieces'), 0);
 
         board.tick(); board.drop(); board.tick();
 
         board.shouldBeEmpty();
-        equals(5, board.get('disappearedPieces'));
+        equals(board.get('disappearedPieces'), 5);
 
         board.tick(); board.drop(); board.tick();
         board.tick(); board.drop(); board.tick();
 
         board.shouldBeEmpty();
-        equals(9, board.get('disappearedPieces'));
+        equals(board.get('disappearedPieces'), 9);
 });
 
 test("The level should increase when pieces disappear", function() {
@@ -466,28 +466,28 @@ test("The level should increase when pieces disappear", function() {
 	colorProvider.secondColor = FilooFiloo.Game.Red;
 
 	board.start();
-        equals(0, board.get('disappearedPieces'));
-        equals(1, board.get('level'));
+        equals(board.get('disappearedPieces'), 0);
+        equals(board.get('level'), 1);
 
         board.dropFiloos(FilooFiloo.Game.LevelUpgrade + 2);
-        equals(FilooFiloo.Game.LevelUpgrade + 2, board.get('disappearedPieces'));
-        equals(2, board.get('level'));
+        equals(board.get('disappearedPieces'), FilooFiloo.Game.LevelUpgrade + 2);
+        equals(board.get('level'), 2);
 
         board.dropFiloos(FilooFiloo.Game.LevelUpgrade + 2);
-        equals(2 * (FilooFiloo.Game.LevelUpgrade + 2), board.get('disappearedPieces'));
-        equals(3, board.get('level'));
+        equals(board.get('disappearedPieces'), 2 * (FilooFiloo.Game.LevelUpgrade + 2));
+        equals(board.get('level'), 3);
 });
 test("Level changes should be forwarded to the ticker", function() {
 	colorProvider.firstColor = FilooFiloo.Game.Red;
 	colorProvider.secondColor = FilooFiloo.Game.Red;
 
 	board.start();
-        equals(1, board.get('level'));
+        equals(board.get('level'), 1);
 
         board.dropFiloos(FilooFiloo.Game.LevelUpgrade + 2);
-        equals(2, board.get('level'));
+        equals(board.get('level'), 2);
 
-        equals(2, ticker.level);
+        equals(ticker.level, 2);
 });
 test("The score should be increased when pieces are disappeared with a rensa", function() {
 	colorProvider.firstColor = FilooFiloo.Game.Red;
@@ -557,7 +557,7 @@ test("board to string should handle main colors", function() {
 
       board.startWithBoard(boardArray);
 
-      equals(boardArray.join("\n")+"\n", board.cellsToString());
+      equals(board.cellsToString(), boardArray.join("\n")+"\n");
 });
 
 test("Cells property names should be unique", function() {

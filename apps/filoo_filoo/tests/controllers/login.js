@@ -31,30 +31,30 @@ test("forceLoginAndDo should set up the login panel", function() {
     var closeLoginPaneCalled = NO;
     loginController.forceLoginAndDo('Test login', 'login, tester:', function() { closeLoginPaneCalled = YES; });
 
-    equals('Test login',loginController.get('loginTitle'));
-    equals('login, tester:',loginController.get('loginCaption'));
-    equals(YES,loginController.get('loginTextRequired'));
-    equals(YES,loginController.get('loginPaneVisible'));
-    equals(NO,closeLoginPaneCalled);
+    equals(loginController.get('loginTitle'), 'Test login');
+    equals(tester:', 'login,loginController.get('loginCaption'));
+    equals(loginController.get('loginTextRequired'), YES);
+    equals(loginController.get('loginPaneVisible'), YES);
+    equals(closeLoginPaneCalled, NO);
 
     loginController.set('name', 'johnny be good');
     loginController.closeLoginPane();
-    equals(NO,loginController.get('loginPaneVisible'));
-    equals(YES,closeLoginPaneCalled);
+    equals(loginController.get('loginPaneVisible'), NO);
+    equals(closeLoginPaneCalled, YES);
 });
 
 test("The login pane should not be closed if no name was entered", function() {
     var closeLoginPaneCalled = NO;
     loginController.forceLoginAndDo('Test login', 'login, tester:', function() { closeLoginPaneCalled = YES; });
     loginController.closeLoginPane();
-    equals(YES,loginController.get('loginPaneVisible'));
-    equals(NO,closeLoginPaneCalled);
+    equals(loginController.get('loginPaneVisible'), YES);
+    equals(closeLoginPaneCalled, NO);
 });
 
 test("If already entered, the login pane should not ask for a name", function() {
     loginController.set('name', 'already');
     loginController.forceLoginAndDo('Test login', 'login, tester:', function() {});
 
-    equals(NO,loginController.get('loginTextRequired'));
-    equals(YES,loginController.get('loginPaneVisible'));
+    equals(loginController.get('loginTextRequired'), NO);
+    equals(loginController.get('loginPaneVisible'), YES);
 });

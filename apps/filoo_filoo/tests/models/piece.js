@@ -114,12 +114,12 @@ test("forEach should enumerate both cells", function() {
        {row:3, col:3, color:FilooFiloo.Game.Blue}];
   var i = 0;
   piece.forEach(function(row, col, color) {
-    equals(expected[i].row, row);
-    equals(expected[i].col, col);
-    equals(expected[i].color, color);
+    equals(row, expected[i].row);
+    equals(col, expected[i].col);
+    equals(color, expected[i].color);
     i++;
   });
-  equals(expected.length, i);
+  equals(i, expected.length);
 });
 
 test("forEach should enumerate cells from bottom to top", function() {

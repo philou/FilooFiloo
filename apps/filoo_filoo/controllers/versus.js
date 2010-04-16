@@ -167,6 +167,9 @@ FilooFiloo.createVersusController = function() {
 
 	  this.boardStringBinding = SC.Binding.from('opponent.boardString', this).to('opponentBoard.boardString', this).connect();
 	  this.outcomeBinding = SC.Binding.from('opponent.outcome', this).to('opponentOutcome', this).connect();
+
+	  this.set('opponentScore', 0);
+	  this.addObserver('opponent.score', this, 'opponentScoreObserver');
 	}
       },
 
@@ -195,6 +198,15 @@ FilooFiloo.createVersusController = function() {
 	opponent.refresh();
       },
 
+      opponentScoreObserver: function() {
+
+	var newScore = this.get('opponent').get('score');
+	var extraScore = newScore - this.get('opponentScore');
+
+	this.get('board').addNasties(Math.ceil(extraScore/70));
+	this.set('opponentScore', newScore);
+      },
+
       stopTheGame: function() {
 	if (this.get('timer')) {
 	  this.get('timer').invalidate();
@@ -212,11 +224,16 @@ FilooFiloo.createVersusController = function() {
 	  delete this.outcomeBinding;
 	}
 
+	this.removeObserver('opponent.score', this, 'opponentScoreObserver');
+
 	var board = this.get('board');
 	if (board && board.get('playing')) {
 	  board.abort();
 	}
       }
+
+      // ajouter une observer sur le score de l'adversaire, faire la diff avec ce qui
+      // a été géré avant, et envoyer le compte de saletés à la board.
     }
   );
 };

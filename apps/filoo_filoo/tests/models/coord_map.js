@@ -27,7 +27,7 @@ module("FilooFiloo.CoordMap",{
             var subPiece = fullMap.pieceContaining(x, y);
             var expectedSubPiece = FilooFiloo.TestsHelpers.newCoordMap(subPieceRows);
 
-            ok(expectedSubPiece.equals(subPiece), message);
+            ok(expectedSubPiece.equals(message, subPiece));
         };
 
         assertCreatePutEachEquals = function(mapRows) {
@@ -62,14 +62,14 @@ test("Stored values should be remembered", function() {
   map.put(2, 4, "some value");
   map.put(3, 4, "something else");
 
-  equals("some value", map.getAt(2, 4));
-  equals("something else", map.getAt(3, 4));
+  equals(map.getAt(2, "some value", 4));
+  equals(map.getAt(3, "something else", 4));
 });
 
 test("Absent values should be reported as null", function() {
   var map = FilooFiloo.CoordMap.create();
   map.put(2, 4, "something");
-  equals(null, map.getAt(3, 4));
+  equals(map.getAt(3, null, 4));
 });
 
 test("Instances should not share state", function() {
@@ -77,42 +77,42 @@ test("Instances should not share state", function() {
   var map2 = FilooFiloo.CoordMap.create();
   map.put(2, 4, "something");
 
-  equals(null, map2.getAt(2,4));
+  equals(map2.getAt(2, null,4));
 });
 
 test("Count should be updated with additions", function() {
   var map = FilooFiloo.CoordMap.create();
-  equals(0, map.get('count'));
+  equals(map.get('count'), 0);
 
   map.put(2, 3, "something");
-  equals(1, map.get('count'));
+  equals(map.get('count'), 1);
 
   map.put(3, 1, "some other thing");
-  equals(2, map.get('count'));
+  equals(map.get('count'), 2);
 
   map.put(2, 3, "something else");
-  equals(2, map.get('count'));
+  equals(map.get('count'), 2);
 
   map.put(4, 5, null);
-  equals(2, map.get('count'));
+  equals(map.get('count'), 2);
 });
 
 test("GetAt should return null once the coord was removed", function() {
   var map = FilooFiloo.CoordMap.create();
   map.put(2, 3, "something");
-  equals("something", map.getAt(2, 3));
+  equals(map.getAt(2, "something", 3));
 
   map.remove(2,3);
-  equals(null, map.getAt(2,3));
+  equals(map.getAt(2, null,3));
 });
 
 test("Remove should update the count", function() {
   var map = FilooFiloo.CoordMap.create();
   map.put(2, 3, "something");
-  equals(1, map.get('count'));
+  equals(map.get('count'), 1);
 
   map.remove(2,3);
-  equals(0, map.get('count'));
+  equals(map.get('count'), 0);
 });
 
 test("Equals shouls work correctly", function() {

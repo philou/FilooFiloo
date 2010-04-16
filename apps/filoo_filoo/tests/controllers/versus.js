@@ -62,7 +62,7 @@ module("FilooFiloo.VersusController",{
       ok(timer, "The timer should have been created");
       ok(timer.get('target'), "The timer should have a target");
       ok(timer.get('action'), "The timer should have an action");
-      equals(YES, timer.get('repeats'),"The timer should repeat");
+      equals(timer.get('repeats'), YES,"The timer should repeat");
 
       timer.get('target')[timer.get('action')]();
     };
@@ -83,24 +83,24 @@ module("FilooFiloo.VersusController",{
 test("Entering versus mode should force a login and start waiting for an opponent", function() {
 
   enterVersusMode();
-  equals(YES, FilooFiloo.loginController.get('loginPaneVisible'), "Entering versus mode should display the login pane");
+  equals(FilooFiloo.loginController.get('loginPaneVisible'), YES, "Entering versus mode should display the login pane");
 
   FilooFiloo.loginController.set('name', 'zinzin');
   FilooFiloo.loginController.closeLoginPane();
 
-  equals(FilooFiloo.VersusController.WAITING, versusController.get('gameStatus'), "After login, player should be waiting");
+  equals(versusController.get('gameStatus'), FilooFiloo.VersusController.WAITING, "Player should be waiting after login");
   ok(versusController.get('player'), "A player should have been created on login");
-  equals(YES, versusController.get('player').commitCalled, "The player should have been commited on login");
-  equals(NO, versusController.get('player').refreshCalled, "The player should have been refreshed after login");
+  equals(versusController.get('player').commitCalled, YES, "The player should have been commited on login");
+  equals(versusController.get('player').refreshCalled, NO, "The player should have been refreshed after login");
 
   tickTimer();
-  equals(YES,versusController.get('player').refreshCalled, "The player should be refreshed at each tick");
+  equals(versusController.get('player').refreshCalled, YES, "The player should be refreshed at each tick");
 
   versusController.get('player').set('opponent', store.createRecord(FilooFiloo.Player, {name:"gyzmo"}));
   tickTimer();
-  equals(FilooFiloo.VersusController.PLAYING, versusController.get('gameStatus'), "Once an opponent is found, the status should be playing");
-  equals("gyzmo", versusController.get('opponent').get('name'), "Once an opponent is found, the status should be playing");
-  equals(YES,versusController.get('board').get('playing'), "The board should be 'playing' once an opponent was found");
+  equals(versusController.get('gameStatus'), FilooFiloo.VersusController.PLAYING, "The status should be playing once an opponent is found");
+  equals(versusController.get('opponent').get('name'), "gyzmo", "The status should be playing once an opponent is found");
+  equals(versusController.get('board').get('playing'), YES, "The board should be 'playing' once an opponent was found");
 });
 
 test("Waiting time should be incremented when waiting for an opponent", function() {
@@ -111,25 +111,25 @@ test("Waiting time should be incremented when waiting for an opponent", function
 
   var oldWaitingTime = versusController.get('waitingTime');
   tickTimer();
-  equals(oldWaitingTime+1, versusController.get('waitingTime'), "waiting time should be incremented at each tick");
+  equals(versusController.get('waitingTime'), oldWaitingTime+1, "waiting time should be incremented at each tick");
 });
 
 test("No login dialog should be shown when entering versus mode with a name", function() {
   FilooFiloo.loginController.set('name', 'zinzin');
   enterVersusMode();
-  equals(NO,FilooFiloo.loginController.get('loginPaneVisible'));
+  equals(FilooFiloo.loginController.get('loginPaneVisible'), NO);
 });
 
 test("We should start waiting for an opponent even if a name was already set", function() {
   FilooFiloo.loginController.set('name', 'zinzin');
   enterVersusMode();
-  equals(FilooFiloo.VersusController.WAITING, versusController.get('gameStatus'), "After login, player should be waiting");
+  equals(versusController.get('gameStatus'), FilooFiloo.VersusController.WAITING, "Player should be waiting after login");
 });
 
 test("We should only start waiting for an opponent in versus mode", function() {
   versusController.set('currentMode', 'FilooFiloo.highScorePage.mainView');
-  equals(NO,FilooFiloo.loginController.get('loginPaneVisible'));
-  ok(FilooFiloo.VersusController.PENDING, versusController.get('gameStatus'), "Outside versus mode, status should be pending");
+  equals(FilooFiloo.loginController.get('loginPaneVisible'), NO);
+  ok(FilooFiloo.VersusController.PENDING, versusController.get('gameStatus'), "Status should be pending outside versus mode");
 });
 
 test("We should not try to start the game multiple times", function() {
@@ -143,16 +143,16 @@ test("Once the game is started, the player should be commited regularly with a v
   versusController.get('player').commitCalled = NO;
   tickTimer();
   ok(versusController.get('player').get('boardString'), "player should have a valid board");
-  equals(YES, versusController.get('player').commitCalled, "the player should have been commited");
+  equals(versusController.get('player').commitCalled, YES, "the player should have been commited");
 });
 
 test("Once the game is started, the player should be updated regularly with the actual score", function() {
   startAGame();
 
-  equals(0, versusController.get('player').get('score'), "The score should be zero at start");
+  equals(versusController.get('player').get('score'), 0, "The score should be zero at start");
   versusController.get('board').set('score', 456);
   tickTimer();
-  equals(456, versusController.get('player').get('score'), "player should be updated with the score of the board");
+  equals(versusController.get('player').get('score'), 456, "player should be updated with the score of the board");
 });
 
 test("Once the game is started, the opponent should be refreshed regularly", function() {
@@ -160,7 +160,7 @@ test("Once the game is started, the opponent should be refreshed regularly", fun
 
   versusController.get('opponent').refreshCalled = NO;
   tickTimer();
-  equals(YES,versusController.get('opponent').refreshCalled, "the opponent should have been refreshed");
+  equals(versusController.get('opponent').refreshCalled, YES, "the opponent should have been refreshed");
 });
 
 test("The opponent board should be refreshed regularly", function() {
@@ -185,7 +185,7 @@ test("Player should not be commited if still BUSY", function() {
   player.set('isEditable', NO);
   tickTimer();
 
-  equals(player.commitCalled, NO, "When busy, player should not be commited");
+  equals(NO, player.commitCalled, "layer should not be commited when busy");
 });
 
 test("When a player looses, the information should be sent to the server", function() {
@@ -196,8 +196,8 @@ test("When a player looses, the information should be sent to the server", funct
   versusController.get('board').set('gameOver', new Date());
   tickTimer();
 
-  equals(FilooFiloo.Player.LOST, player.get('outcome'), "player should be flagged as 'lost' at gameOver");
-  equals(YES, player.commitCalled, "player should be commited when loosing");
+  equals(player.get('outcome'), FilooFiloo.Player.LOST, "player should be flagged as 'lost' at gameOver");
+  equals(player.commitCalled, YES, "player should be commited when loosing");
 });
 
 test("The game should end when the outcome of both players is known", function() {
@@ -207,7 +207,25 @@ test("The game should end when the outcome of both players is known", function()
   versusController.get('opponent').set('outcome', FilooFiloo.Player.LOST);
   tickTimer();
 
-  equals(FilooFiloo.VersusController.FINISHED,versusController.get('gameStatus'));
-  equals(YES,versusController.get('timer').invalidateCalled);
-  equals(NO, versusController.get('board').get('playing'));
+  equals(versusController.get('gameStatus'), FilooFiloo.VersusController.FINISHED);
+  equals(versusController.get('timer').invalidateCalled, YES);
+  equals(versusController.get('board').get('playing'), NO);
+});
+
+test("The score of the opponent should be converted to nasties in the board", function() {
+
+  var nastiesCount = 0;
+  versusController.get('board').addNasties = function(count) {
+    nastiesCount = count;
+  };
+
+  startAGame();
+
+  versusController.get('opponent').set('score', 50);
+  tickTimer();
+  equals(nastiesCount, 1, "1 nasty should be added for a chain worth 50 points");
+
+  versusController.get('opponent').set('score', 50 + 210);
+  tickTimer();
+  equals(nastiesCount, 3, "3 nasties should be added for a chain worth 210 points");
 });

@@ -177,6 +177,13 @@ FilooFiloo.Board = SC.Object.extend(
 	}
     },
 
+    /**
+     * Adds some nasty pieces to be given to the player before next piece ...
+     */
+    addNasties: function() {
+
+    },
+
     moveCurrentPiece_: function(move) {
 	if (this.currentPiece) {
 	    var newPiece = this.currentPiece[move]();

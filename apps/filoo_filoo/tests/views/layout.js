@@ -10,6 +10,6 @@ module("FilooFiloo.Layout");
 test("test description", function() {
   var expected = "test";
   var result   = "test";
-  equals(result, expected, "test should equal test");
+  equals(expected, result, "test should equal test");
 });
 

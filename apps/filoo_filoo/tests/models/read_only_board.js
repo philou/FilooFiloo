@@ -75,9 +75,9 @@ test("The board should be cleared when set a null boardString", function() {
 
 test("The read only board should never be playing", function() {
 
-  equals(NO, roBoard.get('playing'), "Should not be playing after creation");
+  equals(roBoard.get('playing'), NO, "Should not be playing after creation");
 
   roBoard.set('boardString', "rb\npy");
-  equals(NO, roBoard.get('playing'), "Should not be playing after a board string was set");
+  equals(roBoard.get('playing'), NO, "Should not be playing after a board string was set");
 
 });
