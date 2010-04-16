@@ -489,24 +489,62 @@ test("Level changes should be forwarded to the ticker", function() {
 
         equals(2, ticker.level);
 });
-test("The score should be increased when pieces are disappeared", function() {
+test("The score should be increased when pieces are disappeared with a rensa", function() {
+	colorProvider.firstColor = FilooFiloo.Game.Red;
+	colorProvider.secondColor = FilooFiloo.Game.Red;
+
+	board.startWithBoard(["    ",
+			      "    ",
+			      "    ",
+			      "    ",
+			      "r   ",
+			      "r   "]);
+	board.shouldFollow({action:["tick", "drop", "tick", "tick"],
+	                    board: [" rr ", "    ", "    ", " rr ",
+                                    "    ", "    ", "    ", "    ",
+	                            "    ", "    ", "    ", "    ",
+	                            "    ", "    ", "    ", "    ",
+	                            "r   ", "r   ", "    ", "    ",
+	                            "r   ", "rrr ", "    ", "    "],
+                            score: [     0,      0,      0,     40]});
+});
+test("The score should be increased when pieces are disappeared with a combo", function() {
+	colorProvider.firstColor = FilooFiloo.Game.Red;
+	colorProvider.secondColor = FilooFiloo.Game.Blue;
+
+	board.startWithBoard(["    ",
+			      "    ",
+			      "    ",
+			      "r  b",
+			      "r  b",
+			      "r  b"]);
+	board.shouldFollow({action:["tick", "drop", "tick", "tick"],
+	                    board: [" rb ", "    ", "    ", " rb ",
+                                    "    ", "    ", "    ", "    ",
+	                            "    ", "    ", "    ", "    ",
+	                            "r  b", "r  b", "    ", "    ",
+	                            "r  b", "r  b", "    ", "    ",
+	                            "r  b", "rrbb", "    ", "    "],
+                            score: [     0,      0,      0,    400]});
+});
+test("The score should be increased when pieces are disappeared with a rensa chain", function() {
+	colorProvider.firstColor = FilooFiloo.Game.Blue;
+	colorProvider.secondColor = FilooFiloo.Game.Blue;
+
 	board.startWithBoard(["    ",
 			      " r  ",
 			      " r  ",
 			      " r  ",
 			      "rb  ",
 			      "rb  "]);
-	colorProvider.firstColor = FilooFiloo.Game.Blue;
-	colorProvider.secondColor = FilooFiloo.Game.Blue;
-
-	board.shouldFollow({action:["tick", "right","drop", "tick", "tick", "tick"],
-	                    board: [" bb ", "  bb", "    ", "    ", "    ", "    ",
-                                    " r  ", " r  ", " r  ", " r  ", "    ", "    ",
-	                            " r  ", " r  ", " r  ", " r  ", "    ", "    ",
-	                            " r  ", " r  ", " r  ", " r  ", " r  ", "    ",
-	                            "rb  ", "rb  ", "rb  ", "r   ", "rr  ", "    ",
-	                            "rb  ", "rb  ", "rbbb", "r   ", "rr  ", "    "],
-                            score: [     0,      0,      0,      4,      4,     14]});
+	board.shouldFollow({action:["tick", "right","drop", "tick", "tick", "tick", "tick"],
+	                    board: [" bb ", "  bb", "    ", "    ", "    ", "    ", " bb ",
+                                    " r  ", " r  ", " r  ", " r  ", "    ", "    ", "    ",
+	                            " r  ", " r  ", " r  ", " r  ", "    ", "    ", "    ",
+	                            " r  ", " r  ", " r  ", " r  ", " r  ", "    ", "    ",
+	                            "rb  ", "rb  ", "rb  ", "r   ", "rr  ", "    ", "    ",
+	                            "rb  ", "rb  ", "rbbb", "r   ", "rr  ", "    ", "    "],
+                            score: [     0,      0,      0,      0,      0,      0,    540]});
 });
 
 test("board to string should handle main colors", function() {

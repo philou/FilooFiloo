@@ -100,6 +100,7 @@ FilooFiloo.Board = SC.Object.extend(
 	this.setBlockedPieces_(blockedPieces);
 	this.setCurrentPiece_(null);
 
+	this.scoringPieces = 0;
         this.onNextTick = "initCurrentPiece_";
     },
 
@@ -202,6 +203,9 @@ FilooFiloo.Board = SC.Object.extend(
         this.set('gameOver', this.now_());
     },
     initCurrentPiece_: function(center) {
+	var points = 10 * this.scoringPieces * (this.scoringPieces - 3);
+	this.set('score', this.get('score') + points);
+
         center = center || FilooFiloo.Board.PieceStartOrigin;
         var newPiece = FilooFiloo.Piece.create({
 	    center: center,
@@ -213,7 +217,7 @@ FilooFiloo.Board = SC.Object.extend(
             return null;
         }
 
-        this.scoreMultiplier = 1;
+        this.scoringPieces = 0;
 	this.setCurrentPiece_(newPiece);
         return "tickCurrentPiece_";
     },
@@ -260,20 +264,19 @@ FilooFiloo.Board = SC.Object.extend(
 	this.blockedPieces = blockedPieces;
     },
     cleanBlockedPieces_: function() {
-        var cleanedPieces = false;
+        var piecesWereCleaned = false;
         for(var r = FilooFiloo.Board.MaxRow; 0 <= r; --r) {
             for(var c = 0; c <= FilooFiloo.Board.MaxCol; ++c) {
                 var piece = this.blockedPieces.pieceContaining(c, r);
                 if (4 <= piece.get('count')) {
                     this.set('disappearedPieces', this.get('disappearedPieces') + piece.get('count'));
-                    this.set('score', this.get('score') + this.scoreMultiplier * piece.get('count'));
+                    this.scoringPieces = this.scoringPieces + piece.get('count');
                     this.blockedPieces.removeEach(piece);
-                    cleanedPieces = true;
+                    piecesWereCleaned = true;
                 }
             }
         }
-        if (cleanedPieces) {
-            this.scoreMultiplier = FilooFiloo.Game.CascadeScoreMultiplier * this.scoreMultiplier;
+        if (piecesWereCleaned) {
             this.notifyChanged_();
             return "collapseBlockedPieces_";
         }
