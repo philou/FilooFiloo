@@ -47,6 +47,7 @@ class Player
   property :name, Text, :required => true
   property :opponent, Integer
   property :board_string, Text
+  property :score, Integer
   property :outcome, Text
 
   def self.id2url(id)
@@ -76,6 +77,7 @@ class Player
       'name'        => self.name,
       'opponent'    => Player.id2url(self.opponent),
       'boardString' => self.board_string,
+      'score'       => self.score,
       'outcome'     => self.outcome
     }.to_json(*a)
   end
@@ -88,6 +90,7 @@ class Player
     ret = { :name => json['name'],
             :opponent => Player.url2id(json['opponent']),
             :board_string => json['boardString'],
+            :score => json['score'],
             :outcome => json['outcome'] }
     return nil if REQUIRED.find { |r| ret[r].nil? }
     ret
@@ -129,6 +132,7 @@ get '/players' do
   { 'content' => Array(Player.all) }.to_json
 end
 
+# create a new player
 post '/players' do
   body = request.body.read
   opts = Player.parse_json(body) rescue nil
@@ -151,6 +155,7 @@ post '/players' do
   response.status = 201
 end
 
+# update a player
 put '/players/:id' do
   player = Player.get(params[:id]) rescue nil
   halt(404, 'Not Found') if player.nil?
@@ -159,6 +164,7 @@ put '/players/:id' do
   halt(401, 'Invalid Format') if opts.nil?
 
   player.board_string = opts[:board_string]
+  player.score = opts[:score]
 
   if ("lost" == opts[:outcome])
     player.outcome = "lost"

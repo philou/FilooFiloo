@@ -119,13 +119,15 @@ class PlayerTest < Test::Unit::TestCase
   def test_ruby_to_json_to_ruby_should_look_alike
     test_instances_via_json_roundtrip(Player,
                                       [{:name => "Philou",},
-                                       {:name => "AC", :opponent => 2, :board_string => " br "},
-                                       {:name => "DC", :opponent => 2, :board_string => " rp ", :outcome => "win"}])
+                                       {:name => "AC", :opponent => 2, :board_string => " br " },
+                                       {:name => "DC", :opponent => 2, :board_string => " rp ", :outcome => "win" },
+                                       {:name => "DC", :opponent => 2, :board_string => " rp ", :score => 667 }])
   end
   def test_json_to_ruby_to_json_should_look_alike
     test_json_via_instances_roundtrip(Player,
-                                      [{"name"=>"benyb", "opponent"=>nil, "boardString"=>nil, "outcome"=>nil},
-                                       {"name"=>"benyb", "opponent"=>nil, "boardString"=>nil, "outcome"=>"lost"}])
+                                      [{"name"=>"benyb", "opponent"=>nil, "boardString"=>nil, "outcome"=>nil },
+                                       {"name"=>"benyb", "opponent"=>nil, "boardString"=>nil, "outcome"=>"lost" },
+                                       {"name"=>"benyb", "opponent"=>nil, "boardString"=>nil, "outcome"=>"lost", "score"=>234 }])
   end
 
 
@@ -182,14 +184,22 @@ class PlayerTest < Test::Unit::TestCase
     assert_equal "win", mimie["outcome"]
   end
   
+  def assert_update(name, property, old_value, new_value)
+    player = test_create_and_get_player(name)
+    url = player.delete("guid")
+    assert_equal old_value, player[property]
+    player[property] = new_value
+    put url, player.to_json
+    player2 = test_get url
+    assert_equal new_value, player2[property]
+  end
+
   def test_grid_of_a_player_should_be_updatable
-    goofy = test_create_and_get_player("Goofy")
-    url = goofy.delete("guid")
-    assert goofy["boardString"].nil?
-    goofy["boardString"] = " rb "
-    put url, goofy.to_json
-    goofy2 = test_get url
-    assert_equal " rb ", goofy2["boardString"]
+    assert_update("Goofy", "boardString", nil, " rb ")
+  end
+
+  def test_score_of_a_player_should_be_updatable
+    assert_update("Pluto", "score", nil, 1234)
   end
 
 end
