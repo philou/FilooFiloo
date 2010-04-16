@@ -179,9 +179,11 @@ FilooFiloo.createVersusController = function() {
 	  return;
 	}
 
+	// TODO remplace ça par des bindings ? ça éviterait de faire un cas pour le isEditable
 	if (player.get('isEditable')) {
 
 	  player.set('boardString', this.get('board').cellsToString());
+	  player.set('score', this.get('board').get('score'));
 
 	  if (this.get('board').get('gameOver')) {
 	    player.set('outcome', FilooFiloo.Player.LOST);

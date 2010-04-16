@@ -146,6 +146,15 @@ test("Once the game is started, the player should be commited regularly with a v
   equals(YES, versusController.get('player').commitCalled, "the player should have been commited");
 });
 
+test("Once the game is started, the player should be updated regularly with the actual score", function() {
+  startAGame();
+
+  equals(0, versusController.get('player').get('score'), "The score should be zero at start");
+  versusController.get('board').set('score', 456);
+  tickTimer();
+  equals(456, versusController.get('player').get('score'), "player should be updated with the score of the board");
+});
+
 test("Once the game is started, the opponent should be refreshed regularly", function() {
   startAGame();
 

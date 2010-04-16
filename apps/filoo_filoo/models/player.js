@@ -27,6 +27,7 @@ FilooFiloo.Player = SC.Record.extend(
   name: SC.Record.attr(String),
   opponent: SC.Record.toOne("FilooFiloo.Player", {inverse: "opponent", isMaster: YES}),
   boardString: SC.Record.attr(String),
+  score: SC.Record.attr(Number),
   outcome: SC.Record.attr(String)
 });
 
