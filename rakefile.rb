@@ -1,66 +1,35 @@
 require 'rake'
+require 'rake/clean'
 require 'erb'
 
-$image_directory = "clients/puyo_puyo/english.lproj/images"
-$pov_source = $image_directory + "/sprites.pov"
-$pov_settings = $image_directory + "/sprites.ini"
+IMAGE_DIRECTORY = "apps/filoo_filoo/resources/images"
+POV_SETTINGS = IMAGE_DIRECTORY + "/sprites.ini"
 
-def color(name, value)
-  { :name => name, :value => value }
-end
-
-$colors = [color("red", "<0.6,0,0>"),
-           color("green", "<0,0.6,0>"),
-           color("blue", "<0,0,0.6>"),
-           color("purple", "<0.6,0,0.6>"),
-           color("yellow", "<0.6,0.6,0>")]
-
-def color_index(name)
-  $colors.each_index do |i|
-    if ($colors[i][:name] == name)
-      return i+1
-    end
-  end
-  -1
-end
+COLORS = { "red" => "<0.6,0,0>",
+            "green" => "<0,0.6,0>",
+            "blue" => "<0,0,0.6>",
+            "purple" => "<0.6,0,0.6>",
+            "yellow" => "<0.6,0.6,0>"}
 
 def colors_regex_text()
-  first = true
-  result = '('
-  $colors.each do |color|
-    if not first
-      result = result + '|'
-    end
-    first = false
-    result = result + color[:name]
-  end
-  result = result + ')'
-  result
+  "(#{COLORS.keys.join("|")})"
 end
 
-$sprites_files_regex = Regexp.new("sprites_" + colors_regex_text() + "\.png$")
-$colors_regex = Regexp.new(colors_regex_text())
-
-def sprites_files()
-  result = []
-  $colors.each do |color|
-    result.push("#{$image_directory}/sprites_#{color[:name]}.png")
-  end
-  result
+def sprites_files_regex(extension)
+  Regexp.new("sprites_#{colors_regex_text()}\.#{extension}$")
 end
 
 ## tasks
-directory $image_directory
+directory IMAGE_DIRECTORY
 
-file $pov_source => [$image_directory] do |t|
+rule sprites_files_regex("pov") => [ IMAGE_DIRECTORY ] do |t|
 
+  if not (t.name =~ Regexp.new(colors_regex_text()))
+    raise "Unrecognized source file #{t.name}"
+  end
+  color = $&
+  
   povTemplate = ERB.new <<-EOF
-#version unofficial megapov 1.1;
-
-#if (!clock_on)
-  #debug "This scene should be rendered as an animation with 1 -> <%= $colors.length %> frames\\n"
-#end
-
 camera {
   location    <0.0, 0.0, -10.0>
   direction 10*x
@@ -81,21 +50,11 @@ background { color rgbf<1,1,1, 1> }
 #declare Threshold=0.4;
 #declare Radius=1.5;
 #declare Strength=1;
-#declare Variant = frame_number - 1;
-#switch (Variant)
-<% i=0; while (i < $colors.length) %>
-	#case (<%= i %>)
-		#declare Color= rgb<%= $colors[i][:value]%>;
-		#declare Top=0;
-		#declare Right=0;
-		#declare Down=0;
-		#declare Left=0;
-	#break
-<%    i = i+1 %>
-<% end %>
-#end
-
-
+#declare Color= rgb<%= COLORS[color]%>;
+#declare Top=0;
+#declare Right=0;
+#declare Down=0;
+#declare Left=0;
 
 object {
 	blob {
@@ -120,43 +79,52 @@ object {
 			}
 			finish {reflection 0.2 brilliance 0.0 phong 0.3 phong_size 1.0 specular 1 roughness 0.005}
 		}
-		texture {
+		/*texture {
 			pigment {aoi color_map {[1.0 rgbf <1,1,1,1>][0.3 rgb 0.0]}}
-		} 
+		} */
 	}
 }
   EOF
 
-  File.open($pov_source, "w") do |n|
+  File.open(t.name, "w") do |n|
     n.write(povTemplate.result(binding))
   end
 end
 
-file $pov_settings => [$image_directory] do |t|
+file POV_SETTINGS => [IMAGE_DIRECTORY] do |t|
   povTemplate = ERB.new <<-EOF
 Width=30
 Height=30
-Initial_Frame=1
-Final_Frame=<%= $colors.length %>
 Output_Alpha=On
 Output_File_Type=n
 Output_To_File=On
   EOF
 
-  File.open($pov_settings, "w") do |n|
+  File.open(POV_SETTINGS, "w") do |n|
     n.write(povTemplate.result(binding))
   end
 end
 
-task :pov_source => [$pov_source, $pov_settings]
+def image_source(image_file)
+  image_file.sub(".png",".pov")
+end
 
-rule( $sprites_files_regex => [ proc do |task_name|
-                                 if task_name =~ $colors_regex
-                                   task_name.sub('_' + $&, color_index($&).to_s)
-                                 end
-                               end ]) do |t|
-  sh "cp #{t.source} #{t.name}"
+rule sprites_files_regex("png") => [ proc { |tn| image_source(tn) }, POV_SETTINGS ] do |t|
+  sh "povray #{POV_SETTINGS} +A +I#{image_source(t.name)} +O#{t.name}"
+end
+
+def sprites_files()
+  result = []
+  COLORS.each_key do |color|
+    result.push("#{IMAGE_DIRECTORY}/sprites_#{color}.png")
+  end
+  result
 end
 
 task :sprites => sprites_files()
 
+CLOBBER.include(POV_SETTINGS)
+COLORS.each_key do |color|
+  CLOBBER.include("#{IMAGE_DIRECTORY}/sprites_#{color}.pov")
+  CLEAN.include("#{IMAGE_DIRECTORY}/sprites_#{color}.png")
+end
