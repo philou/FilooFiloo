@@ -32,7 +32,12 @@ FilooFiloo.Game = SC.Object.extend(
 FilooFiloo.Game.Clear = null;//'clear';
 
 /**
-  Available colors for the beans.
+ * Color for nasties sent by opponent
+ */
+FilooFiloo.Game.Junk = 'junk';
+
+/**
+  Colors for the beans.
 */
 FilooFiloo.Game.Red = 'red';
 FilooFiloo.Game.Green = 'green';
@@ -47,7 +52,7 @@ FilooFiloo.Game.Colors = [ FilooFiloo.Game.Red,
 			   FilooFiloo.Game.Yellow];
 
 /**
-  Association between states and initiaTo.
+  Association between states and initials.
 */
 FilooFiloo.Game.initialToState = {};
 FilooFiloo.Game.stateToInitial = {};
@@ -67,6 +72,7 @@ FilooFiloo.Game.registerState = function(state) {
 
 FilooFiloo.Game.registerStateWithDetails(FilooFiloo.Game.Clear, ' ', 'clear');
 FilooFiloo.Game.Colors.forEach(FilooFiloo.Game.registerState);
+FilooFiloo.Game.registerState(FilooFiloo.Game.Junk);
 
 
 /**
@@ -81,5 +87,4 @@ FilooFiloo.Game.RowCount = 12;
 FilooFiloo.Game.StartTickerInterval = 500;
 FilooFiloo.Game.LevelAcceleration = 0.9;
 FilooFiloo.Game.LevelUpgrade = 30;
-FilooFiloo.Game.CascadeScoreMultiplier = 2;
 

@@ -5,11 +5,14 @@ require 'erb'
 IMAGE_DIRECTORY = "apps/filoo_filoo/resources/images"
 POV_SETTINGS = IMAGE_DIRECTORY + "/sprites.ini"
 
-COLORS = { "red" => "<0.6,0,0>",
-            "green" => "<0,0.6,0>",
-            "blue" => "<0,0,0.6>",
-            "purple" => "<0.6,0,0.6>",
-            "yellow" => "<0.6,0.6,0>"}
+COLORS = { 
+  "red" => "<0.6,0,0>",
+  "green" => "<0,0.6,0>",
+  "blue" => "<0,0,0.6>",
+  "purple" => "<0.6,0,0.6>",
+  "yellow" => "<0.6,0.6,0>",
+  "grey" => "<0.6,0.6,0.6>"
+}
 
 def colors_regex_text()
   "(#{COLORS.keys.join("|")})"
