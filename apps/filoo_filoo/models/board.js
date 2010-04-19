@@ -178,9 +178,9 @@ FilooFiloo.Board = SC.Object.extend(
     },
 
     /**
-     * Adds some nasty pieces to be given to the player before next piece ...
+     * Adds some junk to be given to the player before next piece ...
      */
-    addNasties: function() {
+    addJunk: function() {
 
     },
 
@@ -271,24 +271,26 @@ FilooFiloo.Board = SC.Object.extend(
 	this.blockedPieces = blockedPieces;
     },
     cleanBlockedPieces_: function() {
-        var piecesWereCleaned = false;
-        for(var r = FilooFiloo.Board.MaxRow; 0 <= r; --r) {
-            for(var c = 0; c <= FilooFiloo.Board.MaxCol; ++c) {
-                var piece = this.blockedPieces.pieceContaining(c, r);
-                if (4 <= piece.get('count')) {
-                    this.set('disappearedPieces', this.get('disappearedPieces') + piece.get('count'));
-                    this.scoringPieces = this.scoringPieces + piece.get('count');
-                    this.blockedPieces.removeEach(piece);
-                    piecesWereCleaned = true;
-                }
-            }
+      var piecesWereCleaned = false;
+      for(var r = FilooFiloo.Board.MaxRow; 0 <= r; --r) {
+        for(var c = 0; c <= FilooFiloo.Board.MaxCol; ++c) {
+	  var cellState = this.cellState(c,r);
+          var piece = this.blockedPieces.pieceContaining(c, r);
+	  if ((FilooFiloo.Game.Grey != cellState)  && (4 <= piece.get('count')) {
+	    this.set('disappearedPieces', this.get('disappearedPieces') + piece.get('count'));
+            this.scoringPieces = this.scoringPieces + piece.get('count');
+            this.blockedPieces.removeEach(piece);
+            piecesWereCleaned = true;
+	  }
         }
-        if (piecesWereCleaned) {
-            this.notifyChanged_();
-            return "collapseBlockedPieces_";
-        }
+      }
 
-        return this.initCurrentPiece_();
+      if (piecesWereCleaned) {
+        this.notifyChanged_();
+        return "collapseBlockedPieces_";
+      }
+
+      return this.initCurrentPiece_();
     },
     collapseBlockedPieces_: function() {
         var collapsedPieces = false;

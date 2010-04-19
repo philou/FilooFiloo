@@ -29,9 +29,9 @@ FilooFiloo.TestsHelpers = {
 	    equals(nCols, stringRows[r].length, message + ", col count is different at row "+r);
 
 	    for(var c = 0; c < nCols; ++c) {
-		equals(FilooFiloo.Game.initialToState[stringRows[r][c]],
-				        actualValues(c, r),
-				        message + " at (col="+c+", row="+r+')');
+		equals(actualValues(c, r),
+		       FilooFiloo.Game.initialToState[stringRows[r][c]],
+		       message + " at (col="+c+", row="+r+')');
 	    }
 	}
     },

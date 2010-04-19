@@ -203,7 +203,7 @@ FilooFiloo.createVersusController = function() {
 	var newScore = this.get('opponent').get('score');
 	var extraScore = newScore - this.get('opponentScore');
 
-	this.get('board').addNasties(Math.ceil(extraScore/70));
+	this.get('board').addJunk(Math.ceil(extraScore/70));
 	this.set('opponentScore', newScore);
       },
 

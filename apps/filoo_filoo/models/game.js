@@ -32,7 +32,7 @@ FilooFiloo.Game = SC.Object.extend(
 FilooFiloo.Game.Clear = null;//'clear';
 
 /**
- * Color for nasties sent by opponent
+ * Color for junk sent by opponent
  */
 FilooFiloo.Game.Junk = 'junk';
 

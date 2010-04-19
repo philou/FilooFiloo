@@ -32,7 +32,7 @@ test("forceLoginAndDo should set up the login panel", function() {
     loginController.forceLoginAndDo('Test login', 'login, tester:', function() { closeLoginPaneCalled = YES; });
 
     equals(loginController.get('loginTitle'), 'Test login');
-    equals(tester:', 'login,loginController.get('loginCaption'));
+    equals('login, tester:', loginController.get('loginCaption'));
     equals(loginController.get('loginTextRequired'), YES);
     equals(loginController.get('loginPaneVisible'), YES);
     equals(closeLoginPaneCalled, NO);

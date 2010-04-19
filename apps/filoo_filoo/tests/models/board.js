@@ -368,6 +368,26 @@ test("When grouped by 4 or more, beans of the same color should disappear", func
 			            "    ", " rr ", " rr ", " rr ", "    ", "    "]});
 });
 
+test("Groups of junk should not disappear, no matter how large", function() {
+  colorProvider.firstColor = FilooFiloo.Game.Red;
+  colorProvider.secondColor = FilooFiloo.Game.Red;
+
+  board.startWithBoard(["    ",
+			"    ",
+			"    ",
+			"j   ",
+			"jj  ",
+			"jjj "]);
+
+  board.shouldFollow({action:["tick", "drop", "tick"],
+		      board: [" rr ", "    ", " rr ",
+			      "    ", "    ", "    ",
+			      "    ", "    ", "    ",
+			      "j   ", "jr  ", "jr  ",
+			      "jj  ", "jjr ", "jjr ",
+			      "jjj ", "jjj ", "jjj "]});
+});
+
 test("If blocking the piece several groups, all should disappear", function() {
 	board.startWithBoard(["    ",
 			      "    ",

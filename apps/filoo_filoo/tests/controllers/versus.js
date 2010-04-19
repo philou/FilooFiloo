@@ -212,20 +212,20 @@ test("The game should end when the outcome of both players is known", function()
   equals(versusController.get('board').get('playing'), NO);
 });
 
-test("The score of the opponent should be converted to nasties in the board", function() {
+test("The score of the opponent should be converted to junk in the board", function() {
 
-  var nastiesCount = 0;
-  versusController.get('board').addNasties = function(count) {
-    nastiesCount = count;
+  var junkCount = 0;
+  versusController.get('board').addJunk = function(count) {
+    junkCount = count;
   };
 
   startAGame();
 
   versusController.get('opponent').set('score', 50);
   tickTimer();
-  equals(nastiesCount, 1, "1 nasty should be added for a chain worth 50 points");
+  equals(junkCount, 1, "1 junk piece should be added for a chain worth 50 points");
 
   versusController.get('opponent').set('score', 50 + 210);
   tickTimer();
-  equals(nastiesCount, 3, "3 nasties should be added for a chain worth 210 points");
+  equals(junkCount, 3, "3 junk pieces should be added for a chain worth 210 points");
 });
