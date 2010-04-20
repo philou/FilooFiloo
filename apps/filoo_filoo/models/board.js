@@ -276,7 +276,7 @@ FilooFiloo.Board = SC.Object.extend(
         for(var c = 0; c <= FilooFiloo.Board.MaxCol; ++c) {
 	  var cellState = this.cellState(c,r);
           var piece = this.blockedPieces.pieceContaining(c, r);
-	  if ((FilooFiloo.Game.Grey != cellState)  && (4 <= piece.get('count')) {
+	  if ((FilooFiloo.Game.Junk != cellState) && (4 <= piece.get('count'))) {
 	    this.set('disappearedPieces', this.get('disappearedPieces') + piece.get('count'));
             this.scoringPieces = this.scoringPieces + piece.get('count');
             this.blockedPieces.removeEach(piece);

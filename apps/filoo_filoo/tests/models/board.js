@@ -369,9 +369,6 @@ test("When grouped by 4 or more, beans of the same color should disappear", func
 });
 
 test("Groups of junk should not disappear, no matter how large", function() {
-  colorProvider.firstColor = FilooFiloo.Game.Red;
-  colorProvider.secondColor = FilooFiloo.Game.Red;
-
   board.startWithBoard(["    ",
 			"    ",
 			"    ",
@@ -380,14 +377,34 @@ test("Groups of junk should not disappear, no matter how large", function() {
 			"jjj "]);
 
   board.shouldFollow({action:["tick", "drop", "tick"],
-		      board: [" rr ", "    ", " rr ",
+		      board: [" rb ", "    ", " rb ",
 			      "    ", "    ", "    ",
 			      "    ", "    ", "    ",
 			      "j   ", "jr  ", "jr  ",
-			      "jj  ", "jjr ", "jjr ",
+			      "jj  ", "jjb ", "jjb ",
 			      "jjj ", "jjj ", "jjj "]});
 });
+/*
+test("Junk should disappear with its colored neigbors", function() {
+  colorProvider.firstColor = FilooFiloo.Game.Red;
+  colorProvider.secondColor = FilooFiloo.Game.Red;
 
+  board.startWithBoard(["    ",
+			"    ",
+			"jj j",
+			"jb j",
+			"bb j",
+			"jjjj"]);
+
+  board.shouldFollow({action:["tick", "drop", "tick", "tick"],
+		      board: [" rb ", "    ", "    ", "    ",
+			      "    ", " r  ", " r  ", "    ",
+			      "jj j", "jj j", "j  j", "    ",
+			      "jb j", "jb j", "   j", "   j",
+			      "bb j", "bbbj", "    ", "   j",
+			      "jjjj", "jjjj", "   j", "jr j" ]});
+});
+*/
 test("If blocking the piece several groups, all should disappear", function() {
 	board.startWithBoard(["    ",
 			      "    ",
