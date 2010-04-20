@@ -384,11 +384,8 @@ test("Groups of junk should not disappear, no matter how large", function() {
 			      "jj  ", "jjb ", "jjb ",
 			      "jjj ", "jjj ", "jjj "]});
 });
-/*
-test("Junk should disappear with its colored neigbors", function() {
-  colorProvider.firstColor = FilooFiloo.Game.Red;
-  colorProvider.secondColor = FilooFiloo.Game.Red;
 
+test("Junk should disappear with its colored neigbors", function() {
   board.startWithBoard(["    ",
 			"    ",
 			"jj j",
@@ -404,7 +401,7 @@ test("Junk should disappear with its colored neigbors", function() {
 			      "bb j", "bbbj", "    ", "   j",
 			      "jjjj", "jjjj", "   j", "jr j" ]});
 });
-*/
+
 test("If blocking the piece several groups, all should disappear", function() {
 	board.startWithBoard(["    ",
 			      "    ",

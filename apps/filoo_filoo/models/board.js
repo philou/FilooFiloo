@@ -271,16 +271,26 @@ FilooFiloo.Board = SC.Object.extend(
 	this.blockedPieces = blockedPieces;
     },
     cleanBlockedPieces_: function() {
+      var that = this;
       var piecesWereCleaned = false;
+
       for(var r = FilooFiloo.Board.MaxRow; 0 <= r; --r) {
         for(var c = 0; c <= FilooFiloo.Board.MaxCol; ++c) {
+
 	  var cellState = this.cellState(c,r);
           var piece = this.blockedPieces.pieceContaining(c, r);
 	  if ((FilooFiloo.Game.Junk != cellState) && (4 <= piece.get('count'))) {
+
+            piecesWereCleaned = true;
 	    this.set('disappearedPieces', this.get('disappearedPieces') + piece.get('count'));
             this.scoringPieces = this.scoringPieces + piece.get('count');
             this.blockedPieces.removeEach(piece);
-            piecesWereCleaned = true;
+
+	    piece.surroundingPiece(YES).each(function(x, y) {
+	      if (FilooFiloo.Board.areValidCoordinates(x,y) && FilooFiloo.Game.Junk == that.cellState(x,y)) {
+		that.blockedPieces.remove(x,y);
+	      }
+	    });
 	  }
         }
       }
@@ -337,6 +347,10 @@ FilooFiloo.Board.setDimensions = function(colCount, rowCount) {
     this.MaxRow = rowCount - 1;
 
     this.PieceStartOrigin = {row: 0, col: this.ColCount / 2 - 1 };
+};
+
+FilooFiloo.Board.areValidCoordinates = function(x,y) {
+  return 0 <= x &&  x <= this.MaxCol && 0 <= y && y <= this.MaxRow;
 };
 
 FilooFiloo.Board.setDimensions(FilooFiloo.Game.ColCount, FilooFiloo.Game.RowCount);

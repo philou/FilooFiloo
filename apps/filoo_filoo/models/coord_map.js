@@ -100,27 +100,31 @@ FilooFiloo.CoordMap = SC.Object.extend(
     },
 
     /**
-      Extracts the sub coord map that contains (x,y) and the surrounding coords with the same color.
-    */
+     * Extracts the sub coord map that contains (x,y) and the surrounding coords with the same color.
+     */
     pieceContaining: function(x,y) {
         return this.collectPieceContaining_(x,y,FilooFiloo.CoordMap.create());
     },
 
+    neighbors_: function(x,y) {
+      return [{x:x-1,y:y},{x:x+1,y:y},{x:x,y:y-1},{x:x,y:y+1}];
+    },
+
     collectPieceContaining_: function(x, y, result) {
-        FilooFiloo.assert(result);
+      FilooFiloo.assert(result);
+      var that = this;
 
-        if (!result.getAt(x,y)) {
-            var value = this.getAt(x,y);
-            if (value) {
-                result.put(x,y, value);
+      if (!result.getAt(x,y)) {
+        var value = this.getAt(x,y);
+        if (value) {
+          result.put(x,y, value);
 
-                this.collectPieceIfValue_(value, x-1, y, result);
-                this.collectPieceIfValue_(value, x+1, y, result);
-                this.collectPieceIfValue_(value, x, y-1, result);
-                this.collectPieceIfValue_(value, x, y+1, result);
-            }
-        }
-        return result;
+	  this.neighbors_(x,y).forEach(function (coord) {
+	    that.collectPieceIfValue_(value, coord.x, coord.y, result);
+	  });
+	}
+      }
+      return result;
     },
     collectPieceIfValue_: function(value, x, y, result) {
         if (value === this.getAt(x,y)) {
@@ -138,6 +142,19 @@ FilooFiloo.CoordMap = SC.Object.extend(
 
     key_: function(x, y) {
 	return x+";"+y;
-    }
+    },
 
-}) ;
+  surroundingPiece: function(value) {
+    var result = FilooFiloo.CoordMap.create();
+    var that = this;
+    this.each(function(x,y) {
+      that.neighbors_(x,y).forEach(function(coord) {
+	if (!that.getAt(coord.x, coord.y)) {
+	  result.put(coord.x, coord.y, value);
+	}
+      });
+    });
+    return result;
+  }
+
+});

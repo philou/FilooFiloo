@@ -21,39 +21,49 @@
 module("FilooFiloo.CoordMap",{
 
     setup: function() {
-        assertPieceContaining = function(fullMapRows, x, y, subPieceRows, message) {
-            subPieceRows = subPieceRows || fullMapRows;
-            var fullMap = FilooFiloo.TestsHelpers.newCoordMap(fullMapRows);
-            var subPiece = fullMap.pieceContaining(x, y);
-            var expectedSubPiece = FilooFiloo.TestsHelpers.newCoordMap(subPieceRows);
+      assertPieceContaining = function(fullMapRows, x, y, subPieceRows, message) {
+        subPieceRows = subPieceRows || fullMapRows;
+        var fullMap = FilooFiloo.TestsHelpers.newCoordMap(fullMapRows);
+        var subPiece = fullMap.pieceContaining(x, y);
+        var expectedSubPiece = FilooFiloo.TestsHelpers.newCoordMap(subPieceRows);
 
-            ok(expectedSubPiece.equals(subPiece), message);
-        };
+        ok(expectedSubPiece.equals(subPiece), message);
+      };
 
-        assertCreatePutEachEquals = function(mapRows) {
-            var map = FilooFiloo.TestsHelpers.newCoordMap(mapRows);
-            var copy = FilooFiloo.CoordMap.create();
-            map.each(function(x,y,value) {
-                copy.put(x,y,value);
-            });
+      assertCreatePutEachEquals = function(mapRows) {
+        var map = FilooFiloo.TestsHelpers.newCoordMap(mapRows);
+        var copy = FilooFiloo.CoordMap.create();
+        map.each(function(x,y,value) {
+          copy.put(x,y,value);
+        });
 
-            ok(map.equals(copy));
-        };
+        ok(map.equals(copy));
+      };
 
-        removeEachShouldWork = function(startRows, removedRows, expectedRows) {
-            var start = FilooFiloo.TestsHelpers.newCoordMap(startRows);
-            var removed = FilooFiloo.TestsHelpers.newCoordMap(removedRows);
-            var expected = FilooFiloo.TestsHelpers.newCoordMap(expectedRows);
+      removeEachShouldWork = function(startRows, removedRows, expectedRows) {
+        var start = FilooFiloo.TestsHelpers.newCoordMap(startRows);
+        var removed = FilooFiloo.TestsHelpers.newCoordMap(removedRows);
+        var expected = FilooFiloo.TestsHelpers.newCoordMap(expectedRows);
 
-            start.removeEach(removed);
+        start.removeEach(removed);
 
-            ok(expected.equals(start));
-        };
+        ok(expected.equals(start));
+      };
+
+      assertSurroundingPiece = function(startRows, expectedRows, message) {
+	var mainPiece = FilooFiloo.TestsHelpers.newCoordMap(startRows);
+	var surrounding = mainPiece.surroundingPiece(FilooFiloo.Game.Junk);
+	var expectedSurrounding = FilooFiloo.TestsHelpers.newCoordMap(expectedRows);
+
+	ok(expectedSurrounding.equals(surrounding), message);
+      };
+
     },
     tearDown: function() {
       assertPieceContaining = undefined;
       assertCreatePutEachEquals = undefined;
       removeEachShouldWork = undefined;
+      assertSurroundingPiece = undefined;
     }
 });
 
@@ -115,7 +125,7 @@ test("Remove should update the count", function() {
   equals(map.get('count'), 0);
 });
 
-test("Equals shouls work correctly", function() {
+test("Equals should work correctly", function() {
   ok(
       !FilooFiloo.TestsHelpers.newCoordMap(["r"]).equals(
           FilooFiloo.TestsHelpers.newCoordMap(["bb"])));
@@ -195,4 +205,22 @@ test("Remove each should work", function() {
        "rr yy"]);
 });
 
+test("Surrounding piece for a single cell should be 4 cells", function() {
+       assertSurroundingPiece(["   ",
+			       " r ",
+			       "   "],
+			      [" j ",
+			       "j j",
+			       " j "],
+			       "surrounding a single cell should be its four direct neighbors");
+});
 
+test("Cells from a piece should never appear in its surrounding piece", function() {
+       assertSurroundingPiece(["    ",
+			       " rr ",
+			       "    "],
+			      [" jj ",
+			       "j  j",
+			       " jj "],
+			       "surrounding a two adjacent cells should be their 6 neighbors");
+});
