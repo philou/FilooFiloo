@@ -620,18 +620,20 @@ test("Junk should appear before a new piece", function() {
 			      "jjjj",
 			      "jjjj"]});
 });
-/*
+
 test("No more than MaxJunkLoad pieces of junk should appear at once", function() {
-  ok(NO);
-  // tester avec MaxJunkLoad+ColCount
+  board.start();
+  board.addJunk(2*FilooFiloo.Board.MaxJunkLoad);
+  board.shouldFollow({action:["tick", "tick", "drop", "tick"],
+		      board: ["    ", " rb ", "    ", "    ",
+			      "    ", "    ", "    ", " jj ",
+			      "    ", "    ", "    ", "jjjj",
+			      "    ", "    ", " rb ", "jrbj",
+			      "jjjj", "jjjj", "jjjj", "jjjj",
+			      "jjjj", "jjjj", "jjjj", "jjjj"]});
 });
 
-test("Remaining junk should be kept for later", function() {
-  ok(NO);
-
-  // tester avec MaxJunkLoad+ColCount
-});
-
+/*
 test("No more than one incomplete row of junk should appear at once", function() {
   ok(NO);
 });

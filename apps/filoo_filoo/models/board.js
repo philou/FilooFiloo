@@ -223,13 +223,14 @@ FilooFiloo.Board = SC.Object.extend(
       }
     },
     dumpJunk_: function() {
-      for(var i = 0; i < this.junkCount; i++) {
+      var junkToDump = Math.min(FilooFiloo.Board.MaxJunkLoad,this.junkCount);
+      for(var i = 0; i < junkToDump; i++) {
 	this.dropCell_(0, i%FilooFiloo.Board.ColCount, FilooFiloo.Game.Junk);
       }
 
-      this.junkCount = 0;
+      this.junkCount -= junkToDump;
       this.notifyChanged_();
-      return "initCurrentPiece_";
+      return "createNewPiece_";
     },
     createNewPiece_: function() {
       var newPiece = FilooFiloo.Piece.create({
