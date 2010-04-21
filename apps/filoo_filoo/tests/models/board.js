@@ -22,6 +22,7 @@ module("FilooFiloo.Board",{
 
     setup: function() {
 	FilooFiloo.Board.setDimensions(4, 6);
+	FilooFiloo.Board.setMaxJunkLoad(8);
 
 	ticker = {
 	    running: false,
@@ -608,4 +609,34 @@ test("Cells property names should be unique", function() {
 
 });
 
-// tester le nouveau mode de propriétés: changer la fonction principale?
+test("Junk should appear before a new piece", function() {
+  board.start();
+  board.addJunk(FilooFiloo.Board.MaxJunkLoad);
+  board.shouldFollow({action:["tick"],
+		      board: ["    ",
+			      "    ",
+			      "    ",
+			      "    ",
+			      "jjjj",
+			      "jjjj"]});
+});
+/*
+test("No more than MaxJunkLoad pieces of junk should appear at once", function() {
+  ok(NO);
+  // tester avec MaxJunkLoad+ColCount
+});
+
+test("Remaining junk should be kept for later", function() {
+  ok(NO);
+
+  // tester avec MaxJunkLoad+ColCount
+});
+
+test("No more than one incomplete row of junk should appear at once", function() {
+  ok(NO);
+});
+
+test("If junk load cannot fit on the board, the game is lost", function() {
+  ok(NO);
+});
+*/

@@ -101,6 +101,7 @@ FilooFiloo.Board = SC.Object.extend(
 	this.setCurrentPiece_(null);
 
 	this.scoringPieces = 0;
+	this.junkCount = 0;
         this.onNextTick = "initCurrentPiece_";
     },
 
@@ -180,8 +181,8 @@ FilooFiloo.Board = SC.Object.extend(
     /**
      * Adds some junk to be given to the player before next piece ...
      */
-    addJunk: function() {
-
+    addJunk: function(count) {
+      this.junkCount += count;
     },
 
     moveCurrentPiece_: function(move) {
@@ -210,23 +211,39 @@ FilooFiloo.Board = SC.Object.extend(
         this.set('gameOver', this.now_());
     },
     initCurrentPiece_: function(center) {
-	var points = 10 * this.scoringPieces * (this.scoringPieces - 3);
-	this.set('score', this.get('score') + points);
+      var points = 10 * this.scoringPieces * (this.scoringPieces - 3);
+      this.set('score', this.get('score') + points);
+      this.scoringPieces = 0;
 
-        center = center || FilooFiloo.Board.PieceStartOrigin;
-        var newPiece = FilooFiloo.Piece.create({
-	    center: center,
-	    colors: {first: this.getColorProvider().popFirstColor(), second: this.getColorProvider().popSecondColor()}
-	});
+      if (0 < this.junkCount) {
+	return this.dumpJunk_();
+      }
+      else {
+	return this.createNewPiece_();
+      }
+    },
+    dumpJunk_: function() {
+      for(var i = 0; i < this.junkCount; i++) {
+	this.dropCell_(0, i%FilooFiloo.Board.ColCount, FilooFiloo.Game.Junk);
+      }
 
-        if (!this.pieceIsAllowed_(newPiece)) {
-            this.gameOver_();
-            return null;
-        }
+      this.junkCount = 0;
+      this.notifyChanged_();
+      return "initCurrentPiece_";
+    },
+    createNewPiece_: function() {
+      var newPiece = FilooFiloo.Piece.create({
+	center: FilooFiloo.Board.PieceStartOrigin,
+	colors: {first: this.getColorProvider().popFirstColor(), second: this.getColorProvider().popSecondColor()}
+      });
 
-        this.scoringPieces = 0;
-	this.setCurrentPiece_(newPiece);
-        return "tickCurrentPiece_";
+      if (!this.pieceIsAllowed_(newPiece)) {
+	this.gameOver_();
+	return null;
+      }
+
+      this.setCurrentPiece_(newPiece);
+      return "tickCurrentPiece_";
     },
     tickCurrentPiece_: function() {
         FilooFiloo.assert(this.currentPiece);
@@ -270,56 +287,80 @@ FilooFiloo.Board = SC.Object.extend(
     setBlockedPieces_: function(blockedPieces) {
 	this.blockedPieces = blockedPieces;
     },
-    cleanBlockedPieces_: function() {
-      var that = this;
-      var piecesWereCleaned = false;
+
+    /** Finialize the moves of the current piece once blocked.
+     *  actionColRowPredicate(c,r) should return an action to do
+     *    or nothing
+     *  nextFinializeStep is the finialize function to call at next
+     *    tick if the finialization is not yet finished
+     */
+    finializeCurrentPiece: function(actionColRowPredicate, nextFinializeStep) {
+      var didSomething = NO;
 
       for(var r = FilooFiloo.Board.MaxRow; 0 <= r; --r) {
         for(var c = 0; c <= FilooFiloo.Board.MaxCol; ++c) {
 
-	  var cellState = this.cellState(c,r);
-          var piece = this.blockedPieces.pieceContaining(c, r);
-	  if ((FilooFiloo.Game.Junk != cellState) && (4 <= piece.get('count'))) {
-
-            piecesWereCleaned = true;
-	    this.set('disappearedPieces', this.get('disappearedPieces') + piece.get('count'));
-            this.scoringPieces = this.scoringPieces + piece.get('count');
-            this.blockedPieces.removeEach(piece);
-
-	    piece.surroundingPiece(YES).each(function(x, y) {
-	      if (FilooFiloo.Board.areValidCoordinates(x,y) && FilooFiloo.Game.Junk == that.cellState(x,y)) {
-		that.blockedPieces.remove(x,y);
-	      }
-	    });
+	  var action = actionColRowPredicate(c,r);
+	  if(action) {
+	    didSomething = YES;
+	    action(c,r);
 	  }
         }
       }
-
-      if (piecesWereCleaned) {
+      if(didSomething) {
         this.notifyChanged_();
-        return "collapseBlockedPieces_";
+        return nextFinializeStep;
       }
 
       return this.initCurrentPiece_();
     },
-    collapseBlockedPieces_: function() {
-        var collapsedPieces = false;
-        for(var r = FilooFiloo.Board.MaxRow; 0 <= r; --r) {
-            for(var c = 0; c <= FilooFiloo.Board.MaxCol; ++c) {
-                if (this.blockedPieces.getAt(c,r) && this.cellIsAllowed_(r+1, c)) {
-                    var color = this.blockedPieces.getAt(c,r);
-                    this.blockedPieces.remove(c,r);
-                    this.dropCell_(r, c, color);
-                    collapsedPieces = true;
-                }
-            }
-        }
-        if (collapsedPieces) {
-            this.notifyChanged_();
-            return "cleanBlockedPieces_";
-        }
+    cleanBlockedPieces_: function() {
+      var that = this;
 
-        return this.initCurrentPiece_();
+      return this.finializeCurrentPiece(
+	function(c,r) {
+
+	  var cellState = that.cellState(c,r);
+	  var piece = that.blockedPieces.pieceContaining(c,r);
+
+	  if ((FilooFiloo.Game.Junk != cellState) && (4 <= piece.get('count'))) {
+	    return function() {
+	      that.set('disappearedPieces', that.get('disappearedPieces') + piece.get('count'));
+              that.scoringPieces = that.scoringPieces + piece.get('count');
+              that.blockedPieces.removeEach(piece);
+
+	      that.cleanSurroundingJunk_(piece);
+	    };
+	  }
+	  return null;
+	},
+	"collapseBlockedPieces_");
+    },
+    cleanSurroundingJunk_: function(disapearingPiece) {
+      var that = this;
+
+      disapearingPiece.surroundingPiece(YES).each(function(x, y) {
+	if (FilooFiloo.Board.areValidCoordinates(x,y) && FilooFiloo.Game.Junk == that.cellState(x,y)) {
+	  that.blockedPieces.remove(x,y);
+	}
+      });
+    },
+    collapseBlockedPieces_: function() {
+      var that = this;
+
+      return this.finializeCurrentPiece(
+	function(c,r) {
+
+	  if (that.blockedPieces.getAt(c,r) && that.cellIsAllowed_(r+1, c)) {
+	    return function() {
+              var color = that.blockedPieces.getAt(c,r);
+              that.blockedPieces.remove(c,r);
+              that.dropCell_(r, c, color);
+	    };
+	  }
+	  return null;
+	},
+	"cleanBlockedPieces_");
     },
 
     forwardLevelToTheTicker: function() {
@@ -339,6 +380,13 @@ FilooFiloo.Board = SC.Object.extend(
 
 });
 
+/** Maximum number of junk pieces that can fall at once */
+FilooFiloo.Board.MaxJunkLoad = 30;
+FilooFiloo.Board.setMaxJunkLoad = function(value) {
+  this.MaxJunkLoad = value;
+};
+
+/** Tweak the size of the board (useful for tests) */
 FilooFiloo.Board.setDimensions = function(colCount, rowCount) {
     this.ColCount = colCount;
     this.MaxCol = colCount - 1;
