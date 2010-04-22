@@ -235,23 +235,32 @@ FilooFiloo.Board = SC.Object.extend(
     },
     dumpJunk_: function() {
       var that = this;
+      var result = "createNewPiece_";
       var junkToDump = Math.min(FilooFiloo.Board.MaxJunkLoad,this.junkCount);
       var fullLines = Math.floor(junkToDump / FilooFiloo.Board.ColCount);
       var lastLineSize = junkToDump % FilooFiloo.Board.ColCount;
 
+      var dropJunk = function(col) {
+	if(!that.cellIsAllowed_(0, col)) {
+	  result = null;
+	  that.gameOver_();
+	  return;
+	}
+
+	that.dropCell_(0,col,FilooFiloo.Game.Junk);
+      };
+
       for(var i = 0; i < fullLines; i++) {
 	for(var c = 0; c < FilooFiloo.Board.ColCount; c++) {
-	  this.dropCell_(0, c, FilooFiloo.Game.Junk);
+	  dropJunk(c);
 	}
       }
 
-      this.columnPicker.randomUniqueIntegers(lastLineSize, FilooFiloo.Board.ColCount).forEach(function(c) {
-	that.dropCell_(0, c, FilooFiloo.Game.Junk);
-      });
+      this.columnPicker.randomUniqueIntegers(lastLineSize, FilooFiloo.Board.ColCount).forEach(dropJunk);
 
       this.junkCount -= junkToDump;
       this.notifyChanged_();
-      return "createNewPiece_";
+      return result;
     },
     createNewPiece_: function() {
       var newPiece = FilooFiloo.Piece.create({

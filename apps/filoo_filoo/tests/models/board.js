@@ -655,8 +655,18 @@ test("When junk does not fill a line, it should be droped at random", function()
 			      "  jj"]});
 });
 
-/*
+
 test("If junk load cannot fit on the board, the game is lost", function() {
-  ok(NO);
+  board.startWithBoard(["    ",
+			"jjjj",
+			"jjjj",
+			"jjjj",
+			"jjjj",
+			"jjjj"]);
+  board.addJunk(FilooFiloo.Board.MaxJunkLoad);
+  var lastGameOverTime = board.get('gameOver');
+
+  board.tick();
+  ok(lastGameOverTime !== board.get('gameOver'), "The game should be lost if there is not enough place for all junk");
 });
-*/
+
