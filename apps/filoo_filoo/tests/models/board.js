@@ -634,10 +634,6 @@ test("No more than MaxJunkLoad pieces of junk should appear at once", function()
 });
 
 /*
-test("No more than one incomplete row of junk should appear at once", function() {
-  ok(NO);
-});
-
 test("If junk load cannot fit on the board, the game is lost", function() {
   ok(NO);
 });
