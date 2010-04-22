@@ -49,17 +49,7 @@ module("FilooFiloo.Board",{
 	    }
 	};
 
-	columnPicker = {
-	  randomUniqueIntegers: function(requested, max) {
-	    result = [];
-	    for(var i = 0; i < requested && i < max; i++) {
-	      result.push(max-1-i);
-	    }
-	    return result;
-	  }
-	};
-
-	board = FilooFiloo.Board.create({ticker: ticker, colorProvider: colorProvider, columnPicker: columnPicker});
+	board = FilooFiloo.Board.create({ticker: ticker, colorProvider: colorProvider});
 
 	board.shouldBe = function(stringRows, message) {
             var board = this;
@@ -644,6 +634,17 @@ test("No more than MaxJunkLoad pieces of junk should appear at once", function()
 });
 
 test("When junk does not fill a line, it should be droped at random", function() {
+
+  board.columnPicker = {
+    randomUniqueIntegers: function(requested, max) {
+      result = [];
+      for(var i = 0; i < requested && i < max; i++) {
+	result.push(max-1-i);
+      }
+      return result;
+    }
+  };
+
   board.start();
   board.addJunk(2);
   board.shouldFollow({action:["tick"],

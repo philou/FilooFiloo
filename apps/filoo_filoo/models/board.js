@@ -83,12 +83,7 @@ FilooFiloo.Board = SC.Object.extend(
     /**
      * Random column picker
      */
-    getColumnPicker: function() {
-      if(!this.columnPicker) {
-	this.columnPicker = FilooFiloo.Random.create();
-      }
-      return this.columnPicker;
-    },
+    columnPicker: FilooFiloo.Random,
 
     init: function() {
       sc_super();

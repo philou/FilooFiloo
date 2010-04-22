@@ -17,6 +17,7 @@
 .board-view .green { background-image: static_url('images/sprites_green.png')}
 .board-view .purple { background-image: static_url('images/sprites_purple.png')}
 .board-view .yellow { background-image: static_url('images/sprites_yellow.png')}
+.board-view .junk { background-image: static_url('images/sprites_grey.png')}
 
 /* styles for the single player game */
 .scores {
