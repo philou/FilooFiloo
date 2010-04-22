@@ -49,7 +49,17 @@ module("FilooFiloo.Board",{
 	    }
 	};
 
-	board = FilooFiloo.Board.create({ticker: ticker, colorProvider: colorProvider});
+	columnPicker = {
+	  randomUniqueIntegers: function(requested, max) {
+	    result = [];
+	    for(var i = 0; i < requested && i < max; i++) {
+	      result.push(max-1-i);
+	    }
+	    return result;
+	  }
+	};
+
+	board = FilooFiloo.Board.create({ticker: ticker, colorProvider: colorProvider, columnPicker: columnPicker});
 
 	board.shouldBe = function(stringRows, message) {
             var board = this;
@@ -631,6 +641,18 @@ test("No more than MaxJunkLoad pieces of junk should appear at once", function()
 			      "    ", "    ", " rb ", "jrbj",
 			      "jjjj", "jjjj", "jjjj", "jjjj",
 			      "jjjj", "jjjj", "jjjj", "jjjj"]});
+});
+
+test("When junk does not fill a line, it should be droped at random", function() {
+  board.start();
+  board.addJunk(2);
+  board.shouldFollow({action:["tick"],
+		      board: ["    ",
+			      "    ",
+			      "    ",
+			      "    ",
+			      "    ",
+			      "  jj"]});
 });
 
 /*

@@ -21,6 +21,7 @@
 require('models/game');
 require('models/ticker');
 require('models/color_provider');
+require('models/random');
 
 /** @class
   Objects representing a players board.
@@ -77,6 +78,16 @@ FilooFiloo.Board = SC.Object.extend(
 	this.colorProvider = FilooFiloo.ColorProvider.create();
       }
       return this.colorProvider;
+    },
+
+    /**
+     * Random column picker
+     */
+    getColumnPicker: function() {
+      if(!this.columnPicker) {
+	this.columnPicker = FilooFiloo.Random.create();
+      }
+      return this.columnPicker;
     },
 
     init: function() {
@@ -223,10 +234,20 @@ FilooFiloo.Board = SC.Object.extend(
       }
     },
     dumpJunk_: function() {
+      var that = this;
       var junkToDump = Math.min(FilooFiloo.Board.MaxJunkLoad,this.junkCount);
-      for(var i = 0; i < junkToDump; i++) {
-	this.dropCell_(0, i%FilooFiloo.Board.ColCount, FilooFiloo.Game.Junk);
+      var fullLines = Math.floor(junkToDump / FilooFiloo.Board.ColCount);
+      var lastLineSize = junkToDump % FilooFiloo.Board.ColCount;
+
+      for(var i = 0; i < fullLines; i++) {
+	for(var c = 0; c < FilooFiloo.Board.ColCount; c++) {
+	  this.dropCell_(0, c, FilooFiloo.Game.Junk);
+	}
       }
+
+      this.columnPicker.randomUniqueIntegers(lastLineSize, FilooFiloo.Board.ColCount).forEach(function(c) {
+	that.dropCell_(0, c, FilooFiloo.Game.Junk);
+      });
 
       this.junkCount -= junkToDump;
       this.notifyChanged_();

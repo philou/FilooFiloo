@@ -29,8 +29,7 @@ FilooFiloo.ColorProvider = SC.Object.extend(
     */
     randomColor_: function() {
 	var colors = FilooFiloo.Game.Colors;
-	var rand = Math.random();
-	var index = Math.round(rand * colors.length) % colors.length;
+	var index = FilooFiloo.Random.randomInteger(colors.length);
 
 	return colors[index];
     },
