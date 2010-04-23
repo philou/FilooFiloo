@@ -25,6 +25,6 @@ FilooFiloo.creditsPage = SC.Page.design(
     layout: FilooFiloo.Layout.MAIN_VIEW,
     classNames: ['main-view', 'information'],
     escapeHTML: NO,
-    value: "<h2>Contributors</h2><p>This game was done by Philippe Bourgau, 2008-2010.</p><h2>Licence</h2><p><a href=\"http://\">GNU Affero General Public License</a>, the code can be found <a href=\"http://www.gnu.org/licenses/\">here</a>.</p><h2>Main third parties</h2><p><ul><li><a href=\"http://www.sproutcore.com/\">Sproutcore</a></li><li><a href=\"http://rubyonrails.org/\">Rails</a></li><li><a href=\"http://www.povray.org/\">POV Ray</a></li></ul></p>"
+    value: "<h2>Contributors</h2><p>This game was done by Philippe Bourgau, 2008-2010.</p><h2>Licence</h2><p><a href=\"http://www.opensource.org/licenses/agpl-v3.html\">GNU Affero general Public License v3</a>, the code can be found on <a href=\"http://github.com/philou/FilooFiloo\">github</a>.</p><h2>Main third parties</h2><p><ul><li><a href=\"http://www.sproutcore.com/\">Sproutcore</a></li><li><a href=\"http://www.sinatrarb.com/\">Sinatra</a></li><li><a href=\"http://www.povray.org/\">POV Ray</a></li></ul></p><h2>Feedback</h2><p><a href=\"mailto:filoo-filoo@gmail.com\">filoo-filoo@gmail.com</a></p>"
   })
 });
