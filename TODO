@@ -1,0 +1,110 @@
+* 2 joueurs
+ - ouvrir une session avec un pseudo [DONE]
+  - utiliser la même popup que les high scores [DONE]
+ - commencer une partie avec un autre joueur libre séléctionné au
+   hazard [DONE]
+ - afficher sa grille à gauche, indiquer que c'est la sienne [DONE]
+  - nettoyage de l'initialization des boards dans les controllers [DONE]
+  - renomage des controllers game et player en single, versus [DONE]
+  - démarrer la partie ! [DONE]
+  - extraire la partie dialog de login dans un loginController [DONE]
+  - passer la textbox en first responder quand on affiche le login
+ - afficher la grille de l'autre joueur à droite, mettre le nom de
+   l'adversaire en dessous
+  - envoyer la grille au serveur à chaque fois qu'elle change
+   - ajouter une grille au player server [DONE]
+   - faire une conversion de function à string pour la grille [DONE]
+   - faire un timer qui met à jour la grille du player et la commit
+     dans le controller du player [DONE]
+   - checker que ça fonctionne bien avec le serveur [DONE]
+  - demander la grille de l'autre joueur régulièrement
+   - migrer à sproutcore 1.0 pour avoir les foreign keys ... [DONE]
+   - dans le player serveur, remplacer l'opponent_name par l'opponent
+     id [DONE]
+   - dans le client, foreign key vers l'opponent [DONE]
+   - loader l'opponent régulièrement
+    - faire un membre "status" dans le controller, le construire comme une machine à état [DONE]
+    - calculer le 'what is player doing' à chaque fois, plutot que de l'utiliser comme état [DONE]
+    - n'utiliser qu'un seul timer dans les tests et dans le controller [DONE]
+    - REM : je n'ai pas réussi à calculer le whatIsPlayerDoing en utilisant le status ... j'ai du le faire sur l'état
+  - faire un model de board qui n'utilise qu'un player comme source:
+    il faut un time, un playing toujours faux, et une fonction cellState [DONE]
+   - quand on change la boardString, time doit changer [DONE]
+   - verifier la fonction cellState [DONE]
+   - créer une nouvelle vue sur la grille de l'adversaire [DONE]
+   - regarder pourquoi parfois un seul puyo s'affiche [DONE]
+   - regarder pourquoi au début les puyos ne s'affichent pas [DONE]
+   - regarder pourquoi parfois ça s'arrête sans explication [DONE]
+   - regarder comment améliorer les perfs (pas de truc particulier au profiler)
+    - faire en sorte que les loads soit plus découpés dans la run loop (granularité plus faible) [DONE]
+    - choisir des fréquences de rafraichissement différentes [DONE]
+    - voir pour améliorer le render de la board view
+      Il faut implémenter un hook pour construire les vues filles pour les cases
+      Elle doivent conserver leur RenderContext, pour ne faire qu'un update de la
+      class, seulement si nécessaire. Il leur faudra les coordonnées, et le board. [DONE]
+
+      C'est fait, mais c'est pire ... ça doit surcharger la runLoop avec des tout petits renders ...
+      On pourrait pousser le truc jusque dans la board avec une pty pour chaque cellule. ça éviterait
+      les updates inutiles, on pourrait supprimer le time de la board, qui met tout à jour et déclenche plein
+      d'événements. Il suffirait de modifier notifyChanged_ pour mettre à jour les propriétés qui ont changées.
+      On ne ferait la boucle sur toutes les cases qu'une seule fois et hors de la runLoop. Il faut une 
+      fonction pour calculer rapidement le nom de la propriété en fonction de col et row 
+      (quelque chose comme "cell#"+(row*ColCount+col)) Meme chose pour la ReadOnlyBoard
+      Il faut aussi modifier les cellBoard pour n'observer que la case qui les interesse !
+    - faire une fonction qui calcule le nom d'une property [DONE]
+    - faire les properties dans la board [DONE]
+    - faire les properties dans les tests de la board [DONE]
+    - faire les properties dans la ROBoard [DONE]
+    - utiliser les properties dans la cellView [DONE]
+    - supprimer les 'time' properties inutilisées [DONE]
+
+ - virer les héritages inutiles sur SC.Record [DONE]
+ - gérer le gagnant: le premier qui perd (comme en single) a perdu [DONE]
+  - ajouter un status 'win/lost' ou 'gameStatus' dans le player (peut être celui qui est dans versus controller)
+    ou bien utiliser le fait opponent null => waiting, une string [null|"lost"|"win"] -> c'est lisible [DONE]
+  - server mettre à jour le status win/lost des deux joueurs au premier recu [DONE]
+  - client, envoyer le lost quand on a perdu [DONE]
+   - observer le gameOver, des qu'il arrive, il faut envoyer le player avec un lost [DONE]
+  - client, afficher lost, win quand on a perdu gagné, au refresh seulement [DONE]
+
+ - envoyer des saletés à l'autre quand on marque des points
+  - trouver la fonction de calcul: http://en.wikipedia.org/wiki/Puyo_Puyo_%28series%29#Ojama_.28garbage.29 [DONE]
+  - revoir les scores dans le jeu monojoueur [DONE]
+  - compter les saletés quand on fait disparaitre des filoos on envoie le score sur le serveur ??? [DONE]
+  - envoyer le score au serveur [DONE]
+  - compter les saletés de l'adversaire, on doit faire tomber celles qui ne l'ont pas encore étés, les données à la board [DONE]
+  - gérer les saletées dans la board
+   - faire une nouvelle couleur pour les saletés [DONE]
+   - un groupe de saletés ne doit pas disparaitre si il contient plus de 4 saletés [TODO]
+   - faire disparaitre les saletés quand on fait disparaitre un filoo à côté [DONE]
+    - construire un coord_map avec les voisins, puis faire disparaitre ceux qui sont gris. Pb il faut donner les dimensions au coord map [DONE]
+   - répartir les saletés sur les bonnes colonnes: par 6, le reste en randoms. max 30, le reste pour plus tard [DONE]
+
+* update the Credits
+ - licence [DONE]
+ - rails -> sinatra [DONE]
+ - link to the code on github [DONE]
+ - a mail to be reached [DONE]
+
+* check that all source files have the good prolog, see in git how to do it automaticaly
+* check to reduce the size of the repo
+
+* Change the view so it fits on the screen, make something like 80's games
+ - top toolbar with Title and login
+ - bottom toolbar with a back to menu button (serves as givup)
+ - a middle container view with changing views, at first, the same as before
+ - single player mode:
+  - suppress the play/give up button
+  - move the score, level and any other information to the left of the board
+ - two players mode:
+  - put the countdown in a modal panel
+  - only two boards when playing
+  - use colored (highlithed, shaded) bounding boxes arround the boards to show who is playing
+  - when the game ends, a panel should show the result
+ - rules and credit views could be wider
+
+* use transactions and optimistic locking (use DataMapper plugins, even if I don't think they are safe)
+
+* Deploy to free + heroku
+
+
