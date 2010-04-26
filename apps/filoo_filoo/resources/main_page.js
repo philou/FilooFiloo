@@ -26,7 +26,7 @@ FilooFiloo.mainPage = SC.Page.design(
   // load.
   mainPane: SC.MainPane.design(
   {
-    childViews: 'headerView modesTabView footerView'.w(),
+    childViews: 'headerView contentView footerView'.w(),
 
     headerView: SC.ToolbarView.design(
     {
@@ -50,8 +50,9 @@ FilooFiloo.mainPage = SC.Page.design(
       ]
     }),
 
-    modesTabView: SC.ContainerView.design(
+    contentView: SC.ContainerView.design(
     {
+      classNames: ['filoo-filoo-container-view'],
       layout: { left:0, right:0, top:36, bottom:36 },
       nowShowingBinding: 'FilooFiloo.menuController.nowShowing'
     }),

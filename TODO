@@ -97,6 +97,7 @@
    - change the current pane with buttons [DONE]
    - get back to the main menu with permanent button [DONE]
  - a middle container view with changing views, at first, the same as before (remove the tab buttons) [DONE]
+  - create a bounding box to all the container view [DONE]
  - single player mode:
   - suppress the play/give up button
   - move the score, level and any other information to the left of the board

@@ -7,6 +7,11 @@
 .filoo-filoo-title {
     font-size: 24px;
 }
+.filoo-filoo-container-view {
+    background-color: #E7E4EF;
+    color: #000000;
+}
+
 
 /* styles for game board. */
 .board-view .cell-view {
