@@ -50,24 +50,9 @@ FilooFiloo.mainPage = SC.Page.design(
       ]
     }),
 
-    modesTabView: SC.TabView.design(
+    modesTabView: SC.ContainerView.design(
     {
-      nowShowing: "FilooFiloo.menuPage.mainView",
-      items: [
-	{ title: "Menu", value: "FilooFiloo.menuPage.mainView" },
-	{ title: "Single player", value: "FilooFiloo.singlePage.mainView" },
-	{ title: "Versus", value: "FilooFiloo.versusPage.mainView" },
-	{ title: "High Scores", value: "FilooFiloo.highScoresPage.mainView" },
-	{ title: "Rules", value: "FilooFiloo.rulesPage.mainView" },
-	{ title: "Credits", value: "FilooFiloo.creditsPage.mainView" }
-      ],
-
-      itemTitleKey: 'title',
-      itemValueKey: 'value',
-
-      layout: { left:12, right:12, top:48, bottom:48 },
-
-      userDefaultKey: "mainPane",
+      layout: { left:0, right:0, top:36, bottom:36 },
       nowShowingBinding: 'FilooFiloo.menuController.nowShowing'
     }),
     footerView: SC.ToolbarView.design(
