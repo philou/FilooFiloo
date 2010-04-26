@@ -4,6 +4,9 @@
 .main-view {
     overflow: auto;
 }
+.filoo-filoo-title {
+    font-size: 24px;
+}
 
 /* styles for game board. */
 .board-view .cell-view {

@@ -21,6 +21,7 @@
 sc_require('models/player');
 sc_require('models/board');
 sc_require('models/read_only_board');
+sc_require('controllers/menu');
 
 FilooFiloo.VersusController = {
   PENDING: "pending",
@@ -131,6 +132,11 @@ FilooFiloo.createVersusController = function() {
 	  this.requestLogin();
 	}
       }.observes('currentMode'),
+
+      // nowShowing is forwarded to currentMode so that it can be overriden while testing
+      nowShowingObserver: function() {
+	this.set('currentMode', FilooFiloo.menuController.get('nowShowing'));
+      }.observes('FilooFiloo.menuController.nowShowing'),
 
       requestLogin: function() {
 	if(!FilooFiloo.loginController.get('name')) {

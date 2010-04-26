@@ -127,7 +127,7 @@ test("We should start waiting for an opponent even if a name was already set", f
 });
 
 test("We should only start waiting for an opponent in versus mode", function() {
-  versusController.set('currentMode', 'FilooFiloo.highScorePage.mainView');
+  FilooFiloo.menuController.set('nowShowing', 'FilooFiloo.highScorePage.mainView');
   equals(FilooFiloo.loginController.get('loginPaneVisible'), NO);
   ok(FilooFiloo.VersusController.PENDING, versusController.get('gameStatus'), "Status should be pending outside versus mode");
 });

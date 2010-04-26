@@ -26,7 +26,7 @@ FilooFiloo.mainPage = SC.Page.design(
   // load.
   mainPane: SC.MainPane.design(
   {
-    childViews: 'headerView modesTabView'.w(),
+    childViews: 'headerView modesTabView footerView'.w(),
 
     headerView: SC.ToolbarView.design(
     {
@@ -36,13 +36,15 @@ FilooFiloo.mainPage = SC.Page.design(
       [
 	SC.LabelView.design(
 	{
+	  classNames: ['filoo-filoo-title'],
 	  value: "Philou's Filoo-Filoo",
-	  layout: { top: 0, left: 0, height: 36 }
+	  layout: { centerY: 0, left: 12, height: 24 },
+	  fontWeight: SC.BOLD_WEIGHT
 	}),
 	SC.TextFieldView.design(
 	{
 	  hint: "login here",
-	  layout: { bottom: 0, right: 0, height: 24, width: 200 },
+	  layout: { centerY: 0, right: 12, height: 24, width: 200 },
 	  valueBinding: 'FilooFiloo.loginController.name'
 	})
       ]
@@ -50,8 +52,9 @@ FilooFiloo.mainPage = SC.Page.design(
 
     modesTabView: SC.TabView.design(
     {
-      nowShowing: "FilooFiloo.singlePage.mainView",
+      nowShowing: "FilooFiloo.menuPage.mainView",
       items: [
+	{ title: "Menu", value: "FilooFiloo.menuPage.mainView" },
 	{ title: "Single player", value: "FilooFiloo.singlePage.mainView" },
 	{ title: "Versus", value: "FilooFiloo.versusPage.mainView" },
 	{ title: "High Scores", value: "FilooFiloo.highScoresPage.mainView" },
@@ -62,10 +65,31 @@ FilooFiloo.mainPage = SC.Page.design(
       itemTitleKey: 'title',
       itemValueKey: 'value',
 
-      layout: { left:12, right:12, top:48, bottom:12 },
+      layout: { left:12, right:12, top:48, bottom:48 },
 
       userDefaultKey: "mainPane",
-      nowShowingBinding: 'FilooFiloo.versusController.currentMode'
+      nowShowingBinding: 'FilooFiloo.menuController.nowShowing'
+    }),
+    footerView: SC.ToolbarView.design(
+    {
+      layout: { bottom: 0, left: 0, right: 0, height: 36 },
+      anchorLocation: SC.ANCHOR_BOTTOM,
+      childViews:
+      [
+        SC.ButtonView.design(
+	{
+	  layout: { centerY: 0, height: 24, left: 12, width: 200 },
+	  title: "Back to menu",
+	  target: "FilooFiloo.menuController",
+	  action: "backToMenu"
+	}),
+	SC.LabelView.design(
+	{
+	  value: "Philippe Bourgau 2008-2010",
+	  textAlign: SC.ALIGN_RIGHT,
+	  layout: { centerY: 0, height: 24, right: 12, width: 200 }
+	})
+    ]
     })
   }),
   loginPane: SC.SheetPane.create(

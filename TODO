@@ -86,13 +86,17 @@
  - link to the code on github [DONE]
  - a mail to be reached [DONE]
 
-* check that all source files have the good prolog, see in git how to do it automaticaly
-* check to reduce the size of the repo
+* check that all source files have the good prolog, see in git how to do it automaticaly [DONE]
 
 * Change the view so it fits on the screen, make something like 80's games
- - top toolbar with Title and login
- - bottom toolbar with a back to menu button (serves as givup)
- - a middle container view with changing views, at first, the same as before
+ - top toolbar with Title and login [DONE]
+ - bottom toolbar with a back to menu button (serves as givup) [DONE]
+ - a new page for navigation (menu) that handles the now showing property
+  - do a new page [DONE]
+  - create a controller for it [DONE]
+   - change the current pane with buttons [DONE]
+   - get back to the main menu with permanent button [DONE]
+ - a middle container view with changing views, at first, the same as before (remove the tab buttons)
  - single player mode:
   - suppress the play/give up button
   - move the score, level and any other information to the left of the board
@@ -106,5 +110,7 @@
 * use transactions and optimistic locking (use DataMapper plugins, even if I don't think they are safe)
 
 * Deploy to free + heroku
+
+* check to reduce the size of the repo
 
 
