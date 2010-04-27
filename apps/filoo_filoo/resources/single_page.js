@@ -49,32 +49,24 @@ FilooFiloo.singlePage = SC.Page.design(
   {
     classNames: ['main-view'],
     layout: FilooFiloo.Layout.MAIN_VIEW,
-    childViews:
-    [
-      SC.ButtonView.design(
-      {
-	layout: FilooFiloo.Layout.scoreRow(0),
-	titleBinding: 'FilooFiloo.singleController.startStopLabel',
-	target: 'FilooFiloo.singleController',
-	action: 'startStop'
-      }),
-      SC.View.design(
-      {
-	classNames: ['scores'],
-	layout: FilooFiloo.Layout.scoreRows(1,3),
-	childViews:
-	[
-	  FilooFiloo.singlePageInternals.newScoreBoardRow('Filoos', 0, 'disappearedPieces'),
-	  FilooFiloo.singlePageInternals.newScoreBoardRow('Score', 1, 'score'),
-	  FilooFiloo.singlePageInternals.newScoreBoardRow('Level', 2, 'level')
-	]
-      }),
-      FilooFiloo.BoardView.design(
-      {
-	layout: { centerX: 0, width: 185, top: FilooFiloo.Layout.scoreRowTop(4), height: 380 },
-	contentBinding: 'FilooFiloo.singleController.board'
-      })
-    ]
+    childViews: 'scoresView boardView'.w(),
+
+    scoresView: SC.View.design(
+    {
+      classNames: ['scores'],
+      layout: FilooFiloo.Layout.scoreRows(0,2),
+      childViews:
+      [
+	FilooFiloo.singlePageInternals.newScoreBoardRow('Filoos', 0, 'disappearedPieces'),
+	FilooFiloo.singlePageInternals.newScoreBoardRow('Score', 1, 'score'),
+	FilooFiloo.singlePageInternals.newScoreBoardRow('Level', 2, 'level')
+      ]
+    }),
+    boardView: FilooFiloo.BoardView.design(
+    {
+      layout: { centerX: 0, width: 185, top: FilooFiloo.Layout.scoreRowTop(3), height: 380 },
+      contentBinding: 'FilooFiloo.singleController.board'
+    })
   })
 });
 

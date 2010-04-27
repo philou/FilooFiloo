@@ -14,7 +14,7 @@
 // program.  If not, see <http://www.gnu.org/licenses/>
 
 // ========================================================================
-// FilooFiloo.PlayerController Unit Test
+// FilooFiloo.VersusController Unit Test
 // ========================================================================
 
 sc_require('models/player');

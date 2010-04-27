@@ -33,29 +33,6 @@ FilooFiloo.singleController = SC.Object.create(
 
     board: FilooFiloo.Board.create(),
 
-    startStopLabel: 'Play !',
-
-    playing: function() {
-      return this.get('board') && this.get('board').get('playing');
-    }.property('board', '.board.playing'),
-
-    // it would have been nicer to define startStopLabel as a function property
-    updateStartStopLabel: function() {
-      if (this.get('playing')) {
-        this.set('startStopLabel', 'Give up ...');
-      } else {
-        this.set('startStopLabel', 'Play !');
-      }
-    }.observes('.board.playing'),
-
-    startStop: function() {
-      if (!this.get('playing')) {
-        this.get('board').start();
-      } else {
-        this.get('board').abort();
-      }
-    },
-
     gameOver: function() {
       if (this.get('board').get('gameOver')) {
 	var that = this;
@@ -70,6 +47,22 @@ FilooFiloo.singleController = SC.Object.create(
 	  score.commitRecord();
 	});
       }
-    }.observes('.board.gameOver')
+    }.observes('.board.gameOver'),
+
+    currentModeObserver: function() {
+      var board = this.get('board');
+      if (('FilooFiloo.singlePage.mainView' === this.get('currentMode')) && (!board.get('playing'))) {
+
+	// start must be invoked only after the board view is visible, otherwise it would not take the
+	// focus automaticaly
+	board.invokeLast('start');
+      } else if(board.get('playing')) {
+	board.abort();
+      }
+    }.observes('currentMode'),
+
+    nowShowingObserver: function() {
+      this.set('currentMode', FilooFiloo.menuController.get('nowShowing'));
+    }.observes('FilooFiloo.menuController.nowShowing')
 
   });
