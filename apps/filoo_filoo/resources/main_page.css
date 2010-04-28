@@ -4,6 +4,7 @@
 .main-view {
     overflow: auto;
 }
+/* this rule is overriden by sproutcore defaults ... I don't know what to do about it */
 .filoo-filoo-title {
     font-size: 24px;
 }

@@ -98,9 +98,9 @@
    - get back to the main menu with permanent button [DONE]
  - a middle container view with changing views, at first, the same as before (remove the tab buttons) [DONE]
   - create a bounding box to all the container view [DONE]
- - single player mode:
-  - suppress the play/give up button
-  - move the score, level and any other information to the left of the board
+ - single player mode: [DONE]
+  - suppress the play/give up button [DONE]
+  - move the score, level and any other information to the left of the board [DONE]
  - two players mode:
   - put the countdown in a modal panel
   - only two boards when playing

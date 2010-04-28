@@ -18,53 +18,62 @@
 // ==========================================================================
 /*globals FilooFiloo */
 
-FilooFiloo.singlePageInternals = {
-
-  newScoreBoardRow: function(title, index, boardFieldBinding)
-  {
-    return SC.View.design(
-    {
-      layout: FilooFiloo.Layout.scoreRow(index),
-      childViews:
-      [
-	SC.LabelView.design(
-	{
-	  layout: { left: 0, width: FilooFiloo.Layout.SCORE_ROW_WIDTH / 2 - 1 },
-	  value: title
-	}),
-	SC.LabelView.design(
-	{
-	  layout: { right: 0, width: FilooFiloo.Layout.SCORE_ROW_WIDTH / 2 -1 },
-	  value: '0',
-	  valueBinding: 'FilooFiloo.singleController.board.'+boardFieldBinding
-	})
-      ]
-    });
+FilooFiloo.SinglePage = {
+  SCORE_ROW_HEIGHT: 24,
+  scoreGridRowTop: function(i) {
+    return i*this.SCORE_ROW_HEIGHT;
+  },
+  scoreGridHeight: function(count) {
+    return count*this.SCORE_ROW_HEIGHT;
+  },
+  scoreRowLayout: function(i) {
+    return { top: this.scoreGridRowTop(i), height: this.SCORE_ROW_HEIGHT, left: 0, right: 0 };
+  },
+  scoreItemViews: function(gridRowIndex, title, property) {
+    return [
+      SC.LabelView.design(
+      {
+	layout: this.scoreRowLayout(gridRowIndex),
+	textAlign: SC.ALIGN_CENTER,
+	fontWeight: SC.BOLD_WEIGHT,
+	value: title
+      }),
+      SC.LabelView.design(
+      {
+	layout: this.scoreRowLayout(gridRowIndex+1),
+	textAlign: SC.ALIGN_CENTER,
+	fontWeight: SC.BOLD_WEIGHT,
+	value: '0',
+	valueBinding: 'FilooFiloo.singleController.board.' + property
+      })];
+  },
+  scoreViews: function() {
+    var result = [];
+    result = result.concat(this.scoreItemViews(0, "Score", 'score'));
+    result = result.concat(this.scoreItemViews(3, "Filoos", 'disappearedPieces'));
+    result = result.concat(this.scoreItemViews(6, "Level", 'level'));
+    return result;
   }
 };
 
 FilooFiloo.singlePage = SC.Page.design(
 {
-  mainView: SC.View.design(
+  mainView: SC.View.design(SC.Border,
   {
     classNames: ['main-view'],
-    layout: FilooFiloo.Layout.MAIN_VIEW,
+    layout: { centerX: 0, centerY: 0, width: 321, height: 395 },
+    borderStyle: SC.BORDER_GRAY,
     childViews: 'scoresView boardView'.w(),
 
     scoresView: SC.View.design(
     {
       classNames: ['scores'],
-      layout: FilooFiloo.Layout.scoreRows(0,2),
-      childViews:
-      [
-	FilooFiloo.singlePageInternals.newScoreBoardRow('Filoos', 0, 'disappearedPieces'),
-	FilooFiloo.singlePageInternals.newScoreBoardRow('Score', 1, 'score'),
-	FilooFiloo.singlePageInternals.newScoreBoardRow('Level', 2, 'level')
-      ]
+      layout: { left: 12, width: 100, centerY: 0, height: FilooFiloo.SinglePage.scoreGridHeight(8) },
+      childViews: FilooFiloo.SinglePage.scoreViews()
     }),
     boardView: FilooFiloo.BoardView.design(
     {
-      layout: { centerX: 0, width: 185, top: FilooFiloo.Layout.scoreRowTop(3), height: 380 },
+      layout: { right: 12, centerY: 0, width: 185, height: 371 },
       contentBinding: 'FilooFiloo.singleController.board'
     })
   })

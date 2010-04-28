@@ -18,24 +18,39 @@
 // ==========================================================================
 /*globals FilooFiloo */
 
+FilooFiloo.MenuPage = {
+  MARGIN: 12,
+  CELL_HEIGHT: 24,
+  gridTop: function(index) {
+    return this.gridHeight(index);
+  },
+  gridHeight: function(itemsCount) {
+    return this.MARGIN+(this.CELL_HEIGHT+this.MARGIN)*itemsCount;
+  },
+  cellLayout: function(index) {
+    return { top: this.gridTop(index), height: this.CELL_HEIGHT, left: this.MARGIN, right: this.MARGIN };
+  }
+};
+
 FilooFiloo.menuPage = SC.Page.design(
 {
-  mainView: SC.View.design(
+  mainView: SC.View.design(SC.Border,
   {
-    classNames: ['main-view'],
-    layout: FilooFiloo.Layout.MAIN_VIEW,
+    classNames: ['main-view menu-view'],
+    layout: { centerX: 0, centerY: 0, width: 300, height: FilooFiloo.MenuPage.gridHeight(5) },
+    borderStyle: SC.BORDER_GRAY,
     childViews:
     [
       SC.ButtonView.design(
       {
-	layout: { top: 12, height: 36, left: 12, right: 12 },
+	layout: FilooFiloo.MenuPage.cellLayout(0),
 	title: 'Solo game',
 	target: 'FilooFiloo.menuController',
 	action: 'singleGame'
       }),
       SC.ButtonView.design(
       {
-	layout: { top: 60, height: 36, left: 12, right: 12 },
+	layout: FilooFiloo.MenuPage.cellLayout(1),
 	title: 'Internet game',
 	target: 'FilooFiloo.menuController',
 	action: 'versusGame'
@@ -43,21 +58,22 @@ FilooFiloo.menuPage = SC.Page.design(
       }),
       SC.ButtonView.design(
       {
-	layout: { top: 108, height: 36, left: 12, right: 12 },
+	layout: FilooFiloo.MenuPage.cellLayout(2),
 	title: 'High scores',
 	target: 'FilooFiloo.menuController',
 	action: 'highScores'
       }),
       SC.ButtonView.design(
       {
-	layout: { top: 156, height: 36, left: 12, right: 12 },
+	layout: FilooFiloo.MenuPage.cellLayout(3),
 	title: 'Rules',
 	target: 'FilooFiloo.menuController',
 	action: 'rules'
       }),
       SC.ButtonView.design(
       {
-	layout: { top: 204, height: 36, left: 12, right: 12 },
+	layout: FilooFiloo.MenuPage.cellLayout(4),
+
 	title: 'Credits',
 	target: 'FilooFiloo.menuController',
 	action: 'credits'
