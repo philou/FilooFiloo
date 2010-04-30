@@ -25,7 +25,7 @@
 */
 FilooFiloo.Layout = {
 
-  MAIN_VIEW: { top: 20, bottom: 0, centerX: 0, width: 300 },
+  MAIN_VIEW: { top: 12, bottom: 12, centerX: 0, width: 300 },
 
   SCORE_ROW_HEIGHT: 24,
   scoreGridRowTop: function(i) {

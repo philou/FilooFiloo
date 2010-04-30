@@ -23,10 +23,19 @@ FilooFiloo.highScoresPage = SC.Page.design(
     layout: FilooFiloo.Layout.MAIN_VIEW,
     childViews:
     [
+
+      SC.LabelView.design(
+      {
+	layout: { top: 0, height: 24, left: 0, right: 0 },
+	textAlign: SC.ALIGN_CENTER,
+	fontWeight: SC.BOLD_WEIGHT,
+	value: "Hall of fame"
+      }),
+
       SC.ScrollView.design(
       {
 	hasHorizontalScroller: NO,
-	layout: { top: 10, bottom: 0, left: 0, right: 0 },
+	layout: { top: 48, bottom: 0, left: 12, right: 12 },
 	contentView: SC.ListView.design(
 	{
 	  contentBinding: 'FilooFiloo.highScoresController.arrangedObjects',

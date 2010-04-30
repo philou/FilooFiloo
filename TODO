@@ -106,7 +106,7 @@
   - create a modal pane (see login pane) to display 'whatIsPlayerDoing' [DONE]
   - test that this pane is visible when the status is waiting or finished [DONE]
   - add score to the player's board, but not to the oppoenent [DONE]
- - rules and credit views could be wider
+ - rules and credit views could be wider [DONE]
 
 * Deploy to free + heroku
 
