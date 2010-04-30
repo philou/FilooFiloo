@@ -95,29 +95,27 @@ FilooFiloo.createVersusController = function() {
 	}
       }.property('gameStatus'),
 
-      /*
-       * What is the opponent doing now ?
-       */
-      whatIsOpponentDoing: function() {
+      whatIsPlayerDoingPaneVisible: function() {
+	if (this.get('currentMode') != 'FilooFiloo.versusPage.mainView') {
+	  return NO;
+	}
+
 	switch(this.get('gameStatus'))
 	{
+	case FilooFiloo.VersusController.WAITING:
 	case FilooFiloo.VersusController.FINISHED:
-	  return this.outcomeToString(this.get('opponent').get('outcome'))+" against "+this.get('player').get('name');
-	case FilooFiloo.VersusController.PLAYING:
-	  return "Playing against "+this.get('player').get('name');
+	  return YES;
 	default:
-	  return "";
+	  return NO;
 	}
       }.property('gameStatus'),
 
       outcomeToString: function(outcome) {
 	switch(outcome) {
-	case FilooFiloo.Player.WIN:
-	  return "Won";
 	case FilooFiloo.Player.LOST:
 	  return "Lost";
 	default:
-	  return "Unexpected outcome";
+	  return "Won";
 	}
       },
 
@@ -236,12 +234,20 @@ FilooFiloo.createVersusController = function() {
 	if (board && board.get('playing')) {
 	  board.abort();
 	}
-      }
+      },
 
-      // ajouter une observer sur le score de l'adversaire, faire la diff avec ce qui
-      // a été géré avant, et envoyer le compte de saletés à la board.
+      whatIsPlayerDoingPaneVisibleDidChange: function() {
+	var pane = FilooFiloo.versusPage.get('whatIsPlayerDoingPane');
+	if (this.get('whatIsPlayerDoingPaneVisible')) {
+	  pane.append();
+	}
+	else {
+	  pane.remove();
+	}
+      }
     }
   );
 };
 
 FilooFiloo.versusController = FilooFiloo.createVersusController();
+FilooFiloo.versusController.addObserver('whatIsPlayerDoingPaneVisible', FilooFiloo.versusController, 'whatIsPlayerDoingPaneVisibleDidChange');

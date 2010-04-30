@@ -70,11 +70,24 @@ module("FilooFiloo.VersusController",{
       versusController.set('currentMode', 'FilooFiloo.versusPage.mainView');
     };
 
-    startAGame = function() {
+    enterVersusModeAndLogin = function() {
       FilooFiloo.loginController.set('name', 'zinzin');
       enterVersusMode();
+    };
 
+    waitAndGetAnOpponent = function() {
       versusController.get('player').set('opponent', store.createRecord(FilooFiloo.Player, {name:"gyzmo", boardString: " rp "}));
+      tickTimer();
+    };
+
+    startAGame = function() {
+      enterVersusModeAndLogin();
+      waitAndGetAnOpponent();
+    };
+
+    winTheGame = function() {
+      versusController.get('player').set('outcome', FilooFiloo.Player.WIN);
+      versusController.get('opponent').set('outcome', FilooFiloo.Player.LOST);
       tickTimer();
     };
   }
@@ -202,10 +215,7 @@ test("When a player looses, the information should be sent to the server", funct
 
 test("The game should end when the outcome of both players is known", function() {
   startAGame();
-
-  versusController.get('player').set('outcome', FilooFiloo.Player.WIN);
-  versusController.get('opponent').set('outcome', FilooFiloo.Player.LOST);
-  tickTimer();
+  winTheGame();
 
   equals(versusController.get('gameStatus'), FilooFiloo.VersusController.FINISHED);
   equals(versusController.get('timer').invalidateCalled, YES);
@@ -228,4 +238,28 @@ test("The score of the opponent should be converted to junk in the board", funct
   versusController.get('opponent').set('score', 50 + 210);
   tickTimer();
   equals(junkCount, 3, "3 junk pieces should be added for a chain worth 210 points");
+});
+
+test("The what is player doing caption should only be visible when the player is not playing", function() {
+
+  ok(!versusController.get('whatIsPlayerDoingPaneVisible'), "What is player doing should not be displayed before he starts waiting");
+
+  enterVersusModeAndLogin('zinzin');
+  ok(versusController.get('whatIsPlayerDoingPaneVisible'), "What is player doing should be displayed when he is waiting");
+
+  waitAndGetAnOpponent();
+  ok(!versusController.get('whatIsPlayerDoingPaneVisible'), "What is player doing should not be displayed when he is playing");
+
+  winTheGame();
+  ok(versusController.get('whatIsPlayerDoingPaneVisible'), "What is player doing should be displayed after he game is ended");
+});
+
+test("The what is player doing caption should only be visible in versus mode", function() {
+
+  startAGame();
+  winTheGame();
+
+  versusController.set('currentMode', 'FilooFiloo.menuPage.mainView');
+
+  ok(!versusController.get('whatIsPlayerDoingPaneVisible'), "What is player doing should not be displayed outside of the versus page");
 });

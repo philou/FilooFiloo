@@ -18,64 +18,10 @@
 // ==========================================================================
 /*globals FilooFiloo */
 
-FilooFiloo.SinglePage = {
-  SCORE_ROW_HEIGHT: 24,
-  scoreGridRowTop: function(i) {
-    return i*this.SCORE_ROW_HEIGHT;
-  },
-  scoreGridHeight: function(count) {
-    return count*this.SCORE_ROW_HEIGHT;
-  },
-  scoreRowLayout: function(i) {
-    return { top: this.scoreGridRowTop(i), height: this.SCORE_ROW_HEIGHT, left: 0, right: 0 };
-  },
-  scoreItemViews: function(gridRowIndex, title, property) {
-    return [
-      SC.LabelView.design(
-      {
-	layout: this.scoreRowLayout(gridRowIndex),
-	textAlign: SC.ALIGN_CENTER,
-	fontWeight: SC.BOLD_WEIGHT,
-	value: title
-      }),
-      SC.LabelView.design(
-      {
-	layout: this.scoreRowLayout(gridRowIndex+1),
-	textAlign: SC.ALIGN_CENTER,
-	fontWeight: SC.BOLD_WEIGHT,
-	value: '0',
-	valueBinding: 'FilooFiloo.singleController.board.' + property
-      })];
-  },
-  scoreViews: function() {
-    var result = [];
-    result = result.concat(this.scoreItemViews(0, "Score", 'score'));
-    result = result.concat(this.scoreItemViews(3, "Filoos", 'disappearedPieces'));
-    result = result.concat(this.scoreItemViews(6, "Level", 'level'));
-    return result;
-  }
-};
+sc_require('views/layout');
 
 FilooFiloo.singlePage = SC.Page.design(
 {
-  mainView: SC.View.design(SC.Border,
-  {
-    classNames: ['main-view'],
-    layout: { centerX: 0, centerY: 0, width: 321, height: 395 },
-    borderStyle: SC.BORDER_GRAY,
-    childViews: 'scoresView boardView'.w(),
-
-    scoresView: SC.View.design(
-    {
-      classNames: ['scores'],
-      layout: { left: 12, width: 100, centerY: 0, height: FilooFiloo.SinglePage.scoreGridHeight(8) },
-      childViews: FilooFiloo.SinglePage.scoreViews()
-    }),
-    boardView: FilooFiloo.BoardView.design(
-    {
-      layout: { right: 12, centerY: 0, width: 185, height: 371 },
-      contentBinding: 'FilooFiloo.singleController.board'
-    })
-  })
+  mainView: FilooFiloo.Layout.detailedBoardView('FilooFiloo.singleController.board', { centerX: 0, centerY: 0})
 });
 

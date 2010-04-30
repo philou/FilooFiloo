@@ -13,61 +13,57 @@
 // You should have received a copy of the GNU Affero General Public License
 // program.  If not, see <http://www.gnu.org/licenses/>
 
+sc_require('views/layout');
 
 FilooFiloo.versusPage = SC.Page.design(
 {
   mainView: SC.View.design(
   {
     classNames: ['main-view'],
-    layout: { top: 20, bottom: 0, centerX: 0, width: 600 },
-    childViews:
-    [
-      SC.View.design(
-      {
-	layout: { top: 0, bottom: 0, left: 0, width: 300 },
-	childViews:
-	[
-	  SC.LabelView.design(
-	  {
-	    layout: FilooFiloo.Layout.scoreRow(0),
-	    value: 'You'
-	  }),
-	  SC.LabelView.design(
-	  {
-	    layout: FilooFiloo.Layout.scoreRow(1),
-	    valueBinding: 'FilooFiloo.versusController.whatIsPlayerDoing'
-	  }),
-	  FilooFiloo.BoardView.design(
-	  {
-	    layout: { left: 1, right: 1, top: FilooFiloo.Layout.scoreRowTop(2), height: 380 },
-	    contentBinding: 'FilooFiloo.versusController.board'
-	  })
-	]
-      }),
-      SC.View.design(
-      {
-	layout: { top: 0, bottom: 0, right: 0, width: 300 },
-	childViews:
-	[
-	  SC.LabelView.design(
-	  {
-	    layout: FilooFiloo.Layout.scoreRow(0),
-	    value: 'Opponent'
-	  }),
-	  SC.LabelView.design(
-	  {
-	    layout: FilooFiloo.Layout.scoreRow(1),
-	    valueBinding: 'FilooFiloo.versusController.whatIsOpponentDoing'
-	  }),
-	  FilooFiloo.BoardView.design(
-	  {
-	    layout: { left: 1, right: 1, top: FilooFiloo.Layout.scoreRowTop(2), height: 380 },
-	    contentBinding: 'FilooFiloo.versusController.opponentBoard'
-	  })
-	]
-      })
+    layout: { centerX: 0, centerY: 0, width: 658, height: 399 },
+    childViews: 'playerView opponentView'.w(),
 
-    ]
+    playerView: FilooFiloo.Layout.detailedBoardView('FilooFiloo.versusController.board', { left: 0, centerY: 0 }),
+
+    opponentView: SC.View.design(SC.Border,
+    {
+      layout: { right: 0, centerY: 0, width: 321, height: 395 },
+      borderStyle: SC.BORDER_GRAY,
+      childViews: 'nameView boardView'.w(),
+
+      nameView: SC.LabelView.design(
+      {
+	layout: { right: 12, centerY: 0, width: 100, height: 24 },
+	textAlign: SC.ALIGN_CENTER,
+	fontWeight: SC.BOLD_WEIGHT,
+	valueBinding: 'FilooFiloo.versusController.opponent.name'
+      }),
+
+      boardView: FilooFiloo.BoardView.design(
+      {
+	layout: { left: 12, centerY: 0, width: 185, height: 371 },
+	contentBinding: 'FilooFiloo.versusController.opponentBoard'
+      })
+    })
+  }),
+
+  whatIsPlayerDoingPane: SC.SheetPane.create(
+  {
+    layout: { width: 400, height: 200, centerX: 0 },
+    contentView: SC.View.extend(
+    {
+      layout: { top: 0, left: 0, bottom: 0, right: 0 },
+      childViews:
+      [
+	SC.LabelView.extend(
+	{
+	  layout: { left: 12, right: 12, centerY: 0, height: 24 },
+	  textAlign: SC.ALIGN_CENTER,
+	  fontWeight: SC.BOLD_WEIGHT,
+	  valueBinding: 'FilooFiloo.versusController.whatIsPlayerDoing'
+	})
+      ]
+    })
   })
 });
 

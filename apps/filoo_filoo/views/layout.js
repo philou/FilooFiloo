@@ -20,26 +20,73 @@
 
 /** @class
 
-  Constants for layout.
+  Common layout.
 
 */
 FilooFiloo.Layout = {
 
   MAIN_VIEW: { top: 20, bottom: 0, centerX: 0, width: 300 },
+
   SCORE_ROW_HEIGHT: 24,
-  SCORE_ROW_WIDTH: 200,
-  scoreRowTop: function(index) {
-    return index*(this.SCORE_ROW_HEIGHT+1)+1;
+  scoreGridRowTop: function(i) {
+    return i*this.SCORE_ROW_HEIGHT;
   },
-  scoreRow: function(index) {
-    return this.scoreRows(index,index);
+  scoreGridHeight: function(count) {
+    return count*this.SCORE_ROW_HEIGHT;
   },
-  scoreRows: function(startIndex, endIndex) {
-    return {
-      width: this.SCORE_ROW_WIDTH,
-      centerX: 0,
-      height: this.SCORE_ROW_HEIGHT*(endIndex+1-startIndex) + endIndex-startIndex,
-      top: this.scoreRowTop(startIndex)
-    };
+  scoreRowLayout: function(i) {
+    return { top: this.scoreGridRowTop(i), height: this.SCORE_ROW_HEIGHT, left: 0, right: 0 };
+  },
+  scoreItemViews: function(gridRowIndex, title, property) {
+    return [
+      SC.LabelView.design(
+      {
+	layout: this.scoreRowLayout(gridRowIndex),
+	textAlign: SC.ALIGN_CENTER,
+	fontWeight: SC.BOLD_WEIGHT,
+	value: title
+      }),
+      SC.LabelView.design(
+      {
+	layout: this.scoreRowLayout(gridRowIndex+1),
+	textAlign: SC.ALIGN_CENTER,
+	fontWeight: SC.BOLD_WEIGHT,
+	value: '0',
+	valueBinding: property
+      })];
+  },
+  scoreViews: function(boardProperty) {
+    var result = [];
+    result = result.concat(this.scoreItemViews(0, "Score", boardProperty+'.score'));
+    result = result.concat(this.scoreItemViews(3, "Filoos", boardProperty+'.disappearedPieces'));
+    result = result.concat(this.scoreItemViews(6, "Level", boardProperty+'.level'));
+    return result;
+  },
+
+  detailedBoardView: function(boardProperty, positionLayout) {
+
+    positionLayout.width = 321;
+    positionLayout.height = 395;
+
+    return SC.View.design(SC.Border,
+    {
+      classNames: ['main-view'],
+      layout: positionLayout,
+      borderStyle: SC.BORDER_GRAY,
+      childViews: 'scoresView boardView'.w(),
+
+      scoresView: SC.View.design(
+      {
+	classNames: ['scores'],
+	layout: { left: 12, width: 100, centerY: 0, height: this.scoreGridHeight(8) },
+	childViews: this.scoreViews()
+      }),
+      boardView: FilooFiloo.BoardView.design(
+      {
+	layout: { right: 12, centerY: 0, width: 185, height: 371 },
+	contentBinding: boardProperty
+      })
+    });
   }
+
 };
