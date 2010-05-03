@@ -150,3 +150,14 @@ COLORS.each_key do |color|
   CLOBBER.include("#{IMAGE_DIRECTORY}/sprites_#{color}.pov")
   CLEAN.include("#{IMAGE_DIRECTORY}/sprites_#{color}.png")
 end
+
+# desc 'Deploys the site'
+# task :deploy => :default do
+#   verbose('deploying to ftp') do
+#     puts 'reading ftp password from password.txt'
+#     password = readFileContent("password.txt")
+#     Net::FTP.open('ftp-windows.fr.oleane.com', 'admweb@madkatbo.fr.fto', password) do |ftp|
+#       uploadHierarchy(ftp, 'site', '.', ['.html', '.css', '.js'])
+#     end
+#   end
+# end
