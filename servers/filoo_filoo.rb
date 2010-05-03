@@ -25,8 +25,7 @@ require 'dm-core'
 require 'json'
 
 # connect DataMapper to a local sqlite file. 
-DataMapper.setup(:default, ENV['DATABASE_URL'] || 
-    "sqlite3://#{File.join(File.dirname(__FILE__), 'tmp', 'filoo_filoo.db')}")
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://filoo_filoo.db")
 
 class HighScore
   include DataMapper::Resource
