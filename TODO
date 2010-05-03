@@ -108,6 +108,8 @@
   - add score to the player's board, but not to the oppoenent [DONE]
  - rules and credit views could be wider [DONE]
 
+* score is not displayed correctly
+
 * Deploy to free + heroku
 
 nice to have:
