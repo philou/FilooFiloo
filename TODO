@@ -108,9 +108,13 @@
   - add score to the player's board, but not to the oppoenent [DONE]
  - rules and credit views could be wider [DONE]
 
-* score is not displayed correctly
+* score is not displayed correctly [DONE]
 
 * Deploy to free + heroku
+ - deploy backend to heroku [DONE]
+ - deploy fronted to free [DONE]
+ - create apache proxies on free
+ - create a script to deploy - maybe useless ... let's do it the second time I have to
 
 nice to have:
 

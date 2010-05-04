@@ -1,0 +1,4 @@
+
+
+Redirect /high_scores http://stormy-planet-75.heroku.com/high_scores
+Redirect /players http://stormy-planet-75.heroku.com/players
