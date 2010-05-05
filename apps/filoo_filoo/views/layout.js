@@ -79,7 +79,7 @@ FilooFiloo.Layout = {
       {
 	classNames: ['scores'],
 	layout: { left: 12, width: 100, centerY: 0, height: this.scoreGridHeight(8) },
-	childViews: this.scoreViews()
+	childViews: this.scoreViews(boardProperty)
       }),
       boardView: FilooFiloo.BoardView.design(
       {

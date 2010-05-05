@@ -22,6 +22,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'dm-core'
+require 'dm-optlock'
 require 'json'
 
 # connect DataMapper to a local sqlite file. 
@@ -67,6 +68,8 @@ class Player
   property :board_string, Text
   property :score, Integer
   property :outcome, Text
+
+  add_locking_column
 
   def self.id2url(id)
     if id.nil?
@@ -116,6 +119,25 @@ class Player
 
 end
 
+def within_transaction
+  while true
+
+    begin
+      transaction = DataMapper::Transaction.new(DataMapper.repository(:default))
+      transaction.begin
+      transaction.within do
+        yield
+      end
+      transaction.commit
+      break
+
+    rescue
+      transaction.rollback
+      puts "transaction failed"
+    end
+  end
+end
+
 
 # upgrade your database as needed
 DataMapper.auto_upgrade!
@@ -152,47 +174,52 @@ end
 
 # create a new player
 post '/players' do
-  body = request.body.read
-  opts = Player.parse_json(body) rescue nil
-  halt(401, 'Invalid Format') if opts.nil?
+  within_transaction do
+    body = request.body.read
+    opts = Player.parse_json(body) rescue nil
+    halt(401, 'Invalid Format') if opts.nil?
 
-  waiting_player = Player.first(:opponent => nil)
+    waiting_player = Player.first(:opponent => nil)
 
-  new_player = Player.new(opts)
-  halt(500, 'Could not save player') unless new_player.save
+    new_player = Player.new(opts)
+    halt(500, 'Could not save player') unless new_player.save
 
-  if (nil != waiting_player)
-    new_player.update(:opponent => waiting_player.id)
-    waiting_player.update(:opponent => new_player.id)
+    if (nil != waiting_player)
+      new_player.update(:opponent => waiting_player.id)
+      waiting_player.update(:opponent => new_player.id)
 
-    halt(500, 'Could not update player') unless new_player.save
-    halt(500, 'Could not update opponent') unless waiting_player.save
+      halt(500, 'Could not update player') unless new_player.save
+      halt(500, 'Could not update opponent') unless waiting_player.save
+    end
+
+    response['Location'] = new_player.url
+    response.status = 201
   end
-
-  response['Location'] = new_player.url
-  response.status = 201
 end
 
 # update a player
 put '/players/:id' do
-  player = Player.get(params[:id]) rescue nil
-  halt(404, 'Not Found') if player.nil?
+  within_transaction do
+    player = Player.get(params[:id]) rescue nil
+    halt(404, 'Not Found') if player.nil?
 
-  opts = Player.parse_json(request.body.read) rescue nil
-  halt(401, 'Invalid Format') if opts.nil?
+    opts = Player.parse_json(request.body.read) rescue nil
+    halt(401, 'Invalid Format') if opts.nil?
 
-  player.board_string = opts[:board_string]
-  player.score = opts[:score]
+    player.board_string = opts[:board_string]
+    player.score = opts[:score]
 
-  if ("lost" == opts[:outcome])
-    player.outcome = "lost"
-    opponent = Player.get(player.opponent)
-    opponent.outcome = "win"
-    halt(500, 'Could not update opponent') unless opponent.save
+    if ("lost" == opts[:outcome])
+      player.outcome = "lost"
+      opponent = Player.get(player.opponent)
+      opponent.outcome = "win"
+      halt(500, 'Could not update opponent') unless opponent.save
+    end
+
+    halt(500, 'Could not update player') unless player.save
+
+    response['Content-Type'] = 'application/json'
+    { 'content' => player }.to_json
   end
-
-  halt(500, 'Could not update player') unless player.save
-
-  response['Content-Type'] = 'application/json'
-  { 'content' => player }.to_json
 end
+

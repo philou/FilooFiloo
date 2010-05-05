@@ -27,6 +27,7 @@ require 'filoo_filoo'
 require 'test/unit'
 require 'rack/test'
 require 'json'
+require 'monitor'
 
 set :environment, :test
 
@@ -34,19 +35,12 @@ module FilooFilooTestMethods
   include Rack::Test::Methods
 
   def setup
-    @__transaction = DataMapper::Transaction.new(DataMapper.repository(:default))
-    @__transaction.begin
-
-    # FIXME: Should I really be calling #push_transaction like that, or is there a better way?
-    DataMapper.repository(:default).adapter.push_transaction(@__transaction)
+    self.teardown
   end
 
   def teardown
-    if @__transaction
-      DataMapper.repository(:default).adapter.pop_transaction
-      @__transaction.rollback
-      @__transaction = nil
-    end
+    DataMapper.repository(:default).adapter.execute('DELETE from players');
+    DataMapper.repository(:default).adapter.execute('DELETE from high_scores');
   end
 
   def test_instances_via_json_roundtrip(klass, fixtures)
@@ -120,6 +114,7 @@ end
 
 class PlayerTest < Test::Unit::TestCase
   include FilooFilooTestMethods
+  include MonitorMixin
 
   def test_url_2_id
     assert_equal nil, Player.url2id(nil)
@@ -221,4 +216,28 @@ class PlayerTest < Test::Unit::TestCase
     assert_update("Pluto", "score", nil, 1234)
   end
 
+  def test_when_many_players_login_at_the_same_time_each_one_should_get_a_unique_opponent
+    players_count = 2*10
+    urls = []
+    threads = Array.new(players_count) do |i|
+      url = test_create_player("Player_"+i.to_s)
+      synchronize do
+        urls << url
+      end
+    end
+    threads.each {|thread| thread.join }
+
+    opponents = Hash.new(0)
+    assert_equal players_count, urls.length
+    urls.each do |url|
+      player = test_get url
+      opponent = player["opponent"]
+      assert !opponent.nil?, player["name"]+" should have an opponent"
+      assert_equal 0, opponents[opponent], "opponent #"+opponent+" already has an opponent"
+      opponents[opponent] = opponents[opponent]+1
+    end
+
+  end
+
 end
+
