@@ -7,7 +7,7 @@ $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
   
 require 'rubygems'
-gem 'dm-core', '>=0.10.2'
+gem 'dm-core', '>=0.9.10'
 require 'dm-core'
 
 module DataMapper
