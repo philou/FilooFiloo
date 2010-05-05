@@ -22,8 +22,8 @@
 require 'rubygems'
 require 'sinatra'
 require 'dm-core'
-require 'dm-optlock'
 require 'json'
+require Pathname(__FILE__).dirname.expand_path + 'dm-optlock'
 
 # connect DataMapper to a local sqlite file. 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://filoo_filoo.db")
