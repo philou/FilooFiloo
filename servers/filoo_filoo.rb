@@ -22,6 +22,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'dm-core'
+require 'dm-optlock'
 require 'json'
 
 # connect DataMapper to a local sqlite file. 
@@ -67,6 +68,8 @@ class Player
   property :board_string, Text
   property :score, Integer
   property :outcome, Text
+
+  add_locking_column
 
   def self.id2url(id)
     if id.nil?
@@ -117,15 +120,21 @@ class Player
 end
 
 def within_transaction
-  if not DataMapper.repository(:default).adapter.current_transaction.nil?
-    yield
-  else
-    transaction = DataMapper::Transaction.new(DataMapper.repository(:default))
-    transaction.begin
-    transaction.within do
-      yield
+  while true
+
+    begin
+      transaction = DataMapper::Transaction.new(DataMapper.repository(:default))
+      transaction.begin
+      transaction.within do
+        yield
+      end
+      transaction.commit
+      break
+
+    rescue
+      transaction.rollback
+      puts "transaction failed"
     end
-    transaction.commit
   end
 end
 

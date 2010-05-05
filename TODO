@@ -110,6 +110,9 @@
 
 * score is not displayed correctly [DONE]
 
+* use transactions and optimistic locking (use DataMapper plugins, even if I don't think they are safe) [DONE]
+ - NB: the DM optimistic lock does not seem to modify the update db query, strange.
+
 * Deploy to free + heroku
  - deploy backend to heroku [DONE]
  - deploy fronted to free [DONE]
@@ -119,6 +122,5 @@
 nice to have:
 
 * check to reduce the size of the repo
-* use transactions and optimistic locking (use DataMapper plugins, even if I don't think they are safe)
 * be able to get back to menu from a finished versus game
 
