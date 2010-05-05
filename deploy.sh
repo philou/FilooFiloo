@@ -1,9 +1,8 @@
 #!/bin/sh
 
-# checkout production
-# clean temp
-# sc-build
-# git push heroku production
-# deploy client on free
-# checkout master
-# clean temp
+sc-build --languages=en --build=LATEST --clean
+git rm -r tmp/build
+git add .
+git commit -m "Deployed `date`"
+git push origin production
+git push heroku production:master

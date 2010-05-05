@@ -1,0 +1,11 @@
+.main-view{overflow:auto;}.filoo-filoo-title{font-size:24px;}.filoo-filoo-container-view{background-color:#E7E4EF;color:#000;}
+.board-view .cell-view{padding:0;background-color:#FFF;background-repeat:no-repeat;}
+.board-view .red{background-image:url('/static/filoo_filoo/en/LATEST/resources/images/sprites_red.png');}
+.board-view .blue{background-image:url('/static/filoo_filoo/en/LATEST/resources/images/sprites_blue.png');}
+.board-view .green{background-image:url('/static/filoo_filoo/en/LATEST/resources/images/sprites_green.png');}
+.board-view .purple{background-image:url('/static/filoo_filoo/en/LATEST/resources/images/sprites_purple.png');}
+.board-view .yellow{background-image:url('/static/filoo_filoo/en/LATEST/resources/images/sprites_yellow.png');}
+.board-view .junk{background-image:url('/static/filoo_filoo/en/LATEST/resources/images/sprites_grey.png');}
+.scores{color:#444;}.high_scores{width:100%;margin:auto;}table.high_scores_table{border-collapse:collapse;margin:auto;}
+table.high_scores_table th,table.high_scores_table td{border:1px solid #c9c9c9;padding:1px 4px;}
+table.high_scores_table th{background-color:#DDD;}.information table{margin:auto;}

@@ -115,12 +115,20 @@
 
 * Deploy to free + heroku
  - deploy backend to heroku [DONE]
- - deploy fronted to free [DONE]
- - create apache proxies on free
- - create a script to deploy - maybe useless ... let's do it the second time I have to
+ - deploy fronted to free [CANCELED]
+ - create apache proxies on free [CANCELED]
+ - revert BuildFile in production mode, it is ignored [TODO]
+ - add static content to config.ru [TODO]
+ - change .gitignore to add static built files into the repo [TODO]
+* next time I have to deploy, automate the process
+ - the script should be in production branch only
+ - use a constant version number
+ - call sc-build with this version number, english only
+
 
 nice to have:
 
 * check to reduce the size of the repo
 * be able to get back to menu from a finished versus game
 
+ 
