@@ -1,2 +1,6 @@
-dm-core --version '>=0.10.2'
+dm-core --version '0.10.2'
+addressable --version '2.1.1'
+extlib --version '0.9.14'
+do_sqlite3 --version '0.10.1.1'
+data_objects --version '0.10.2'
 
