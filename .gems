@@ -1,6 +1,0 @@
-extlib --version '0.9.14'
-addressable --version '2.1.1'
-dm-core --version '0.10.2'
-data_objects --version '0.10.1'
-do_sqlite3 --version '0.10.1.1'
-dm_postgres --version '0.10.0'
