@@ -23,7 +23,6 @@ require 'rubygems'
 require 'sinatra'
 require 'dm-core'
 require 'json'
-require Pathname(__FILE__).dirname.expand_path + 'dm-optlock'
 
 # connect DataMapper to a local sqlite file. 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://filoo_filoo.db")
@@ -68,8 +67,6 @@ class Player
   property :board_string, Text
   property :score, Integer
   property :outcome, Text
-
-  add_locking_column
 
   def self.id2url(id)
     if id.nil?
