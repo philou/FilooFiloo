@@ -24,6 +24,8 @@ require 'sinatra'
 require 'dm-core'
 require 'json'
 
+set :root, File.join(File.dirname(__FILE__),'..')
+
 # connect DataMapper to a local sqlite file. 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://filoo_filoo.db")
 
