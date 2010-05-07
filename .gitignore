@@ -6,4 +6,5 @@
 *.db
 public
 log
+tmp
 
