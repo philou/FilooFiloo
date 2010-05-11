@@ -191,8 +191,11 @@ post '/players' do
     throw "Could not save player" unless new_player.save
 
     if (nil != waiting_player)
-      throw "Could not update player" unless new_player.update(:opponent => waiting_player.id)
-      throw "Could not update opponent" unless waiting_player.update(:opponent => new_player.id)
+      new_player.opponent = waiting_player.id
+      waiting_player.opponent = new_player.id
+
+      throw "Could not update player" unless new_player.save
+      throw "Could not update opponent" unless waiting_player.save
     end
 
     response['Location'] = new_player.url
@@ -214,7 +217,8 @@ put '/players/:id' do
     if ("lost" == opts[:outcome])
       player.outcome = "lost"
       opponent = Player.get(player.opponent)
-      throw "Could not update opponent" unless opponent.update(:outcome => "win")
+      opponent.outcome = "win"
+      throw "Could not update opponent" unless opponent.save
     end
 
     throw "Could not update player" unless player.save
