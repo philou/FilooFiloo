@@ -35,12 +35,14 @@ module FilooFilooTestMethods
   include Rack::Test::Methods
 
   def setup
+    DataMapper.auto_upgrade!
     self.teardown
   end
 
   def teardown
-    DataMapper.repository(:default).adapter.execute('DELETE from players');
-    DataMapper.repository(:default).adapter.execute('DELETE from high_scores');
+    # assertions here are ignored
+    DataMapper.repository(:default).adapter.execute('DELETE from players') rescue nil
+    DataMapper.repository(:default).adapter.execute('DELETE from high_scores') rescue nil
   end
 
   def test_instances_via_json_roundtrip(klass, fixtures)
@@ -128,6 +130,11 @@ class PlayerTest < Test::Unit::TestCase
   def test_id_2_url
     assert_equal nil, Player.id2url(nil)
     assert_equal "/players/2", Player.id2url(2)
+  end
+
+  def test_json_should_parse_without_errors
+    assert Player.parse_json("{\"outcome\":null,\"name\":\"File électrique\",\"guid\":\"/players/8\",\"boardString\":\"  gr  \\n      \\n      \\n      \\n      \\n      \\n      \\n      \\n      \\n  yg  \\n gyr \\ngyryp \\n\",\"score\":540,\"opponent\":\"/players/7\"}")
+    assert Player.parse_json("{\"name\":\"test\"}")
   end
 
   def test_ruby_to_json_to_ruby_should_look_alike
@@ -237,6 +244,17 @@ class PlayerTest < Test::Unit::TestCase
       opponents[opponent] = opponents[opponent]+1
     end
 
+  end
+
+  def test_incorrect_data_should_return_an_error
+    DataMapper.repository(:default).adapter.execute('DROP table players')
+    post "/players", {"name"=> "Regis"}.to_json
+    assert_equal 500, last_response.status
+  end
+
+  def test_invalid_json_should_return_an_error
+    post "/players", {"name"=> nil}.to_json
+    assert_equal 401, last_response.status
   end
 
 end
