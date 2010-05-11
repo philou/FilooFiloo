@@ -130,9 +130,14 @@ def within_transaction
       transaction.commit
       return
 
+    rescue Exception => e
+      transaction.rollback unless transaction.nil?
+      error = e.to_s + "\n\n" + e.backtrace.join("\n")
+
     rescue
-      transaction.rollback
+      transaction.rollback unless transaction.nil?
       error = $!.to_s
+
     end
   end
   halt(500, "Transaction failed: " + error)
