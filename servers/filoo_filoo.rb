@@ -22,9 +22,12 @@
 require 'rubygems'
 require 'sinatra'
 require 'dm-core'
+require 'dm-timestamps'
 require 'json'
 
 set :root, File.join(File.dirname(__FILE__),'..')
+
+TIMEOUT = 30.0 / (24*60*60)
 
 # connect DataMapper to a local sqlite file. 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://filoo_filoo.db")
@@ -69,6 +72,7 @@ class Player
   property :board_string, Text
   property :score, Integer
   property :outcome, Text
+  property :updated_at, DateTime
 
   def self.id2url(id)
     if id.nil?
@@ -118,8 +122,19 @@ class Player
 
 end
 
+class HttpException < Exception
+  def self.wrap(e)
+    HttpException.new(500, e.message + "\n\n" + e.backtrace.join("\n"))
+  end
+  def initialize(httpStatus, message)
+    super(message)
+    @httpStatus = httpStatus
+  end
+  attr_reader :httpStatus
+end
+
 def within_transaction
-  error = "unknown reason"
+  httpException = HttpException.new(500, "Unknown")
   5.times do
     begin
       transaction = DataMapper::Transaction.new(DataMapper.repository(:default))
@@ -130,17 +145,21 @@ def within_transaction
       transaction.commit
       return
 
+    rescue String => m
+      transaction.rollback unless transaction.nil?
+      error = HttpException.new(500, m)
+
+    rescue HttpException => e
+      transaction.rollback unless transaction.nil?
+      error = e
+
     rescue Exception => e
       transaction.rollback unless transaction.nil?
-      error = e.to_s + "\n\n" + e.backtrace.join("\n")
-
-    rescue
-      transaction.rollback unless transaction.nil?
-      error = $!.to_s
+      error = HttpException.new(500, e.message + "\n\n" + e.backtrace.join("\n"))
 
     end
   end
-  halt(500, "Transaction failed: " + error)
+  halt(httpException.httpStatus, "Transaction failed: " + httpException.message)
 end
 
 def read_request(klass)
@@ -171,10 +190,21 @@ get '/players/:id' do
   player = Player.get(params[:id]) rescue nil
   halt(404, 'Not Found') if player.nil?
 
+  if (player.updated_at < (DateTime.now - TIMEOUT))
+    player.outcome = "timeout"
+
+  elsif !player.opponent.nil?
+    opponent = Player.get(player.opponent)
+    if (opponent.updated_at < (DateTime.now - TIMEOUT))
+      player.outcome = "timeout"
+    end
+  end
+
   content_type 'application/json'
   { 'content' => player }.to_json
 end
 
+# Debug purpose only
 get '/players' do
   content_type 'application/json'
   { 'content' => Array(Player.all) }.to_json
@@ -185,7 +215,7 @@ post '/players' do
   opts = read_request(Player)
 
   within_transaction do
-    waiting_player = Player.first(:opponent => nil)
+    waiting_player = Player.first(:opponent => nil, :updated_at.gt => (DateTime.now - TIMEOUT))
 
     new_player = Player.new(opts)
     throw "Could not save player" unless new_player.save
@@ -215,8 +245,8 @@ put '/players/:id' do
     player.score = opts[:score]
 
     if ("lost" == opts[:outcome])
-      player.outcome = "lost"
       opponent = Player.get(player.opponent)
+      player.outcome = "lost"
       opponent.outcome = "win"
       throw "Could not update opponent" unless opponent.save
     end

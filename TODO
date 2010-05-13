@@ -1,24 +1,21 @@
 BUGS
 ==============================================
-* HTTP 401 Unauthorized error when posting a player on a built game ... ? 
-  - try to update the gems [CANCELED]
-  - try to reproduce in debug mode with 2 computers [DONE]
-  - try to reproduce locally with 1 computer [DONE]
-  - get the definitions of halt(...) and Resource.save() to see if it is logical with the transaction handling [DONE]
-  - read the request and params in within_transaction. I think the problem occurs when the transaction is retried [DONE]
-  - limit the number of retries [DONE]
-  - improve the logs [DONE]
-* Sometimes, when one player looses, no result panel is displayed
-  - after a REST error, the server is ignored.
 * When a game is won, the panel is diplayed, but the outcome is not set, and the game continues behind
+* Sometimes, when one player looses, no result panel is displayed
+  - after a REST error, the server is ignored, see how to recover
 * sc-busy error when the server is really slow to answer (reproduce with internet hosting through freebox)
 
 ENHANCEMENTS
 ==============================================
 * Detect deconnections
-  - add a timestamp to the players in the database
-  - update outcome when a player has not been posting anything since a certain timeout
-  - it should work when either waiting or playing
+  - add a timestamp to the players in the database [DONE]
+  - stop waiting from the client after TIMEOUT ? resolve in the server [DONE]
+  - update outcome when a player has not been posting anything since a certain timeout [DONE]
+  - it should work when either waiting or playing [DONE]
+  - stop waiting when outcome becomes timeout in client
+  - stop the game when status becomes timeout in client
+* Simplify the url
+  - create a copy of index.html at the root
 * be able to get back to menu from a finished versus game
 * use optimistic locking
   - either manage to deploy dm-optlock plugin to heroku (did not manage last time)
