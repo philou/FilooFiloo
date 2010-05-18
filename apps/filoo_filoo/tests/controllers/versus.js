@@ -85,10 +85,18 @@ module("FilooFiloo.VersusController",{
       waitAndGetAnOpponent();
     };
 
-    winTheGame = function() {
-      versusController.get('player').set('outcome', FilooFiloo.Player.WIN);
-      versusController.get('opponent').set('outcome', FilooFiloo.Player.LOST);
+    endTheGame = function(opponentOutcome) {
+      opponentOutcome = opponentOutcome || FilooFiloo.Player.LOST;
+      versusController.get('opponent').set('outcome', opponentOutcome);
       tickTimer();
+    };
+    test_game_ends_when_opponent_outcome_is_known = function(loser) {
+      startAGame();
+      endTheGame(loser);
+
+      equals(versusController.get('gameStatus'), FilooFiloo.VersusController.FINISHED);
+      equals(versusController.get('timer').invalidateCalled, YES, "timer should be stoped when the game ends");
+      equals(versusController.get('board').get('playing'), NO, "the board should stop when the game ends");
     };
   }
 });
@@ -213,13 +221,10 @@ test("When a player looses, the information should be sent to the server", funct
   equals(player.commitCalled, YES, "player should be commited when loosing");
 });
 
-test("The game should end when the outcome of both players is known", function() {
-  startAGame();
-  winTheGame();
-
-  equals(versusController.get('gameStatus'), FilooFiloo.VersusController.FINISHED);
-  equals(versusController.get('timer').invalidateCalled, YES);
-  equals(versusController.get('board').get('playing'), NO);
+[FilooFiloo.Player.WIN, FilooFiloo.Player.LOST, FilooFiloo.Player.TIMEOUT].forEach(function(opponentOutcome) {
+  test("The game should end when the outcome of opponent is "+opponentOutcome, function() {
+    test_game_ends_when_opponent_outcome_is_known(opponentOutcome);
+  });
 });
 
 test("The score of the opponent should be converted to junk in the board", function() {
@@ -250,16 +255,34 @@ test("The what is player doing caption should only be visible when the player is
   waitAndGetAnOpponent();
   ok(!versusController.get('whatIsPlayerDoingPaneVisible'), "What is player doing should not be displayed when he is playing");
 
-  winTheGame();
+  endTheGame();
   ok(versusController.get('whatIsPlayerDoingPaneVisible'), "What is player doing should be displayed after he game is ended");
 });
 
 test("The what is player doing caption should only be visible in versus mode", function() {
 
   startAGame();
-  winTheGame();
+  endTheGame();
 
   versusController.set('currentMode', 'FilooFiloo.menuPage.mainView');
 
   ok(!versusController.get('whatIsPlayerDoingPaneVisible'), "What is player doing should not be displayed outside of the versus page");
+});
+
+test("Waiting for an opponent should eventually timeout", function() {
+  enterVersusModeAndLogin();
+  versusController.get('player').set('outcome', FilooFiloo.Player.TIMEOUT);
+  tickTimer();
+
+  equals(versusController.get('gameStatus'), FilooFiloo.VersusController.FINISHED, "The game should be ended if no opponent connected");
+});
+
+test("The game should stop if the opponent timeouts", function() {
+  startAGame();
+
+  versusController.get('player').set('outcome', FilooFiloo.Player.TIMEOUT);
+  versusController.get('opponent').set('outcome', FilooFiloo.Player.TIMEOUT);
+  tickTimer();
+
+  equals(versusController.get('gameStatus'), FilooFiloo.VersusController.FINISHED, "The game should be ended if no opponent connected");
 });

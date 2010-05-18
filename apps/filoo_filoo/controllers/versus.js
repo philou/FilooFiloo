@@ -62,8 +62,9 @@ FilooFiloo.createVersusController = function() {
        * Current status
        */
       gameStatus: function() {
+	var player = this.get('player');
 	var opponent = this.get('opponent');
-	if (opponent && opponent.get('outcome')) {
+	if ((player && player.get('outcome')) || (opponent && opponent.get('outcome'))) {
 	  return FilooFiloo.VersusController.FINISHED;
 	}
 	else if (opponent) {
@@ -75,7 +76,7 @@ FilooFiloo.createVersusController = function() {
 	else {
 	  return FilooFiloo.VersusController.PENDING;
 	}
-      }.property('opponent','waitingTime','opponentOutcome'),
+      }.property('waitingTime','opponent','opponentOutcome','player','playerOutcome'),
 
 
       /*
@@ -85,7 +86,13 @@ FilooFiloo.createVersusController = function() {
 	switch(this.get('gameStatus'))
 	{
 	case FilooFiloo.VersusController.FINISHED:
-	  return this.outcomeToString(this.get('player').get('outcome'))+" against "+this.get('opponent').get('name');
+	  var opponent = this.get('opponent');
+	  if (!opponent) {
+	    return "Could not find any opponent, try again later !";
+	  }
+	  else {
+	    return this.outcomeToString()+" against "+this.get('opponent').get('name');
+	  }
 	case FilooFiloo.VersusController.PLAYING:
 	  return "Playing against "+this.get('opponent').get('name');
 	case FilooFiloo.VersusController.WAITING:
@@ -110,12 +117,14 @@ FilooFiloo.createVersusController = function() {
 	}
       }.property('gameStatus'),
 
-      outcomeToString: function(outcome) {
-	switch(outcome) {
+      outcomeToString: function() {
+	switch(this.get('opponentOutcome')) {
+	case FilooFiloo.Player.TIMEOUT:
+	  return "Timeout";
 	case FilooFiloo.Player.LOST:
-	  return "Lost";
-	default:
 	  return "Won";
+	default:
+	  return "Lost";
 	}
       },
 
@@ -148,6 +157,7 @@ FilooFiloo.createVersusController = function() {
 
       _startWaitingForOpponent: function() {
 	this.set('player', this.store.createRecord(FilooFiloo.Player, {name: FilooFiloo.loginController.get('name')}));
+	this.playerOutcomeBinding = SC.Binding.from('player.outcome', this).to('playerOutcome', this).connect();
 	this.get('player').commitRecord();
 
 	this.set('waitingTime', 0);
@@ -170,7 +180,7 @@ FilooFiloo.createVersusController = function() {
 	  this.get('board').start();
 
 	  this.boardStringBinding = SC.Binding.from('opponent.boardString', this).to('opponentBoard.boardString', this).connect();
-	  this.outcomeBinding = SC.Binding.from('opponent.outcome', this).to('opponentOutcome', this).connect();
+	  this.opponentOutcomeBinding = SC.Binding.from('opponent.outcome', this).to('opponentOutcome', this).connect();
 
 	  this.set('opponentScore', 0);
 	  this.addObserver('opponent.score', this, 'opponentScoreObserver');
@@ -178,15 +188,14 @@ FilooFiloo.createVersusController = function() {
       },
 
       _updatePlayers: function() {
-	var player = this.get('player');
 	var opponent = this.get('opponent');
-
-	if (player.get('outcome') && opponent.get('outcome')) {
+	if (opponent.get('outcome')) {
 	  this.stopTheGame();
 	  return;
 	}
 
 	// TODO remplace ça par des bindings ? ça éviterait de faire un cas pour le isEditable
+	var player = this.get('player');
 	if (player.get('isEditable')) {
 
 	  player.set('boardString', this.get('board').cellsToString());
@@ -223,9 +232,14 @@ FilooFiloo.createVersusController = function() {
 	  delete this.boardStringBinding;
 	}
 
-	if (this.outcomeBinding) {
-	  this.outcomeBinding.disconnect();
-	  delete this.outcomeBinding;
+	if (this.playerOutcomeBinding) {
+	  this.playerOutcomeBinding.disconnect();
+	  delete this.playerOutcomeBinding;
+	}
+
+	if (this.opponentOutcomeBinding) {
+	  this.opponentOutcomeBinding.disconnect();
+	  delete this.opponentOutcomeBinding;
 	}
 
 	this.removeObserver('opponent.score', this, 'opponentScoreObserver');

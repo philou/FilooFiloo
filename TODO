@@ -1,24 +1,20 @@
-BUGS
-==============================================
-* When a game is won, the panel is diplayed, but the outcome is not set, and the game continues behind
-* Sometimes, when one player looses, no result panel is displayed
-  - after a REST error, the server is ignored, see how to recover
-* sc-busy error when the server is really slow to answer (reproduce with internet hosting through freebox)
+TODO
+====
+*BUG* Sometimes, it freezes !
+*ENH* be able to get back to the menu from a finished versus game
+*BUG* sc-busy error when the server is really slow to answer (reproduce with internet hosting through freebox)
 
-ENHANCEMENTS
-==============================================
-* Detect deconnections
-  - add a timestamp to the players in the database [DONE]
-  - stop waiting from the client after TIMEOUT ? resolve in the server [DONE]
-  - update outcome when a player has not been posting anything since a certain timeout [DONE]
-  - it should work when either waiting or playing [DONE]
-  - stop waiting when outcome becomes timeout in client
-  - stop the game when status becomes timeout in client
-* Simplify the url
-  - create a copy of index.html at the root
-* be able to get back to menu from a finished versus game
-* use optimistic locking
+NICE TO HAVE
+============
+
+*ENH* use optimistic locking
   - either manage to deploy dm-optlock plugin to heroku (did not manage last time)
   - dump DataMapper altogether and use raw SQL
-* display blobs
-* Aris told he would have liked to see my score
+*ENH* See how to recover after a REST error
+*ENH* display blobs
+*ENH* Aris told he would have liked to see my score
+*ENH* People told me they would like to see the next colors
+*ENH* Simplify the url
+  - create a copy of index.html at the root
+
+
