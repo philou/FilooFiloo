@@ -1,7 +1,5 @@
 #!/bin/sh
 
-git checkout production
-git merge master
 sc-build --languages=en --build=LATEST --clean
 git rm -r public/static
 cp -r tmp/build/static public/
