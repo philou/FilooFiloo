@@ -61,6 +61,13 @@ FilooFiloo.versusPage = SC.Page.design(
 	  textAlign: SC.ALIGN_CENTER,
 	  fontWeight: SC.BOLD_WEIGHT,
 	  valueBinding: 'FilooFiloo.versusController.whatIsPlayerDoing'
+	}),
+        SC.ButtonView.design(
+	{
+	  layout: { centerX: 0, width: 200, height: 24, bottom: 12 },
+	  title: "Back to menu",
+	  target: "FilooFiloo.menuController",
+	  action: "backToMenu"
 	})
       ]
     })

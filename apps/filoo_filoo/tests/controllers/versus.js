@@ -286,3 +286,18 @@ test("The game should stop if the opponent timeouts", function() {
 
   equals(versusController.get('gameStatus'), FilooFiloo.VersusController.FINISHED, "The game should be ended if no opponent connected");
 });
+
+/*
+test("What is player doing should be hidden when versus mode is left", function() {
+  ok(NO);
+});
+test("Given an aborted waiting, when coming back to versus mode then the waiting should start again", function() {
+  ok(NO);
+});
+test("Given an aborted game, when coming back to versus mode then the waiting should start again", function() {
+  ok(NO);
+});
+test("Given an finished game, when coming back to versus mode then the waiting should start again", function() {
+  ok(NO);
+});
+*/
