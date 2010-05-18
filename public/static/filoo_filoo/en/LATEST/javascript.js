@@ -23,7 +23,7 @@ FilooFiloo.Game.StartTickerInterval=500;FilooFiloo.Game.LevelAcceleration=0.9;Fi
 FilooFiloo.Ticker=SC.Object.extend({start:function(a){FilooFiloo.assert(!this.timer);
 FilooFiloo.assert(!this.game);FilooFiloo.assert(a);this.game=a;this.timer=SC.Timer.schedule({target:this.game,action:"tick",repeats:YES,interval:this.interval_(a.get("level"))})
 },stop:function(){this.timer.invalidate();delete (this.timer);delete (this.game)},setLevel:function(a){if(this.timer){this.timer.set("interval",this.interval_(a))
-}},interval_:function(a){return FilooFiloo.Game.StartTickerInterval*Math.pow(FilooFiloo.Game.LevelAcceleration,a-1)
+}},interval_:function(a){return Math.floor(FilooFiloo.Game.StartTickerInterval*Math.pow(FilooFiloo.Game.LevelAcceleration,a-1))
 }});FilooFiloo.ColorProvider=SC.Object.extend({randomColor_:function(){var a=FilooFiloo.Game.Colors;
 var b=FilooFiloo.Random.randomInteger(a.length);return a[b]},popFirstColor:function(){return this.randomColor_()
 },popSecondColor:function(){return this.randomColor_()}});FilooFiloo.Random={randomInteger:function(a){return Math.floor(Math.random()*a)%a
