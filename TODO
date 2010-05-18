@@ -1,19 +1,24 @@
 TODO
 ====
 *BUG* Sometimes, it freezes !
+  - when reaching level 4, the ticker interval is a float number ... and this stops the timer [DONE]
+*BUG* Ca ne fonctionne pas bien sur IE
+  - passer à la dernière version de Sproutcore
 *ENH* be able to get back to the menu from a finished versus game
-*BUG* sc-busy error when the server is really slow to answer (reproduce with internet hosting through freebox)
 
 NICE TO HAVE
 ============
 
+*ENH* augmenter la fréquence de rafraichissement en production
+*ENH* People told me they would like to see the next colors
+*ENH* display blobs
+*BUG* sc-busy error when the server is really slow to answer (reproduce with internet hosting through freebox)
+*ENH* ajouter quelque chose pour voir les logs sur le web
 *ENH* use optimistic locking
   - either manage to deploy dm-optlock plugin to heroku (did not manage last time)
   - dump DataMapper altogether and use raw SQL
 *ENH* See how to recover after a REST error
-*ENH* display blobs
 *ENH* Aris told he would have liked to see my score
-*ENH* People told me they would like to see the next colors
 *ENH* Simplify the url
   - create a copy of index.html at the root
 
