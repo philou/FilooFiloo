@@ -35,4 +35,5 @@ FilooFiloo.Player = SC.Record.extend(
 // use undefined or null for not yet unknown
 FilooFiloo.Player.WIN = "win";
 FilooFiloo.Player.LOST = "lost";
+FilooFiloo.Player.TIMEOUT = "timeout";
 

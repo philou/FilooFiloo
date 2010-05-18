@@ -257,5 +257,38 @@ class PlayerTest < Test::Unit::TestCase
     assert_equal 401, last_response.status
   end
 
+  def update_updated_at(playerId, timeString)
+    DataMapper.repository(:default).adapter.execute("update players set updated_at = '#{timeString}' where id = #{playerId.to_s}")
+  end
+
+  def test_a_game_should_not_start_against_a_long_gone_opponent
+    opponentId = Player.url2id(test_create_player("Old opponent"))
+    update_updated_at(opponentId, '2010-05-12 05:11:02')
+    player = test_create_and_get_player("Late player")
+
+    assert player["opponent"].nil?
+  end
+
+  def test_timeout_for_searching_an_opponent_should_be_30_seconds
+    playerUrl = test_create_player("Lonely")
+    update_updated_at(Player.url2id(playerUrl), '2010-05-12 05:11:02')
+    player = test_get playerUrl
+
+    assert_equal "timeout", player["outcome"]
+  end
+
+  def test_a_game_should_end_when_one_player_timeouts
+    opponentUrl = test_create_player("BusyOpponent")
+    playerUrl = test_create_player("Player")
+
+    update_updated_at(Player.url2id(opponentUrl), '2010-05-12 05:11:02')
+
+    opponent = test_get opponentUrl
+    assert_equal "timeout", opponent["outcome"]
+
+    player = test_get playerUrl
+    assert_equal "timeout", player["outcome"]
+  end
+
 end
 
