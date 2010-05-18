@@ -95,7 +95,8 @@ var d=FilooFiloo.store.createRecord(FilooFiloo.HighScore,b);d.commitRecord()})}}
 if(("FilooFiloo.singlePage.mainView"===this.get("currentMode"))&&(!a.get("playing"))){a.invokeLast("start")
 }else{if(a.get("playing")){a.abort()}}}.observes("currentMode"),nowShowingObserver:function(){this.set("currentMode",FilooFiloo.menuController.get("nowShowing"))
 }.observes("FilooFiloo.menuController.nowShowing")});FilooFiloo.Player=SC.Record.extend({name:SC.Record.attr(String),opponent:SC.Record.toOne("FilooFiloo.Player",{inverse:"opponent",isMaster:YES}),boardString:SC.Record.attr(String),score:SC.Record.attr(Number),outcome:SC.Record.attr(String)});
-FilooFiloo.Player.WIN="win";FilooFiloo.Player.LOST="lost";FilooFiloo.ReadOnlyBoard=SC.Object.extend({boardString:"",playing:NO,init:function(){arguments.callee.base.apply(this,arguments);
+FilooFiloo.Player.WIN="win";FilooFiloo.Player.LOST="lost";FilooFiloo.Player.TIMEOUT="timeout";
+FilooFiloo.ReadOnlyBoard=SC.Object.extend({boardString:"",playing:NO,init:function(){arguments.callee.base.apply(this,arguments);
 this.updateCells()},boardStringObserver:function(){this.updateCells(this.get("boardString"))
 }.observes("boardString"),updateCells:function(f){if(!f){for(var b=0;b<FilooFiloo.Board.ColCount;
 b++){for(var e=0;e<FilooFiloo.Board.RowCount;e++){this.set(FilooFiloo.Board.cellProperty(b,e),FilooFiloo.Game.Clear)
@@ -103,36 +104,39 @@ b++){for(var e=0;e<FilooFiloo.Board.RowCount;e++){this.set(FilooFiloo.Board.cell
 a++){this.setIfChanged(FilooFiloo.Board.cellProperty(a,d),FilooFiloo.Game.initialToState[e.charAt(a)])
 }}}});sc_require("models/player");sc_require("models/board");sc_require("models/read_only_board");
 sc_require("controllers/menu");FilooFiloo.VersusController={PENDING:"pending",WAITING:"waiting for opponent",PLAYING:"playing",FINISHED:"finished"};
-FilooFiloo.createVersusController=function(){return SC.Object.create({board:FilooFiloo.Board.create(),opponentBoard:FilooFiloo.ReadOnlyBoard.create(),currentMode:undefined,gameStatus:function(){var a=this.get("opponent");
-if(a&&a.get("outcome")){return FilooFiloo.VersusController.FINISHED}else{if(a){return FilooFiloo.VersusController.PLAYING
-}else{if(undefined!=this.get("waitingTime")){return FilooFiloo.VersusController.WAITING
-}else{return FilooFiloo.VersusController.PENDING}}}}.property("opponent","waitingTime","opponentOutcome"),whatIsPlayerDoing:function(){switch(this.get("gameStatus")){case FilooFiloo.VersusController.FINISHED:return this.outcomeToString(this.get("player").get("outcome"))+" against "+this.get("opponent").get("name");
-case FilooFiloo.VersusController.PLAYING:return"Playing against "+this.get("opponent").get("name");
+FilooFiloo.createVersusController=function(){return SC.Object.create({board:FilooFiloo.Board.create(),opponentBoard:FilooFiloo.ReadOnlyBoard.create(),currentMode:undefined,gameStatus:function(){var b=this.get("player");
+var a=this.get("opponent");if((b&&b.get("outcome"))||(a&&a.get("outcome"))){return FilooFiloo.VersusController.FINISHED
+}else{if(a){return FilooFiloo.VersusController.PLAYING}else{if(undefined!=this.get("waitingTime")){return FilooFiloo.VersusController.WAITING
+}else{return FilooFiloo.VersusController.PENDING}}}}.property("waitingTime","opponent","opponentOutcome","player","playerOutcome"),whatIsPlayerDoing:function(){switch(this.get("gameStatus")){case FilooFiloo.VersusController.FINISHED:var a=this.get("opponent");
+if(!a){return"Could not find any opponent, try again later !"}else{return this.outcomeToString()+" against "+this.get("opponent").get("name")
+}case FilooFiloo.VersusController.PLAYING:return"Playing against "+this.get("opponent").get("name");
 case FilooFiloo.VersusController.WAITING:return"Waiting for an opponent ... "+this.get("waitingTime")+" seconds";
 default:return"pending"}}.property("gameStatus"),whatIsPlayerDoingPaneVisible:function(){if(this.get("currentMode")!="FilooFiloo.versusPage.mainView"){return NO
 }switch(this.get("gameStatus")){case FilooFiloo.VersusController.WAITING:case FilooFiloo.VersusController.FINISHED:return YES;
-default:return NO}}.property("gameStatus"),outcomeToString:function(a){switch(a){case FilooFiloo.Player.LOST:return"Lost";
-default:return"Won"}},Timer:SC.Timer,store:FilooFiloo.store,currentModeObserver:function(){if("FilooFiloo.versusPage.mainView"===this.get("currentMode")){this.requestLogin()
+default:return NO}}.property("gameStatus"),outcomeToString:function(){switch(this.get("opponentOutcome")){case FilooFiloo.Player.TIMEOUT:return"Timeout";
+case FilooFiloo.Player.LOST:return"Won";default:return"Lost"}},Timer:SC.Timer,store:FilooFiloo.store,currentModeObserver:function(){if("FilooFiloo.versusPage.mainView"===this.get("currentMode")){this.requestLogin()
 }}.observes("currentMode"),nowShowingObserver:function(){this.set("currentMode",FilooFiloo.menuController.get("nowShowing"))
 }.observes("FilooFiloo.menuController.nowShowing"),requestLogin:function(){if(!FilooFiloo.loginController.get("name")){var a=this;
 FilooFiloo.loginController.forceLoginAndDo("Login","Filoo Filoo rules... you need to login in order to play against someone.",function(){a._startWaitingForOpponent()
 })}else{this._startWaitingForOpponent()}},_startWaitingForOpponent:function(){this.set("player",this.store.createRecord(FilooFiloo.Player,{name:FilooFiloo.loginController.get("name")}));
+this.playerOutcomeBinding=SC.Binding.from("player.outcome",this).to("playerOutcome",this).connect();
 this.get("player").commitRecord();this.set("waitingTime",0);this.set("timer",this.Timer.schedule({target:this,action:"_checkForOpponent",repeats:YES,interval:1000}));
 this.addObserver("player.opponent",this,"playerOpponentObserver")},_checkForOpponent:function(){this.incrementProperty("waitingTime");
 this.get("player").refresh()},playerOpponentObserver:function(){var a=this.get("player").get("opponent");
 if(a&&a.get("name")){this.removeObserver("player.opponent",this,"playerOpponentObserver");
 this.set("opponent",a);this.get("timer").set("interval",3131);this.get("timer").set("action","_updatePlayers");
 this.get("board").start();this.boardStringBinding=SC.Binding.from("opponent.boardString",this).to("opponentBoard.boardString",this).connect();
-this.outcomeBinding=SC.Binding.from("opponent.outcome",this).to("opponentOutcome",this).connect();
+this.opponentOutcomeBinding=SC.Binding.from("opponent.outcome",this).to("opponentOutcome",this).connect();
 this.set("opponentScore",0);this.addObserver("opponent.score",this,"opponentScoreObserver")
-}},_updatePlayers:function(){var b=this.get("player");var a=this.get("opponent");
-if(b.get("outcome")&&a.get("outcome")){this.stopTheGame();return}if(b.get("isEditable")){b.set("boardString",this.get("board").cellsToString());
+}},_updatePlayers:function(){var a=this.get("opponent");if(a.get("outcome")){this.stopTheGame();
+return}var b=this.get("player");if(b.get("isEditable")){b.set("boardString",this.get("board").cellsToString());
 b.set("score",this.get("board").get("score"));if(this.get("board").get("gameOver")){b.set("outcome",FilooFiloo.Player.LOST)
 }b.commitRecord()}a.refresh()},opponentScoreObserver:function(){var b=this.get("opponent").get("score");
 var a=b-this.get("opponentScore");this.get("board").addJunk(Math.ceil(a/70));this.set("opponentScore",b)
 },stopTheGame:function(){if(this.get("timer")){this.get("timer").invalidate()}this.removeObserver("player.opponent",this,"playerOpponentObserver");
 if(this.boardStringBinding){this.boardStringBinding.disconnect();delete this.boardStringBinding
-}if(this.outcomeBinding){this.outcomeBinding.disconnect();delete this.outcomeBinding
+}if(this.playerOutcomeBinding){this.playerOutcomeBinding.disconnect();delete this.playerOutcomeBinding
+}if(this.opponentOutcomeBinding){this.opponentOutcomeBinding.disconnect();delete this.opponentOutcomeBinding
 }this.removeObserver("opponent.score",this,"opponentScoreObserver");var a=this.get("board");
 if(a&&a.get("playing")){a.abort()}},whatIsPlayerDoingPaneVisibleDidChange:function(){var a=FilooFiloo.versusPage.get("whatIsPlayerDoingPane");
 if(this.get("whatIsPlayerDoingPaneVisible")){a.append()}else{a.remove()}}})};FilooFiloo.versusController=FilooFiloo.createVersusController();
