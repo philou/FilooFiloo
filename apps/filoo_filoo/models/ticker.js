@@ -58,6 +58,6 @@ FilooFiloo.Ticker = SC.Object.extend(
 
     // Time interval between tick at the given level
     interval_: function(level) {
-        return FilooFiloo.Game.StartTickerInterval * Math.pow(FilooFiloo.Game.LevelAcceleration, level-1);
+        return Math.floor(FilooFiloo.Game.StartTickerInterval * Math.pow(FilooFiloo.Game.LevelAcceleration, level-1));
     }
 });
