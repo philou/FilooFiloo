@@ -71,12 +71,24 @@ module FilooFilooTestMethods
     location
   end
 
-  def test_get(url)
+  def test_get(url, params = {})
     get url
     assert last_response.ok?
     body = JSON.parse(last_response.body)
     assert body["content"]
-    body["content"]
+    result = body["content"]
+    params.each do |key, value|
+      assert_equal value, result[key]
+    end
+    result.delete("guid")
+    result
+  end
+
+  def test_put(url, json, params = {})
+    params.each do |key, value|
+      json[key] = value
+    end
+    put url, json.to_json
   end
 
 end
@@ -160,59 +172,46 @@ class PlayerTest < Test::Unit::TestCase
     test_post '/players', {"name"=> name}, /\/players\/[0-9]+/
   end
 
-  def test_create_and_get_player(name="AC")
+  def test_create_and_get_player(name="AC", params={})
     location = test_create_player(name)
-    player_json = test_get location
-    assert_equal location, player_json["guid"]
-    assert_equal name, player_json["name"]
-    player_json
+    player_json = test_get location, params.merge("guid" => location, "name" => name)
+
+    [player_json, location]
   end
 
   def test_put_player_should_ok
-    benyb = test_create_and_get_player("benyb")
-    url = benyb.delete("guid")
+    benyb, url = test_create_and_get_player("benyb")
     put url, benyb.to_json
     assert last_response.ok?
   end
 
   def test_a_lonely_player_should_not_get_an_opponent
-    player_json = test_create_and_get_player("Donald")
+    player_json, = test_create_and_get_player("Donald")
     assert player_json["opponent"].nil?
   end
 
   def test_two_players_should_play_against_each_other
     bonnyUrl = test_create_player("Bonny")
-    clide = test_create_and_get_player("Clide")
-    bonny = test_get bonnyUrl
-
-    assert_equal bonny["guid"], clide["opponent"]
-    assert_equal clide["guid"], bonny["opponent"]
+    clide, clideUrl = test_create_and_get_player "Clide", "opponent" => bonnyUrl
+    bonny = test_get bonnyUrl, "opponent" => clideUrl
   end
 
   def test_the_last_to_loose_should_be_the_winner
-    mickey = test_create_and_get_player("Mickey")
-    mickeyUrl = mickey.delete("guid")
-
+    mickey, mickeyUrl = test_create_and_get_player("Mickey")
     mimieUrl = test_create_player("Mimie")
 
-    mickey["outcome"] = "lost"
-    put mickeyUrl, mickey.to_json
+    test_put mickeyUrl, mickey, "outcome" => "lost"
 
-    mickey = test_get mickeyUrl
-    assert_equal "lost", mickey["outcome"]
-
-    mimie = test_get mimieUrl
-    assert_equal "win", mimie["outcome"]
+    mickey = test_get mickeyUrl, "outcome" => "lost"
+    mimie = test_get mimieUrl, "outcome" => "win"
   end
   
   def assert_update(name, property, old_value, new_value)
-    player = test_create_and_get_player(name)
-    url = player.delete("guid")
-    assert_equal old_value, player[property]
-    player[property] = new_value
-    put url, player.to_json
-    player2 = test_get url
-    assert_equal new_value, player2[property]
+    player, url = test_create_and_get_player name, property => old_value
+
+    test_put url, player, property => new_value
+
+    player2 = test_get url, property => new_value
   end
 
   def test_grid_of_a_player_should_be_updatable
@@ -264,17 +263,13 @@ class PlayerTest < Test::Unit::TestCase
   def test_a_game_should_not_start_against_a_long_gone_opponent
     opponentId = Player.url2id(test_create_player("Old opponent"))
     update_updated_at(opponentId, '2010-05-12 05:11:02')
-    player = test_create_and_get_player("Late player")
-
-    assert player["opponent"].nil?
+    player, = test_create_and_get_player "Late player", "opponent" => nil
   end
 
   def test_timeout_for_searching_an_opponent_should_be_30_seconds
     playerUrl = test_create_player("Lonely")
     update_updated_at(Player.url2id(playerUrl), '2010-05-12 05:11:02')
-    player = test_get playerUrl
-
-    assert_equal "timeout", player["outcome"]
+    player = test_get playerUrl, "outcome" => "timeout"
   end
 
   def test_a_game_should_end_when_one_player_timeouts
@@ -283,11 +278,8 @@ class PlayerTest < Test::Unit::TestCase
 
     update_updated_at(Player.url2id(opponentUrl), '2010-05-12 05:11:02')
 
-    opponent = test_get opponentUrl
-    assert_equal "timeout", opponent["outcome"]
-
-    player = test_get playerUrl
-    assert_equal "timeout", player["outcome"]
+    opponent = test_get opponentUrl, "outcome" => "timeout"
+    player = test_get playerUrl, "outcome" => "timeout"
   end
 
   def test_when_a_player_explicitly_timeouts_then_its_outcome_should_stick_to_timeout
@@ -296,15 +288,23 @@ class PlayerTest < Test::Unit::TestCase
 
   def test_given_a_timeouted_waiting_player_when_an_opponent_starts_waiting_then_no_game_should_start
     assert_update("A player", "outcome", nil, "timeout")
-    opponent = test_create_and_get_player("An opponent")
-    assert_equal nil, opponent["opponent"]
+    opponent, = test_create_and_get_player "An opponent", "opponent" => nil
   end
 
   def test_given_a_started_game_when_a_player_explicitly_timeouts_then_its_opponent_should_timeout_too
     opponentUrl = test_create_player("An opponent")
     assert_update("A player", "outcome", nil, "timeout")
-    opponent = test_get opponentUrl
-    assert_equal "timeout", opponent["outcome"]
+    opponent = test_get opponentUrl, "outcome" => "timeout"
+  end
+
+  def test_once_a_game_is_ended_the_outcome_should_not_be_modifiable
+    mickey, mickeyUrl = test_create_and_get_player("Mickey")
+    mimieUrl = test_create_player("Mimie")
+
+    test_put mickeyUrl, mickey, "outcome" => "timeout"
+    test_put mickeyUrl, mickey, "outcome" => "lost"
+
+    mickey = test_get mickeyUrl, "outcome" => "timeout"
   end
 
 end

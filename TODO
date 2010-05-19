@@ -8,7 +8,7 @@ TODO
 *ENH* be able to get back to the menu from a finished versus game
   - ajouter un bouton au panel d'info du versus mode [DONE]
   - effacer le panel d'info quand on quitte le versus mode [DONE]
-  - gérer l'insertion d'un timeout dans le serveur (peut être déjà le cas)
+  - gérer l'insertion d'un timeout dans le serveur (peut être déjà le cas) [DONE]
   - envoyer un timeout au serveur lorsqu'on quitte le versus mode
   - tout nettoyer quand on quitte le versus mode
 *ENH* create filoo-filoo@gmail.com

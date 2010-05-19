@@ -252,7 +252,7 @@ put '/players/:id' do
     player.board_string = opts[:board_string]
     player.score = opts[:score]
 
-    if (["lost","timeout"].include?(opts[:outcome]))
+    if (player.outcome.nil? && ["lost","timeout"].include?(opts[:outcome]))
       player.outcome = opts[:outcome]
       opponent = Player.get(player.opponent)
       if !opponent.nil?

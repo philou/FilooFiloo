@@ -287,14 +287,9 @@ test("The game should stop if the opponent timeouts", function() {
   equals(versusController.get('gameStatus'), FilooFiloo.VersusController.FINISHED, "The game should be ended if no opponent connected");
 });
 
-/*
-test("Given an aborted waiting, when coming back to versus mode then the waiting should start again", function() {
-  ok(NO);
-});
-test("Given an aborted game, when coming back to versus mode then the waiting should start again", function() {
-  ok(NO);
-});
-test("Given an finished game, when coming back to versus mode then the waiting should start again", function() {
-  ok(NO);
-});
-*/
+//test("Given a player in versus mode, when he leaves versus mode, then he should explicity timeout to the server", function() {
+
+  // make sure one cannot override an outcome in the server
+
+
+//});
