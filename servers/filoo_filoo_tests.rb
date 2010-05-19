@@ -290,5 +290,22 @@ class PlayerTest < Test::Unit::TestCase
     assert_equal "timeout", player["outcome"]
   end
 
+  def test_when_a_player_explicitly_timeouts_then_its_outcome_should_stick_to_timeout
+    assert_update("A player", "outcome", nil, "timeout")
+  end
+
+  def test_given_a_timeouted_waiting_player_when_an_opponent_starts_waiting_then_no_game_should_start
+    assert_update("A player", "outcome", nil, "timeout")
+    opponent = test_create_and_get_player("An opponent")
+    assert_equal nil, opponent["opponent"]
+  end
+
+  def test_given_a_started_game_when_a_player_explicitly_timeouts_then_its_opponent_should_timeout_too
+    opponentUrl = test_create_player("An opponent")
+    assert_update("A player", "outcome", nil, "timeout")
+    opponent = test_get opponentUrl
+    assert_equal "timeout", opponent["outcome"]
+  end
+
 end
 

@@ -1,14 +1,16 @@
 TODO
 ====
 *BUG* Sometimes, it freezes !
-  - when reaching level 4, the ticker interval is a float number ... and this stops the timer [DONE]
+  - when reaching level 4, the ticker interval is a float number ... maybe this stops the timer ? [DONE]
 *BUG* Ca ne fonctionne pas bien sur IE
   - passer à la dernière version de Sproutcore [DONE]
   - servir le jeu depuis le eeepc derrière la freebox pour avoir un vrai debug sur IE, essayer d'ailleurs
 *ENH* be able to get back to the menu from a finished versus game
   - ajouter un bouton au panel d'info du versus mode [DONE]
-  - effacer le panel d'info quand on quitte le versus mode
-  - redémarrer à zero quand on revient dans le versus mode
+  - effacer le panel d'info quand on quitte le versus mode [DONE]
+  - gérer l'insertion d'un timeout dans le serveur (peut être déjà le cas)
+  - envoyer un timeout au serveur lorsqu'on quitte le versus mode
+  - tout nettoyer quand on quitte le versus mode
 *ENH* create filoo-filoo@gmail.com
 
 NICE TO HAVE

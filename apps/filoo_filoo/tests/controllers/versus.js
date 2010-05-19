@@ -288,9 +288,6 @@ test("The game should stop if the opponent timeouts", function() {
 });
 
 /*
-test("What is player doing should be hidden when versus mode is left", function() {
-  ok(NO);
-});
 test("Given an aborted waiting, when coming back to versus mode then the waiting should start again", function() {
   ok(NO);
 });
