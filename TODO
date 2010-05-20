@@ -9,8 +9,9 @@ TODO
   - ajouter un bouton au panel d'info du versus mode [DONE]
   - effacer le panel d'info quand on quitte le versus mode [DONE]
   - gérer l'insertion d'un timeout dans le serveur (peut être déjà le cas) [DONE]
-  - envoyer un timeout au serveur lorsqu'on quitte le versus mode
-  - tout nettoyer quand on quitte le versus mode
+  - envoyer un timeout au serveur lorsqu'on quitte le versus mode [DONE]
+  - tout nettoyer quand on quitte le versus mode [DONE]
+  - vérifier que ça marche vraiment
 *ENH* create filoo-filoo@gmail.com
 
 NICE TO HAVE
@@ -26,6 +27,7 @@ NICE TO HAVE
   - either manage to deploy dm-optlock plugin to heroku (did not manage last time)
   - dump DataMapper altogether and use raw SQL
 *ENH* See how to recover after a REST error
+*ENH* the down arrow should drop
 *ENH* Aris told he would have liked to see my score
 *ENH* Simplify the url
   - create a copy of index.html at the root
