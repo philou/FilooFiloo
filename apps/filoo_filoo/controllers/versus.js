@@ -43,20 +43,37 @@ FilooFiloo.createVersusController = function() {
   return SC.Object.create(
     /** @scope FilooFiloo.versusController */ {
 
-      /**
-       * Current player's board.
-       */
+      /** Current player's board. */
       board: FilooFiloo.Board.create(),
 
-      /**
-       * Opponent's board.
-       */
+      /** Opponent's board. */
       opponentBoard: FilooFiloo.ReadOnlyBoard.create(),
 
       /* mode (single, versus ...)
        * corresponds to the current main tab
        */
       currentMode: undefined,
+
+      /** Record sent to the server with the game state */
+      player: undefined,
+
+      /** Record received from the server with the opponent's game state */
+      opponent: undefined,
+
+      /** Time waiting for an opponent */
+      waitingTime: undefined,
+
+      /** Score of the opponent, used to know how many junk we have to handle */
+      opponentScore: undefined,
+
+      /** Timer responsible for the client server synchronization */
+      timer: undefined,
+
+      /*
+       * External refs
+       */
+      Timer: SC.Timer,
+      store: FilooFiloo.store,
 
       /*
        * Current status
@@ -128,15 +145,35 @@ FilooFiloo.createVersusController = function() {
 	}
       },
 
-      /*
-       * External refs
-       */
-      Timer: SC.Timer,
-      store: FilooFiloo.store,
+      asSoonAsEditable: function(record, action) {
+	if (record.get('isEditable')) {
+	  action();
+	}
+	else {
+	  record.addObserver('isEditable', {
+	    isEditableObserver: function() {
+	      if (record.get('isEditable')) {
+		action();
+		record.removeObserver('isEditable', this, 'isEditableObserver');
+	      }
+	    }
+	  }, 'isEditableObserver');
+	}
+      },
 
       currentModeObserver: function() {
+	var player = this.get('player');
         if ('FilooFiloo.versusPage.mainView' === this.get('currentMode')) {
 	  this.requestLogin();
+	}
+	else if (player) {
+	  this.stopTheGame();
+	  this.reset();
+
+	  this.asSoonAsEditable(player, function() {
+	    player.set('outcome', FilooFiloo.Player.TIMEOUT);
+	    player.commitRecord();
+	  });
 	}
       }.observes('currentMode'),
 
@@ -167,7 +204,9 @@ FilooFiloo.createVersusController = function() {
 
       _checkForOpponent: function() {
 	this.incrementProperty('waitingTime');
-	this.get('player').refresh();
+	if(this.get('player').get('isEditable')) {
+	  this.get('player').refresh();
+	}
       },
 
       playerOpponentObserver: function() {
@@ -225,29 +264,26 @@ FilooFiloo.createVersusController = function() {
 	  this.get('timer').invalidate();
 	}
 
+	var that = this;
+	["boardStringBinding","playerOutcomeBinding","opponentOutcomeBinding"].forEach(function(bindingName) {
+	  if (that[bindingName]) {
+	    that[bindingName].disconnect();
+	    delete that[bindingName];
+	  };
+	});
+	this.removeObserver('opponent.score', this, 'opponentScoreObserver');
 	this.removeObserver('player.opponent', this, 'playerOpponentObserver');
 
-	if (this.boardStringBinding) {
-	  this.boardStringBinding.disconnect();
-	  delete this.boardStringBinding;
-	}
-
-	if (this.playerOutcomeBinding) {
-	  this.playerOutcomeBinding.disconnect();
-	  delete this.playerOutcomeBinding;
-	}
-
-	if (this.opponentOutcomeBinding) {
-	  this.opponentOutcomeBinding.disconnect();
-	  delete this.opponentOutcomeBinding;
-	}
-
-	this.removeObserver('opponent.score', this, 'opponentScoreObserver');
-
 	var board = this.get('board');
-	if (board && board.get('playing')) {
+	if (board.get('playing')) {
 	  board.abort();
 	}
+      },
+      reset: function() {
+	var that = this;
+	['timer','player','opponent','waitingTime','opponentScore'].forEach(function(property) {
+	  that.set(property, undefined);
+	});
       },
 
       whatIsPlayerDoingPaneVisibleDidChange: function() {

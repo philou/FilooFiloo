@@ -215,7 +215,7 @@ post '/players' do
   opts = read_request(Player)
 
   within_transaction do
-    waiting_player = Player.first(:opponent => nil, :updated_at.gt => (DateTime.now - TIMEOUT))
+    waiting_player = Player.first(:opponent => nil, :outcome => nil, :updated_at.gt => (DateTime.now - TIMEOUT))
 
     new_player = Player.new(opts)
     throw "Could not save player" unless new_player.save
@@ -233,6 +233,14 @@ post '/players' do
   end
 end
 
+def opponent_outcome(outcome)
+  { 
+    "lost" => "win",
+    "win" => "lost",
+    "timeout" => "timeout" 
+  }[outcome]
+end
+
 # update a player
 put '/players/:id' do
   opts = read_request(Player)
@@ -244,11 +252,13 @@ put '/players/:id' do
     player.board_string = opts[:board_string]
     player.score = opts[:score]
 
-    if ("lost" == opts[:outcome])
+    if (player.outcome.nil? && ["lost","timeout"].include?(opts[:outcome]))
+      player.outcome = opts[:outcome]
       opponent = Player.get(player.opponent)
-      player.outcome = "lost"
-      opponent.outcome = "win"
-      throw "Could not update opponent" unless opponent.save
+      if !opponent.nil?
+        opponent.outcome = opponent_outcome(player.outcome)
+        throw "Could not update opponent" unless opponent.save
+      end
     end
 
     throw "Could not update player" unless player.save

@@ -1,23 +1,27 @@
 TODO
 ====
 *BUG* Sometimes, it freezes !
-  - when reaching level 4, the ticker interval is a float number ... and this stops the timer [DONE]
+  - when reaching level 4, the ticker interval is a float number ... maybe this stops the timer ? [DONE]
 *BUG* Ca ne fonctionne pas bien sur IE
-  - passer à la dernière version de Sproutcore
-*ENH* be able to get back to the menu from a finished versus game
+  - passer à la dernière version de Sproutcore [DONE]
+  - servir le jeu depuis le eeepc derrière la freebox pour avoir un vrai debug sur IE, essayer d'ailleurs
+*ENH* create filoo-filoo@gmail.com
 
 NICE TO HAVE
 ============
 
+*ENH* add a link to official puyo-puyo rules from wikipedia or other
 *ENH* augmenter la fréquence de rafraichissement en production
 *ENH* People told me they would like to see the next colors
 *ENH* display blobs
+*ENH* When no opponent is found, there is no need to continue to pool the server
 *BUG* sc-busy error when the server is really slow to answer (reproduce with internet hosting through freebox)
 *ENH* ajouter quelque chose pour voir les logs sur le web
 *ENH* use optimistic locking
   - either manage to deploy dm-optlock plugin to heroku (did not manage last time)
   - dump DataMapper altogether and use raw SQL
 *ENH* See how to recover after a REST error
+*ENH* the down arrow should drop
 *ENH* Aris told he would have liked to see my score
 *ENH* Simplify the url
   - create a copy of index.html at the root

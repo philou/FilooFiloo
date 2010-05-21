@@ -286,3 +286,28 @@ test("The game should stop if the opponent timeouts", function() {
 
   equals(versusController.get('gameStatus'), FilooFiloo.VersusController.FINISHED, "The game should be ended if no opponent connected");
 });
+
+test("Given a player in versus mode, when he leaves versus mode, then he should explicity timeout to the server", function() {
+  enterVersusModeAndLogin();
+  var player = versusController.get('player');
+  player.commitCalled = NO;
+  versusController.set('currentMode', 'FilooFiloo.menuPage.mainView');
+
+  equals(player.get('outcome'), "timeout", "Player's outcome should be set to timeout if he leaves versus mode");
+  equals(player.commitCalled, YES, "Player's timeout should be sent to the server when he leaves versus mode");
+});
+
+test("Given a started game, when the player leaves versus mode, then the board should stop", function() {
+  startAGame();
+  versusController.set('currentMode', 'FilooFiloo.menuPage.mainView');
+
+  ok(!versusController.get('board').get('playing'), "The boad should stop when versus mode is left");
+});
+
+test("Given a player in versus mode, when he leaves versus mode, then the board should stop", function() {
+  startAGame();
+  versusController.set('currentMode', 'FilooFiloo.menuPage.mainView');
+
+  equals(versusController.get('gameStatus'), FilooFiloo.VersusController.PENDING, "The game should be pending when versus mode is left");
+});
+
