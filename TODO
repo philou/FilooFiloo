@@ -5,15 +5,6 @@ TODO
 *BUG* Ca ne fonctionne pas bien sur IE
   - passer à la dernière version de Sproutcore [DONE]
   - servir le jeu depuis le eeepc derrière la freebox pour avoir un vrai debug sur IE, essayer d'ailleurs
-*ENH* be able to get back to the menu from a finished versus game
-  - ajouter un bouton au panel d'info du versus mode [DONE]
-  - effacer le panel d'info quand on quitte le versus mode [DONE]
-  - gérer l'insertion d'un timeout dans le serveur (peut être déjà le cas) [DONE]
-  - envoyer un timeout au serveur lorsqu'on quitte le versus mode [DONE]
-  - tout nettoyer quand on quitte le versus mode [DONE]
-  - sc-busy error quand on essaye d'envoyer le timeout au serveur
-  - vérifier que ça marche vraiment
-*BUG* When no opponent is found, there is no need to continue to pool the server
 *ENH* create filoo-filoo@gmail.com
 
 NICE TO HAVE
@@ -23,6 +14,7 @@ NICE TO HAVE
 *ENH* augmenter la fréquence de rafraichissement en production
 *ENH* People told me they would like to see the next colors
 *ENH* display blobs
+*ENH* When no opponent is found, there is no need to continue to pool the server
 *BUG* sc-busy error when the server is really slow to answer (reproduce with internet hosting through freebox)
 *ENH* ajouter quelque chose pour voir les logs sur le web
 *ENH* use optimistic locking

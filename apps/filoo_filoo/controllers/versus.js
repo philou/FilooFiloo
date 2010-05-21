@@ -145,6 +145,22 @@ FilooFiloo.createVersusController = function() {
 	}
       },
 
+      asSoonAsEditable: function(record, action) {
+	if (record.get('isEditable')) {
+	  action();
+	}
+	else {
+	  record.addObserver('isEditable', {
+	    isEditableObserver: function() {
+	      if (record.get('isEditable')) {
+		action();
+		record.removeObserver('isEditable', this, 'isEditableObserver');
+	      }
+	    }
+	  }, 'isEditableObserver');
+	}
+      },
+
       currentModeObserver: function() {
 	var player = this.get('player');
         if ('FilooFiloo.versusPage.mainView' === this.get('currentMode')) {
@@ -154,23 +170,10 @@ FilooFiloo.createVersusController = function() {
 	  this.stopTheGame();
 	  this.reset();
 
-	  var commitTimeout = function() {
+	  this.asSoonAsEditable(player, function() {
 	    player.set('outcome', FilooFiloo.Player.TIMEOUT);
 	    player.commitRecord();
-	  };
-	  if (player.get('isEditable')) {
-	    commitTimeout();
-	  }
-	  else {
-	    player.addObserver('isEditable', {
-	      isEditableObserver: function() {
-		if (player.get('isEditable')) {
-		  commitTimeout();
-		  player.removeObserver('isEditable', this, 'isEditableObserver');
-		}
-	      }
-	    }, 'isEditableObserver');
-	  }
+	  });
 	}
       }.observes('currentMode'),
 
