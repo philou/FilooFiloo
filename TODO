@@ -11,7 +11,9 @@ TODO
   - gérer l'insertion d'un timeout dans le serveur (peut être déjà le cas) [DONE]
   - envoyer un timeout au serveur lorsqu'on quitte le versus mode [DONE]
   - tout nettoyer quand on quitte le versus mode [DONE]
+  - sc-busy error quand on essaye d'envoyer le timeout au serveur
   - vérifier que ça marche vraiment
+*BUG* When no opponent is found, there is no need to continue to pool the server
 *ENH* create filoo-filoo@gmail.com
 
 NICE TO HAVE

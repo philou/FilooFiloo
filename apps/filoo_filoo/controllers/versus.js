@@ -151,10 +151,26 @@ FilooFiloo.createVersusController = function() {
 	  this.requestLogin();
 	}
 	else if (player) {
-	  player.set('outcome', FilooFiloo.Player.TIMEOUT);
-	  player.commitRecord();
 	  this.stopTheGame();
 	  this.reset();
+
+	  var commitTimeout = function() {
+	    player.set('outcome', FilooFiloo.Player.TIMEOUT);
+	    player.commitRecord();
+	  };
+	  if (player.get('isEditable')) {
+	    commitTimeout();
+	  }
+	  else {
+	    player.addObserver('isEditable', {
+	      isEditableObserver: function() {
+		if (player.get('isEditable')) {
+		  commitTimeout();
+		  player.removeObserver('isEditable', this, 'isEditableObserver');
+		}
+	      }
+	    }, 'isEditableObserver');
+	  }
 	}
       }.observes('currentMode'),
 
@@ -185,7 +201,9 @@ FilooFiloo.createVersusController = function() {
 
       _checkForOpponent: function() {
 	this.incrementProperty('waitingTime');
-	this.get('player').refresh();
+	if(this.get('player').get('isEditable')) {
+	  this.get('player').refresh();
+	}
       },
 
       playerOpponentObserver: function() {
