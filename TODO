@@ -5,12 +5,10 @@ TODO
 *BUG* Ca ne fonctionne pas bien sur IE
   - passer à la dernière version de Sproutcore [DONE]
   - servir le jeu depuis le eeepc derrière la freebox pour avoir un vrai debug sur IE, essayer d'ailleurs
-*ENH* create filoo-filoo@gmail.com
 
 NICE TO HAVE
 ============
 
-*ENH* add a link to official puyo-puyo rules from wikipedia or other
 *ENH* augmenter la fréquence de rafraichissement en production
 *ENH* People told me they would like to see the next colors
 *ENH* display blobs
