@@ -671,3 +671,17 @@ test("If junk load cannot fit on the board, the game is lost", function() {
   ok(lastGameOverTime !== board.get('gameOver'), "The game should be lost if there is not enough place for all junk");
 });
 
+test("Given a lost game, when a new game is started, then it should not start as gameOver", function() {
+  board.startWithBoard(["jjjj",
+			"jjjj",
+			"jjjj",
+			"jjjj",
+			"jjjj",
+			"jjjj"]);
+  board.tick();
+  ok(board.get('gameOver'), "The game should game over when board is full");
+
+  board.start();
+  ok(!board.get('gameOver'), "A new game on an old board should not be game over");
+});
+
