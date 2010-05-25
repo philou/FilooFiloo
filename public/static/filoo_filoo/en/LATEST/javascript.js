@@ -40,9 +40,9 @@ FilooFiloo.Board=SC.Object.extend({playing:false,gameOver:null,disappearedPieces
 for(var a=0;a<FilooFiloo.Board.ColCount;a++){for(var b=0;b<FilooFiloo.Board.RowCount;
 b++){this.set(FilooFiloo.Board.cellProperty(a,b),FilooFiloo.Game.Clear)}}},start:function(a){a=a||FilooFiloo.CoordMap.create();
 this.set("disappearedPieces",0);this.set("score",0);this.set("playing",true);this.getTicker().start(this);
-this.setBlockedPieces_(a);this.setCurrentPiece_(null);this.scoringPieces=0;this.junkCount=0;
-this.onNextTick="initCurrentPiece_"},abort:function(){this.getTicker().stop();this.set("playing",false)
-},cellState:function(b,c){if(this.currentPiece){var a=this.currentPiece.cellState(b,c);
+this.setBlockedPieces_(a);this.setCurrentPiece_(null);this.set("gameOver",null);this.scoringPieces=0;
+this.junkCount=0;this.onNextTick="initCurrentPiece_"},abort:function(){this.getTicker().stop();
+this.set("playing",false)},cellState:function(b,c){if(this.currentPiece){var a=this.currentPiece.cellState(b,c);
 if(a){return a}}if(this.blockedPieces){var a=this.blockedPieces.getAt(b,c);if(a){return a
 }}return FilooFiloo.Game.Clear},tick:function(){FilooFiloo.assert(this[this.onNextTick]);
 this.onNextTick=this[this.onNextTick]();FilooFiloo.assert(!this.onNextTick||this[this.onNextTick])
