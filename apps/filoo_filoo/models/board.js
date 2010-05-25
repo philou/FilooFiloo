@@ -105,6 +105,7 @@ FilooFiloo.Board = SC.Object.extend(
 	this.getTicker().start(this);
 	this.setBlockedPieces_(blockedPieces);
 	this.setCurrentPiece_(null);
+	this.set('gameOver', null);
 
 	this.scoringPieces = 0;
 	this.junkCount = 0;

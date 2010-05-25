@@ -311,3 +311,18 @@ test("Given a player in versus mode, when he leaves versus mode, then the board 
   equals(versusController.get('gameStatus'), FilooFiloo.VersusController.PENDING, "The game should be pending when versus mode is left");
 });
 
+test("Given a player in versus mode, when he starts a new game, then it should start as usual", function() {
+  startAGame();
+  versusController.get('player').set('outcome', FilooFiloo.Player.LOST);
+  endTheGame(FilooFiloo.Player.WIN);
+  versusController.set('currentMode', 'FilooFiloo.menuPage.mainView');
+
+  startAGame();
+  equals(versusController.get('gameStatus'), FilooFiloo.VersusController.PLAYING, "A new game should have started");
+
+  for(var i = 0; i < 3; ++i) {
+    tickTimer();
+    equals(versusController.get('gameStatus'), FilooFiloo.VersusController.PLAYING, "A new game should continue");
+  }
+});
+
